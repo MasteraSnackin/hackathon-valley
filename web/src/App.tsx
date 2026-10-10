@@ -21,6 +21,17 @@ import CaseList from './components/CaseList';
 import RightPanel from './components/RightPanel';
 import Pipeline from './components/Pipeline';
 import StageDetailCard from './components/StageDetailCard';
+import PolicyEngine from './components/PolicyEngine';
+import {
+  DEFAULT_THRESHOLDS,
+  SEED_POLICIES,
+  detectCategory,
+  detectThreshold,
+  newPolicyId,
+  type Policy,
+  type PolicySource,
+  type Thresholds,
+} from './lib/policies';
 
 /** A curated spread of BUILD cases (varied category/complexity/event-count)
  * seeded once so the dashboard has enough variety to demo — real imports via
@@ -112,6 +123,34 @@ function App() {
   const [actionError, setActionError] = useState<string | null>(null);
   const [responding, setResponding] = useState(false);
 
+  // Policy engine (front-end-only demo state).
+  const [view, setView] = useState<'operations' | 'policies'>('operations');
+  const [policies, setPolicies] = useState<Policy[]>(SEED_POLICIES);
+  const [thresholds, setThresholds] = useState<Thresholds>(DEFAULT_THRESHOLDS);
+  // Human-in-the-loop: after an approval, offer to capture the decision as a
+  // reusable policy. Holds the pre-filled suggestion text, or null when hidden.
+  const [policySuggestion, setPolicySuggestion] = useState<string | null>(null);
+
+  function addPolicy(text: string, source: PolicySource) {
+    setPolicies((prev) => [
+      {
+        id: newPolicyId(),
+        text,
+        category: detectCategory(text),
+        threshold: detectThreshold(text),
+        enabled: true,
+        source,
+      },
+      ...prev,
+    ]);
+  }
+
+  function togglePolicy(id: string) {
+    setPolicies((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, enabled: !p.enabled } : p)),
+    );
+  }
+
   useEffect(() => {
     let cancelled = false;
     async function bootstrap() {
@@ -192,6 +231,17 @@ function App() {
       setSelectedDetail(updated);
       const refreshed = await listCases();
       setCases(refreshed);
+      // Human-in-the-loop: a committed human decision is exactly the kind of
+      // judgement worth turning into a reusable rule — offer to capture it,
+      // pre-filling a suggestion that reflects the decision just made.
+      const cat = selectedDetail.case.category;
+      const suggestionByKey: Record<ActionKey, string> = {
+        approve: `Auto-approve and assign a contractor for verified ${cat} requests at known properties.`,
+        reject: `Hold ${cat} requests for manual review when the property or identity is unverified.`,
+        defer: `Give ${cat} requests an extra working day before escalating.`,
+        more_evidence: `Request supporting evidence for ${cat} requests before acting.`,
+      };
+      setPolicySuggestion(suggestionByKey[key]);
     } catch (err) {
       setActionError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
@@ -254,15 +304,33 @@ function App() {
   return (
     <div className="flex h-screen w-screen flex-col overflow-hidden bg-[var(--color-canvas)] font-[var(--font-body)] text-[var(--color-ink)]">
       <nav className="flex h-12 shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5">
-        <div className="flex items-center gap-2.5">
-          <span
-            className="h-2 w-2 rounded-full bg-[var(--color-primary)]"
-            style={{ boxShadow: '0 0 6px rgba(33,88,72,.5)', animation: 'dot-pulse 2.2s ease-out infinite' }}
-          />
-          <span className="text-[15px] font-semibold tracking-[-0.2px] text-[var(--color-ink)]">
-            Property Desk
-          </span>
-          <span className="text-[13px] text-[var(--color-muted)]">· Maintenance operations</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2.5">
+            <span
+              className="h-2 w-2 rounded-full bg-[var(--color-primary)]"
+              style={{ boxShadow: '0 0 6px rgba(33,88,72,.5)', animation: 'dot-pulse 2.2s ease-out infinite' }}
+            />
+            <span className="text-[15px] font-semibold tracking-[-0.2px] text-[var(--color-ink)]">
+              Property Desk
+            </span>
+          </div>
+          <div className="flex items-center gap-1 rounded-[var(--radius-sm)] bg-[var(--color-canvas)] p-0.5">
+            {(['operations', 'policies'] as const).map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setView(v)}
+                className="rounded-[5px] px-3 py-1 text-[12px] font-medium transition-colors"
+                style={
+                  view === v
+                    ? { background: 'var(--color-surface)', color: 'var(--color-ink)', boxShadow: '0 1px 2px rgba(25,44,48,.08)' }
+                    : { background: 'transparent', color: 'var(--color-muted)' }
+                }
+              >
+                {v === 'operations' ? 'Operations' : 'Policies'}
+              </button>
+            ))}
+          </div>
         </div>
         <span
           className="rounded-full border px-3 py-1 text-[11px] font-medium"
@@ -276,6 +344,17 @@ function App() {
         </span>
       </nav>
 
+      {view === 'policies' ? (
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <PolicyEngine
+            policies={policies}
+            onAdd={(text) => addPolicy(text, 'Manual')}
+            onToggle={togglePolicy}
+            thresholds={thresholds}
+            onThresholdChange={(patch) => setThresholds((prev) => ({ ...prev, ...patch }))}
+          />
+        </div>
+      ) : (
       <div className="flex min-h-0 flex-1">
         <div className="w-[260px] shrink-0 border-r border-[var(--color-border)] bg-[var(--color-sidebar)]">
           <CaseList cases={summaries} selectedId={selectedId} onSelect={setSelectedId} />
@@ -353,6 +432,19 @@ function App() {
                   disabledNote={disabledNote}
                   activity={activity}
                 />
+
+                {policySuggestion !== null && (
+                  <PolicySuggestion
+                    value={policySuggestion}
+                    onChange={setPolicySuggestion}
+                    onAdd={(text) => {
+                      addPolicy(text, 'AI-learned');
+                      setPolicySuggestion(null);
+                      setView('policies');
+                    }}
+                    onDismiss={() => setPolicySuggestion(null)}
+                  />
+                )}
               </>
             ) : (
               <p className="text-sm text-[var(--color-muted)]">Select a case to see its pipeline.</p>
@@ -363,6 +455,56 @@ function App() {
         <div className="w-[220px] shrink-0 border-l border-[var(--color-border)] bg-[var(--color-sidebar)]">
           <RightPanel stats={stats} inProgress={inProgress} finishedToday={finishedToday} />
         </div>
+      </div>
+      )}
+    </div>
+  );
+}
+
+/** Human-in-the-loop capture card: shown after an approval, lets the operator
+ * turn the decision into a reusable AI-learned policy. */
+function PolicySuggestion({
+  value,
+  onChange,
+  onAdd,
+  onDismiss,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  onAdd: (text: string) => void;
+  onDismiss: () => void;
+}) {
+  return (
+    <div
+      className="mt-4 rounded-[var(--radius-md)] border p-4"
+      style={{ borderColor: 'var(--color-border)', background: 'var(--color-information-bg)' }}
+    >
+      <p className="text-[13px] font-semibold text-[var(--color-ink)]">Add this as a policy?</p>
+      <p className="mt-0.5 text-[12px] text-[var(--color-muted)]">
+        Capture this decision so the agent can handle similar cases on its own next time.
+      </p>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-3 w-full rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-[13px] text-[var(--color-ink)] outline-none focus:border-[var(--color-primary)]"
+      />
+      <div className="mt-3 flex gap-2">
+        <button
+          type="button"
+          onClick={() => onAdd(value.trim())}
+          disabled={!value.trim()}
+          className="rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-50"
+        >
+          Add to Policy Engine
+        </button>
+        <button
+          type="button"
+          onClick={onDismiss}
+          className="rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-transparent px-4 py-2 text-[13px] font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-canvas)]"
+        >
+          Not now
+        </button>
       </div>
     </div>
   );
