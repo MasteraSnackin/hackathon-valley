@@ -1,0 +1,2121 @@
+[
+  {
+    "case_id": "002",
+    "issue_states": [
+      {
+        "issue_label": "Blocked toilet requiring removal and repiping",
+        "state": "reported_complete",
+        "label": "Contractor reported completion",
+        "note": "The contractor reported the blocked-toilet work complete in this historical record. The referenced image and invoice are unavailable, so the physical result is not independently verified.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-034",
+            "quote": "confirms the completion of the job regarding the blocked toilet, attaches a completed image and invoice for the service."
+          },
+          {
+            "file": "history.md",
+            "event": "event-034",
+            "quote": "The image and invoice remain unavailable."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Completion files unavailable",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Appointment wording conflicts",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Closed case reappeared in the dashboard",
+        "tags": [
+          "other"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the completion image and invoice support the contractor’s report that the toilet repair was finished?",
+      "rationale": "Proposed evidence check only. The record reports completion, but the supporting files are unavailable; the later dashboard fault does not establish a failed repair.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-034",
+          "quote": "confirms the completion of the job regarding the blocked toilet, attaches a completed image and invoice for the service."
+        },
+        {
+          "file": "history.md",
+          "event": "event-034",
+          "quote": "The image and invoice remain unavailable."
+        },
+        {
+          "file": "history.md",
+          "event": "event-045",
+          "quote": "Comment: Held due to system issues."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "005",
+    "issue_states": [
+      {
+        "issue_label": "Check-out cleaning, including appliances",
+        "state": "reported_complete",
+        "label": "Cleaning reported complete",
+        "note": "The case overview reports cleaning completed and the agency refers to cleaning that was done. This is a historical general account; appliance-by-appliance results are not itemised.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The cleaning was completed, the keys were returned, and the property was ready for move-in."
+          },
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Clean property through out as per check out to include all appliances"
+          }
+        ]
+      },
+      {
+        "issue_label": "Freezer defrost",
+        "state": "unconfirmed",
+        "label": "Defrost result unconfirmed",
+        "note": "Freezer defrost was requested. The later general cleaning report does not explicitly confirm this item, so completion is unconfirmed rather than known to be unfinished.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "freezer defrost"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The cleaning was completed, the keys were returned, and the property was ready for move-in."
+          }
+        ]
+      },
+      {
+        "issue_label": "Bedroom carpet cleaning",
+        "state": "unconfirmed",
+        "label": "Carpet result unconfirmed",
+        "note": "The agency instructed cleaning of both bedroom carpets. The later general cleaning report does not itemise either carpet result.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "Please ensure both bedroom carpets are cleaned please."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The cleaning was completed, the keys were returned, and the property was ready for move-in."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Different property mentioned in quote follow-up",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Completion chronology is ambiguous",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Invoice receipt not explicit",
+        "tags": [
+          "documents",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can an itemised cleaning record confirm the appliances, freezer defrost and both bedroom carpets at this property?",
+      "rationale": "Proposed evidence check only. General cleaning completion is reported, but individual items and invoice receipt are not explicit, and a quote follow-up names another property.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "the quote for Flat 27, 117 Lantern Quay, Kingshaven, ZZ4 6ZZ hasnt attached."
+        },
+        {
+          "file": "history.md",
+          "event": "event-027",
+          "quote": "Waiting for invoice"
+        },
+        {
+          "file": "history.md",
+          "event": "event-017",
+          "quote": "Please ensure both bedroom carpets are cleaned please."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "006",
+    "issue_states": [
+      {
+        "issue_label": "Burnt carpet replacement",
+        "state": "unconfirmed",
+        "label": "Carpet result not itemised",
+        "note": "The carpet appears in the approved work scope. The agency records contractor completion generally, but does not document this item separately; an attendance note also names another property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Supply and fit large carpet to approx 27 sqm meters £240"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+          },
+          {
+            "file": "history.md",
+            "event": "event-018",
+            "quote": "attending Flat 12, 122 Juniper Mews, Westmarsh, ZZ8 7ZZ this week"
+          }
+        ]
+      },
+      {
+        "issue_label": "Repainting",
+        "state": "unconfirmed",
+        "label": "Painting result not itemised",
+        "note": "Painting appears in the approved work scope. The historical contractor-completion account does not itemise the studio and bathroom finish or provide supporting attachments.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "supply and paint full studio including bathroom in light grey £220"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+          }
+        ]
+      },
+      {
+        "issue_label": "Bathroom vinyl replacement",
+        "state": "unconfirmed",
+        "label": "Vinyl result not itemised",
+        "note": "Bathroom vinyl was added to the approved scope. The general contractor-completion account does not separately confirm that it was fitted.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Supper and fit new vinyl flooring to bathroom £100"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+          }
+        ]
+      },
+      {
+        "issue_label": "Sink waste replacement",
+        "state": "unconfirmed",
+        "label": "Sink-waste result not itemised",
+        "note": "Sink waste was added to the approved scope. The general contractor-completion account does not separately confirm that it was fitted.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Fit new chrome waste to sink £45"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Attendance note names another property",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Work scope expanded after the initial request",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "No supporting attachments supplied",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property did the contractor attend? Can an itemised record confirm the carpet, painting, bathroom vinyl and sink waste?",
+      "rationale": "Proposed evidence check only. The record contains a general completion account, no supporting attachments and an attendance note for a different address; it does not prove any item remains unfinished.",
+      "evidence": [
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+        },
+        {
+          "file": "history.md",
+          "event": "event-018",
+          "quote": "attending Flat 12, 122 Juniper Mews, Westmarsh, ZZ8 7ZZ this week"
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "No attachments are required or available for this case."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "008",
+    "issue_states": [
+      {
+        "issue_label": "Bedroom repainting, with other rooms subject to need",
+        "state": "unconfirmed",
+        "label": "Painting scope and result unconfirmed",
+        "note": "Repainting was requested, with other rooms conditional on need. The later general completion account does not establish which rooms were painted and its invoice message names another property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repaint bedroom any other rooms if needed"
+          },
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "invoice for Flat 13, 83 Harbour View, Eastmere, ZZ5 3ZZ - works are now complete."
+          }
+        ]
+      },
+      {
+        "issue_label": "Burnt bedroom carpet",
+        "state": "unconfirmed",
+        "label": "Carpet result unconfirmed",
+        "note": "Replacement of the burnt bedroom carpet was requested. The general completion account does not provide an item-level result tied unambiguously to this property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Replace bedroom carpet that is burnt"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The requested works were completed, and the final cost was lower than the original quote because the tap did not need replacing."
+          },
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "invoice for Flat 13, 83 Harbour View, Eastmere, ZZ5 3ZZ - works are now complete."
+          }
+        ]
+      },
+      {
+        "issue_label": "Bathroom flooring replacement",
+        "state": "unconfirmed",
+        "label": "Flooring result unconfirmed",
+        "note": "Bathroom flooring replacement was requested. The general completion account does not separately confirm fitting at this property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Replace bathroom flooring"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The requested works were completed, and the final cost was lower than the original quote because the tap did not need replacing."
+          }
+        ]
+      },
+      {
+        "issue_label": "Broken plug; type unspecified",
+        "state": "unconfirmed",
+        "label": "Plug type and repair unconfirmed",
+        "note": "The request does not identify the kind of plug. The general completion account does not identify what was repaired or separately confirm this item.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair broken plug"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The requested works were completed, and the final cost was lower than the original quote because the tap did not need replacing."
+          }
+        ]
+      },
+      {
+        "issue_label": "Dripping bath tap",
+        "state": "unconfirmed",
+        "label": "Tap outcome unconfirmed",
+        "note": "The agency says the tap did not need replacing and reduced the final cost. That does not separately confirm how the reported drip was resolved.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair dripping bath tap"
+          },
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "the tap didn't need replacing so it was cheaper then the original quote."
+          }
+        ]
+      },
+      {
+        "issue_label": "Damaged bathroom shelf",
+        "state": "unconfirmed",
+        "label": "Shelf result unconfirmed",
+        "note": "Repair of the bathroom shelf was requested. The general completion account does not separately document the repair, and completion photographs were not attached.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair damaged shelf in bathroom"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The requested works were completed, and the final cost was lower than the original quote because the tap did not need replacing."
+          },
+          {
+            "file": "history.md",
+            "event": "event-046",
+            "quote": "Reason provided: No photos attached"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Several messages refer to other properties",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "No completion photographs",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Tap replacement was not required",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Broken plug is not classified",
+        "tags": [
+          "scope"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property does the invoice cover? Can itemised evidence confirm the rooms painted, plug type and resolution of the tap drip?",
+      "rationale": "Proposed evidence check only. The invoice message names another property, no completion photographs were attached, and the tap replacement was removed from the cost without a separate account of the drip.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-045",
+          "quote": "invoice for Flat 13, 83 Harbour View, Eastmere, ZZ5 3ZZ - works are now complete."
+        },
+        {
+          "file": "history.md",
+          "event": "event-046",
+          "quote": "Reason provided: No photos attached"
+        },
+        {
+          "file": "history.md",
+          "event": "event-045",
+          "quote": "the tap didn't need replacing so it was cheaper then the original quote."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "013",
+    "issue_states": [
+      {
+        "issue_label": "Integrated dishwasher starts, beeps and then stops",
+        "state": "reported_complete",
+        "label": "Agency reported dishwasher running",
+        "note": "The agency reported that the dishwasher had been repaired on site and was running. No supporting attachments or technical repair details are supplied; this is not a current functional test.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "They have repaired the dishwasher on site and it is all up and running."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Completion is an agency account",
+        "tags": [
+          "documents",
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Later call does not establish a new fault",
+        "tags": [
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the repair record identify the dishwasher and work performed? What evidence confirms it ran successfully afterwards?",
+      "rationale": "Proposed evidence check only. The agency reports successful repair, but the readable record does not establish the appliance model or technical work. The later wrong-connection call does not establish a new fault.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-028",
+          "quote": "They have repaired the dishwasher on site and it is all up and running."
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "No attachments are required or available for this case."
+        },
+        {
+          "file": "history.md",
+          "event": "event-035",
+          "quote": "The caller realizes the error and ends the call."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "016",
+    "issue_states": [
+      {
+        "issue_label": "Back/garden door difficult to close and creaking",
+        "state": "reported_complete",
+        "label": "Contractor reported door working",
+        "note": "The contractor reported the door functioning after naturally settling. This historical resolution account does not establish a replacement part or repair to a separate handle defect.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-022",
+            "quote": "the door repair job is complete and no invoice is required as the door is functioning well after naturally settling."
+          },
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "The hinges seem to be misaligned."
+          },
+          {
+            "file": "history.md",
+            "event": "event-015",
+            "quote": "a maintenance visit to fix a door handle"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Invoice wording disagrees",
+        "tags": [
+          "documents",
+          "communication"
+        ]
+      },
+      {
+        "question_label": "Door part described differently",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Door photograph unavailable",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the conflicting invoice wording be reconciled? Does the work record show a door adjustment or only natural settling?",
+      "rationale": "Proposed record check only. The contractor reports a functioning door and no invoice required, whereas the agency later says an invoice was needed; the hinge and handle descriptions also differ.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-022",
+          "quote": "no invoice is required as the door is functioning well after naturally settling."
+        },
+        {
+          "file": "history.md",
+          "event": "event-024",
+          "quote": "the invoice was needed for this one as the door is functioning well after naturally settling."
+        },
+        {
+          "file": "history.md",
+          "event": "event-015",
+          "quote": "a maintenance visit to fix a door handle"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "017",
+    "issue_states": [
+      {
+        "issue_label": "Kitchen extractor fan apparently not turning on",
+        "state": "reported_complete",
+        "label": "Tenant reported fan working",
+        "note": "The tenant reported the extractor working after finding its switch. The historical record supports resolution through operating guidance, with no contractor repair established.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "There is a switch to the righthand side of the hob when needs to be switched on."
+          },
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "The customer confirms that the extractor fan is working after locating the button."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Reported fault resolved by operating guidance",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Referenced photograph unavailable",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the switch-location guidance and tenant confirmation be retained with the appliance record for any future enquiry?",
+      "rationale": "Proposed record check only. The tenant already reported successful operation; the missing photograph is an evidence limitation, not evidence that the fan remains broken.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-008",
+          "quote": "There is a switch to the righthand side of the hob when needs to be switched on."
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "The customer confirms that the extractor fan is working after locating the button."
+        },
+        {
+          "file": "history.md",
+          "event": "event-004",
+          "quote": "Attachment referenced: picture; unavailable."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "018",
+    "issue_states": [
+      {
+        "issue_label": "Overgrown tree and weeds",
+        "state": "reported_complete",
+        "label": "Agency reported garden work done",
+        "note": "The agency reported garden maintenance done. The tenant identified a communal area; unavailable photographs and invoice prevent independent confirmation of the extent or physical result.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "The agency reported that the garden work was done and would be invoiced off the rent; the landlord acknowledged the message."
+          },
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "**A:** communal area"
+          },
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "Attachment #1 (garden photograph referenced by provider; unavailable)"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Private-garden assumption conflicts with tenant answer",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Safety and extent not established",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Completion documents unavailable",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the completion record identify the communal garden’s tree and weed work, including any recorded safety assessment?",
+      "rationale": "Proposed evidence check only. The work is reported done, but the original safety and extent questions were unanswered and completion documents are unavailable. No present hazard is established.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-002",
+          "quote": "**Q:** Is anyone's safety currently at risk?\n  **A:** *(not answered)*"
+        },
+        {
+          "file": "history.md",
+          "event": "event-002",
+          "quote": "**Q:** How tall is the tree and is it touching the building, fences, paths, or any overhead cables?\n  **A:** *(not answered)*"
+        },
+        {
+          "file": "history.md",
+          "event": "event-016",
+          "quote": "The invoice attachment is unavailable in the case record."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "019",
+    "issue_states": [
+      {
+        "issue_label": "Rubbish and construction waste requiring clearance",
+        "state": "reported_complete",
+        "label": "Agency reported clearance complete",
+        "note": "The agency reported that the garden had been cleared after approval for removal. This historical source assertion covers clearance; it does not independently establish the final garden condition.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "Please go ahead with the removal."
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "Just to make you aware that the garden has now been cleared."
+          }
+        ]
+      },
+      {
+        "issue_label": "Ground levelling requested",
+        "state": "unconfirmed",
+        "label": "Levelling completion unconfirmed",
+        "note": "Ground levelling was requested, but the explicit approval concerns removal and the completion message says cleared. Neither authorisation nor completion of levelling is separately established.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Levelling of the ground"
+          },
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "Please go ahead with the removal."
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "Just to make you aware that the garden has now been cleared."
+          }
+        ]
+      },
+      {
+        "issue_label": "Gravel or stone covering requested",
+        "state": "unconfirmed",
+        "label": "Gravel completion unconfirmed",
+        "note": "Gravel or stone covering was requested. The removal approval and clearance report do not separately establish authorisation or completion of that covering.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Proper gravel/stone covering"
+          },
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "Please go ahead with the removal."
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "Just to make you aware that the garden has now been cleared."
+          }
+        ]
+      },
+      {
+        "issue_label": "Garden reported unsafe or unusable in its current condition",
+        "state": "unconfirmed",
+        "label": "Final usability unconfirmed",
+        "note": "The initial request sought a safe, usable garden. The later clearance report and unavailable photographs do not establish its final usability; they also do not prove a current hazard.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Making the garden safe and usable"
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "Just to make you aware that the garden has now been cleared."
+          },
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "The referenced garden pictures are unavailable."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Clearance does not confirm the full requested scope",
+        "tags": [
+          "scope",
+          "permission"
+        ]
+      },
+      {
+        "question_label": "Waste type needs evidence",
+        "tags": [
+          "scope",
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Photographs and invoice unavailable",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Workflow stages were entered after reported completion",
+        "tags": [
+          "chronology"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Were levelling and gravel or stone covering authorised and completed? What evidence confirms the garden’s final condition and usability?",
+      "rationale": "Proposed question and evidence request only. The landlord explicitly approved removal and the agency reported clearance; the wider requested works and final usability are not separately evidenced.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-001",
+          "quote": "Levelling of the ground"
+        },
+        {
+          "file": "history.md",
+          "event": "event-001",
+          "quote": "Proper gravel/stone covering"
+        },
+        {
+          "file": "history.md",
+          "event": "event-025",
+          "quote": "Please go ahead with the removal."
+        },
+        {
+          "file": "history.md",
+          "event": "event-038",
+          "quote": "Just to make you aware that the garden has now been cleared."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "020",
+    "issue_states": [
+      {
+        "issue_label": "Landlord query about an unapproved dog flap",
+        "state": "reported",
+        "label": "Approval query recorded",
+        "note": "A later landlord message raised an allegedly unapproved dog-flap installation. The historical record does not supply an answer or establish the permission position independently.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "a dog flap installation that was not approved"
+          },
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "No issues were identified during the inspection."
+          }
+        ]
+      },
+      {
+        "issue_label": "Spare front-door key query after a lock change",
+        "state": "reported",
+        "label": "Spare-key query recorded",
+        "note": "The landlord asked about retrieving a spare key after a lock change. The supplied history contains no recorded resolution of that query; present key custody is unknown.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "the retrieval of a spare front door key following a lock change."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Summary dates disagree with event dates",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "No-issues result does not settle later landlord questions",
+        "tags": [
+          "scope",
+          "permission"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "What record establishes the dog-flap permission decision and the custody or return of the spare front-door key?",
+      "rationale": "Proposed evidence check only. A no-issues inspection result precedes these two questions and does not answer them; neither question establishes a physical defect.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-017",
+          "quote": "No issues were identified during the inspection."
+        },
+        {
+          "file": "history.md",
+          "event": "event-020",
+          "quote": "a dog flap installation that was not approved and inquires about the retrieval of a spare front door key following a lock change."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "021",
+    "issue_states": [
+      {
+        "issue_label": "Snapped conservatory back-door key with no spare",
+        "state": "reported_complete",
+        "label": "Contractor reported lock replaced",
+        "note": "The contractor reported replacement of the cylinder and handles. That is a historical repair account; supporting completion attachments are not available.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "Job is completed, I have replaced Cylinder and handles. I will drop off remaining keys to the office tomorrow."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      },
+      {
+        "issue_label": "Lock replacement and distribution of four new keys",
+        "state": "unconfirmed",
+        "label": "Lock replaced; key allocation unconfirmed",
+        "note": "The contractor reported replacement and promised delivery of remaining keys; the agency later confirmed key return. The record does not itemise the intended four-key allocation to each recipient.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "replace the lock and provide 4 new keys, 2 for the tenants, 1 for us and 1 for the landlord."
+          },
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "Job is completed, I have replaced Cylinder and handles. I will drop off remaining keys to the office tomorrow."
+          },
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "Keys return confirmed"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Promise to deliver keys is followed by confirmation",
+        "tags": [
+          "chronology",
+          "communication"
+        ]
+      },
+      {
+        "question_label": "No independent completion attachments",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can a handover record confirm two keys for the tenants, one for the agency and one for the landlord?",
+      "rationale": "Proposed record check only. Key return is confirmed after the delivery promise, so return is not treated as unresolved; the individual allocations and count are not itemised.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-008",
+          "quote": "replace the lock and provide 4 new keys, 2 for the tenants, 1 for us and 1 for the landlord."
+        },
+        {
+          "file": "history.md",
+          "event": "event-028",
+          "quote": "Keys return confirmed"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "023",
+    "issue_states": [
+      {
+        "issue_label": "Balcony-door locking mechanism will not turn or lock",
+        "state": "reported_complete",
+        "label": "Contractor reported repair complete",
+        "note": "The contractor reported the job done and invoice sent; the agency later confirmed key return. No supplied attachments independently establish the physical repair result.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "I’ve done the job and sent you the invoice yesterday"
+          },
+          {
+            "file": "history.md",
+            "event": "event-026",
+            "quote": "Keys return confirmed"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Access chase may have lagged behind work",
+        "tags": [
+          "chronology",
+          "communication"
+        ]
+      },
+      {
+        "question_label": "Completion attachments not supplied",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the referenced invoice or repair account identify the work performed on the balcony-door locking mechanism?",
+      "rationale": "Proposed evidence check only. The contractor reports completion, but the supplied record lacks supporting attachments and repair detail; the earlier access chase does not establish a failed repair.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-020",
+          "quote": "I’ve done the job and sent you the invoice yesterday"
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "No attachments are required or available for this case."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "025",
+    "issue_states": [
+      {
+        "issue_label": "Oven and grill do not heat despite light and sound working",
+        "state": "reported_complete",
+        "label": "Contractor reported warranty repair",
+        "note": "The contractor reported the oven repair completed under warranty. A same-day call said it appeared fixed but had not been fully tested, so successful operation on all settings is not independently established.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-062",
+            "quote": "The oven repair has been completed under warranty with no charge to the landlord."
+          },
+          {
+            "file": "history.md",
+            "event": "event-060",
+            "quote": "The agent confirmed that the oven appeared to be fixed but had not been fully tested yet."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Final function was not fully tested in the recorded call",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Installation year conflicts with the event timeline",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Appointment dates conflict",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Warranty position changed after investigation",
+        "tags": [
+          "documents",
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Oven description entered into the pets field",
+        "tags": [
+          "other"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the service date be reconciled? Can the warranty repair record and completed oven-and-grill function check be supplied?",
+      "rationale": "Proposed evidence check only. Contractor completion is reported, but the recorded call says full testing had not occurred and the appointment dates conflict.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-060",
+          "quote": "The agent confirmed that the oven appeared to be fixed but had not been fully tested yet."
+        },
+        {
+          "file": "history.md",
+          "event": "event-062",
+          "quote": "The oven repair has been completed under warranty with no charge to the landlord."
+        },
+        {
+          "file": "history.md",
+          "event": "event-027",
+          "quote": "Visit date selected - 22/05/2024 12:00 am"
+        },
+        {
+          "file": "history.md",
+          "event": "event-028",
+          "quote": "Confirmed Time Slot: tomorrow, 21st June (21/06/2024)"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "027",
+    "issue_states": [
+      {
+        "issue_label": "Bath drains slowly after showers",
+        "state": "reported_complete",
+        "label": "Tenant reported drain clear",
+        "note": "The tenant reported that a plunger cleared the bath and the agency recorded resolution without a contractor. This historical statement does not establish the drain’s present condition.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-007",
+            "quote": "apparently its some a plunger could do. its now clear. thanks for the help."
+          },
+          {
+            "file": "history.md",
+            "event": "event-009",
+            "quote": "Resolved following instructions. No contractor required."
+          }
+        ]
+      },
+      {
+        "issue_label": "Enquiry about garage parking registration",
+        "state": "reported",
+        "label": "Parking question awaiting recorded answer",
+        "note": "The customer asked about garage parking registration. The agency promised an update, but no registration or availability answer is recorded in the supplied history.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "The customer is inquiring about the need to register for a parking space in the garage."
+          },
+          {
+            "file": "history.md",
+            "event": "event-012",
+            "quote": "Once I have further information, I will update you accordingly."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Separate parking enquiry has no recorded answer",
+        "tags": [
+          "scope",
+          "communication"
+        ]
+      },
+      {
+        "question_label": "Post-closure correspondence is a separate subject",
+        "tags": [
+          "scope",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Did block management answer the garage parking availability and registration enquiry? Can that response be added to the record?",
+      "rationale": "Proposed record check only. The bath was reported clear; the later enquiry is a separate parking question for which the history contains a promised update rather than an answer.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-012",
+          "quote": "Once I have further information, I will update you accordingly."
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "The customer is inquiring about the need to register for a parking space in the garage."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "028",
+    "issue_states": [
+      {
+        "issue_label": "Loose water pipe",
+        "state": "reported_complete",
+        "label": "Landlord reported pipe repair complete",
+        "note": "The landlord reported completion on 19 June 2025. The historical repair claim remains subject to conflicting property references and an unavailable photograph; it is not verified condition evidence for a specific property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-012",
+            "quote": "All completed on 19/06/25"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "Flat 7, 87 Alder Lane, Bellmere, ZZ3 8ZZ"
+          },
+          {
+            "file": "history.md",
+            "event": "event-009",
+            "quote": "Flat 7, 177 Alder Lane, Northbridge, ZZ6 5ZZ"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Conflicting property references",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Referenced photo unavailable",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property does the pipe repair concern? Can the repair record or original photograph confirm that location?",
+      "rationale": "Proposed evidence check only. The forwarded tenant message names a different address from the case header, and the referenced photograph is unavailable.",
+      "evidence": [
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "Flat 7, 87 Alder Lane, Bellmere, ZZ3 8ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-009",
+          "quote": "Flat 7, 177 Alder Lane, Northbridge, ZZ6 5ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-009",
+          "quote": "[Unavailable attachment: attachment-17-document]"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "031",
+    "issue_states": [
+      {
+        "issue_label": "Toilet cistern continually fills with water",
+        "state": "reported_complete",
+        "label": "Contractor reported cistern job complete",
+        "note": "The contractor reported the job completed on 26 July. The invoice itself and some messages are unavailable, so the repair method and physical result cannot be independently inspected.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-022",
+            "quote": "Please close this job, it was completed on the 26/07."
+          },
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "Provider uploaded invoice"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      },
+      {
+        "issue_label": "Reported water-leakage notification",
+        "state": "unconfirmed",
+        "label": "Leak-letter implications unconfirmed",
+        "note": "The tenant reported receiving a leakage letter. Its contents are absent; the cistern job’s general completion report does not establish the location, cause or resolution of any separately notified leak.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "I have received a letter from Oakfield Services about a water leakage over two weeks ago."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          },
+          {
+            "file": "history.md",
+            "event": "event-022",
+            "quote": "Please close this job, it was completed on the 26/07."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Leak notification is a reported document",
+        "tags": [
+          "documents",
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Appointment weekday and date differ",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Provider names differ",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Completion evidence is incomplete",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Landlord confirmation content is not shown",
+        "tags": [
+          "documents",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Did the leakage letter concern the cistern or a separate leak? Can the letter and repair invoice establish what was resolved?",
+      "rationale": "Proposed evidence check only. The tenant’s letter is not supplied, and the completion account does not establish whether a separate leak existed or was addressed.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-001",
+          "quote": "I have received a letter from Oakfield Services about a water leakage over two weeks ago."
+        },
+        {
+          "file": "history.md",
+          "event": "event-022",
+          "quote": "Please close this job, it was completed on the 26/07."
+        },
+        {
+          "file": "history.md",
+          "event": "event-020",
+          "quote": "Provider uploaded invoice"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "034",
+    "issue_states": [
+      {
+        "issue_label": "Shower has no cold water and can run too hot",
+        "state": "reported_complete",
+        "label": "Contractor reported temperature problem resolved",
+        "note": "The contractor reported cleaning and greasing the shower resolved the main temperature problem. The repair update names conflicting properties and provides no independent final function check.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-010",
+            "quote": "The engineer found a temperature issue with the shower, cleaned and greased it, which resolved the main problem."
+          },
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "Address: Flat 9, 9 Willowmere Road, Bellmere, ZZ9 7ZZ"
+          },
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "Flat 17, 77 Harbour View, Northbridge, ZZ9 1ZZ"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Conflicting property references in the repair update",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Invoice content unavailable",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property received the shower work? Can an itemised repair record confirm the final cold-water and temperature function?",
+      "rationale": "Proposed evidence check only. The repair update’s header and body identify different flats; payment does not itself establish the location or complete physical result.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "Address: Flat 9, 9 Willowmere Road, Bellmere, ZZ9 7ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "Flat 17, 77 Harbour View, Northbridge, ZZ9 1ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-010",
+          "quote": "The engineer found a temperature issue with the shower, cleaned and greased it, which resolved the main problem."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "036",
+    "issue_states": [
+      {
+        "issue_label": "Shower pull knob cap comes off",
+        "state": "reported_complete",
+        "label": "Dataset reports replacement tap fitted",
+        "note": "The contractor account says a new bath tap was fitted without charge. It does not separately test the pull knob; this synthetic record includes November 2026 events after 10 October 2026, so it is not proof of work already completed today.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-050",
+            "quote": "this job is complete a new bath tap was fitted no charge as it was a faulty tap i fitted back in february"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "**Completed:** 2026-11-07 07:14:06 UTC"
+          }
+        ]
+      },
+      {
+        "issue_label": "Shower and tap run simultaneously when the button is pressed",
+        "state": "reported_complete",
+        "label": "Dataset reports replacement tap fitted",
+        "note": "The replacement-tap account follows the simultaneous-flow report, but gives no separate function test. Its November 2026 dataset events fall after 10 October 2026 and do not establish a current real-world resolution.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-030",
+            "quote": "The caller describes an issue with both the shower and tap running simultaneously when a button is pressed."
+          },
+          {
+            "file": "history.md",
+            "event": "event-050",
+            "quote": "this job is complete a new bath tap was fitted no charge as it was a faulty tap i fitted back in february"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "**Completed:** 2026-11-07 07:14:06 UTC"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Visit dates differ",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Photos and video unavailable",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Record extends beyond the present date",
+        "tags": [
+          "chronology"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "For this synthetic record, can the replacement date and a subsequent check of the pull knob and shower/tap flow be established?",
+      "rationale": "Proposed dataset review only. The supplied dates conflict and extend beyond 10 October 2026, while photos and video are unavailable; the recorded replacement must not be treated as real work verified today.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-039",
+          "quote": "9.30am Wednesday 4th"
+        },
+        {
+          "file": "history.md",
+          "event": "event-041",
+          "quote": "The contractor has booked to go out to the property to fit the taps on 03/11/26"
+        },
+        {
+          "file": "history.md",
+          "event": "event-050",
+          "quote": "this job is complete a new bath tap was fitted no charge as it was a faulty tap i fitted back in february"
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "**Completed:** 2026-11-07 07:14:06 UTC"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "038",
+    "issue_states": [
+      {
+        "issue_label": "Washing machine reported inoperative after a power failure",
+        "state": "reported",
+        "label": "Tenant reported machine inoperative",
+        "note": "The tenant reported a power-failure fault and inferred from an online search that it could not be fixed. No engineer diagnosis or later functional result is supplied.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Washing machine broken, it’s LG , we have googled it, it has power failure and can’t be fixed"
+          }
+        ]
+      },
+      {
+        "issue_label": "Tenant-owned replacement and removal of the old machine",
+        "state": "planned",
+        "label": "Replacement approved; removal planned",
+        "note": "The landlord permitted use of a tenant-owned replacement and the tenant proposed family removal of the old machine. These are approval and future intention, not evidence of installation or collection.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-010",
+            "quote": "Your landlord said it's fine to replace it with your own, and you can take yours when you vacate."
+          },
+          {
+            "file": "history.md",
+            "event": "event-010",
+            "quote": "I'll have my brother take the old machine to the tip since he has a van."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Conflicting property references",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Replacement plan is not a completion receipt",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Diagnosis is a tenant claim",
+        "tags": [
+          "scope",
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property does the approval concern? Was the tenant-owned machine installed and the old one removed, with a handover or completion record?",
+      "rationale": "Proposed question only. Approval and a removal plan are recorded, but installation and collection are not confirmed; the landlord call also names another property.",
+      "evidence": [
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-004",
+          "quote": "Flat 18, 128 Meadow Row, Cedarford, ZZ5 9ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-010",
+          "quote": "Your landlord said it's fine to replace it with your own, and you can take yours when you vacate."
+        },
+        {
+          "file": "history.md",
+          "event": "event-010",
+          "quote": "I'll have my brother take the old machine to the tip since he has a van."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "041",
+    "issue_states": [
+      {
+        "issue_label": "Washing machine does not spin or drain and retains water",
+        "state": "reported_complete",
+        "label": "Landlord reported washer fixed",
+        "note": "The landlord reported the washing machine fixed. This historical account does not establish the technical cause or a present functional test.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-023",
+            "quote": "Just to confirm Lantern Solutions have been and fixed the washing machine."
+          },
+          {
+            "file": "history.md",
+            "event": "event-021",
+            "quote": "went this morning but couldn't fix it"
+          }
+        ]
+      },
+      {
+        "issue_label": "Towel rail awaiting a replacement part",
+        "state": "planned",
+        "label": "Part ordered; fitting planned",
+        "note": "The landlord’s same update says a towel-rail part was ordered for fitting when received. No later fitting confirmation appears in this case; the washer’s closure does not establish towel-rail completion.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-023",
+            "quote": "has ordered a replacement part for the towel rail, and this will be fitted as soon as its received."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Separate towel-rail work remains a follow-up in this history",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Appointment weekday and date differ",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Historical repair does not establish the new cause",
+        "tags": [
+          "scope"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Was the towel-rail part received and fitted? Can its completion be recorded separately from the reported washing-machine repair?",
+      "rationale": "Proposed question only. The source reports the washer fixed while describing future towel-rail fitting. This history does not establish the towel rail’s present condition.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-023",
+          "quote": "Just to confirm Lantern Solutions have been and fixed the washing machine."
+        },
+        {
+          "file": "history.md",
+          "event": "event-023",
+          "quote": "has ordered a replacement part for the towel rail, and this will be fitted as soon as its received."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "043",
+    "issue_states": [
+      {
+        "issue_label": "Washing machine still does not drain after filter cleaning",
+        "state": "reported_complete",
+        "label": "Repair reported; date inconsistent",
+        "note": "The contractor reported completion and the agency described refitting the drain-pipe propeller and reinstalling the machine. The stated November date conflicts with the April case chronology and does not verify when repair occurred.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "completed the repair of the washing machine on November 4th."
+          },
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "The drain-pipe propeller has been re-fitted and the washing machine re-installed."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "**Created:** 2026-04-06 07:31:34 UTC"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Completion date is inconsistent with the case chronology",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Repair authority has a qualitative limit",
+        "tags": [
+          "permission"
+        ]
+      },
+      {
+        "question_label": "Tenant identity differs across contractor instructions",
+        "tags": [
+          "identity",
+          "communication"
+        ]
+      },
+      {
+        "question_label": "Landlord confirmation content is not shown",
+        "tags": [
+          "documents",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the repair record reconcile the service date and tenant identity? Does it show the authority for the work performed?",
+      "rationale": "Proposed record check only. The completion date is inconsistent, contact identities differ, and the instruction permits an easy, cheap repair while requiring further approval for parts or complex work.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-016",
+          "quote": "completed the repair of the washing machine on November 4th."
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "if is something easy and cheap to fix, but if turns out needs part or is more complex, please quote it and we will chase her approval."
+        },
+        {
+          "file": "history.md",
+          "event": "event-010",
+          "quote": "Please contact the tenant to arrange a suitable time to complete the job or provide a quote if required."
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "Please see below the tenants contact details:"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "045",
+    "issue_states": [
+      {
+        "issue_label": "Kitchen window repair request; exact fault not established",
+        "state": "unconfirmed",
+        "label": "Window scope and result unconfirmed",
+        "note": "The landlord gives a general completion message, but it does not identify which glazing was completed. Multiple property references and the unspecified kitchen fault prevent an item-level conclusion for this window.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Kitchen window + patio door windows"
+          },
+          {
+            "file": "history.md",
+            "event": "event-034",
+            "quote": "Good, all done!"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ"
+          },
+          {
+            "file": "history.md",
+            "event": "event-003",
+            "quote": "Flat 12, 182 Meadow Row, Kingshaven, ZZ5 7ZZ"
+          }
+        ]
+      },
+      {
+        "issue_label": "Patio door glazing reported as blown; mentioned for a future quote",
+        "state": "planned",
+        "label": "Future quote only",
+        "note": "The landlord described the patio-door glazing as a future quotation item and limited the current budget to windows. There is no explicit approval or completion report for replacing the patio-door glass.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "They will mention the patio door glass blown a little bit which you can quote for the future"
+          },
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "but I only have budget for the windows for now."
+          },
+          {
+            "file": "history.md",
+            "event": "event-034",
+            "quote": "Good, all done!"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Several different property references",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Patio-door scope differs from the window budget",
+        "tags": [
+          "scope",
+          "permission"
+        ]
+      },
+      {
+        "question_label": "Fault detail depends on unavailable photos",
+        "tags": [
+          "scope",
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Visit chronology is inconsistent",
+        "tags": [
+          "chronology"
+        ]
+      },
+      {
+        "question_label": "Post-closure appointment query concerns another address",
+        "tags": [
+          "identity",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property and glazing did the completed work cover? Was the patio-door glass separately quoted, authorised or replaced?",
+      "rationale": "Proposed question only. The record contains several property references and an unitemised completion message, while patio-door glazing was described as a future item outside the stated window budget.",
+      "evidence": [
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "Flat 29, 39 Beacon Close, Kingshaven, ZZ4 9ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-011",
+          "quote": "but I only have budget for the windows for now."
+        },
+        {
+          "file": "history.md",
+          "event": "event-034",
+          "quote": "Good, all done!"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "047",
+    "issue_states": [
+      {
+        "issue_label": "Bedroom window does not close properly",
+        "state": "reported_complete",
+        "label": "Agency recorded contractor completion",
+        "note": "The agency says the landlord’s contractor confirmed the window job complete. The underlying message, itemised work and repair photographs are not supplied, and another visit message names a different property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-035",
+            "quote": "Landlord's contractor confirmed job complete."
+          },
+          {
+            "file": "history.md",
+            "event": "event-010",
+            "quote": "Flat 18, 88 Alder Lane, Willowbank, ZZ3 5ZZ"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      },
+      {
+        "issue_label": "Toilet blocked after a toilet freshener was flushed",
+        "state": "reported_complete",
+        "label": "Tenant reported toilet fixed",
+        "note": "The tenant said a family member fixed the toilet and asked for only the window repair to proceed. This is a historical tenant account, not an independent condition check.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-006",
+            "quote": "My mother managed to fix the toilet.You can just send somebody to fix the window,thank you!"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Landlord message refers to another property",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Toilet was explicitly removed from the remaining work",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Window repair detail is limited",
+        "tags": [
+          "documents"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the contractor’s window-completion account identify which property received the repair and what work was performed?",
+      "rationale": "Proposed evidence check only. The agency records contractor confirmation without the underlying message or attachments, and a landlord visit message names a different address. The tenant had already removed the toilet from the remaining work.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-035",
+          "quote": "Landlord's contractor confirmed job complete."
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-010",
+          "quote": "Flat 18, 88 Alder Lane, Willowbank, ZZ3 5ZZ"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "048",
+    "issue_states": [
+      {
+        "issue_label": "Bathroom window stuck closed",
+        "state": "reported_complete",
+        "label": "Contractor reported window repair",
+        "note": "The contractor reported replacing the handle, gearbox and hinges. The completion address differs from the case header, so this remains a source-attributed claim awaiting property reconciliation, not verified completion at the header address.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "has been completed, with the handle, gearbox, and hinges all replaced."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ"
+          },
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ"
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Completion messages identify a different property",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "question_label": "Booking and quote approval recorded after completion claim",
+        "tags": [
+          "chronology",
+          "permission"
+        ]
+      },
+      {
+        "question_label": "Photo and quote contents unavailable",
+        "tags": [
+          "documents"
+        ]
+      },
+      {
+        "question_label": "Later no-results alert may be stale",
+        "tags": [
+          "chronology",
+          "other"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Which property received the handle, gearbox and hinge replacement? Can the quote approval and actual visit date be matched to that repair?",
+      "rationale": "Proposed record check only. Completion messages name another property and booking and approval entries follow the completion claim. The later no-results alert does not by itself establish repair failure.",
+      "evidence": [
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-016",
+          "quote": "Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ"
+        },
+        {
+          "file": "history.md",
+          "event": "event-018",
+          "quote": "Visit date selected - 12/12/2024 03:57 pm"
+        },
+        {
+          "file": "history.md",
+          "event": "event-026",
+          "quote": "Quote was approved by landlord"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "049",
+    "issue_states": [
+      {
+        "issue_label": "Shed door sags and must be lifted to close",
+        "state": "reported_complete",
+        "label": "Agency reported tenant repair",
+        "note": "The agency note says the tenants completed the shed-door job themselves. No underlying tenant response or repair photograph is supplied, so this is a historical attributed completion account.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Tenats have completed the job themselves"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      }
+    ],
+    "question_groups": [
+      {
+        "question_label": "Intake category is not a confirmed structural diagnosis",
+        "tags": [
+          "scope"
+        ]
+      },
+      {
+        "question_label": "Completion is documented by an agency note",
+        "tags": [
+          "documents",
+          "communication"
+        ]
+      }
+    ],
+    "next_check": {
+      "question": "Can the tenant’s account or an available photograph confirm the shed-door work and how the door closed afterwards?",
+      "rationale": "Proposed evidence check only. Completion is reported by an agency note without the underlying response or image; the intake’s ceiling question does not establish a separate structural defect.",
+      "evidence": [
+        {
+          "file": "history.md",
+          "event": "event-013",
+          "quote": "Tenats have completed the job themselves"
+        },
+        {
+          "file": "index.md",
+          "event": null,
+          "quote": "No attachments are required or available for this case."
+        },
+        {
+          "file": "history.md",
+          "event": "event-001",
+          "quote": "Shed door is sagging and needs to be lifted from the bottom to close properly"
+        }
+      ]
+    }
+  }
+]
