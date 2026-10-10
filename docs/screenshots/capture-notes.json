@@ -1,0 +1,26 @@
+{
+  "captured_on": "2026-10-10",
+  "timezone": "Europe/London",
+  "source": "Actual browser screenshots of the local Property Desk application",
+  "runtime": "native_local",
+  "interpretation": "literal_demo",
+  "data": "Fictional tenant report in isolated application and native workflow storage; no source dataset or reserved evaluation data loaded",
+  "operations": "Simulated; policy interpretation was neither saved nor published",
+  "files": [
+    {
+      "file": "policy-settings.jpg",
+      "sha256": "f62c93465760124c9bff16c18fd523fd96adb6e97aeb7c2700f8ee2c2511d107",
+      "bytes": 93492
+    },
+    {
+      "file": "staff-review.jpg",
+      "sha256": "95fb390c3b286a22b98c62ca779503d9bd8519db40cf4e20a2c34ac58d74a1e7",
+      "bytes": 108339
+    },
+    {
+      "file": "tenant-request.jpg",
+      "sha256": "66d427589dece8e3cf25264d413b1c136158ee9b574dee4037144e6d8ec2f8c8",
+      "bytes": 58240
+    }
+  ]
+}

@@ -72,6 +72,8 @@ async def security(request,call_next):
     response=await call_next(request)
     response.headers['X-Content-Type-Options']='nosniff'
     response.headers['Referrer-Policy']='same-origin'
+    if request.url.path.startswith('/api/'):
+        response.headers['Cache-Control']='no-store'
     response.headers['Content-Security-Policy']="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'"
     return response
 
@@ -153,6 +155,14 @@ async def import_build(bid:str,data:dict=Body(default={}),who=Depends(actor)):
     result=await asyncio.to_thread(import_case,get_service(),bid,who,data.get('event_count',1));await wake(result['case']['id']);return result
 @app.get('/api/health')
 def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated'}
+
+# Tenant sessions have their own ownership-checked routes. The view switch is
+# demonstration navigation; it is never used as an authorisation boundary.
+from .tenant import create_tenant_router
+from .policy_assistant import create_policy_assistant_router
+app.include_router(create_tenant_router(wake, mode=MODE))
+app.include_router(create_policy_assistant_router(actor))
+
 @app.get('/')
 def index():return FileResponse(ROOT/'static/index.html')
 app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')

@@ -292,6 +292,10 @@ class Service:
     def preview_tx(self,c,draft):
         policy=self.active(c);affected=[]
         for case in self.db.case_list(c):
+            completed=any(a['business_id']==business_id(case) and a['status']=='succeeded' for a in self.action_states(c,case['id']))
+            if completed:
+                affected.append({'case_id':case['id'],'title':case['title'],'revision':case['revision'],'before':'NO FURTHER ACTION','after':'NO FURTHER ACTION','blockers':[],'changed':False})
+                continue
             before=evaluate({**case,'policy_pending':False},self.claims(c,case['id']),self.approvals(c,case['id']),policy)
             after=evaluate({**case,'policy_pending':False},self.claims(c,case['id']),self.approvals(c,case['id']),draft)
             affected.append({'case_id':case['id'],'title':case['title'],'revision':case['revision'],'before':before['outcome'],'after':after['outcome'],'blockers':[b['key'] for b in after['blockers']],'changed':digest(before['blockers'])!=digest(after['blockers'])})

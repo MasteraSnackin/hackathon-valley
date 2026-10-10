@@ -18,8 +18,8 @@ def replay(case_ids, event_count=1):
     verify_sources()
     results=[]
     # Replay never sends source material to a model or starts an outbound adapter.
-    previous=os.environ.get('MODEL_MODE')
-    os.environ['MODEL_MODE']='literal_demo'
+    previous={key:os.environ.get(key) for key in ('AI_MODE','MODEL_MODE')}
+    os.environ['MODEL_MODE']='literal_demo';os.environ['AI_MODE']='literal_demo'
     try:
         with TemporaryDirectory(prefix='property-build-replay-') as directory:
             service=Service(Store('sqlite:///'+str(Path(directory)/'replay.db')))
@@ -32,8 +32,9 @@ def replay(case_ids, event_count=1):
                     'action_count':len(detail['actions'])})
             service.db.engine.dispose()
     finally:
-        if previous is None:os.environ.pop('MODEL_MODE',None)
-        else:os.environ['MODEL_MODE']=previous
+        for key,value in previous.items():
+            if value is None:os.environ.pop(key,None)
+            else:os.environ[key]=value
     return {'partition':'BUILD','model_mode':'literal_demo','external_operations':'not executed',
         'policy_version':1,'notice':'Chronological development replay, not an accuracy score. No eventual outcome is used as ground truth. All attachments are excluded.',
         'cases':results}
