@@ -6,10 +6,11 @@ from copy import deepcopy
 from datetime import timedelta
 from .store import Store, payload
 from .domain import *
-from . import ai
+from . import ai, jev
 
 # Actor recorded on events and records produced from Claude's readings.
 CLAUDE={'id':'claude','role':'model'}
+JEV={'id':'jev','role':'model'}
 DEMO_DIRECTORY='Fictional demo directory: DEMO-FLAT-1, tenant demo-resident, verified in-app demonstration route. No real address or recipient.'
 
 class Forbidden(ValueError): pass
@@ -42,7 +43,8 @@ class Service:
             for key in ['identity','route']:
                 self.db.add(c,'claim',{'key':key,'value':True,'scope':{'property_ref':'DEMO-FLAT-1'},'source_id':directory['id'],'source_quote':DEMO_DIRECTORY,'verified':True,'verification':'Preconfigured demonstration directory','supersedes':[]},case['id'])
         return case,evidence
-    def intake(self,data:Intake,actor):
+    def intake(self,data:Intake,actor,self_identification=None):
+        """self_identification: {name, address, conversation_id}, set only by the tenant portal bridge."""
         self.role(actor,{'case_manager'})
         input_hash=digest(data.model_dump(exclude={'idempotency_key'}))
         # The report is stored before anyone reads it; Claude triage runs in the
@@ -56,6 +58,9 @@ class Service:
             staff=data.triage=='staff'
             case,evidence=self.new_case(c,title=data.title,property_ref=data.property_ref,report=data.report,category=data.category,action=data.action,work_item=data.work_item,provider=data.provider,access_method=data.access_method,actor=actor,
                 triage_state='staff' if staff else 'pending',category_source='staff' if data.category else 'claude',route_source='staff' if data.action else 'claude')
+            if self_identification:
+                case['self_identification']={**self_identification,'source_id':evidence['id'],'at':stamp(),'corrected':False}
+                self.db.save_case(c,case)
             if staff and case['category']!='other':
                 # Manual triage: the case manager owns the classification fact.
                 self.db.add(c,'claim',{'key':'classification','value':True,'scope':{'property_ref':case['property_ref'],'work_item':data.work_item,'category':case['category']},'source_id':evidence['id'],'source_quote':data.report,'verified':True,'verification':'Manual triage by the case manager at intake','verified_by':actor,'supersedes':[]},case['id'])
@@ -216,6 +221,13 @@ class Service:
             if triage=='pending':case['triage']={**(case.get('triage') or {}),'state':'pending','source_id':source['id'],'confirmed':False}
             self.bump(c,case); self.event(c,case,'evidence_received',{'source_id':source['id']},actor); self.assess(c,case)
             return self.detail_tx(c,cid)
+    def identity_corrected(self,cid,fields,actor):
+        """The tenant changed their name or address: self-identification no longer counts."""
+        with self.db.tx() as c:
+            case=self.db.case(c,cid);sid=case.get('self_identification')
+            if not sid or sid.get('corrected'):return
+            case['self_identification']={**sid,'corrected':True,'corrected_to':{k:fields.get(k) for k in ('name','address')},'corrected_at':stamp()}
+            self.bump(c,case);self.event(c,case,'self_identification_corrected',{},actor);self.assess(c,case)
     def tenant_reply(self,cid,text,actor):
         """A reply in the simulated in-app tenant thread, recorded as evidence."""
         return self.evidence(cid,EvidenceInput(text=text,source_label='Tenant reply (simulated in-app thread)'),actor)
@@ -232,7 +244,7 @@ class Service:
             if triage.get('state')=='failed':triage['state']='staff'
             if category is not None:
                 case['category']=category;case['category_source']='staff'
-                if triage.get('disagreement'):triage['confirmed']=True
+                if triage.get('disagreement') or triage.get('route_disagreement'):triage['confirmed']=True
             case['triage']=triage;case['route_source']='staff'
             case['proposal']=proposal;case['action_revision']+=1;case['status']='open';self.bump(c,case)
             self.event(c,case,'proposal_changed',data.model_dump(),actor);self.assess(c,case)
@@ -293,6 +305,48 @@ class Service:
         retries=Counter(r['source_id'] for r in self.rows(c,'triage_retry',cid))
         done={(r['source_id'],r.get('attempt',0)) for r in self.rows(c,'interpretation',cid)}
         return [e for e in self.rows(c,'evidence',cid) if e.get('triage')=='pending' and (e['id'],retries[e['id']]) not in done]
+    def attempt_of(self,c,cid,sid): return sum(r['source_id']==sid for r in self.rows(c,'triage_retry',cid))
+    def routings(self,c,cid): return {(r['source_id'],r['attempt']):r for r in self.rows(c,'routing',cid)}
+    def awaiting_route(self,c,cid):
+        """Unread messages Jev has not routed yet (none when the policy router is claude)."""
+        if self.active(c)['settings']['router']=='claude':return []
+        routed=self.routings(c,cid)
+        return [e for e in self.pending_sources(c,cid) if (e['id'],self.attempt_of(c,cid,e['id'])) not in routed]
+    def awaiting_reading(self,c,cid):
+        waiting={e['id'] for e in self.awaiting_route(c,cid)}
+        return [e for e in self.pending_sources(c,cid) if e['id'] not in waiting]
+    # ---- Jev routing: one fast calibrated call per message; uncertain messages go to Claude.
+    def route_messages(self,cid):
+        routed=jev_only=0
+        for _ in range(20):
+            with self.db.tx() as c:
+                waiting=self.awaiting_route(c,cid)
+                if not waiting:break
+                source=waiting[0];case=self.db.case(c,cid);settings=self.active(c)['settings']
+                attempt=self.attempt_of(c,cid,source['id']);context=self.triage_context(c,case,source)
+            answers=error=None;meta={'provider':'typesafe','requested_model':jev.model_id(),'router_version':jev.ROUTER_VERSION}
+            if case.get('route_source')=='staff':
+                decision={'mode':'claude','route':None,'reasons':['Staff chose the route; Claude reads the message.']}
+            else:
+                # The model call happens outside any database transaction.
+                try:answers,meta=jev.ask(source['text'],context)
+                except jev.JevUnavailable as exc:
+                    error=exc;decision={'mode':'claude','route':None,'reasons':[f'Jev unavailable ({exc.error_type}); Claude triages.']}
+                else:decision=jev.decide(answers,context,settings)
+            proposed=decision['mode']
+            # Shadow mode records Jev's decision for comparison; Claude decides.
+            if settings['router']=='jev_shadow':decision={**decision,'mode':'claude','reasons':['Shadow mode: Claude decides.',*decision['reasons']]}
+            with self.db.tx() as c:
+                record={**meta,'source_id':source['id'],'attempt':attempt,'router':settings['router'],'mode':decision['mode'],'proposed_mode':proposed,
+                        'route':decision.get('route'),'decision':decision,'answers':answers,'error_type':error.error_type if error else None}
+                rec,created=self.db.add(c,'routing',record,cid,dedupe=f"route:{source['id']}:{attempt}")
+                if not created:continue
+                case=self.db.case(c,cid);routed+=1
+                self.event(c,case,'message_routed',{'source_id':source['id'],'routing_id':rec['id'],'mode':decision['mode'],'route':decision.get('route')},JEV)
+                if decision['mode']=='jev_only':
+                    jev_only+=1
+                    self.apply_triage(c,cid,source,attempt,jev.reading(decision,source['text'],case),{**meta,'routing_id':rec['id']},None,routing={**record,'id':rec['id']})
+        return {'routed':routed,'jev_only':jev_only}
     def triage_context(self,c,case,source):
         p=case['proposal']; t=case.get('triage') or {}
         earlier=[e for e in self.rows(c,'evidence',case['id']) if e['id']!=source['id'] and e.get('triage')!='not_required'][-6:]
@@ -304,26 +358,36 @@ class Service:
                 'earlier_messages':[{'label':e['source_label'],'received_at':e.get('occurred_at'),'text':e['text'][:4000],'truncated':len(e['text'])>4000} for e in earlier],
                 'new_message_label':source['source_label']}
     def triage_messages(self,cid):
+        """Claude reads each routed message: fully when Jev handed it off, as extraction when Jev routed it."""
+        # Direct callers (replay, tests) may not have run the routing step yet.
+        self.route_messages(cid)
         spawned=[]; count=0
         for _ in range(20):
             with self.db.tx() as c:
-                case=self.db.case(c,cid); pending=self.pending_sources(c,cid)
+                case=self.db.case(c,cid); pending=self.awaiting_reading(c,cid)
                 if not pending:break
-                source=pending[0]; attempt=sum(r['source_id']==source['id'] for r in self.rows(c,'triage_retry',cid))
-                context=self.triage_context(c,case,source)
+                source=pending[0]; attempt=self.attempt_of(c,cid,source['id'])
+                context=self.triage_context(c,case,source); routing=self.routings(c,cid).get((source['id'],attempt))
+            locked=routing if routing and routing['mode']=='jev_route' else None
             # The model call happens outside any database transaction.
-            try:result,meta=ai.triage(source['text'],context);error=None
+            try:result,meta=ai.triage(source['text'],context,{'route':locked['route'],'reasons':locked['decision']['reasons']} if locked else None);error=None
             except ai.ClaudeUnavailable as exc:result,error=None,exc;meta={'provider':'anthropic','requested_model':ai.model_id(),'prompt_version':ai.PROMPT_VERSION}
-            with self.db.tx() as c:spawned+=self.apply_triage(c,cid,source,attempt,result,meta,error)
+            if routing:meta={**meta,'routing_id':routing['id']}
+            with self.db.tx() as c:spawned+=self.apply_triage(c,cid,source,attempt,result,meta,error,routing=routing)
             count+=1
         return {'triaged':count,'spawned_case_ids':spawned}
-    def apply_triage(self,c,cid,source,attempt,result,meta,error):
+    def apply_triage(self,c,cid,source,attempt,result,meta,error,routing=None):
         case=self.db.case(c,cid); policy=self.active(c); s=policy['settings']
         base={'source_id':source['id'],'attempt':attempt,**meta}
+        router=None
+        if routing:
+            d=routing['decision']
+            router={'mode':routing['mode'],'proposed_mode':routing['proposed_mode'],'route':d.get('route'),'route_confidence':d.get('route_confidence'),
+                    'jev_route':(routing.get('answers') or {}).get('route',{}).get('choice'),'reasons':d['reasons'],'model':routing.get('model'),'routing_id':routing['id']}
         if error:
             rec,created=self.db.add(c,'interpretation',{**base,'status':'failed','error_type':error.error_type,'error':str(error)[:300]},cid,dedupe=f"triage:{source['id']}:{attempt}")
             if not created:return []
-            case['triage']={'state':'failed','source_id':source['id'],'error':error.error_type,'interpretation_id':rec['id']}
+            case['triage']={'state':'failed','source_id':source['id'],'error':error.error_type,'interpretation_id':rec['id'],'router':router}
             self.bump(c,case);self.event(c,case,'triage_failed',{'source_id':source['id'],'error_type':error.error_type},CLAUDE);self.assess(c,case)
             return []
         checked=ai.checked_triage(result,source['text'])
@@ -333,7 +397,17 @@ class Service:
         issues=checked['issues']
         primary=next((i for i in issues if i['relation']=='current_case'),issues[0] if issues else None)
         route_ambiguities=[a for a in checked['ambiguities'] if a['affects_route']]
-        disagreement=None
+        disagreement=route_disagreement=None;confidence=checked['confidence']
+        if routing and routing['mode']=='jev_route':
+            # Jev's route stands unless Claude objects. An objection applies
+            # Claude's route and holds the case for a person, so a disputed
+            # route never anchors later readings. A hazard is never de-escalated.
+            locked=routing['route'];objection=checked.get('route_objection','').strip()
+            if primary is None:route_disagreement={'jev':locked,'claude':'no actionable issue','reason':objection}
+            else:
+                if primary['route']!=locked or objection:route_disagreement={'jev':locked,'claude':primary['route'],'reason':objection}
+                if locked=='urgent_hazard' or not route_disagreement:primary['route']=locked
+            confidence=jev.combined_confidence(confidence,routing['decision'])
         if primary:
             route=ROUTES[primary['route']]; category=route.get('category',primary['category'])
             if case.get('category_source')=='staff':
@@ -347,7 +421,9 @@ class Service:
                 if route['action']!=case['proposal']['action'] or work_item!=case['proposal']['work_item']:
                     case['proposal']={**case['proposal'],'action':route['action'],'work_item':work_item,'scope':{}};case['action_revision']+=1;case['status']='open'
                     self.db.add(c,'route_changed',{'interpretation_id':rec['id'],'route':primary['route'],'action':route['action'],'work_item':work_item,'action_revision':case['action_revision']},cid)
-            self.issue_claims(c,case,source['id'],rec['id'],checked,issues.index(primary),policy,blocked=bool(route_ambiguities or disagreement))
+            self.issue_claims(c,case,source['id'],rec['id'],{**checked,'confidence':confidence},issues.index(primary),policy,blocked=bool(route_ambiguities or disagreement or route_disagreement),
+                # Jev does not look for ambiguity, so a Jev-only category waits for the case manager.
+                auto_accept=not (routing and routing['mode']=='jev_only'))
         open_q={q['id'] for q in self.questions(c,case) if q['status']=='open'}
         for a in checked['answers']:
             if a['question_id'] not in open_q:continue
@@ -356,22 +432,23 @@ class Service:
             elif a['status']=='partial':
                 self.db.add(c,'question_followup',{'question_id':a['question_id'],'source_id':source['id'],'source_quote':a['source_quote']},cid,dedupe=f"followup:{a['question_id']}:{source['id']}")
         case['triage']={'state':'done','source_id':source['id'],'interpretation_id':rec['id'],'model':meta.get('model'),'intent':checked['intent'],'summary':checked['summary'],
-            'route':primary['route'] if primary else previous.get('route'),'confidence':checked['confidence'],'rationale':checked['rationale'],
+            'route':primary['route'] if primary else previous.get('route'),'confidence':confidence,'rationale':checked['rationale'],
             'open_ambiguities':route_ambiguities,'other_ambiguities':[a for a in checked['ambiguities'] if not a['affects_route']],
-            'disagreement':disagreement,'risk_flags':checked['risk_flags'],'rejected_items':checked['rejected'],'confirmed':False}
+            'disagreement':disagreement,'route_disagreement':route_disagreement,'router':router,'risk_flags':checked['risk_flags'],'rejected_items':checked['rejected'],'confirmed':False}
+        mode='claude' if not router or router['mode']=='claude' else 'jev' if router['mode']=='jev_only' else 'jev+claude'
         # Kept for the existing dashboard panel.
-        case['interpretation']={'mode':'claude','model':meta.get('model'),'summary':checked['summary'],'category':case['category'],'proposed_action':case['proposal']['action'],
-            'confidence':checked['confidence'],'uncertainties':[a['description'] for a in checked['ambiguities']],'source_id':source['id']}
+        case['interpretation']={'mode':mode,'model':meta.get('model'),'summary':checked['summary'],'category':case['category'],'proposed_action':case['proposal']['action'],
+            'confidence':confidence,'uncertainties':[a['description'] for a in checked['ambiguities']],'source_id':source['id'],'router':router}
         spawned=[]
         for i,issue in enumerate(issues):
             if issue is primary or issue['relation']!='new_issue':continue
             _,new=self.db.add(c,'issue_split',{'source_id':source['id'],'issue_index':i,'parent_case_id':cid},cid,dedupe=f"split:{source['id']}:{i}")
             if new:spawned.append(self.split_issue(c,case,source,rec['id'],checked,i,policy))
         self.bump(c,case)
-        self.event(c,case,'triage_completed',{'source_id':source['id'],'interpretation_id':rec['id'],'route':case['triage']['route'],'split_case_ids':spawned},CLAUDE)
+        self.event(c,case,'triage_completed',{'source_id':source['id'],'interpretation_id':rec['id'],'route':case['triage']['route'],'mode':mode,'split_case_ids':spawned},JEV if mode=='jev' else CLAUDE)
         self.assess(c,case)
         return spawned
-    def issue_claims(self,c,case,source_id,interpretation_id,checked,index,policy,blocked=False):
+    def issue_claims(self,c,case,source_id,interpretation_id,checked,index,policy,blocked=False,auto_accept=True):
         """Store one issue's assertions unverified; auto-accept only the derived category label when policy allows."""
         issue=checked['issues'][index]; s=policy['settings']
         for claim in checked['claims']:
@@ -384,7 +461,7 @@ class Service:
         scope={'property_ref':case['property_ref'],'work_item':case['proposal']['work_item'],'category':case['category']}
         if any(x['key']=='classification' and x['scope']==scope for x in self.claims(c,case['id'])):return
         threshold=s['triage_auto_accept']
-        accepted=threshold!='never' and CONFIDENCE_RANK[checked['confidence']]>=CONFIDENCE_RANK[threshold]
+        accepted=auto_accept and threshold!='never' and CONFIDENCE_RANK[checked['confidence']]>=CONFIDENCE_RANK[threshold]
         self.db.add(c,'claim',{'key':'classification','value':True,'scope':scope,'source_id':source_id,'source_quote':issue['source_quote'],'verified':accepted,'origin':'claude','interpretation_id':interpretation_id,
             'verification':f"Claude's derived category, auto-accepted by policy v{policy['version']} at {checked['confidence']} confidence" if accepted else None,'supersedes':[]},case['id'])
     def split_issue(self,c,parent,source,interpretation_id,checked,index,policy):
@@ -520,10 +597,11 @@ class Service:
     def claude_steps(self,cid):
         """Run triage and drafting inline: manual demo mode and BUILD replay only."""
         spawned=[]
-        for _ in range(6):
+        for _ in range(8):
             with self.db.tx() as c:
-                case=self.db.case(c,cid);triage=bool(self.pending_sources(c,cid));draft=bool(self.tenant_questions_due(c,case,self.active(c)))
-            if triage:spawned+=self.triage_messages(cid)['spawned_case_ids']
+                case=self.db.case(c,cid);route=bool(self.awaiting_route(c,cid));triage=bool(self.pending_sources(c,cid));draft=bool(self.tenant_questions_due(c,case,self.active(c)))
+            if route:self.route_messages(cid)
+            elif triage:spawned+=self.triage_messages(cid)['spawned_case_ids']
             elif draft:self.compose_tenant_messages(cid)
             else:break
         return spawned
@@ -648,7 +726,7 @@ class Service:
             times.append(at+timedelta(minutes=5))
             case=self.db.case(c,cid)
             return {'terminal':case['status']=='administratively_archived','next_wake_at':stamp(min(t for t in times if t>at)),'revision':case['revision'],
-                    'needs_triage':bool(self.pending_sources(c,cid)),'needs_tenant_message':bool(self.tenant_questions_due(c,case,policy))}
+                    'needs_routing':bool(self.awaiting_route(c,cid)),'needs_triage':bool(self.awaiting_reading(c,cid)),'needs_tenant_message':bool(self.tenant_questions_due(c,case,policy))}
 
 _service=None
 def get_service():
@@ -671,6 +749,10 @@ def coordinator_cycle(case_id:str)->dict:
 def triage_messages(case_id:str)->dict:
     """Workflow step body: Claude reads every stored, unread message for the case."""
     return get_service().triage_messages(case_id)
+
+def route_messages(case_id:str)->dict:
+    """Workflow step body: Jev routes every stored, unread message for the case."""
+    return get_service().route_messages(case_id)
 
 def compose_tenant_messages(case_id:str)->dict:
     """Workflow step body: Claude drafts tenant questions; policy decides sending."""

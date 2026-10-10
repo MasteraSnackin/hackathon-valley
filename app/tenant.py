@@ -260,6 +260,8 @@ def _deliver(service, owner, cid, operation):
             text=operation['message']['text'],
             source_label='Tenant conversation: unverified statement',
             idempotency_key='tenant:' + operation['message']['id']), actor)
+        if operation['corrected']:
+            service.identity_corrected(case_id, operation['fields'], actor)
         reply = ('Thanks, I’ve passed on your corrected details for your property manager to check.'
                  if operation['corrected'] else
                  'Thanks, I’ve added your update to the report for your property manager.')
@@ -271,7 +273,8 @@ def _deliver(service, owner, cid, operation):
             property_ref='Unverified address: ' + fields['address'],
             report=operation['transcript'],  # Claude chooses the route
             work_item='Tenant-reported maintenance',
-            idempotency_key='tenant-conversation:' + cid), actor)
+            idempotency_key='tenant-conversation:' + cid), actor,
+            self_identification={'name': fields['name'], 'address': fields['address'], 'conversation_id': cid})
         case_id = result['case']['id']
         reply = ('Thanks, I’ve saved your report. Your property manager will check the details. '
                  'You can add an update here.')

@@ -33,6 +33,22 @@ def snapshot(case_id,event_count=1):
     text='\n'.join(parts[:event_count])
     return {'case_id':case_id,'event_count':event_count,'text':text,'attachments':[],'boundary':'Only selected chronological history prefix. Current index, later events and all attachments excluded.','source_url':next(x['source_url'] for x in manifest()['cases'] if x['case_id']==case_id)+'/history.md'}
 
+def events(case_id,count):
+    """The first `count` history events as separate messages, for message-by-message replay.
+
+    Same boundary as snapshot(): a hash-checked chronological prefix only, no
+    index page, later events or attachments.
+    """
+    text=snapshot(case_id,count)['text']
+    result=[]
+    for part in re.split(r'(?=<a id="event-\d+">)',text):
+        head=re.search(r'## (.+?) — event (\d+)',part)
+        if not head:continue
+        field=lambda name:(re.search(r'\*\*'+name+r':\*\* ([^\n]+)',part) or [None,'Not specified'])[1].strip()
+        body=re.split(r'\n- \*\*To:\*\* [^\n]*\n',part,maxsplit=1)[-1].strip()
+        result.append({'number':int(head.group(2)),'at':head.group(1),'channel':field('Channel'),'sender':field('From'),'recipient':field('To'),'text':body})
+    return result
+
 def list_build():
     return [{**c,'preview':snapshot(c['case_id'])['text'],'snapshot_event_count':1} for c in manifest()['cases']]
 

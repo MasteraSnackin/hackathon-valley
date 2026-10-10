@@ -1,6 +1,6 @@
 # Claude triage and tenant messaging
 
-Claude reads every incoming message, chooses the workflow route, extracts quoted assertions and drafts tenant questions. The policy engine and named staff still decide what may happen. There is no keyword interpreter: when Claude is unavailable, a person triages the message.
+With the default `router: jev` policy, TypeSafe Jev routes each message first and Claude reads only what Jev hands off or routed with facts to extract; see [Jev routing](JEV_ROUTING.md). The rest of this page describes Claude's reading. With `router: claude`, or without a TypeSafe key, Claude reads every incoming message, chooses the workflow route, extracts quoted assertions and drafts tenant questions. The policy engine and named staff still decide what may happen. There is no keyword interpreter: when Claude is unavailable, a person triages the message.
 
 ## Where it runs
 

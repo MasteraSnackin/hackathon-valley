@@ -21,7 +21,8 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 ### What the prototype does
 
 - Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts.
-- Claude triage as native workflow steps: every stored message is read by Claude, which picks the workflow route, names the work item, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Unreadable, ambiguous, hazardous or disputed readings hold the action for a person; there is no keyword fallback. See [Claude triage](docs/CLAUDE_TRIAGE.md).
+- Jev routing with hand-off to Claude: a fast TypeSafe Jev call routes every stored message first. Confident, simple messages are routed by Jev alone; Jev's other routes are applied while Claude extracts quotes and claims and may object (a CONFLICT for a person); unsure messages go to Claude as before. See [Jev routing](docs/JEV_ROUTING.md).
+- Claude triage as native workflow steps: every message Jev hands off is read by Claude, which picks the workflow route, names the work item, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Unreadable, ambiguous, hazardous or disputed readings hold the action for a person; there is no keyword fallback. See [Claude triage](docs/CLAUDE_TRIAGE.md).
 - Claude-drafted tenant questions: Claude recommends auto-send or staff review from the case data and policy, and a deterministic gate decides. Staff approve, edit or reject drafts; replies close answered questions. Sending is simulated.
 - Per-action **PASS / FAIL / UNKNOWN / CONFLICT** checks that retain all relevant blockers and source links.
 - Editable ALL/ANY rules, action/property/category filters, review ownership, thresholds and working-hour follow-ups.
@@ -57,7 +58,7 @@ The companion [decision flow](docs/diagrams/decision-flow.html) shows how a held
 - Python **3.12**, including `venv` and `pip` for a fresh environment.
 - A POSIX environment for the native local process lock; existing verification was performed on macOS.
 - This project's source and lockfile. BUILD replay additionally needs the supplied read-only `data/build/` and `handoff/BUILD_MANIFEST.json`.
-- An Anthropic API key for Claude triage (without one, every message is handed to a case manager for manual triage). No cloud database or Vercel credentials are needed for the local demonstration.
+- An Anthropic API key for Claude triage (without one, every message is handed to a case manager for manual triage), and optionally a TypeSafe API key for Jev routing (without one, Claude triages every message). No cloud database or Vercel credentials are needed for the local demonstration.
 
 The [GitHub repository](https://github.com/MasteraSnackin/hackathon-valley) is private; your GitHub account needs access. For a fresh checkout:
 
@@ -126,7 +127,9 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 | `VERCEL_QUEUE_BASE_URL` | Must be unset for the embedded local mode; this app does not configure an external local queue delivery route. |
 | `ANTHROPIC_API_KEY` | Claude triage and tenant drafting. Keep it in `.env.local` or the hosting environment; never in source, screenshots or fixtures. Without it, messages go to manual triage. |
 | `CLAUDE_MODEL` | Default `claude-opus-5`. |
-| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` | Adaptive-thinking effort, default `medium` / `low`. |
+| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_EXTRACT_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low` (extraction runs when Jev already chose the route). |
+| `TYPESAFE_API_KEY` | Jev routing. Same handling as the Anthropic key. Without it, Jev is skipped and Claude triages every message. |
+| `JEV_MODEL` | Default `jev-1.13.0` (pinned; router thresholds are tuned for this version). |
 | `STAFF_TOKEN_ROLES` | Production API configuration: JSON records with `id`, `role` and bearer-secret `sha256`. Does not provide browser login or organisation isolation. |
 
 Tenant name/address/issue extraction and plain-English policy drafting remain local parsers. A completed tenant report, later updates and staff evidence without structured claims are read by Claude, so those texts are sent to the Anthropic API.
@@ -148,6 +151,8 @@ Tenant name/address/issue extraction and plain-English policy drafting remain lo
 | `tenant_messages` | `claude_decides` | `claude_decides`: Claude may auto-send within the gate; `staff_approval`: every tenant message waits for a case manager; `off`: no tenant drafting. |
 | `tenant_auto_send_topics` | all topics | Question topics Claude may send without staff review. |
 | `tenant_max_questions` / `tenant_follow_ups` | 3 / 1 | Questions per message; narrower follow-ups after a partial answer. |
+| `tenant_self_identification` | `clarify`, `request_quote` | Actions for which the name and address a tenant gives in their own portal session satisfy identity and route. Limited to these two; corrected details fall back to the case manager. |
+| `router` and `router_*` | `jev`, see [Jev routing](docs/JEV_ROUTING.md) | Jev routes first; thresholds for Jev-only, hand-off to Claude and hazard escalation. |
 
 Rules combine supported fact states with ALL/ANY conditions, action/property/category filters, a response and an owner. The `total` fact must be the full comparable cumulative job commitment including tax; the prototype does not calculate it across invoices. Unknown is not zero. Precise appointment values, conflicting slot reconciliation and accepted-source configuration remain future work.
 
@@ -183,6 +188,7 @@ Claude triage needs an **Anthropic API key**; nothing else needs an external acc
 | --- | --- | --- |
 | Tenant and policy parsers | Local name/address/issue extraction and a bounded vocabulary for policy suggestions | Not general-purpose model conversations; policy publication remains explicit |
 | Anthropic Claude API | Message triage (route, work item, issue split, quoted assertions, ambiguities, answers) and tenant-question drafting with a send recommendation. Python SDK `anthropic==1.13.0`, `beta.messages.parse` with structured output, adaptive thinking, server-side `fallbacks: "default"`, cached system prompt; model `CLAUDE_MODEL` (default `claude-opus-5`) | Requires `ANTHROPIC_API_KEY`; verified locally with live calls. Without it, every message goes to manual triage |
+| TypeSafe Jev API | Routes each new message before Claude (route Choice with an explicit `unknown`, category Choice, five yes/no signals) in one request. Python SDK `typesafe-sdk==0.7.4`, model `jev-1.13.0` | Requires `TYPESAFE_API_KEY`; verified locally with live calls and a BUILD replay evaluation ([results](docs/evals/JEV_ROUTER_EVAL.md)). Without it, Claude triages every message |
 | Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
 | SQLite / SQLAlchemy | Application case state, evidence, decisions, policies and local tenant state | Local storage; PostgreSQL/psycopg is an unverified hosted path, not a provisioned service |
 | FastAPI JSON API | Same-origin browser access to tenant conversations, case decisions and policy operations | Demo sessions locally; production staff bearer configuration is separate from a browser login |
