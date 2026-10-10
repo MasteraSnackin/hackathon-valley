@@ -135,7 +135,8 @@ def model_status():
 def session(request:Request):
     try:who=actor(request)
     except Forbidden:who=None
-    return {'actor':who,'mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),'authentication':'Open hosted demonstration roles; anyone with the link can act' if HOSTED else 'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
+    # Clients offer the demo role picker when mode is 'demo'; hosted_demo has it too.
+    return {'actor':who,'mode':'demo' if DEMO else MODE,'hosted':HOSTED,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),'authentication':'Open hosted demonstration roles; anyone with the link can act' if HOSTED else 'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
 
 @app.post('/api/demo-session')
 def demo_session(request:Request,data:dict=Body(...)):
