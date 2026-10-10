@@ -102,7 +102,7 @@ Use one process without `--reload`. Local timers require a running process; star
 
 ### Try the tenant and staff journeys
 
-1. In **Tenant** view, enter the fictional report: “My name is Alex Taylor. I live at 18 Example Road. My kitchen tap is leaking.” Answer any missing-detail question. Explicit `Name:`, `Address:` and `Issue:` wording is available for corrections the local parser does not understand.
+1. In **Tenant** view, enter the fictional report: “My name is Alex Taylor. I live at 18 Example Road. My kitchen tap is leaking.” Claude asks for anything missing, then shows a **Here's what I've got** summary. Press **Yes, send it**; nothing reaches property management before that. Without Claude, the local parser fills the summary and understands explicit `Name:`, `Address:` and `Issue:` wording.
 2. Switch to **Property management** to inspect the case and outstanding requirements. Providing an address does not verify identity or grant access. The view switch is a demonstration convenience, not production login.
 3. As **Case manager**, create a fictional dishwasher case at `DEMO-FLAT-1` with category `appliance`. This identifier has an explicit demo-only trusted property/contact mapping. Choose **Instruct work** to see missing requirements separately.
 4. Add original evidence and exact quoted claims. Switch to the role named on a review to correct a supported fact or grant a scoped approval. Remaining blockers stay visible.
@@ -126,10 +126,10 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 | `VERCEL_QUEUE_BASE_URL` | Must be unset for the embedded local mode; this app does not configure an external local queue delivery route. |
 | `ANTHROPIC_API_KEY` | Claude triage and tenant drafting. Keep it in `.env.local` or the hosting environment; never in source, screenshots or fixtures. Without it, messages go to manual triage. |
 | `CLAUDE_MODEL` | Default `claude-opus-5`. |
-| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` | Adaptive-thinking effort, default `medium` / `low`. |
+| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_INTAKE_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low`. |
 | `STAFF_TOKEN_ROLES` | Production API configuration: JSON records with `id`, `role` and bearer-secret `sha256`. Does not provide browser login or organisation isolation. |
 
-Tenant name/address/issue extraction and plain-English policy drafting remain local parsers. A completed tenant report, later updates and staff evidence without structured claims are read by Claude, so those texts are sent to the Anthropic API.
+Claude reads the tenant conversation to prepare the summary the tenant confirms (the local parser is the offline fallback); plain-English policy drafting remains a local parser. Tenant messages before and after submission, and staff evidence without structured claims, are read by Claude, so those texts are sent to the Anthropic API.
 
 #### Editable policy settings
 
@@ -181,7 +181,7 @@ Claude triage needs an **Anthropic API key**; nothing else needs an external acc
 
 | Component or service | Current use | Credentials and verification boundary |
 | --- | --- | --- |
-| Tenant and policy parsers | Local name/address/issue extraction and a bounded vocabulary for policy suggestions | Not general-purpose model conversations; policy publication remains explicit |
+| Tenant intake and policy parser | Claude prepares the tenant-confirmed summary (local phrase parser as fallback); a bounded vocabulary for policy suggestions | A tenant's confirmation is not identity verification; policy publication remains explicit |
 | Anthropic Claude API | Message triage (route, work item, issue split, quoted assertions, ambiguities, answers) and tenant-question drafting with a send recommendation. Python SDK `anthropic==1.13.0`, `beta.messages.parse` with structured output, adaptive thinking, server-side `fallbacks: "default"`, cached system prompt; model `CLAUDE_MODEL` (default `claude-opus-5`) | Requires `ANTHROPIC_API_KEY`; verified locally with live calls. Without it, every message goes to manual triage |
 | Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
 | SQLite / SQLAlchemy | Application case state, evidence, decisions, policies and local tenant state | Local storage; PostgreSQL/psycopg is an unverified hosted path, not a provisioned service |
@@ -189,7 +189,7 @@ Claude triage needs an **Anthropic API key**; nothing else needs an external acc
 | Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real email, SMS, phone, contractor system or payment service is connected |
 | Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
 
-Claude's output is schema-validated and every quote must occur verbatim in the source. Its assertions stay unverified until the named role checks them, and a deterministic gate controls every tenant message. Tenant reports, updates and unstructured staff evidence are sent to the Anthropic API; the tenant slot parser and the policy parser remain local. No ElevenLabs integration is implemented.
+Claude's output is schema-validated and every quote must occur verbatim in the source. Its assertions stay unverified until the named role checks them, and a deterministic gate controls every tenant message. Tenant conversations, updates and unstructured staff evidence are sent to the Anthropic API; the tenant fallback parser and the policy parser remain local. No ElevenLabs integration is implemented.
 
 ### Libraries and runtime
 

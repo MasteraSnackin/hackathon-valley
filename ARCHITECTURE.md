@@ -61,7 +61,7 @@ In demo mode, staff sessions are random, loopback-only cookies backed by an in-m
 
 **Source:** [tenant.py](app/tenant.py); [portal behaviour](docs/PORTAL_UI.md).
 
-The tenant router owns a separate session cookie, conversation ownership checks and an allowlisted response projection. A bounded local parser gathers name, address and issue while retaining original messages. Once these fields are present, a server-side bridge creates one case through `Service.intake`; subsequent messages use `Service.evidence`. Names and addresses remain unverified, and a tenant cannot activate the reserved fictional directory alias by entering it as an address.
+The tenant router owns a separate session cookie, conversation ownership checks and an allowlisted response projection. Claude reads the conversation and proposes name, address and separate problems; only values found in the tenant's own words are kept, and a bounded local parser is the fallback. When all are present the tenant sees a summary and must confirm it; only then does a server-side bridge create one case through `Service.intake`. Subsequent messages use `Service.evidence`. Names and addresses remain unverified, and a tenant cannot activate the reserved fictional directory alias by entering it as an address.
 
 Session hashes, conversation projections, owner indexes, pending deliveries and request receipts are stored in mutable `meta` entries. Message delivery is reserved durably before entering the separately transactional case service. Stable request keys let retries converge after an interrupted case commit. Completed reports and subsequent updates become immutable case evidence. This design does not make every pre-submission conversation field an immutable audit record.
 
@@ -252,7 +252,7 @@ The staff interface exposes evidence, claim provenance, decisions, reviews, acti
 | --- | --- |
 | Modular Python application with a static client | Keeps the demonstration understandable and deployable through FastAPI; it shares one service and data model rather than separate microservices |
 | Deterministic policy outside interpretation | Makes action permission inspectable and prevents model text from creating authority; factual verification remains explicit staff work |
-| Claude reads and routes; policy decides | Claude handles open-ended wording, routing and tenant questions; deterministic gates and named roles keep permission and verification out of the model. Tenant slot and policy parsers remain bounded local parsers |
+| Claude reads and routes; policy decides | Claude handles open-ended wording, routing and tenant questions; deterministic gates and named roles keep permission and verification out of the model. Tenant intake uses Claude with a deterministic completeness gate and a local fallback parser; the policy parser remains local |
 | Append-only records plus mutable projections | Preserves decisions while supporting current views; administrator tamper resistance and full relational integrity are outside this design |
 | Native SDK orchestration plus application idempotency | Provides genuine replay/hooks/timers while protecting business effects from step retry; requires two persistent stores and careful recovery |
 | Global transaction serialisation | Favours straightforward correctness for the prototype; constrains throughput and needs redesign before substantial parallel load |
