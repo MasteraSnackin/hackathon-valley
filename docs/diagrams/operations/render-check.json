@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-10T12:32:25.336Z",
+  "renderer": "Installed Chrome via bundled Playwright; isolated temporary profile",
+  "scope": "1440x1000 light static render and SVG bounds; no application runtime tests",
+  "results": [
+    {
+      "slug": "data-storage",
+      "sha256": "f0fab8927e2590dbd57e20635b6a5644796cba0b1a2403d5fb2613f3a0632d6d",
+      "viewportFits": true,
+      "viewBox": {
+        "width": 1280,
+        "height": 720
+      },
+      "outside": [],
+      "fonts": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Arial, sans-serif"
+    },
+    {
+      "slug": "local-deployment",
+      "sha256": "0a71a1569617c4f50f33c478ec97ef3bc60ca3e4359aa4cf446606f36ed2020e",
+      "viewportFits": true,
+      "viewBox": {
+        "width": 1280,
+        "height": 720
+      },
+      "outside": [],
+      "fonts": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Arial, sans-serif"
+    }
+  ]
+}

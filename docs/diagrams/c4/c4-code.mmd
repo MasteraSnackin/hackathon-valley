@@ -1,0 +1,16 @@
+%% C4 · Action permission call path
+%% Source commit: 2732af60a920d0f9a88be18a36e078aa22fbfa6d
+flowchart LR
+  execute["Service.execute_tx<br/>service.py:540-558"]
+  business["business_id<br/>domain.py:222"]
+  assess["Service.assess<br/>service.py:131-193"]
+  evaluate["evaluate<br/>domain.py:256-328"]
+  scope["scope_matches<br/>domain.py:223-225"]
+  basis["approval_basis<br/>domain.py:211-220"]
+  triage["triage_check<br/>domain.py:239-254"]
+  execute -->|"Deduplicate action"| business
+  execute -->|"Recheck permission"| assess
+  assess -->|"Case + facts + policy"| evaluate
+  evaluate -->|"Filter claims"| scope
+  evaluate -->|"Validate approval"| basis
+  evaluate -->|"Check reading state"| triage

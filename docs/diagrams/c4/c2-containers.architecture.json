@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "C2 \u00b7 Application and storage",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/MasteraSnackin/hackathon-valley",
+      "revision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d"
+    },
+    "views": [
+      {
+        "id": "case-storage",
+        "label": "Case storage",
+        "focus": [
+          "browser",
+          "app",
+          "records"
+        ],
+        "note": "Case records commit in the application store before a workflow wake."
+      },
+      {
+        "id": "runtime-history",
+        "label": "Runtime history",
+        "focus": [
+          "app",
+          "history"
+        ],
+        "note": "The SDK stores execution history outside the case database."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      72
+    ],
+    "cols": 3,
+    "cellW": 220,
+    "cellH": 80,
+    "gapX": 180,
+    "gapY": 130
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "frontend",
+      "label": "Browser client",
+      "sublabel": "HTML \u00b7 CSS \u00b7 JavaScript",
+      "row": 1,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "static/app.js"
+        }
+      ]
+    },
+    {
+      "id": "app",
+      "type": "backend",
+      "label": "Python application",
+      "sublabel": "FastAPI + embedded Workflow",
+      "row": 1,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 50,
+          "end_line": 70
+        }
+      ]
+    },
+    {
+      "id": "records",
+      "type": "database",
+      "label": "Application store",
+      "sublabel": "SQLite \u00b7 SQLAlchemy",
+      "row": 1,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/store.py",
+          "line": 10,
+          "end_line": 44
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "type": "database",
+      "label": "Workflow event store",
+      "sublabel": "Native local World directory",
+      "row": 2,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/workflows.py",
+          "line": 245,
+          "end_line": 282
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "type": "cloud",
+      "label": "Anthropic API",
+      "sublabel": "Hosted Claude",
+      "row": 0,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/ai.py",
+          "line": 121,
+          "end_line": 262
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "browser-to-app",
+      "from": "browser",
+      "to": "app",
+      "label": "Same-origin HTTP",
+      "variant": "default"
+    },
+    {
+      "id": "app-to-records",
+      "from": "app",
+      "to": "records",
+      "label": "SQL transactions",
+      "variant": "default"
+    },
+    {
+      "id": "app-to-history",
+      "from": "app",
+      "to": "history",
+      "label": "SDK history",
+      "variant": "default",
+      "labelAt": [
+        620,
+        426
+      ]
+    },
+    {
+      "id": "app-to-claude",
+      "from": "app",
+      "to": "claude",
+      "label": "HTTPS \u00b7 structured output",
+      "variant": "default",
+      "labelAt": [
+        654,
+        220
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "One local process",
+      "items": [
+        "FastAPI, Service and the embedded queue share a process.",
+        "Workflow is a library/runtime, not a separate hosted service here."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Two durable stores",
+      "items": [
+        "Application records and native event history are separate.",
+        "PostgreSQL and Vercel cloud paths are not deployment proof."
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Property Desk local demo",
+      "wraps": [
+        "app",
+        "records",
+        "history"
+      ],
+      "pad": 28
+    }
+  ]
+}

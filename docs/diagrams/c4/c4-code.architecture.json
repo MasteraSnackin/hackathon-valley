@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "C4 \u00b7 Action permission call path",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/MasteraSnackin/hackathon-valley",
+      "revision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d"
+    },
+    "views": [
+      {
+        "id": "permission",
+        "label": "Permission check",
+        "focus": [
+          "execute",
+          "assess",
+          "evaluate"
+        ],
+        "note": "Every execution attempt obtains a fresh assessment."
+      },
+      {
+        "id": "approval",
+        "label": "Approval validity",
+        "focus": [
+          "evaluate",
+          "basis"
+        ],
+        "note": "Approval scope, policy, action revision, expiry and evidence must remain current."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      72
+    ],
+    "cols": 4,
+    "cellW": 220,
+    "cellH": 80,
+    "gapX": 130,
+    "gapY": 130
+  },
+  "components": [
+    {
+      "id": "execute",
+      "type": "backend",
+      "label": "Service.execute_tx",
+      "sublabel": "service.py:540-558",
+      "row": 1,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/service.py",
+          "line": 540,
+          "end_line": 558
+        }
+      ]
+    },
+    {
+      "id": "business",
+      "type": "backend",
+      "label": "business_id",
+      "sublabel": "domain.py:222",
+      "row": 0,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 222,
+          "end_line": 225
+        }
+      ]
+    },
+    {
+      "id": "assess",
+      "type": "backend",
+      "label": "Service.assess",
+      "sublabel": "service.py:131-193",
+      "row": 1,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/service.py",
+          "line": 131,
+          "end_line": 193
+        }
+      ]
+    },
+    {
+      "id": "evaluate",
+      "type": "security",
+      "label": "evaluate",
+      "sublabel": "domain.py:256-328",
+      "row": 1,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 256,
+          "end_line": 328
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "type": "backend",
+      "label": "scope_matches",
+      "sublabel": "domain.py:223-225",
+      "row": 0,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 223,
+          "end_line": 225
+        }
+      ]
+    },
+    {
+      "id": "basis",
+      "type": "backend",
+      "label": "approval_basis",
+      "sublabel": "domain.py:211-220",
+      "row": 1,
+      "col": 3,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 211,
+          "end_line": 220
+        }
+      ]
+    },
+    {
+      "id": "triage",
+      "type": "backend",
+      "label": "triage_check",
+      "sublabel": "domain.py:239-254",
+      "row": 2,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 239,
+          "end_line": 254
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "execute-to-business",
+      "from": "execute",
+      "to": "business",
+      "label": "Deduplicate action",
+      "variant": "default"
+    },
+    {
+      "id": "execute-to-assess",
+      "from": "execute",
+      "to": "assess",
+      "label": "Recheck permission",
+      "variant": "default"
+    },
+    {
+      "id": "assess-to-evaluate",
+      "from": "assess",
+      "to": "evaluate",
+      "label": "Case + facts + policy",
+      "variant": "default"
+    },
+    {
+      "id": "evaluate-to-scope",
+      "from": "evaluate",
+      "to": "scope",
+      "label": "Filter claims",
+      "variant": "default",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        918,
+        214
+      ]
+    },
+    {
+      "id": "evaluate-to-basis",
+      "from": "evaluate",
+      "to": "basis",
+      "label": "Validate approval",
+      "variant": "default"
+    },
+    {
+      "id": "evaluate-to-triage",
+      "from": "evaluate",
+      "to": "triage",
+      "label": "Check reading state",
+      "variant": "default",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        930,
+        432
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Call semantics",
+      "items": [
+        "Edges mean Python calls, not successive workflow stages.",
+        "Scope, approval and triage checks run inside evaluate."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Result and action",
+      "items": [
+        "evaluate returns all blockers plus the priority outcome.",
+        "execute_tx writes a simulated receipt only after ACT."
+      ]
+    }
+  ]
+}

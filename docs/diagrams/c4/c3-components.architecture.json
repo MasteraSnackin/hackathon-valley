@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "C3 \u00b7 Python application components",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/MasteraSnackin/hackathon-valley",
+      "revision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d"
+    },
+    "views": [
+      {
+        "id": "native-cycle",
+        "label": "Native cycle",
+        "focus": [
+          "api",
+          "workflow",
+          "service",
+          "policy"
+        ],
+        "note": "A workflow wake causes a fresh policy assessment using current records."
+      },
+      {
+        "id": "interpretation",
+        "label": "Model proposals",
+        "focus": [
+          "service",
+          "ai",
+          "store"
+        ],
+        "note": "The service stores model output with source provenance before further checks."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      72
+    ],
+    "cols": 3,
+    "cellW": 220,
+    "cellH": 80,
+    "gapX": 180,
+    "gapY": 130
+  },
+  "components": [
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "HTTP routers",
+      "sublabel": "main.py + tenant.py",
+      "row": 1,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 128,
+          "end_line": 198
+        },
+        {
+          "path": "app/tenant.py",
+          "line": 189,
+          "end_line": 224
+        }
+      ]
+    },
+    {
+      "id": "draft",
+      "type": "backend",
+      "label": "Policy assistant",
+      "sublabel": "policy_assistant.py",
+      "row": 2,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/policy_assistant.py",
+          "line": 277,
+          "end_line": 397
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "type": "backend",
+      "label": "Workflow coordinator",
+      "sublabel": "workflows.py",
+      "row": 0,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/workflows.py",
+          "line": 80,
+          "end_line": 182
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "type": "backend",
+      "label": "Case service",
+      "sublabel": "service.py \u00b7 Service",
+      "row": 1,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/service.py",
+          "line": 18,
+          "end_line": 67
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "type": "backend",
+      "label": "Claude adapter",
+      "sublabel": "ai.py",
+      "row": 2,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/ai.py",
+          "line": 121,
+          "end_line": 262
+        }
+      ]
+    },
+    {
+      "id": "store",
+      "type": "database",
+      "label": "Transactional store",
+      "sublabel": "store.py \u00b7 Store",
+      "row": 1,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/store.py",
+          "line": 37,
+          "end_line": 75
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "Policy evaluator",
+      "sublabel": "domain.py \u00b7 evaluate",
+      "row": 2,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/domain.py",
+          "line": 256,
+          "end_line": 328
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "api-to-service",
+      "from": "api",
+      "to": "service",
+      "label": "Case commands",
+      "variant": "default",
+      "labelAt": [
+        416,
+        354
+      ]
+    },
+    {
+      "id": "draft-to-service",
+      "from": "draft",
+      "to": "service",
+      "label": "Read policy context",
+      "variant": "default"
+    },
+    {
+      "id": "api-to-workflow",
+      "from": "api",
+      "to": "workflow",
+      "label": "Wake after commit",
+      "variant": "default"
+    },
+    {
+      "id": "workflow-to-service",
+      "from": "workflow",
+      "to": "service",
+      "label": "Durable steps",
+      "variant": "default",
+      "labelAt": [
+        620,
+        220
+      ]
+    },
+    {
+      "id": "service-to-ai",
+      "from": "service",
+      "to": "ai",
+      "label": "Triage / draft",
+      "variant": "default"
+    },
+    {
+      "id": "service-to-store",
+      "from": "service",
+      "to": "store",
+      "label": "Read / append",
+      "variant": "default",
+      "labelAt": [
+        770,
+        288
+      ]
+    },
+    {
+      "id": "service-to-policy",
+      "from": "service",
+      "to": "policy",
+      "label": "Check requirements",
+      "variant": "default",
+      "labelAt": [
+        624,
+        426
+      ]
+    },
+    {
+      "id": "api-to-ai",
+      "from": "api",
+      "to": "ai",
+      "label": "Read tenant intake",
+      "labelAt": [
+        232,
+        426
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Explicit policy control",
+      "items": [
+        "Tenant intake checks its summary before creating a case.",
+        "Case triage and proposed actions still pass explicit checks."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Scope of this view",
+      "items": [
+        "The native coordinator has three durable step functions.",
+        "Cycle checks, message triage and tenant drafting call Service."
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Python application: one local process",
+      "wraps": [
+        "api",
+        "draft",
+        "workflow",
+        "service",
+        "ai",
+        "store",
+        "policy"
+      ],
+      "pad": 28
+    }
+  ]
+}

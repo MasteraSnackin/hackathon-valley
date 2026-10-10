@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "sequence",
+  "input": "docs/diagrams/behaviour/human-review.sequence.json",
+  "output": "docs/diagrams/behaviour/human-review.html",
+  "specification": {
+    "sha256": "5ef5c7dd0c6b0524ffee7321e2ffd0c6cfed7ab5d25ec0d99356c41bc1b70b63",
+    "bytes": 3435
+  },
+  "artifact": {
+    "sha256": "3ba3b5075c30d64d82d96f050ab3aa08536107ecc214b386deb70ac502244fbd",
+    "bytes": 809654
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

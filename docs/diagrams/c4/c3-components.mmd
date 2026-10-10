@@ -1,0 +1,27 @@
+%% C3 · Python application components
+%% Source commit: 2732af60a920d0f9a88be18a36e078aa22fbfa6d
+flowchart LR
+  api["HTTP routers<br/>main.py + tenant.py"]
+  draft["Policy assistant<br/>policy_assistant.py"]
+  workflow["Workflow coordinator<br/>workflows.py"]
+  service["Case service<br/>service.py · Service"]
+  ai["Claude adapter<br/>ai.py"]
+  store["Transactional store<br/>store.py · Store"]
+  policy["Policy evaluator<br/>domain.py · evaluate"]
+  subgraph boundary0["Python application: one local process"]
+    api
+    draft
+    workflow
+    service
+    ai
+    store
+    policy
+  end
+  api -->|"Case commands"| service
+  draft -->|"Read policy context"| service
+  api -->|"Wake after commit"| workflow
+  workflow -->|"Durable steps"| service
+  service -->|"Triage / draft"| ai
+  service -->|"Read / append"| store
+  service -->|"Check requirements"| policy
+  api -->|"Read tenant intake"| ai
