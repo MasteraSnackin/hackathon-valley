@@ -62,6 +62,17 @@ def readings(detail):
             yield row['payload'], routes.get(row['payload'].get('source_id'))
 
 
+def native_error(error):
+    """Readable text of a native SDK error record (plain or base64 serialised); never raises."""
+    import base64
+    data = (error or {}).get('data') if isinstance(error, dict) else error
+    try:
+        text = base64.b64decode(data).decode('utf-8') if isinstance(data, str) else json.dumps(error)
+    except Exception:
+        return 'error payload not decodable'
+    return text.removeprefix('devl')
+
+
 def failures_of(detail):
     out = []
     for row in detail['timeline']:
@@ -163,11 +174,14 @@ def write_answers(case_id, case_dir, provenance, config, result, track=None):
         answer += [f"> **Run assumption:** the {' and '.join(f'`{k}`' for k in assumed)} check(s) were set aside by policy "
                    f"(`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; "
                    'every other gate (access, authority, schedule, completion, money, triage) still applied.', '']
+    processed = result.get('sources_processed')
+    if processed is None:  # A failed worker records no count; settled checkpoints are on disk.
+        processed = f"{len(list(case_dir.glob('checkpoint-*.json')))} settled before the failure,"
     answer += [
               f"- **Property (as supplied, unverified):** {data.get('property_ref', 'unknown')}",
               f"- **Decision cutoff:** {data.get('as_of', 'unknown')}",
               f"- **Runner status:** **{result.get('status')}** · execution `{result.get('execution', 'unknown')}` · "
-              f"sources processed {result.get('sources_processed', 0)} of {1 + len(data.get('evidence', []))}",
+              f"sources processed {processed} of {1 + len(data.get('evidence', []))}",
               f"- **Models:** Claude `{config.model}` (triage effort {config.triage_effort}); Jev `{config.jev_model}` routing",
               f"- **Commit:** `{provenance.get('git_commit', 'unknown')}` · input SHA-256 `{provenance.get('input_sha256', 'unknown')[:16]}…`", '',
               SIMULATED, '']
@@ -189,6 +203,11 @@ def write_answers(case_id, case_dir, provenance, config, result, track=None):
     failures = [f for d in details for f in failures_of(d)]
     if result.get('error'):
         failures.insert(0, f"Runner: {result['error']}")
+    for native in evidence.get('native', []) + evidence.get('unassociated_native_runs', []):
+        for step in native.get('steps', []):
+            if step.get('status') == 'failed':
+                failures.insert(1, f"Native Vercel Workflow step `{step.get('stepName')}` failed in run `{native.get('run_id')}`: "
+                                   f"{clip(native_error(step.get('error')), 300)} (raw events: `evidence.json`; trace: `worker.log`)")
     if result.get('status') not in {'settled'}:
         failures.append(f"The run did not settle cleanly (status `{result.get('status')}`); any recorded state is partial.")
     if result.get('routing_fallback_count'):
