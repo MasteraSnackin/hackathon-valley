@@ -293,6 +293,12 @@ No public deployment is claimed. Screenshots must not expose credentials or rese
 
 The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. Operational actions remain simulated.
 
+#### Animated screenshot walkthrough
+
+![Animated walkthrough of the tenant request, staff review and policy settings](docs/screenshots/property-desk-walkthrough.gif)
+
+A 15-second loop using the saved application screenshots, with animated zooms and highlights. This is a screenshot walkthrough rather than a recording of live interactions; operational actions remain simulated.
+
 #### Tenant request
 
 ![Tenant conversation showing a saved fictional report about a leaking kitchen tap](docs/screenshots/tenant-request.jpg)
