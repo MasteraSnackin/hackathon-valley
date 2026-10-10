@@ -1,0 +1,173 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Publish a policy without rewriting history",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "edit",
+      "label": "Policy editor"
+    },
+    {
+      "id": "current",
+      "label": "Unfinished action"
+    },
+    {
+      "id": "history",
+      "label": "Completed action"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "suggest",
+      "lane": "edit",
+      "col": 0,
+      "label": "Propose policy",
+      "sublabel": "Plain English or resolved review",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "draft",
+      "lane": "edit",
+      "col": 1,
+      "label": "Save draft",
+      "sublabel": "Based on current version",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "preview",
+      "lane": "edit",
+      "col": 2,
+      "label": "Preview impact",
+      "sublabel": "Saved case revision snapshot",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "publish",
+      "lane": "edit",
+      "col": 3,
+      "label": "Publish version",
+      "sublabel": "Explicit editor action",
+      "type": "security",
+      "width": 174
+    },
+    {
+      "id": "hold",
+      "lane": "current",
+      "col": 3,
+      "label": "Hold for reassessment",
+      "sublabel": "policy_pending = true",
+      "type": "security",
+      "width": 174
+    },
+    {
+      "id": "reassess",
+      "lane": "current",
+      "col": 2,
+      "label": "Explicit reassessment",
+      "sublabel": "Read the new policy",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "checks",
+      "lane": "current",
+      "col": 1,
+      "label": "Recheck all facts",
+      "sublabel": "Version-bound approvals",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "historical",
+      "lane": "history",
+      "col": 3,
+      "label": "Keep original decision",
+      "sublabel": "Completed business action",
+      "type": "database",
+      "width": 174
+    }
+  ],
+  "edges": [
+    {
+      "id": "suggest-draft",
+      "from": "suggest",
+      "to": "draft",
+      "label": "Save",
+      "variant": "default",
+      "role": "main"
+    },
+    {
+      "id": "draft-preview",
+      "from": "draft",
+      "to": "preview",
+      "label": "Evaluate",
+      "variant": "default",
+      "role": "main"
+    },
+    {
+      "id": "preview-publish",
+      "from": "preview",
+      "to": "publish",
+      "label": "Current preview",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "publish-hold",
+      "from": "publish",
+      "to": "hold",
+      "label": "Unfinished",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "hold-reassess",
+      "from": "hold",
+      "to": "reassess",
+      "label": "Staff requests",
+      "variant": "default",
+      "role": "main"
+    },
+    {
+      "id": "reassess-checks",
+      "from": "reassess",
+      "to": "checks",
+      "label": "Fresh checks",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "publish-historical",
+      "from": "publish",
+      "to": "historical",
+      "label": "Already succeeded",
+      "variant": "dashed",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Publication checks the preview",
+      "items": [
+        "Only a policy editor can save, preview and publish. A stale base or changed case snapshot requires a fresh draft or preview.",
+        "The bounded policy assistant proposes settings. It does not publish policy or rewrite application code."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Each decision keeps its version",
+      "items": [
+        "Publication holds unfinished actions for explicit reassessment. It does not silently approve them.",
+        "Completed action records retain their original decision. New checks may invalidate approvals bound to an older policy."
+      ]
+    }
+  ]
+}

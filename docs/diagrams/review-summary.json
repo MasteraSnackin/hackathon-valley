@@ -1,0 +1,250 @@
+{
+  "sourceRevision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d",
+  "archify": [
+    {
+      "file": "c4/c1-context.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "c4/c2-containers.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "c4/c3-components.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "c4/c4-code.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "behaviour/tenant-message.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "behaviour/human-review.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "behaviour/action-decision.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    },
+    {
+      "file": "behaviour/policy-publication.html",
+      "matchesReceipt": true,
+      "validation": "9/9 showcase, 0 errors, 0 warnings",
+      "browser": "passed",
+      "visual": "passed"
+    }
+  ],
+  "operations": {
+    "checkedAt": "2026-10-10T12:32:25.336Z",
+    "renderer": "Installed Chrome via bundled Playwright; isolated temporary profile",
+    "scope": "1440x1000 light static render and SVG bounds; no application runtime tests",
+    "results": [
+      {
+        "slug": "data-storage",
+        "sha256": "f0fab8927e2590dbd57e20635b6a5644796cba0b1a2403d5fb2613f3a0632d6d",
+        "viewportFits": true,
+        "viewBox": {
+          "width": 1280,
+          "height": 720
+        },
+        "outside": [],
+        "fonts": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Arial, sans-serif"
+      },
+      {
+        "slug": "local-deployment",
+        "sha256": "0a71a1569617c4f50f33c478ec97ef3bc60ca3e4359aa4cf446606f36ed2020e",
+        "viewportFits": true,
+        "viewBox": {
+          "width": 1280,
+          "height": 720
+        },
+        "outside": [],
+        "fonts": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Arial, sans-serif"
+      }
+    ]
+  },
+  "links": {
+    "localLinksChecked": 222,
+    "diagramGuideAnchors": 10,
+    "missing": []
+  },
+  "interactions": {
+    "artifact": "docs/diagrams/c4/c2-containers.html",
+    "sha256": "91363308c7e11d1c31fc8423eaf42e63edbf6cd95aa85f1c64dad60092236a0d",
+    "checkedAt": "2026-10-10T12:34:14.798Z",
+    "status": "passed",
+    "scope": "C2 scripted UI check only: search result, selection, theme and chapter control. No export, source navigation or application runtime test.",
+    "search": {
+      "inputType": "search",
+      "matched": "Anthropic API"
+    },
+    "focused": {
+      "hash": "#focus=claude",
+      "marks": []
+    },
+    "theme": {
+      "before": "light",
+      "after": "dark"
+    },
+    "guided": {
+      "hash": "#view=case-storage",
+      "text": true
+    },
+    "initialAttempts": "Two test-selector failures were repaired by targeting the observed input; no diagram source changes."
+  },
+  "gallery": {
+    "checkedAt": "2026-10-10T12:37:29.093Z",
+    "renderer": "Installed Chrome through bundled Playwright; fresh isolated pages",
+    "scope": "Desktop full-height viewport and mobile top/bottom samples; ten unique cards and one header verified from DOM. No application runtime tests.",
+    "checks": [
+      {
+        "width": 1440,
+        "height": 2400,
+        "overflow": false,
+        "headers": 1,
+        "cards": 10,
+        "images": true,
+        "pageHeight": 2400,
+        "cardPositions": [
+          {
+            "title": "System context",
+            "top": 269,
+            "bottom": 705
+          },
+          {
+            "title": "Containers",
+            "top": 269,
+            "bottom": 705
+          },
+          {
+            "title": "Components",
+            "top": 269,
+            "bottom": 705
+          },
+          {
+            "title": "Code",
+            "top": 729,
+            "bottom": 1165
+          },
+          {
+            "title": "Tenant message",
+            "top": 729,
+            "bottom": 1165
+          },
+          {
+            "title": "Human review",
+            "top": 729,
+            "bottom": 1165
+          },
+          {
+            "title": "Action decision",
+            "top": 1189,
+            "bottom": 1601
+          },
+          {
+            "title": "Policy publication",
+            "top": 1189,
+            "bottom": 1601
+          },
+          {
+            "title": "Storage",
+            "top": 1189,
+            "bottom": 1601
+          },
+          {
+            "title": "Local runtime",
+            "top": 1625,
+            "bottom": 2061
+          }
+        ]
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "headers": 1,
+        "cards": 10,
+        "images": true,
+        "pageHeight": 5102,
+        "cardPositions": [
+          {
+            "title": "System context",
+            "top": 353,
+            "bottom": 789
+          },
+          {
+            "title": "Containers",
+            "top": 813,
+            "bottom": 1249
+          },
+          {
+            "title": "Components",
+            "top": 1273,
+            "bottom": 1709
+          },
+          {
+            "title": "Code",
+            "top": 1733,
+            "bottom": 2169
+          },
+          {
+            "title": "Tenant message",
+            "top": 2193,
+            "bottom": 2629
+          },
+          {
+            "title": "Human review",
+            "top": 2653,
+            "bottom": 3089
+          },
+          {
+            "title": "Action decision",
+            "top": 3113,
+            "bottom": 3525
+          },
+          {
+            "title": "Policy publication",
+            "top": 3549,
+            "bottom": 3985
+          },
+          {
+            "title": "Storage",
+            "top": 4009,
+            "bottom": 4445
+          },
+          {
+            "title": "Local runtime",
+            "top": 4469,
+            "bottom": 4905
+          }
+        ]
+      }
+    ],
+    "visualInspection": "Passed: desktop overview and mobile top/bottom screenshots inspected. All ten cards appear once; labels and footer are readable. Replaced an earlier full-page screenshot with a fresh full-height viewport capture."
+  },
+  "scope": "Documentation and diagrams only. No application tests, live model calls or deployments run for this change."
+}

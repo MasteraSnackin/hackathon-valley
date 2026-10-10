@@ -3,9 +3,12 @@
 The hook transports wake notifications, never authority or the source event itself.
 Intake must commit its event and recovery record before calling these helpers.
 
-Each case coordinator runs three kinds of durable step:
+Each case coordinator runs four kinds of durable step:
   run_case_cycle          policy assessment, timers and simulated actions
-  triage_case_messages    Claude reads newly stored messages and routes the case
+  route_case_messages     Jev routes newly stored messages; confident, simple
+                          ones are applied without Claude
+  triage_case_messages    Claude reads what Jev handed off (or routed, to
+                          extract quotes and claims) and routes the case
   compose_tenant_messages Claude drafts tenant questions and decides, within
                           policy, whether each is sent or held for staff
 Model output is persisted by the service with idempotent keys, so a retried
@@ -49,8 +52,15 @@ class CycleResult(BaseModel):
     next_wake_at: AwareDatetime | None
     revision: int = Field(ge=0, strict=True)
     # Work for the model steps. Absent means none (older service versions).
+    needs_routing: bool = Field(default=False, strict=True)
     needs_triage: bool = Field(default=False, strict=True)
     needs_tenant_message: bool = Field(default=False, strict=True)
+
+
+class RouteResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    routed: int = Field(ge=0, strict=True)
+    jev_only: int = Field(ge=0, strict=True)
 
 
 class TriageResult(BaseModel):
@@ -89,6 +99,14 @@ async def run_case_cycle(case_id: str) -> dict:
 
     result = await asyncio.to_thread(coordinator_cycle, case_id)
     return CycleResult.model_validate(result).model_dump(mode="json")
+
+
+@wf.step(max_retries=3)
+async def route_case_messages(case_id: str) -> dict:
+    """Jev routes every committed, unread message; uncertain ones go to Claude."""
+    from app.service import route_messages
+
+    return RouteResult.model_validate(await asyncio.to_thread(route_messages, case_id)).model_dump(mode="json")
 
 
 @wf.step(max_retries=3)
@@ -142,9 +160,11 @@ async def case_coordinator(*, case_id: str) -> dict:
 
                 # Unread messages hold every action (policy WAIT), so reading
                 # them comes first; tenant questions follow the fresh cycle.
-                if model_steps < MAX_MODEL_STEPS_PER_WAKE and (state.needs_triage or state.needs_tenant_message):
+                if model_steps < MAX_MODEL_STEPS_PER_WAKE and (state.needs_routing or state.needs_triage or state.needs_tenant_message):
                     model_steps += 1
-                    if state.needs_triage:
+                    if state.needs_routing:
+                        await route_case_messages(case_id)
+                    elif state.needs_triage:
                         await triage_case_messages(case_id)
                     else:
                         await compose_tenant_messages(case_id)
@@ -319,7 +339,7 @@ async def recover_local_case_steps(case_id: str) -> dict:
         step = await world.steps_get(hook.run_id, step_id)
         if step.status in {"completed", "failed"}:
             continue
-        if step.step_name not in {run_case_cycle.name, triage_case_messages.name, compose_tenant_messages.name}:
+        if step.step_name not in {run_case_cycle.name, route_case_messages.name, triage_case_messages.name, compose_tenant_messages.name}:
             raise RuntimeError("Recovery encountered an unrecognised case coordinator step")
         at = datetime.now(UTC)
         retry_at = getattr(step, "retry_after", None)
@@ -336,4 +356,4 @@ async def recover_local_case_steps(case_id: str) -> dict:
             "step_ids": requeued, "sdk_version": "0.11.1"}
 
 
-__all__ = ["wf", "CaseSignal", "case_coordinator", "triage_case_messages", "compose_tenant_messages", "case_hook_token", "start_case_coordinator", "signal_case_event", "native_runtime_lifespan", "validate_runtime_mode", "recover_local_case_steps"]
+__all__ = ["wf", "CaseSignal", "case_coordinator", "route_case_messages", "triage_case_messages", "compose_tenant_messages", "case_hook_token", "start_case_coordinator", "signal_case_event", "native_runtime_lifespan", "validate_runtime_mode", "recover_local_case_steps"]

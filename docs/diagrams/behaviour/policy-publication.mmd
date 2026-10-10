@@ -1,0 +1,13 @@
+flowchart TD
+    A[Plain English proposal or resolved-review suggestion] --> B[Policy editor saves a draft]
+    B --> C[Preview impact on current case revisions]
+    C --> D{Same base version and current editor preview?}
+    D -->|No| E[Reload the policy or repeat the preview]
+    E --> B
+    D -->|Yes, explicit publish| F[Append published policy version]
+    F --> G{Current business action already succeeded?}
+    G -->|Yes| H[Keep original decision and policy version]
+    G -->|No| I[Set policy_pending and hold action]
+    I --> J[Staff explicitly requests reassessment]
+    J --> K[Evaluate all requirements under the new version]
+    K --> L[Retain remaining blockers or allow simulation]

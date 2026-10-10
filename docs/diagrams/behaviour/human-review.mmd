@@ -1,0 +1,29 @@
+sequenceDiagram
+    actor Staff as Required reviewer
+    participant API as Staff API
+    participant Service as Case service
+    participant DB as Case store
+    participant WF as Native Workflow
+    Note over Service,DB: Action ledger is stored in this same application database
+    Staff->>API: Review response, reason and supporting evidence
+    API->>Service: Respond to review
+    Service->>DB: Load current review, scope, claims and policy
+    Service->>Service: Check role, status, scope, expiry and evidence
+    alt Stale, expired, duplicate or invalid response
+        Service-->>API: Reject; permissions do not change
+    else Response is valid for this requirement
+        Service->>DB: Commit response, assessment, event and wake intent
+        Service-->>API: Current assessment with all remaining blockers
+        API-->>WF: Wake after commit
+        WF->>Service: Fresh run_case_cycle
+        Service->>DB: Reload evidence, active policy and scoped grants
+        Service->>Service: Reassess every requirement
+        alt A blocker remains
+            Service-->>WF: Retain action hold and next deadline
+        else Outcome is ACT
+            Service->>DB: Record intent, simulated provider receipt and result
+            Note over Service,DB: Stable business-action ID prevents duplicate simulation
+            Service-->>WF: Commit checkpoint and next wake
+        end
+    end
+    Note over Staff,WF: One approval never waives the other requirements

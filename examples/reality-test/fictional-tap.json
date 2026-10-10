@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "title": "Fictional kitchen tap report",
+  "property_ref": "FICTIONAL-EXAMPLE-ONLY",
+  "as_of": "2026-10-10T09:15:00+01:00",
+  "report_available_at": "2026-10-10T09:00:00+01:00",
+  "report": "The kitchen tap drips even when it is turned off.",
+  "evidence": [
+    {
+      "source_label": "Fictional tenant follow-up",
+      "available_at": "2026-10-10T09:15:00+01:00",
+      "text": "Please ask before arranging a visit. I have not given permission to enter."
+    }
+  ]
+}

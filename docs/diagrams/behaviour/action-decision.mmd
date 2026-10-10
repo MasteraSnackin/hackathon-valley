@@ -1,0 +1,18 @@
+flowchart TD
+    A[Current proposed action] --> B{Successful receipt already exists?}
+    B -->|Yes| N[NO FURTHER ACTION for this proposal]
+    B -->|No| C[Assess all required facts and custom holds]
+    C --> D{Any blockers?}
+    D -->|No| X[ACT]
+    X --> Y[Record simulated intent, receipt and result]
+    Y --> N
+    D -->|Yes| E[Retain every blocker; choose headline by priority]
+    E --> S[STOP ACTION: refusal, rejection or stop rule]
+    E --> H[HUMAN REVIEW: evidence, authority or judgement required]
+    E --> Q[CLARIFY: request information through a verified route]
+    E --> W[WAIT: pending triage, event or deadline]
+    S --> R[New evidence, valid review or revised proposal]
+    H --> R
+    Q --> R
+    W --> R
+    R --> C

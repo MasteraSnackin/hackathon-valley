@@ -1,0 +1,10 @@
+%% C1 · Property Desk in context
+%% Source commit: 2732af60a920d0f9a88be18a36e078aa22fbfa6d
+flowchart LR
+  tenant["Tenant<br/>Reports and follow-ups"]
+  staff["Property team<br/>Reviews and policy decisions"]
+  desk["Property Desk<br/>Maintenance case application"]
+  claude["Anthropic API<br/>Claude structured responses"]
+  tenant -->|"Report / progress"| desk
+  staff -->|"Review / configure"| desk
+  desk -->|"HTTPS · text + context"| claude

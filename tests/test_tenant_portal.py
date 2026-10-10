@@ -250,9 +250,9 @@ def test_retry_recovers_after_case_commit_before_conversation_link(portal, monke
     original = service.intake
     once = True
 
-    def fail_after_commit(*args):
+    def fail_after_commit(*args, **kwargs):
         nonlocal once
-        result = original(*args)
+        result = original(*args, **kwargs)
         if once:
             once = False
             raise RuntimeError('simulated interrupted reply')
@@ -315,6 +315,66 @@ def test_production_and_remote_demo_identity_are_disabled(portal, mode, host):
             ('POST', '/api/tenant/conversations/unknown/confirm', None),
         ]:
             assert client.request(method, path, json=body).status_code == 403
+
+
+MANAGER = {'id': 'test-manager', 'role': 'case_manager'}
+EDITOR = {'id': 'test-editor', 'role': 'policy_editor'}
+
+
+def checks(service, case_id, action):
+    """Route the case to an action (as a reading would) and return its identity/route checks."""
+    from app.domain import ProposalInput
+    detail = service.proposal(case_id, ProposalInput(action=action, category='plumbing', work_item='Kitchen tap leaking'), MANAGER)
+    return {c['key']: c for c in detail['decision']['checks'] if c['key'] in {'identity', 'route'}}
+
+
+def test_tenant_self_identification_unblocks_only_information_gathering(portal):
+    client, service, _, _ = portal
+    start(client)
+    case_id = submitted(client)['case_id']
+    sid = service.detail(case_id)['case']['self_identification']
+    assert (sid['name'], sid['address'], sid['corrected']) == ('Alex Taylor', '18 Example Road', False)
+    for action in ['clarify', 'request_quote']:
+        found = checks(service, case_id, action)
+        assert {k: c['status'] for k, c in found.items()} == {'identity': 'PASS', 'route': 'PASS'}
+        assert 'Alex Taylor at 18 Example Road' in found['identity']['reason']
+    # Visits, keys, work, closing and archiving still need the case manager.
+    for action in ['confirm_appointment', 'supply_keys', 'instruct_work', 'close_item', 'archive']:
+        assert checks(service, case_id, action)['identity']['status'] == 'UNKNOWN'
+    # It never becomes a verified claim, so nothing else can reuse it.
+    assert not any(c['key'] in {'identity', 'route'} and c['verified'] for c in service.detail(case_id)['claims'])
+
+
+def test_corrected_details_return_identity_to_the_case_manager(portal):
+    client, service, _, _ = portal
+    start(client)
+    first = submitted(client)
+    assert checks(service, first['case_id'], 'request_quote')['identity']['status'] == 'PASS'
+    message(client, first['id'], 'Address: 19 Other Road')
+    case = service.detail(first['case_id'])['case']
+    assert case['self_identification']['corrected'] and case['self_identification']['corrected_to']['address'] == '19 Other Road'
+    assert checks(service, first['case_id'], 'request_quote')['identity']['status'] == 'UNKNOWN'
+
+
+def test_policy_can_switch_tenant_self_identification_off(portal):
+    from app.domain import PolicyInput
+    client, service, _, _ = portal
+    draft = service.draft(PolicyInput(base_version=1, settings={'tenant_self_identification': []}, reason='Always verify'), EDITOR)
+    service.preview(draft['id'], EDITOR)
+    service.publish(draft['id'], EDITOR)
+    start(client)
+    case_id = submitted(client)['case_id']
+    assert checks(service, case_id, 'request_quote')['identity']['status'] == 'UNKNOWN'
+    with pytest.raises(ValueError):
+        PolicyInput(base_version=1, settings={'tenant_self_identification': ['instruct_work']})
+
+
+def test_staff_intake_never_gets_self_identification(portal):
+    from app.domain import Intake
+    _, service, _, _ = portal
+    detail = service.intake(Intake(title='Staff report', property_ref='18 Example Road', report='Name: Alex Taylor. Tap leaking.'), MANAGER)
+    assert 'self_identification' not in detail['case']
+    assert checks(service, detail['case']['id'], 'request_quote')['identity']['status'] == 'UNKNOWN'
 
 
 def test_nothing_to_confirm_until_details_are_complete(portal):

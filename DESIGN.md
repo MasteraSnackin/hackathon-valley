@@ -379,3 +379,4 @@ Final logo/brand name, exact responsive refinements, component library, the prod
 ### Document provenance and validation
 
 This target brief is based on the user's UI direction and current local source inspection, not an implementation or a usability study. The retained tokens come from `static/style.css`; the divider expresses its existing 1px border treatment as a reusable separator. Its structure follows the [DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md). Structural validation cannot establish rendered accessibility, functional enforcement or product readiness.
+

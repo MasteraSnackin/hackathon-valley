@@ -1,0 +1,37 @@
+sequenceDiagram
+    actor Tenant
+    participant API as Tenant API
+    participant Service as Case service
+    participant DB as Case store
+    participant WF as Native Workflow
+    participant Claude as Anthropic Claude API
+    Note over Tenant,API: Starts with a confirmed intake or an update to a linked case
+    Tenant->>API: Confirm report or submit case update
+    API->>Service: Intake or evidence with stable retry key
+    Service->>DB: Commit source, event, initial assessment and wake intent
+    API-->>WF: Start or signal after commit
+    WF->>Service: Fresh run_case_cycle
+    Service-->>WF: Unread message holds action; triage due
+    WF->>Service: triage_case_messages
+    Service->>Claude: Stored source and bounded case context
+    alt Claude returns a valid reading
+        Claude-->>Service: Route, source quotes, assertions and ambiguities
+        Service->>DB: Commit checked interpretation and unverified assertions
+    else Claude unavailable, refused or invalid
+        Service->>DB: Record failure and route triage to staff
+    end
+    WF->>Service: Fresh run_case_cycle
+    opt Tenant questions are due
+        WF->>Service: compose_tenant_messages
+        Service->>Claude: Open questions, policy and recent context
+        Claude-->>Service: Question draft and send recommendation
+        Service->>Service: Check identity, route, topics and risk
+        alt Deterministic send checks pass
+            Service->>DB: Record simulated in-app message
+        else Staff review or required fact missing
+            Service->>DB: Hold draft for staff
+        end
+    end
+    WF->>Service: Fresh policy cycle; simulate only if ACT
+    Service-->>WF: Checkpoint and next wake deadline
+    WF->>WF: Wait on typed hook or absolute timer

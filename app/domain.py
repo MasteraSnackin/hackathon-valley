@@ -39,7 +39,7 @@ MESSAGES = {
  'policy':'Explicitly reassess this case under the newly published policy.',
  'automation':'Reconcile the uncertain external result before another attempt.',
  'profile':'Resolve the unsupported or conflicting policy profile.',
- 'triage':'Claude must read the latest message, or a case manager must triage it, before this action proceeds.'
+ 'triage':'Jev or Claude must read the latest message, or a case manager must triage it, before this action proceeds.'
 }
 # Claude chooses one of these workflow routes. Each maps to exactly one policy
 # action; the model cannot invent a route, an action or a permission.
@@ -59,7 +59,14 @@ TENANT_TOPICS = ['issue_details','location','photo','availability','access','key
 TENANT_TOPIC_FOR = {'access':'access','keys':'keys','schedule':'availability','completion':'completion','evidence':'photo','classification':'issue_details','triage':'issue_details'}
 CONFIDENCE_RANK = {'low':0,'medium':1,'high':2}
 DEFAULT_SETTINGS = {'access_immediate_review':False,'reminder_hours':8,'escalation_hours':16,'reminder_limit':1,'review_limit':100.0,'approval_hours':48,'profile':'demo','deputy':'case_manager','required_per_action':{},'holiday_dates':[],
- 'triage_auto_accept':'high','tenant_messages':'claude_decides','tenant_auto_send_topics':['issue_details','location','photo','availability','access','keys','completion'],'tenant_max_questions':3,'tenant_follow_ups':1}
+ 'triage_auto_accept':'high','tenant_messages':'claude_decides','tenant_auto_send_topics':['issue_details','location','photo','availability','access','keys','completion'],'tenant_max_questions':3,'tenant_follow_ups':1,
+ # Jev routes first and hands uncertain messages to Claude (see app/jev.py).
+ 'router':'jev','router_min_confidence':0.5,'router_jev_only_confidence':0.8,'router_jev_only_routes':['archive','request_quote'],'router_hazard_threshold':0.3,'router_signal_threshold':0.35,
+ # Actions for which a tenant's own name and address, given in their portal
+ # session, satisfy identity and route (replies go back to that same thread).
+ 'tenant_self_identification':['clarify','request_quote']}
+SELF_IDENTIFICATION_ACTIONS={'clarify','request_quote'}
+ROUTERS={'claude','jev_shadow','jev'}
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -173,6 +180,14 @@ class PolicyInput(StrictModel):
         for k,hi in [('tenant_max_questions',5),('tenant_follow_ups',3)]:
             if isinstance(s[k],bool) or not isinstance(s[k],int) or not 0<=s[k]<=hi: raise ValueError(f'Invalid {k}')
         if s['tenant_max_questions']<1: raise ValueError('Tenant messages need at least one question')
+        if s['router'] not in ROUTERS: raise ValueError('Router must be claude, jev_shadow or jev')
+        # Only information-gathering actions may rest on a tenant's own statement.
+        if not isinstance(s['tenant_self_identification'],list) or set(s['tenant_self_identification'])-SELF_IDENTIFICATION_ACTIONS: raise ValueError('Tenant self-identification is limited to clarify and request_quote')
+        for k in ['router_min_confidence','router_jev_only_confidence','router_hazard_threshold','router_signal_threshold']:
+            if isinstance(s[k],bool) or not isinstance(s[k],(int,float)) or not 0<=s[k]<=1: raise ValueError(f'{k} must be between 0 and 1')
+        if s['router_jev_only_confidence']<s['router_min_confidence']: raise ValueError('The Jev-only bar cannot be below the routing bar')
+        # Routes that need a person or Claude's quotes can never skip Claude.
+        if not isinstance(s['router_jev_only_routes'],list) or set(s['router_jev_only_routes'])-{'archive','request_quote'}: raise ValueError('Jev-only routes are limited to archive and request_quote')
         if not isinstance(s['required_per_action'],dict): raise ValueError('Action requirements must map actions to required facts')
         for a,keys in s['required_per_action'].items():
             if a not in REQUIRED or not isinstance(keys,list) or set(keys)-FACTS: raise ValueError('Unsupported action requirement')
@@ -240,13 +255,15 @@ def triage_check(t):
     """Hold actions while a message is unread, unreadable or ambiguous."""
     base={'key':'triage','status':'UNKNOWN','source_ids':[t['source_id']] if t.get('source_id') else [],'claim_ids':[]}
     state=t.get('state')
-    if state=='pending': return {**base,'reason':'Claude is reading the latest message. Actions wait for its reading.','response':'WAIT'}
+    if state=='pending': return {**base,'reason':'The latest message is being routed and read. Actions wait for the reading.','response':'WAIT'}
     if state=='failed': return {**base,'reason':'Claude could not read the latest message ('+str(t.get('error') or 'unavailable')+'). A case manager must triage it manually or retry.','response':'HUMAN REVIEW'}
     if state!='done' or t.get('confirmed'): return None
     if t.get('route')=='urgent_hazard':
         # Clarifying is otherwise allowed alongside a hazard; a hazard reading
         # itself must reach a person before any automated contact.
         return {**base,'reason':'Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.','response':'HUMAN REVIEW'}
+    if t.get('route_disagreement'):
+        d=t['route_disagreement']; return {**base,'status':'CONFLICT','reason':f"Jev routed this message to {d['jev']}, but Claude reads it as {d['claude']}"+(f": {d['reason']}" if d.get('reason') else '.')+' The case follows Claude\'s route (a hazard is never de-escalated). Confirm or correct the route.','response':'HUMAN REVIEW'}
     if t.get('disagreement'):
         d=t['disagreement']; return {**base,'status':'CONFLICT','reason':f"Staff set the category to {d['staff']}, but Claude reads the message as {d['claude']}. Confirm or correct the category.",'response':'HUMAN REVIEW'}
     if t.get('open_ambiguities'):
@@ -268,6 +285,15 @@ def evaluate(case,claims,approvals,policy,uncertain=False,at=None):
         else: status='UNKNOWN'
         checkmap[key]={'key':key,'status':status,'reason':MESSAGES.get(key,key),'source_ids':list(dict.fromkeys(c['source_id'] for c in rows)),'claim_ids':[c['id'] for c in rows]}
     valid_approvals=[a for a in approvals if a['action_revision']==case['action_revision'] and a['scope']==scope_of(case) and a['policy_version']==policy['version'] and dt(a['expires_at'])>at and not a.get('revoked') and (not a.get('basis_hash') or a['basis_hash']==approval_basis(case,claims,a['key'],policy))]
+    sid=case.get('self_identification')
+    if sid and not sid.get('corrected') and action in s['tenant_self_identification']:
+        # The tenant named themselves and the property in their own session, and
+        # replies go back to that thread. Enough to ask questions or get a quote;
+        # never consent, authority or anything another person must confirm.
+        for key in ['identity','route']:
+            if checkmap[key]['status']=='UNKNOWN':
+                checkmap[key]={'key':key,'status':'PASS','source_ids':[sid['source_id']],'claim_ids':[],
+                    'reason':f"Tenant self-identified in their portal session as {sid['name']} at {sid['address']}; policy v{policy['version']} accepts this for {action.replace('_',' ')}."+(' Replies use the same in-app thread.' if key=='route' else '')}
     for key in ['authority','finance']:
         # A grant cannot override a refusal or material contradiction.
         if any(a['key']==key for a in valid_approvals) and checkmap.get(key,{}).get('status') not in {'FAIL','CONFLICT'}:

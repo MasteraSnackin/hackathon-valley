@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "A scoped review resumes one held action",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      620
+    ]
+  },
+  "participants": [
+    {
+      "id": "staff",
+      "label": "Reviewer",
+      "type": "external",
+      "sublabel": "required role"
+    },
+    {
+      "id": "api",
+      "label": "Staff API",
+      "type": "frontend",
+      "sublabel": "authenticated request"
+    },
+    {
+      "id": "service",
+      "label": "Case service",
+      "type": "backend",
+      "sublabel": "scope and policy"
+    },
+    {
+      "id": "store",
+      "label": "Case store",
+      "type": "database",
+      "sublabel": "SQL transaction"
+    },
+    {
+      "id": "workflow",
+      "label": "Workflow",
+      "type": "messagebus",
+      "sublabel": "native coordinator"
+    },
+    {
+      "id": "ledger",
+      "label": "Action ledger",
+      "type": "database",
+      "sublabel": "simulated receipt"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "from": "staff",
+      "to": "api",
+      "label": "Submit review response + reason",
+      "y": 160,
+      "variant": "default"
+    },
+    {
+      "id": "m2",
+      "from": "api",
+      "to": "service",
+      "label": "Respond to current review",
+      "y": 188,
+      "variant": "security"
+    },
+    {
+      "id": "m3",
+      "from": "service",
+      "to": "store",
+      "label": "Load review, scope and evidence",
+      "y": 216,
+      "variant": "default"
+    },
+    {
+      "id": "m4",
+      "from": "store",
+      "to": "service",
+      "label": "Current policy and revision",
+      "y": 244,
+      "variant": "return"
+    },
+    {
+      "id": "m5",
+      "from": "service",
+      "to": "store",
+      "label": "Commit checked response + event",
+      "y": 272,
+      "variant": "emphasis"
+    },
+    {
+      "id": "m6",
+      "from": "service",
+      "to": "api",
+      "label": "Return assessment with all blockers",
+      "y": 300,
+      "variant": "return"
+    },
+    {
+      "id": "m7",
+      "from": "api",
+      "to": "workflow",
+      "label": "Wake only after commit",
+      "y": 328,
+      "variant": "dashed"
+    },
+    {
+      "id": "m8",
+      "from": "workflow",
+      "to": "service",
+      "label": "Fresh policy and evidence cycle",
+      "y": 356,
+      "variant": "default"
+    },
+    {
+      "id": "m9",
+      "from": "service",
+      "to": "store",
+      "label": "Reload all claims and approvals",
+      "y": 384,
+      "variant": "security"
+    },
+    {
+      "id": "m10",
+      "from": "store",
+      "to": "service",
+      "label": "Current claims and scoped grants",
+      "y": 412,
+      "variant": "return"
+    },
+    {
+      "id": "m11",
+      "from": "service",
+      "to": "workflow",
+      "label": "If blocked: retain hold + deadline",
+      "y": 440,
+      "variant": "return"
+    },
+    {
+      "id": "m12",
+      "from": "service",
+      "to": "ledger",
+      "label": "If ACT: intent + simulated receipt",
+      "y": 468,
+      "variant": "emphasis"
+    },
+    {
+      "id": "m13",
+      "from": "ledger",
+      "to": "service",
+      "label": "Stable business-action result",
+      "y": 496,
+      "variant": "return"
+    },
+    {
+      "id": "m14",
+      "from": "service",
+      "to": "store",
+      "label": "Commit result and checkpoint",
+      "y": 524,
+      "variant": "default"
+    }
+  ]
+}

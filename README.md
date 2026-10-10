@@ -22,13 +22,14 @@ A maintenance request can involve a tenant, property manager and contractor, eac
 
 Property Desk makes those decisions explicit. It gathers a tenant's report, proposes the next action, checks its evidence and authority, and either proceeds through a simulated adapter, asks for clarification, waits, routes a scoped decision to a person, or stops the affected action. The request can continue to gather information while that action is held. Staff see the reason and the evidence needed to resume.
 
-**Status:** native Workflow execution is implemented and has been verified locally. Contractor contact, bookings, work instructions and payment-related actions are **simulated**. Claude (Anthropic API) reads every message, chooses the workflow route and drafts tenant questions; this has been verified locally with live calls. Hosted Vercel execution, PostgreSQL deployment and production identity integrations remain unverified. The interface is called Property Desk. The Python package is `property-workflow` and the FastAPI title is Property Workflow.
+**Status:** this is an actively changing prototype. Native Workflow execution is implemented and has been verified locally. Contractor contact, bookings, work instructions and payment-related actions are **simulated**. The current case pipeline uses Jev for initial routing, with Claude handling uncertainty, detailed interpretation and tenant questions. A separate React staff dashboard now sits alongside the original tenant/staff interface. Earlier recordings and verification reports describe their recorded revision, not every later change. Hosted Vercel execution, PostgreSQL deployment and production identity integrations remain unverified. The interface is called Property Desk. The Python package is `property-workflow` and the FastAPI title is Property Workflow.
 
 ### What the prototype does
 
-- Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts.
-- Claude triage as native workflow steps: every stored message is read by Claude, which picks the workflow route, names the work item, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Unreadable, ambiguous, hazardous or disputed readings hold the action for a person; there is no keyword fallback. See [Claude triage](docs/CLAUDE_TRIAGE.md).
-- Phone intake: an ElevenLabs voice agent on a Twilio number asks for the caller's name, address and problems, reads the summary back and, after a clear yes, sends it in as an unverified report that follows the same triage path. See [Phone intake](docs/VOICE_PHONE.md).
+- Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts. The newer React dashboard provides a staff case list, pipeline view, action-required panel and review controls; the original interface retains tenant intake and the policy editor.
+- Jev routing before Claude: configurable confidence and risk checks select a Jev-only route, Jev routing with Claude extraction, or full Claude triage. Missing Jev credentials or a failed Jev call fall back to Claude. Jev-only handling is restricted to configured quote-request and archive routes; it does not manufacture verified facts or permissions. See [Jev routing](docs/JEV_ROUTING.md).
+- Claude triage as native workflow steps where needed: it names work items, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Jev/Claude route disagreement, hazards and unresolved interpretation can hold actions for human review. If Claude is needed but unavailable, the reading fails and needs staff triage. See [Claude triage](docs/CLAUDE_TRIAGE.md) for the earlier Claude integration and the current routing settings below.
+- Phone intake: an ElevenLabs voice agent on a Twilio number asks for the caller's name, address and problems, reads the summary back and, after a clear yes, sends it in as an unverified report that follows the same Jev/Claude routing and triage path. See [Phone intake](docs/VOICE_PHONE.md).
 - Claude-drafted tenant questions: Claude recommends auto-send or staff review from the case data and policy, and a deterministic gate decides. Staff approve, edit or reject drafts; replies close answered questions. Sending is simulated.
 - Per-action **PASS / FAIL / UNKNOWN / CONFLICT** checks that retain all relevant blockers and source links.
 - Editable ALL/ANY rules, action/property/category filters, review ownership, thresholds and working-hour follow-ups.
@@ -41,30 +42,38 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 
 ## 2. Architecture
 
-![Property Desk system overview: browser views, case and policy service, native Workflow and separate stores](docs/diagrams/system-overview.svg)
+[![C2 container view: browser, Python application, Anthropic API and two separate data stores](docs/diagrams/c4/c2-containers.png)](docs/diagrams/c4/c2-containers.png)
 
-Both browser views share the case service and policy checks. Incoming evidence and events commit before the workflow is signalled; the coordinator reassesses current requirements before recording a simulated action. Application records and native Workflow events use separate storage, both of which are needed for local recovery.
+Both interfaces use the same Python application. FastAPI serves the original tenant/staff interface directly; the React staff dashboard runs through Vite during development and proxies API requests to FastAPI. The case service, policy evaluator and native Workflow runtime share the Python process. Jev proposes a route; Claude handles the readings and questions that need it. Explicit policy checks decide whether an action can proceed. Application records and Workflow history use separate stores, both of which are needed for local recovery.
 
-[ARCHITECTURE.md](ARCHITECTURE.md) describes the components, data flows, deployment constraints and design decisions.
+### Choose a diagram
 
-### Property Desk architecture
+| Question | Diagram |
+| --- | --- |
+| Who uses Property Desk, and which external service does it call? | [C1: system context](docs/diagrams/README.md#c1-system-context) |
+| What runs in the application, and where is data stored? | [C2: containers](docs/diagrams/README.md#c2-containers) |
+| Which modules own each responsibility? | [C3: components](docs/diagrams/README.md#c3-components) |
+| Which functions decide whether an action is allowed? | [C4: code](docs/diagrams/README.md#c4-code) |
+| What happens after a tenant confirms a report? | [Tenant-message sequence](docs/diagrams/README.md#tenant-message-sequence) |
+| What happens after staff resolve a review? | [Human-review sequence](docs/diagrams/README.md#human-review-sequence) |
+| How does the agent choose act, clarify, wait or review? | [Action-decision flow](docs/diagrams/README.md#action-decision-flow) |
+| How does a draft policy affect an existing case? | [Policy-publication flow](docs/diagrams/README.md#policy-publication-flow) |
+| Which records are durable, mutable or held in JSON? | [Data storage](docs/diagrams/README.md#data-storage) |
+| Where does the local prototype run? | [Local deployment](docs/diagrams/README.md#local-deployment) |
 
-[![Property Desk architecture map showing browser views, case service, policy checks, native Workflow, storage and simulated actions](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)
+[The diagram guide](docs/diagrams/README.md) includes all ten previews, interactive maps and editable sources. [ARCHITECTURE.md](ARCHITECTURE.md) explains the implementation and its limits. On GitHub, the images render inline; download an interactive HTML file and open it locally to use search, focus and guided views.
 
-[Download the interactive architecture map](docs/diagrams/property-workflow.html) using GitHub’s **Download raw file** button, then open the HTML file locally to explore components and three guided views. GitHub displays the static preview above; it does not run the interactive HTML inside the README.
-
-The map’s [editable JSON](docs/diagrams/property-workflow.architecture.json), [delivery receipt](docs/diagrams/property-workflow.delivery.json) and [source notes](docs/diagrams/source-notes.md) are kept alongside it. It describes reviewed local code; it does not represent a verified cloud deployment.
-
-The companion [decision flow](docs/diagrams/decision-flow.html) shows how a held action returns to a fresh assessment. The [standalone system overview](docs/diagrams/system-overview.html) is the editable HTML source of the embedded figure. Both diagrams describe the implemented local system; optional live interpretation and hosted deployment are explicitly distinguished.
+The rendered diagrams describe an earlier reviewed source snapshot and do not yet include the React dashboard, Jev routing or the current self-identification allowance. The current implementation is described in the text here and in [ARCHITECTURE.md](ARCHITECTURE.md). Operational actions remain simulated, and hosted Vercel and PostgreSQL operation remain unverified.
 
 ## 3. How to run it
 
 ### Requirements
 
 - Python **3.12**, including `venv` and `pip` for a fresh environment.
+- For the optional React staff dashboard: Node.js **22.12 or later** and npm (the dependencies also accept Node 20 from 20.19). The original FastAPI interface needs no frontend build.
 - A POSIX environment for the native local process lock; existing verification was performed on macOS.
 - This project's source and lockfile. BUILD replay additionally needs the supplied read-only `data/build/` and `handoff/BUILD_MANIFEST.json`.
-- An Anthropic API key for Claude triage (without one, every message is handed to a case manager for manual triage). No cloud database or Vercel credentials are needed for the local demonstration.
+- An Anthropic credential (`ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`) for Claude intake, interpretation and question drafting. A TypeSafe API key additionally enables Jev routing; without it the case pipeline falls back to Claude. Without Claude, intake uses a local parser and any case reading that requires Claude needs manual triage. No cloud database or Vercel credentials are needed for the local demonstration.
 
 The [GitHub repository](https://github.com/MasteraSnackin/hackathon-valley) is private; your GitHub account needs access. For a fresh checkout:
 
@@ -76,12 +85,13 @@ python3.12 -m venv .venv
 mkdir -p var
 ```
 
-With [uv](https://docs.astral.sh/uv/), `uv sync` replaces the venv and pip steps (`uv.lock` is the exact resolved set; refresh `requirements.lock` with `uv export --no-hashes --no-emit-project -o requirements.lock`). Use an existing prepared `.venv` when dependencies are already installed.
+With [uv](https://docs.astral.sh/uv/), `uv sync --frozen` replaces the venv and pip steps (`uv.lock` is the exact resolved set; refresh `requirements.lock` with `uv export --no-hashes --no-emit-project -o requirements.lock`). Use an existing prepared `.venv` when dependencies are already installed.
 
-Put the Anthropic key in the git-ignored `.env.local`, which the server, replay and tests load at startup (existing environment variables win). No other `.env` file is loaded; [`.env.example`](.env.example) documents available settings.
+Put model credentials in the git-ignored `.env.local`, which the server, replay and tests load at startup (existing environment variables win). No other `.env` file is loaded; [`.env.example`](.env.example) documents available settings. These example values are placeholders:
 
-```sh
-printf 'ANTHROPIC_API_KEY=your-key\n' > .env.local
+```dotenv
+ANTHROPIC_API_KEY=your-anthropic-key
+TYPESAFE_API_KEY=your-typesafe-key
 ```
 
 ### Start the native local application
@@ -107,10 +117,26 @@ Record the printed directory. Stop with Ctrl-C; to resume, reuse the same `prope
 
 Use one process without `--reload`. Local timers require a running process; startup recovery reconstructs pending work after a restart. See [the runtime guide](docs/WORKFLOW_RUNTIME.md). Do not repurpose the shared default `var/property.db` for controlled BUILD checks.
 
+### Start the React staff dashboard
+
+The `web/` application is a separate staff dashboard, not the tenant portal or policy editor. Its development proxy targets **`http://127.0.0.1:8017`**. Start an isolated Python instance with the command above, changing `--port 8027` to `--port 8017`. In a second terminal, from the repository root:
+
+```sh
+cd web
+npm ci
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+Open [the React staff dashboard](http://127.0.0.1:5173). The original tenant/staff interface for that same backend is at [http://127.0.0.1:8017](http://127.0.0.1:8017). The Vite proxy rewrites the request origin for local development so the backend's same-origin mutation check can pass. `npm run build` creates frontend assets, but FastAPI and `vercel.json` do not yet serve that build as an integrated deployment.
+
+**Opening the React dashboard changes the connected demo store.** It creates a case-manager demo session, imports nine selected BUILD prefixes that it does not find already present, and attempts to reject the top review on up to two newly seeded cases to demonstrate blocked states. Use a disposable isolated store with the supplied BUILD files; do not use this dashboard as an evaluation client. Its review buttons submit real local API mutations, subject to backend policy and role checks. The original staff interface provides the fuller evidence, role and policy controls.
+
+The React dashboard starts in the case-manager role. Its approval button also appears for factual blockers, where a generic approval is rejected, while authority and financial approvals require the approver role. Complete these reviews in the original staff interface using the assigned role and supporting evidence.
+
 ### Try the tenant and staff journeys
 
 1. In **Tenant** view, enter the fictional report: “My name is Alex Taylor. I live at 18 Example Road. My kitchen tap is leaking.” Claude asks for anything missing, then shows a **Here's what I've got** summary. Press **Yes, send it**; nothing reaches property management before that. Without Claude, the local parser fills the summary and understands explicit `Name:`, `Address:` and `Issue:` wording.
-2. Switch to **Property management** to inspect the case and outstanding requirements. Providing an address does not verify identity or grant access. The view switch is a demonstration convenience, not production login.
+2. Switch to **Property management** in the original interface to inspect the case and outstanding requirements. The default policy lets a tenant's confirmed name/address and same conversation satisfy otherwise unknown identity and contact-route checks for **Clarify** and **Request a quote** only. This is a limited policy allowance, not independent identity verification or permission to enter. The view switch is a demonstration convenience, not production login.
 3. As **Case manager**, create a fictional dishwasher case at `DEMO-FLAT-1` with category `appliance`. This identifier has an explicit demo-only trusted property/contact mapping. Choose **Instruct work** to see missing requirements separately.
 4. Add original evidence and exact quoted claims. Switch to the role named on a review to correct a supported fact or grant a scoped approval. Remaining blockers stay visible.
 5. For routine automatic progress, propose **Request a quote** for that dishwasher. Once its smaller requirement set passes, native mode records one simulated action. Completing a quote request does not resolve the repair.
@@ -131,12 +157,15 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 | `DATABASE_URL` | Defaults to shared `var/property.db`. Override for isolated development; the deployment path requires PostgreSQL. |
 | `WORKFLOW_LOCAL_DATA_DIR` | Native local event storage. Retain it with its matching application database. |
 | `VERCEL_QUEUE_BASE_URL` | Must be unset for the embedded local mode; this app does not configure an external local queue delivery route. |
-| `ANTHROPIC_API_KEY` | Claude triage and tenant drafting. Keep it in `.env.local` or the hosting environment; never in source, screenshots or fixtures. Without it, messages go to manual triage. |
+| `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` | Either credential enables Claude intake, triage, extraction and tenant drafting. Keep credentials in `.env.local` or the hosting environment; never in source, screenshots or fixtures. Without either, intake uses a local parser and any case reading requiring Claude needs manual triage. |
+| `TYPESAFE_API_KEY` | Enables Jev routing. Without it, or if Jev fails, the case pipeline falls back to Claude. |
+| `JEV_MODEL` | Default `jev-1.13.0`; the routing model version is recorded with decisions. |
 | `CLAUDE_MODEL` | Default `claude-opus-5`. |
-| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_INTAKE_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low`. |
+| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_INTAKE_EFFORT` / `CLAUDE_EXTRACT_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low` / `low`. |
+| `PROPERTY_LOCAL_ENV` | Set to `off` to prevent `.env.local` loading, including for offline checks. Already exported environment variables still apply. |
 | `STAFF_TOKEN_ROLES` | Production API configuration: JSON records with `id`, `role` and bearer-secret `sha256`. Does not provide browser login or organisation isolation. |
 
-Claude reads the tenant conversation to prepare the summary the tenant confirms (the local parser is the offline fallback); plain-English policy drafting remains a local parser. Tenant messages before and after submission, and staff evidence without structured claims, are read by Claude, so those texts are sent to the Anthropic API.
+Claude reads the tenant conversation to prepare the summary the tenant confirms; the local parser is the intake fallback. After submission, Jev receives case-message text and bounded recent context when enabled. Depending on the routing decision, Claude may also receive the message and case context for interpretation; Claude drafts follow-up questions separately. Those paths send data to TypeSafe and Anthropic respectively. Plain-English policy drafting remains local.
 
 #### Editable policy settings
 
@@ -152,6 +181,11 @@ Claude reads the tenant conversation to prepare the summary the tenant confirms 
 | `holiday_dates` | Empty list | `YYYY-MM-DD` exclusions from Monday to Friday, 09:00 to 17:00 Europe/London working hours. |
 | `profile` | `demo` | The only configured policy profile. |
 | `triage_auto_accept` | `high` | Minimum Claude confidence to accept the derived category label automatically (`high`, `medium` or `never`). Nothing else is ever accepted from the model. |
+| `router` | `jev` | `jev`: route first with Jev; `jev_shadow`: record Jev's suggestion but use Claude; `claude`: bypass Jev. |
+| `router_min_confidence` / `router_jev_only_confidence` | 0.5 / 0.8 | Minimum Jev routing confidence and the higher threshold for handling a permitted route without Claude. Other risk and context checks still apply. |
+| `router_jev_only_routes` | `archive`, `request_quote` | The only routes permitted to skip Claude. Jev-only classification is not automatically verified. |
+| `router_hazard_threshold` / `router_signal_threshold` | 0.3 / 0.35 | Thresholds for a possible hazard and signals such as multiple issues, stated facts or sensitivity. These affect human escalation or whether Claude is required. |
+| `tenant_self_identification` | `clarify`, `request_quote` | Lets confirmed tenant details satisfy otherwise unknown identity/route checks for these actions. It cannot cover other actions or override failed/conflicting checks; correcting identity invalidates it. |
 | `tenant_messages` | `claude_decides` | `claude_decides`: Claude may auto-send within the gate; `staff_approval`: every tenant message waits for a case manager; `off`: no tenant drafting. |
 | `tenant_auto_send_topics` | all topics | Question topics Claude may send without staff review. |
 | `tenant_max_questions` / `tenant_follow_ups` | 3 / 1 | Questions per message; narrower follow-ups after a partial answer. |
@@ -165,38 +199,51 @@ Rules combine supported fact states with ALL/ANY conditions, action/property/cat
 .venv/bin/python -m app.replay --case 013 --events 2
 ```
 
-Replay verifies the source manifest, uses temporary isolated storage, sends each selected prefix to Claude for triage and executes no adapters; drafted tenant questions stay in the simulated thread. It reports blockers, not an accuracy score. Index pages, later events and all binary attachments are excluded; see [BUILD replay boundaries](docs/BUILD_REPLAY_BOUNDARY.md), including retrospective material in BUILD 008.
+Replay verifies the source manifest, uses temporary isolated storage and runs routing, any required interpretation and question drafting on the selected prefix. Jev and Claude calls depend on the configured policy and credentials. It executes no operational adapters; drafted tenant questions stay in the simulated thread. It reports blockers, not an accuracy score. Index pages, later events and all binary attachments are excluded; see [BUILD replay boundaries](docs/BUILD_REPLAY_BOUNDARY.md), including retrospective material in BUILD 008.
+
+### Reality Test preparation
+
+The separate [Reality Test runner](docs/REALITY_TEST.md) accepts a versioned input manifest, runs cases in isolated native local Workflow processes and exports the required `ANSWERS/<case-id>/ANSWER.md` and `REASONING.md` with execution evidence. It retains failures and unresolved human handovers; it does not supply approvals or replace the agent's answers.
+
+Follow the guide to validate configuration, record the frozen commit and run the organisers' newly released cases. The organiser input format has not yet been supplied, so conversion into the documented input schema may be needed. Fictional development examples verify the runner, not performance on unseen cases. Official Reality Test results have not been generated.
+
+The [submission checklist](submission.md) collects the video path, social links, team accounts, freeze deadlines and remaining hand-in requirements.
 
 ### Checks
 
 The test framework is **pytest**. From the prepared environment:
 
 ```sh
-.venv/bin/python -m pytest -q                  # live Claude tests run when a key is configured
-.venv/bin/python -m pytest -q -m "not claude"  # offline only
-.venv/bin/python -m pytest tests/test_native_workflow.py tests/test_native_api.py -q
+PROPERTY_LOCAL_ENV=off ANTHROPIC_API_KEY= ANTHROPIC_AUTH_TOKEN= TYPESAFE_API_KEY= \
+  .venv/bin/python -m pytest -q -m "not claude and not jev"
 node --check static/app.js
+cd web
+npm run build
+npm run lint
 ```
 
-Tests marked `claude` call the real Anthropic API on fictional messages (routing, clarification, issue splitting, tenant questions and replies, staff-approval policy, hazard holds, prompt injection, and triage inside the native runtime); they are skipped without a key. Offline tests use manual staff triage or no credential. Coverage also includes independent blockers, evidence conflicts, roles and revisions, policy changes during a wait, duplicate handling, tenant ownership, bounded policy interpretation, uncertain-result reconciliation and native hook/timer/restart behaviour. Tests use isolated storage; do not point them at the shared application database.
+Tests marked `claude` call the real Anthropic API; those also marked `jev` call TypeSafe as well. They use fictional messages and are skipped without the required credentials. Running `.venv/bin/python -m pytest -q` from the repository root with credentials configured includes those live calls. The offline command above disables local credential loading and both providers. Coverage includes routing and fallback, independent blockers, evidence conflicts, roles and revisions, policy changes during a wait, duplicate handling, tenant ownership and self-identification, bounded policy interpretation, uncertain-result reconciliation and native hook/timer/restart behaviour. Tests use isolated storage; do not point them at the shared application database. A successful frontend build or lint run does not verify a browser journey.
 
 [Recorded verification](docs/VERIFICATION.md) includes the earlier baseline and later 132-test checks. It and the [runtime evidence](docs/WORKFLOW_RUNTIME.md) describe dated checks. They are historical snapshots, not a claim that subsequent revisions passed the same run. Local SDK and simulated-receipt tests do not establish cloud operation, model accuracy, message delivery or physical repairs.
 
+During this documentation refresh, the React dependencies installed successfully and `npm run build` and `npm run lint` passed. The dashboard was not opened for a browser-flow test, so its automatic seeding and live case interactions were not exercised in that check.
+
 ## 4. Models, APIs and external services used
 
-Claude triage needs an **Anthropic API key**; nothing else needs an external account for the local demonstration. The following table describes implemented calls and configured options, not sponsor affiliations or planned integrations.
+Claude intake, interpretation and question drafting need **`ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`**. Jev routing additionally needs a **TypeSafe API key**; the app falls back to Claude when Jev is unavailable. The following table describes implemented calls and configured options, not sponsor affiliations or planned integrations.
 
 | Component or service | Current use | Credentials and verification boundary |
 | --- | --- | --- |
 | Tenant intake and policy parser | Claude prepares the tenant-confirmed summary (local phrase parser as fallback); a bounded vocabulary for policy suggestions | A tenant's confirmation is not identity verification; policy publication remains explicit |
-| Anthropic Claude API | Message triage (route, work item, issue split, quoted assertions, ambiguities, answers) and tenant-question drafting with a send recommendation. Python SDK `anthropic==1.13.0`, `beta.messages.parse` with structured output, adaptive thinking, server-side `fallbacks: "default"`, cached system prompt; model `CLAUDE_MODEL` (default `claude-opus-5`) | Requires `ANTHROPIC_API_KEY`; verified locally with live calls. Without it, every message goes to manual triage |
+| Anthropic Claude API | Message triage (route, work item, issue split, quoted assertions, ambiguities, answers) and tenant-question drafting with a send recommendation. Python SDK `anthropic==1.13.0`, `beta.messages.parse` with structured output, adaptive thinking, server-side `fallbacks: "default"`, cached system prompt; model `CLAUDE_MODEL` (default `claude-opus-5`) | Requires `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`; earlier local checks used live calls. Without either, intake uses a local parser and case messages needing interpretation require manual triage |
+| TypeSafe Jev API | Typed route/category choices and risk signals through `typesafe-sdk==0.7.4`; default model `jev-1.13.0`. Deterministic thresholds choose Jev-only, Jev-plus-Claude or Claude handling | Requires `TYPESAFE_API_KEY`. Routing and fallbacks are recorded; no accuracy or cost-saving claim is established by the integration |
 | Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
 | SQLite / SQLAlchemy | Application case state, evidence, decisions, policies and local tenant state | Local storage; PostgreSQL/psycopg is an unverified hosted path, not a provisioned service |
 | FastAPI JSON API | Same-origin browser access to tenant conversations, case decisions and policy operations | Demo sessions locally; production staff bearer configuration is separate from a browser login |
 | Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real email, SMS, phone, contractor system or payment service is connected |
 | Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
 
-Claude's output is schema-validated and every quote must occur verbatim in the source. Its assertions stay unverified until the named role checks them, and a deterministic gate controls every tenant message. Tenant conversations, updates and unstructured staff evidence are sent to the Anthropic API; the tenant fallback parser and the policy parser remain local. No ElevenLabs integration is implemented.
+Claude's output is schema-validated. Case-triage quotes must occur verbatim in the source; tenant intake checks normalise whitespace and case. Assertions stay unverified until the named role checks them, apart from the configurable derived category label. Jev proposes routes without creating verified authority. A deterministic gate controls case follow-up messages; intake replies use the separate conversation route. Enabled model paths send relevant text and bounded context to their provider; the tenant fallback parser and the policy parser remain local. No ElevenLabs integration is implemented.
 
 ### Libraries and runtime
 
@@ -206,12 +253,13 @@ Claude's output is schema-validated and every quote must occur verbatim in the s
 | API and validation | FastAPI 0.118.0, Uvicorn 0.37.0, Pydantic 2.14.0 |
 | Workflow | Native Python `vercel-workflow==0.11.1`; local event store and embedded queue |
 | Persistence | SQLAlchemy 2.0.43; SQLite locally; unverified PostgreSQL/psycopg deployment path |
-| Interface | Static HTML, CSS and vanilla JavaScript served by FastAPI; vendored Lucide icons |
-| Interpretation | Claude via the Anthropic Python SDK 1.13.0, run as native Workflow steps |
+| Original interface | Static HTML, CSS and vanilla JavaScript served by FastAPI; tenant/staff switch, policy editor and vendored Lucide icons |
+| React staff dashboard | React 19, TypeScript 6, Vite 8 and Tailwind CSS 4 in `web/`; separate development server and API proxy |
+| Routing and interpretation | Jev via TypeSafe SDK 0.7.4, then Claude via Anthropic SDK 1.13.0 where needed; tenant intake runs during the request, while case routing, triage and question drafting run as native Workflow steps |
 | Testing | pytest 8.4.2, API checks and native Workflow subprocess tests |
 | Deployment preparation | FastAPI configuration in `vercel.json`; Workflow entry point in `pyproject.toml` |
 
-[requirements.lock](requirements.lock) pins the recorded dependencies. Serving the interface requires no frontend build; Node.js is only needed for the optional JavaScript syntax check.
+[requirements.lock](requirements.lock) and [uv.lock](uv.lock) record Python dependencies. [web/package-lock.json](web/package-lock.json) locks the separate React frontend. Serving the original interface requires no frontend build; developing or building the React dashboard requires Node.js and npm.
 
 ### Application API
 
@@ -244,6 +292,7 @@ The response includes the case and current assessment. Native execution can adva
 | `POST /api/tenant/conversations` | Start a report with `text` and `idempotency_key` |
 | `GET /api/tenant/conversations/{id}` | Read an owned conversation and filtered progress |
 | `POST /api/tenant/conversations/{id}/messages` | Continue the report and shared case |
+| `POST /api/tenant/conversations/{id}/confirm` | Confirm the checked summary and create the shared case |
 | `GET/POST /api/cases`, `GET /api/cases/{id}` | Create/list cases; inspect sources, decisions, reviews and actions |
 | `POST /api/cases/{id}/evidence` | Submit original evidence and exact quoted claims |
 | `POST /api/cases/{id}/proposal` | Change the scoped action and its revision |
@@ -267,7 +316,7 @@ Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at
 ## 5. Key assumptions
 
 - This is a **single-organisation local demonstration**, using fictional UI reports or only the authorised BUILD partition. The view toggle and demo roles are not production authentication.
-- A name, address, message, document or model assertion is evidence to assess. It does not automatically establish identity, consent, authority or completion. The policy-gated auto-acceptance of Claude's derived category label and the `DEMO-FLAT-1` directory are the only exceptions.
+- A name, address, message, document or model assertion is evidence to assess. It does not automatically establish consent, authority or completion. The default policy accepts tenant self-identification only for otherwise unknown identity/contact-route checks on clarification and quote requests. Other explicit allowances are the policy-gated derived category label and the fictional `DEMO-FLAT-1` directory; none is a production identity integration.
 - Permissions and approvals apply to the relevant property, work item, action, provider and access method. Every applicable check must pass; resolving one blocker leaves the others in place.
 - Demo thresholds, role mappings and Monday–Friday 09:00–17:00 Europe/London working hours are illustrative. An operational owner must supply real authority mappings, thresholds, accepted evidence and urgent-response procedures.
 - A responsible staff member can verify evidence, request more information or make a scoped decision. A review can suggest a policy draft, but only an authorised editor can save, preview and publish it. The system does not rewrite its code after a human decision.
@@ -279,8 +328,11 @@ Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at
 | Area | Present limit |
 | --- | --- |
 | Real operations | All external operational effects are simulated. No contractor visit, message delivery, payment or physical repair is established by a demo receipt. |
-| Conversation and evidence | Local parsing supports limited wording. Claude reading quality has no labelled accuracy measurement yet; attachment ingestion, image understanding and a voice conversation are not verified or implemented as complete flows. |
+| Conversation and evidence | The local intake fallback and policy parser support limited wording. Claude reading quality has no labelled accuracy measurement yet; attachment ingestion, image understanding and a voice conversation are not verified or implemented as complete flows. |
 | Identity and access | Production tenant login, staff SSO, organisation/property isolation and a real authority directory are unfinished. Tenant routes are disabled outside demo mode. |
+| React dashboard | A local staff demonstration with automatic BUILD seeding and seeded review rejections. It has no tenant portal, policy editor or production login; it loads case state at bootstrap, selection and after its own review actions, rather than continuously refreshing background Workflow changes. Its build is not integrated into FastAPI or Vercel hosting. |
+| Dashboard labels | “Resolved today” counts all loaded cases with `NO FURTHER ACTION`, without a date filter; it does not measure completed repairs. “Approve & assign contractor” submits a review response, subject to backend checks, and does not establish a real contractor assignment. |
+| Contact labels | The dashboard labels an internal `signal_outbox` wake record as “Email sent to landlord” and uses it to mark “Contacted”. This records neither an outbound email nor verified contact; these display labels need correction. |
 | Hosted operation | Vercel cloud execution and PostgreSQL behaviour are unverified. Deployment configuration does not provision accounts, secrets, storage, authentication or a production environment. |
 | Durability and scale | Local delivery uses an in-memory queue plus persisted native history and startup recovery. One process owns the Workflow directory; hot reload and multiple workers are unsupported. The prototype serialises transactions and has no production capacity or availability claim. |
 | Evaluation | BUILD replay reports decisions and blockers, not accuracy. Development provenance does not support a claim of a completely blind holdout; see the disclosure below. |
@@ -296,7 +348,8 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 - Implement operational adapters with provider idempotency, read-back and transactional delivery.
 - Add attachment storage/extraction with document-version availability controls.
 - Extend typed scheduling, accepted-source settings, holiday feeds and cumulative budget/invoice integration.
-- Label routing outcomes to measure Claude triage accuracy, and show Claude's tenant questions inside the tenant portal conversation.
+- Label routing outcomes to compare Jev-only, Jev-plus-Claude and Claude handling, including missed hazards, unnecessary reviews and provider failures.
+- Complete the React tenant/policy journeys, add live case refresh and make demo seeding explicit before integrating frontend deployment.
 - Add operational metrics, tracing, alerting and service targets.
 - Extend review-derived policy suggestions with duplicate-rule checks and regression examples; retain explicit editor review and publication.
 - Add a voice intake adapter that confirms missing details, preserves the transcript and calls the same case API, with a clear handover to a person.
@@ -311,13 +364,15 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 
 No public deployment is claimed. Screenshots must not expose credentials or reserved evaluation records.
 
-The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. Operational actions remain simulated.
+The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. They show an earlier version of the original interface, before the React dashboard and current self-identification allowance. Operational actions remain simulated.
 
-#### Animated screenshot walkthrough
+#### Animated product and architecture walkthrough
 
-![Animated walkthrough of the tenant request, staff review and policy settings](docs/screenshots/property-desk-walkthrough.gif)
+![Property Desk animated walkthrough: tenant request, property management, policy settings and architecture](docs/screenshots/property-desk-combined.gif)
 
-A 15-second loop using the saved application screenshots, with animated zooms and highlights. This is a screenshot walkthrough rather than a recording of live interactions; operational actions remain simulated.
+A 61-second loop covering tenant intake, staff review and policy settings, followed by the architecture. It combines an edited sequence of actual local app screens with an architecture animation. Operational actions are simulated; an action receipt does not confirm a completed repair.
+
+Property Desk is still being built. This walkthrough is a prototype snapshot, and the interface, workflows and features are subject to frequent changes.
 
 #### Tenant request
 
@@ -329,7 +384,7 @@ The tenant's report is saved for the property manager to check. The confirmation
 
 ![Staff review queue with separate person-and-property and contact-route requirements](docs/screenshots/staff-review.jpg)
 
-Two open reviews block the proposed quote request: person/property mapping and the verified contact route. Each review shows its scope, owner and other remaining blocker.
+In this recorded revision, two open reviews block the proposed quote request: person/property mapping and the verified contact route. Each review shows its scope, owner and other remaining blocker. Under the current default policy, a confirmed tenant-portal report can satisfy those otherwise unknown checks for quote requests through its limited self-identification allowance.
 
 #### Policy settings
 
@@ -348,13 +403,19 @@ A plain-English instruction produces a proposed change to route missing access p
 
 ### Licence
 
-**Project licence: not specified.** No project-wide `LICENSE` file is present; this README does not grant or choose one on the maintainer's behalf.
+Property Desk's original source code and documentation are licensed under the [Apache License 2.0](LICENSE). Copyright 2026 Property Desk contributors.
 
-`TODO: choose the project licence and add a root LICENSE file before public reuse.` Third-party assets retain their own terms; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
+Third-party libraries, datasets, models, APIs and assets retain their own licences and terms. The project licence does not relicense those materials; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
+
+### Maintainers and team
+
+- [@MasteraSnackin](https://github.com/MasteraSnackin)
+- [@vincentwap](https://github.com/vincentwap)
+- [@oleh-vell](https://github.com/oleh-vell)
+- [@Mehedi-dev-2404](https://github.com/Mehedi-dev-2404)
 
 ### Contact and support
 
-- **Maintainer:** `TODO: add maintainer or team name.`
 - **Support channel:** [GitHub issues](https://github.com/MasteraSnackin/hackathon-valley/issues), for users with repository access.
 - **Repository:** [MasteraSnackin/hackathon-valley](https://github.com/MasteraSnackin/hackathon-valley) (private).
 

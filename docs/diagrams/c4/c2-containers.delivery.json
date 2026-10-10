@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "docs/diagrams/c4/c2-containers.architecture.json",
+  "output": "docs/diagrams/c4/c2-containers.html",
+  "specification": {
+    "sha256": "3954d7d92b7a35d420064feeb92e51c37aec66e839105c8a52cf831f4902a97f",
+    "bytes": 4171
+  },
+  "artifact": {
+    "sha256": "91363308c7e11d1c31fc8423eaf42e63edbf6cd95aa85f1c64dad60092236a0d",
+    "bytes": 803850
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  },
+  "evidence": {
+    "verified": true,
+    "repository": "https://github.com/MasteraSnackin/hackathon-valley",
+    "revision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d",
+    "references": 5
+  }
+}

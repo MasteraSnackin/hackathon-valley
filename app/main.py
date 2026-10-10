@@ -10,7 +10,7 @@ from .localenv import load_local_env
 load_local_env()
 from .domain import *
 from .service import get_service,Forbidden,Conflict
-from . import ai
+from . import ai, jev
 from .build_data import list_build,import_case,snapshot
 from .voice import TUNNEL_PATHS,create_voice_router
 
@@ -192,7 +192,8 @@ async def import_build(bid:str,data:dict=Body(default={}),who=Depends(actor)):
     if set(data)-{'event_count'}:raise ValueError('Only event_count is supported')
     result=await asyncio.to_thread(import_case,get_service(),bid,who,data.get('event_count',1));return await settle(result['case']['id'],result)
 @app.get('/api/health')
-def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status()}
+def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),
+    'router':{'provider':'typesafe','model':jev.model_id(),'credential_configured':jev.configured(),'router_version':jev.ROUTER_VERSION}}
 
 # Tenant sessions have their own ownership-checked routes. The view switch is
 # demonstration navigation; it is never used as an authorisation boundary.
