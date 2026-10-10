@@ -1,0 +1,17 @@
+%% C2 · Application and storage
+%% Source commit: 2732af60a920d0f9a88be18a36e078aa22fbfa6d
+flowchart LR
+  browser["Browser client<br/>HTML · CSS · JavaScript"]
+  app["Python application<br/>FastAPI + embedded Workflow"]
+  records["Application store<br/>SQLite · SQLAlchemy"]
+  history["Workflow event store<br/>Native local World directory"]
+  claude["Anthropic API<br/>Hosted Claude"]
+  subgraph boundary0["Property Desk local demo"]
+    app
+    records
+    history
+  end
+  browser -->|"Same-origin HTTP"| app
+  app -->|"SQL transactions"| records
+  app -->|"SDK history"| history
+  app -->|"HTTPS · structured output"| claude

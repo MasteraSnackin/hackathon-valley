@@ -1,0 +1,202 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "How the next action is decided",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "active",
+      "label": "Current proposal"
+    },
+    {
+      "id": "stop",
+      "label": "Stop"
+    },
+    {
+      "id": "review",
+      "label": "Human judgement"
+    },
+    {
+      "id": "follow",
+      "label": "Clarify or wait"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "proposal",
+      "lane": "active",
+      "col": 0,
+      "label": "Current action",
+      "sublabel": "Same property and work item",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "evaluate",
+      "lane": "active",
+      "col": 1,
+      "label": "Assess all facts",
+      "sublabel": "PASS / FAIL / UNKNOWN / CONFLICT",
+      "type": "security",
+      "width": 174
+    },
+    {
+      "id": "act",
+      "lane": "active",
+      "col": 2,
+      "label": "ACT",
+      "sublabel": "No remaining blockers",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "receipt",
+      "lane": "active",
+      "col": 3,
+      "label": "Record simulation",
+      "sublabel": "Stable business-action ID",
+      "type": "database",
+      "width": 174
+    },
+    {
+      "id": "done",
+      "lane": "active",
+      "col": 5,
+      "label": "NO FURTHER ACTION",
+      "sublabel": "Receipt for this proposal",
+      "type": "database",
+      "width": 174
+    },
+    {
+      "id": "stop_action",
+      "lane": "stop",
+      "col": 2,
+      "label": "STOP ACTION",
+      "sublabel": "Refusal or rejected action",
+      "type": "security",
+      "width": 174
+    },
+    {
+      "id": "human",
+      "lane": "review",
+      "col": 2,
+      "label": "HUMAN REVIEW",
+      "sublabel": "Owner, scope and evidence",
+      "type": "security",
+      "width": 174
+    },
+    {
+      "id": "clarify",
+      "lane": "follow",
+      "col": 2,
+      "label": "CLARIFY",
+      "sublabel": "Ask through a verified route",
+      "type": "backend",
+      "width": 174
+    },
+    {
+      "id": "wait",
+      "lane": "follow",
+      "col": 4,
+      "label": "WAIT",
+      "sublabel": "Await triage, event or deadline",
+      "type": "messagebus",
+      "width": 174
+    }
+  ],
+  "edges": [
+    {
+      "id": "proposal-evaluate",
+      "from": "proposal",
+      "to": "evaluate",
+      "label": "Unfinished",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "evaluate-act",
+      "from": "evaluate",
+      "to": "act",
+      "label": "All clear",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "act-receipt",
+      "from": "act",
+      "to": "receipt",
+      "label": "Simulate",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "receipt-done",
+      "from": "receipt",
+      "to": "done",
+      "label": "Succeeded",
+      "variant": "default",
+      "role": "main"
+    },
+    {
+      "id": "proposal-done",
+      "from": "proposal",
+      "to": "done",
+      "label": "Already succeeded",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "evaluate-stop_action",
+      "from": "evaluate",
+      "to": "stop_action",
+      "label": "Must stop",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "evaluate-human",
+      "from": "evaluate",
+      "to": "human",
+      "label": "Review needed",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "evaluate-clarify",
+      "from": "evaluate",
+      "to": "clarify",
+      "label": "Missing answer",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "evaluate-wait",
+      "from": "evaluate",
+      "to": "wait",
+      "label": "Pending work",
+      "variant": "dashed",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "All blockers remain visible",
+      "items": [
+        "Headline priority: STOP ACTION, HUMAN REVIEW, CLARIFY, WAIT. A headline does not discard the other checks.",
+        "New evidence, a valid review, a revised proposal or a deadline triggers another assessment."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "A hold affects the action",
+      "items": [
+        "Clarification requires verified identity and route. An asserted fact still needs its permitted verification.",
+        "Custom rules add holds. They cannot remove default requirements. An uncertain receipt requires reconciliation."
+      ]
+    }
+  ]
+}

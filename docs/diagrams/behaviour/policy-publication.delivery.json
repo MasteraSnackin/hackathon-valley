@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "workflow",
+  "input": "docs/diagrams/behaviour/policy-publication.workflow.json",
+  "output": "docs/diagrams/behaviour/policy-publication.html",
+  "specification": {
+    "sha256": "f87bf2bff646b2beb90e12822b55e4784ab9ea3abe724c99c6850540971dfade",
+    "bytes": 3972
+  },
+  "artifact": {
+    "sha256": "e5cab763dbf0b415ab70f88e23258d69add9a56a7c9deccf7c3ea9d6fd9e52be",
+    "bytes": 807440
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

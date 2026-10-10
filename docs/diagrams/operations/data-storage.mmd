@@ -1,0 +1,18 @@
+erDiagram
+    cases ||..o{ records : "service-checked case_id (no SQL FK)"
+    cases {
+        varchar id PK
+        text payload "required JSON text"
+    }
+    records {
+        varchar id PK
+        varchar kind "required; indexed"
+        varchar case_id "optional; indexed"
+        varchar created_at "required"
+        text payload "required JSON text"
+        varchar dedupe UK "optional"
+    }
+    meta {
+        varchar key PK
+        text value "required JSON text"
+    }
