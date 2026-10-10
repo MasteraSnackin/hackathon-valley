@@ -84,7 +84,10 @@ class RunnerConfig(Strict):
     mode: Literal["preparation", "official"] = "preparation"
     expected_commit: str | None = Field(default=None, pattern=r"^[0-9a-f]{40}$")
     model: str = Field(default="claude-opus-5", min_length=1, max_length=100)
+    jev_model: str = Field(default="jev-1.13.0", min_length=1, max_length=100)
+    jev_timeout_seconds: float = Field(default=30, ge=1, le=120)
     triage_effort: Literal["low", "medium", "high", "max"] = "medium"
+    extract_effort: Literal["low", "medium", "high", "max"] = "low"
     draft_effort: Literal["low", "medium", "high", "max"] = "low"
     model_timeout_seconds: float = Field(default=30, ge=1, le=120)
     case_timeout_seconds: float = Field(default=150, ge=5, le=900)
@@ -177,7 +180,7 @@ def source_provenance(config: RunnerConfig):
     files = git("ls-files", "--cached", "--others", "--exclude-standard", "--", *SOURCE_PATHS).splitlines()
     hashes = {name: digest((ROOT / name).read_bytes()) for name in files if (ROOT / name).is_file()}
     installed = {}
-    for name in ("vercel-workflow", "anthropic", "fastapi", "pydantic"):
+    for name in ("vercel-workflow", "anthropic", "typesafe-sdk", "fastapi", "pydantic"):
         try:
             installed[name] = version(name)
         except PackageNotFoundError:
@@ -195,9 +198,21 @@ def worker_environment(config: RunnerConfig, runtime: Path):
                PROPERTY_LOCAL_ENV="off", DATABASE_URL=f"sqlite:///{runtime / 'application.db'}",
                WORKFLOW_LOCAL_DATA_DIR=str(runtime / "native-world"), CLAUDE_MODEL=config.model,
                CLAUDE_TIMEOUT=str(config.model_timeout_seconds), CLAUDE_TRIAGE_EFFORT=config.triage_effort,
-               CLAUDE_DRAFT_EFFORT=config.draft_effort)
+               CLAUDE_EXTRACT_EFFORT=config.extract_effort, CLAUDE_DRAFT_EFFORT=config.draft_effort,
+               JEV_MODEL=config.jev_model, JEV_TIMEOUT=str(config.jev_timeout_seconds))
     env.pop("VERCEL_QUEUE_BASE_URL", None)
     return env
+
+
+def model_environment(config: RunnerConfig):
+    from .domain import DEFAULT_SETTINGS
+    return {"anthropic_credential_present": bool(os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_AUTH_TOKEN")),
+            "typesafe_credential_present": bool(os.getenv("TYPESAFE_API_KEY")),
+            "policy_router": config.policy_settings.get("router", DEFAULT_SETTINGS["router"]),
+            "claude_model": config.model, "jev_model": config.jev_model,
+            "triage_effort": config.triage_effort, "extract_effort": config.extract_effort,
+            "draft_effort": config.draft_effort, "jev_timeout_seconds": config.jev_timeout_seconds,
+            "claude_timeout_seconds": config.model_timeout_seconds}
 
 
 def _request(client, method, path, **kwargs):
@@ -357,7 +372,8 @@ def _worker(input_path: Path, config_path: Path, case_dir: Path):
             _request(client, "POST", f"/api/policies/{policy['id']}/preview")
             _request(client, "POST", f"/api/policies/{policy['id']}/publish")
         _request(client, "POST", "/api/demo-session", json={"role": "case_manager"})
-        atomic_json(case_dir / "runtime-status.json", {"health": health, "execution_started_at": utcnow()})
+        atomic_json(case_dir / "runtime-status.json", {"health": health, "model_environment": model_environment(config),
+                    "execution_started_at": utcnow()})
         created = _request(client, "POST", "/api/cases", json={"title": data.title,
             "property_ref": data.property_ref, "report": data.report, "triage": "claude"})
         case_id = created["case"]["id"]
@@ -372,10 +388,14 @@ def _worker(input_path: Path, config_path: Path, case_dir: Path):
         failures = [r for d in snapshot["cases"] for r in d["timeline"] if
                     (r["kind"] == "interpretation" and r["payload"].get("status") == "failed") or
                     (r["kind"] == "tenant_message" and r["payload"].get("status") == "draft_failed")]
+        fallbacks = [r for d in snapshot["cases"] for r in d["timeline"]
+                     if r["kind"] == "routing" and r["payload"].get("error_type")]
         result = {"status": "model_failed" if failures else "settled", "system_case_id": case_id,
                   "execution": "native_local", "external_operations": "simulated",
                   "sources_processed": len(data.evidence) + 1,
-                  "finished_at": utcnow(), "model_failure_count": len(failures)}
+                  "finished_at": utcnow(), "model_failure_count": len(failures),
+                  "routing_fallback_count": len(fallbacks),
+                  "routing_fallback_errors": sorted({r["payload"]["error_type"] for r in fallbacks})}
         atomic_json(case_dir / "result.json", result)
     return result
 
@@ -390,6 +410,8 @@ def markdown_evidence(case_id, case_dir, provenance, config, result):
               f"Input SHA-256: `{provenance['input_sha256']}`.", ""]
     if result.get("error"):
         answer += ["Failure: " + result["error"], ""]
+    if result.get("routing_fallback_count"):
+        answer += [f"Jev was unavailable for {result['routing_fallback_count']} recorded routing attempts; the product handed those messages to Claude. Recorded causes: {', '.join(result['routing_fallback_errors'])}.", ""]
     reasoning = [f"# Recorded decision evidence — {case_id}", "", label, "",
                  "This is an export of the system's recorded policy assessments and concise model rationale, not a reconstructed answer or hidden model reasoning.", "",
                  "Full source inputs: `input.json`. Raw structured evidence, source IDs, assertions, decisions, reviews, actions and native execution events: `evidence.json`.",
@@ -408,6 +430,12 @@ def markdown_evidence(case_id, case_dir, provenance, config, result):
         for blocker in decision.get("blockers", []):
             reasoning += [f"- `{blocker['key']}` → {blocker['response']}: {blocker['reason']} Sources: {', '.join(blocker.get('source_ids', [])) or 'none recorded'}. Rule: `{blocker.get('rule_id', 'none')}`."]
         for row in detail["timeline"]:
+            if row["kind"] == "routing":
+                recorded = row["payload"]
+                reasoning += ["", f"Routing `{row['id']}`: mode `{recorded.get('mode')}`; model `{recorded.get('model', recorded.get('requested_model'))}`; source `{recorded.get('source_id')}`.",
+                              " ".join(recorded.get("decision", {}).get("reasons", []))]
+                if recorded.get("error_type"):
+                    reasoning += [f"Recorded router fallback: {recorded['error_type']}."]
             if row["kind"] == "interpretation":
                 recorded = row["payload"]
                 reasoning += ["", f"Interpretation `{row['id']}`: {recorded.get('status')}; source `{recorded.get('source_id')}`."]
@@ -434,6 +462,7 @@ def run_batch(manifest_path: Path, config_path: Path, output: Path):
         raise ValueError("Development fixtures cannot be used in official mode")
     provenance = {**source_provenance(config), "config_sha256": digest(config_bytes),
                   "manifest_sha256": digest(manifest_bytes), "started_at": utcnow(),
+                  "model_environment": model_environment(config),
                   "mode": config.mode, "runtime": "native_local", "external_operations": "simulated"}
     # Exclusive directory creation prevents overwriting or mixing previous results.
     output.mkdir(parents=True, exist_ok=False)
@@ -530,6 +559,7 @@ def preflight(manifest_path: Path, config_path: Path):
     missing = [name for name, installed in provenance["installed_packages"].items() if installed is None]
     return {"status": "validated_only", "mode": config.mode, "execution": "not_started",
             "model_credential_present": configured, "credentials_required": config.require_model_credentials,
+            "model_environment": model_environment(config),
             "missing_packages": missing,
             "ready_to_attempt": all(e["valid"] for e in entries) and (configured or not config.require_model_credentials) and not missing,
             "provenance": provenance, "cases": entries}

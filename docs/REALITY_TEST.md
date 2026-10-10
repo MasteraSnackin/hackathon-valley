@@ -8,15 +8,23 @@ No reserved evaluation cases are included, read or loaded automatically.
 
 `python -m app.reality_test` starts each case in a separate Python process with its
 own SQLite database and native local Vercel Workflow directory. It uses the same
-FastAPI intake/evidence endpoints, application service, Claude triage and native
+FastAPI intake/evidence endpoints, application service, Jev routing, Claude reading
+when needed, and native
 Vercel Workflow coordinator as the product. The in-process HTTP client runs the
 real application lifespan; it does not need a running web server.
 
 There is no manual execution fallback. Contractor contact, messages, bookings and
 other operational adapters remain **simulated**, as in the submitted prototype.
 A policy assessment, native workflow start, simulated receipt, human wait and
-confirmed physical repair are distinct outcomes. A model failure is recorded as
-a failure, never replaced with an invented decision.
+confirmed physical repair are distinct outcomes. A Claude reading/drafting failure
+is recorded as a failure. When optional Jev is unavailable, the product's existing
+routing path hands the message to Claude; the runner records that fallback and its
+reason rather than hiding it.
+
+The default policy keeps Jev before Claude. Depending on its recorded decision, Jev
+may handle a permitted simple route alone, route before Claude extracts quoted
+evidence, or hand off full triage to Claude. The runner does not silently switch
+this policy to Claude-only mode. Policy gates still control permission in every path.
 
 Each report is processed before the next evidence item becomes visible. The runner
 waits for the current application revision and all committed events to reach a
@@ -111,14 +119,16 @@ settings separate from committed source files.
 | `mode` | `preparation`; all outputs prominently say they are not official results. |
 | `expected_commit` | Required 40-character frozen Git commit in `official` mode. |
 | `model` | `claude-opus-5`, matching the current product default; verify account availability before the freeze. |
-| `triage_effort`, `draft_effort` | `medium` / `low`, explicitly applied to the worker environment. |
+| `jev_model` | `jev-1.13.0`, matching the pinned product router model. |
+| `jev_timeout_seconds` | 30 seconds for the TypeSafe request. |
+| `triage_effort`, `extract_effort`, `draft_effort` | `medium` / `low` / `low`, explicitly applied to the worker environment. Extraction effort applies when Jev supplies the route. |
 | `model_timeout_seconds` | 30 seconds per SDK request; the product SDK may retry twice. |
 | `case_timeout_seconds` | 150 seconds total per isolated case, including startup and all evidence. |
 | `batch_timeout_seconds` | 1,500 seconds for the batch, leaving headroom within a 30-minute test window. |
 | `workers` | Four independent workers; reduce if API rate limits require it. |
 | `poll_seconds` | 0.25 seconds between state checks. |
 | `require_model_credentials` | `true`; cannot be disabled in official mode. Missing credentials produce explicit failed outputs. |
-| `policy_settings`, `policy_rules` | Empty means the committed application defaults. Any supplied policy is validated, previewed and published in the empty isolated store before intake. |
+| `policy_settings`, `policy_rules` | Empty means the committed application defaults, including `router: "jev"`. Any supplied policy is validated, previewed and published in the empty isolated store before intake. |
 
 Before the freeze, settle the model and policy configuration, test the adapters,
 commit the implementation and record the exact frozen commit and configuration
@@ -127,17 +137,28 @@ that application/configuration sources, dependency declarations, `uv.lock` and
 `requirements.lock`
 are clean. It records their SHA-256 hashes and checks again after the batch. Never
 edit these sources during execution. Policy content and policy version are also
-recorded per case. The runner records configuration bytes and their hash; operators
+recorded per case. Configured model names, all used effort settings and timeouts
+override ambient model/effort environment variables. The run records optional
+TypeSafe credential presence, effective router policy, and the installed
+`typesafe-sdk` version (pinned to `0.7.4` in the dependency files).
+The runner records configuration bytes and their hash; operators
 must preserve their pre-freeze approved configuration rather than tune it on the
 released cases.
 
 No credentials go in JSON or Git. Export the authorised `ANTHROPIC_API_KEY` or
 `ANTHROPIC_AUTH_TOKEN` in your own terminal. An exported credential is used only by
-the existing Anthropic integration. Never paste it into an answer or log.
+the existing Anthropic integration. Optionally export `TYPESAFE_API_KEY` to enable
+Jev requests under the default routing policy. Without it, Jev records
+`missing_credentials` and Claude performs full triage; absence of this optional
+key does not prevent readiness when the required Anthropic credential and packages
+are present. Preflight, provenance and runtime status record only credential
+presence. Final outputs include recovered router-fallback counts and reasons.
+Do not claim a successful Jev execution when those records show fallback. Never
+paste either credential into an answer or log.
 
 ## Run a preparation batch
 
-With authorised model credentials available, this calls the real configured model
+With authorised model credentials available, this calls the real configured models
 on the fictional example and may incur API charges:
 
 ```sh
@@ -228,9 +249,11 @@ PROPERTY_LOCAL_ENV=off uv run --frozen python -m pytest tests/test_reality_test.
 ```
 
 The tests use wholly fictional inputs. The native smoke exercises the actual
-application endpoints and native SDK with a controlled, offline AI double. It
+application endpoints and native routing/reading steps with controlled, offline
+AI doubles. The tests remove inherited TypeSafe credentials and intercept the Jev
+call boundary, so no Jev request can escape even if the host normally has a key. It
 tests execution, chronological input isolation, output provenance and failure
-handling. It does not measure Claude accuracy or prove hosted/cloud execution.
+handling. It does not measure Claude/Jev accuracy or prove hosted/cloud execution.
 
 The runner uses real wall-clock time for workflow deadlines. Source timestamps
 establish input ordering/cutoffs; they do not rewind the application's clock or

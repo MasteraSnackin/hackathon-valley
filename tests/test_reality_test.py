@@ -31,7 +31,7 @@ def write_json(path, data):
 
 
 def credential_free(monkeypatch):
-    for key in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN", "VERCEL_QUEUE_BASE_URL"):
+    for key in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN", "TYPESAFE_API_KEY", "VERCEL_QUEUE_BASE_URL"):
         monkeypatch.delenv(key, raising=False)
     monkeypatch.setenv("PROPERTY_LOCAL_ENV", "off")
 
@@ -87,6 +87,9 @@ def test_preflight_is_read_only_and_does_not_load_local_credentials(tmp_path, mo
     assert result["execution"] == "not_started"
     assert result["cases"][0]["valid"] is True
     assert result["model_credential_present"] is False
+    assert result["model_environment"]["typesafe_credential_present"] is False
+    assert result["model_environment"]["policy_router"] == "jev"
+    assert "typesafe-sdk" in result["provenance"]["installed_packages"]
     assert result["ready_to_attempt"] is False
     assert set(tmp_path.iterdir()) == before
 
@@ -138,13 +141,17 @@ def test_native_worker_with_fake_model_preserves_chronology_and_real_sdk_evidenc
     code = '''
 import json, sys
 from pathlib import Path
-from app import ai, reality_test as r
+from app import ai, jev, reality_test as r
 seen=[]
-def fake_triage(text, context):
+def no_jev_network(*args, **kwargs):
+    assert not jev.configured(), "Offline runner tests must remove inherited TypeSafe credentials"
+    raise jev.JevUnavailable("missing_credentials", "offline test has no TypeSafe credential")
+jev.ask=no_jev_network
+def fake_triage(text, context, router=None):
     seen.append({"text":text,"earlier":[x["text"] for x in context["earlier_messages"]]})
     parsed=ai.Triage(intent="new_request",summary="Fictional deterministic test reading",issues=[
         ai.TriageIssue(category="plumbing",route="request_quote",work_item="Kitchen tap",source_quote=text,relation="current_case")
-    ],claims=[],ambiguities=[],answers=[],risk_flags=[],confidence="high",rationale="Fixture route for runner plumbing only")
+    ],claims=[],ambiguities=[],answers=[],risk_flags=[],confidence="high",rationale="Fixture route for runner plumbing only",route_objection="")
     return parsed.model_dump(), {"provider":"test-double","model":"offline-fixture","prompt_version":"fictional-test","request_id":"fixture"}
 ai.triage=fake_triage
 directory=Path(sys.argv[1])
@@ -157,6 +164,8 @@ print(json.dumps(result))
     assert done.returncode == 0, done.stdout + done.stderr
     result = runner.load_json(case_dir / "result.json")
     assert result["status"] == "settled" and result["execution"] == "native_local"
+    assert result["routing_fallback_count"] == 2
+    assert result["routing_fallback_errors"] == ["missing_credentials"]
     seen = runner.load_json(case_dir / "observed-model-inputs.json")
     assert seen[0]["earlier"] == []
     assert seen[1]["earlier"] == [fictional()["report"]]
@@ -172,17 +181,38 @@ print(json.dumps(result))
     events = evidence["native"][0]["events"]
     assert {"run_created", "step_completed", "wait_created"} <= {e["eventType"] for e in events}
     assert any("triage_case_messages" in s["stepName"] for s in evidence["native"][0]["steps"])
+    assert any("route_case_messages" in s["stepName"] for s in evidence["native"][0]["steps"])
     for index in (0, 1):
         assert (case_dir / f"checkpoint-{index:03d}.json").is_file()
     provenance = {"git_commit": "test", "config_sha256": "test", "input_sha256": "test"}
     runner.markdown_evidence("fictional", case_dir, provenance, config, result)
     assert "PREPARATION ONLY" in (case_dir / "ANSWER.md").read_text()
     assert "Fixture route for runner plumbing only" in (case_dir / "REASONING.md").read_text()
+    assert "Jev was unavailable for 2" in (case_dir / "ANSWER.md").read_text()
+    assert "Recorded router fallback: missing_credentials" in (case_dir / "REASONING.md").read_text()
 
 
 def test_credential_values_are_redacted(monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "fictional-secret-value")
     assert runner.scrub({"error": ["failure fictional-secret-value"]}) == {"error": ["failure [REDACTED]"]}
+
+
+def test_model_environment_is_bound_to_config_and_optional_router_presence_is_recorded(tmp_path, monkeypatch):
+    credential_free(monkeypatch)
+    for name in ("CLAUDE_MODEL", "CLAUDE_TRIAGE_EFFORT", "CLAUDE_EXTRACT_EFFORT", "CLAUDE_DRAFT_EFFORT", "JEV_MODEL", "JEV_TIMEOUT"):
+        monkeypatch.setenv(name, "ambient-value-must-not-win")
+    monkeypatch.setenv("TYPESAFE_API_KEY", "fictional-typesafe-secret")
+    config = runner.RunnerConfig()
+    env = runner.worker_environment(config, tmp_path)
+    assert env["JEV_MODEL"] == "jev-1.13.0"
+    assert env["JEV_TIMEOUT"] == "30"
+    assert env["CLAUDE_MODEL"] == "claude-opus-5"
+    assert env["CLAUDE_TRIAGE_EFFORT"] == "medium"
+    assert env["CLAUDE_EXTRACT_EFFORT"] == env["CLAUDE_DRAFT_EFFORT"] == "low"
+    recorded = runner.model_environment(config)
+    assert recorded["typesafe_credential_present"] is True
+    assert recorded["policy_router"] == "jev"
+    assert "fictional-typesafe-secret" not in json.dumps(recorded)
 
 
 def test_hard_batch_timeout_preserves_pending_cases(tmp_path, monkeypatch):
