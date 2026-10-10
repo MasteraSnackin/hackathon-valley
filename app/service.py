@@ -928,7 +928,11 @@ class Service:
 _service=None
 def get_service():
     global _service
-    if _service is None:_service=Service()
+    if _service is None:
+        _service=Service()
+        from . import audit
+        folder=audit.auto_directory()
+        if folder:_service.db.on_commit=audit.exporter(_service,folder)
     return _service
 
 def coordinator_cycle(case_id:str)->dict:

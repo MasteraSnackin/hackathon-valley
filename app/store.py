@@ -37,21 +37,29 @@ def make_engine(url=None):
     return engine
 
 class Store:
-    def __init__(self,url=None): self.engine=make_engine(url)
+    def __init__(self,url=None): self.engine=make_engine(url); self.on_commit=None
     @contextmanager
     def tx(self):
+        touched=set()
         with self.engine.connect() as c:
             if self.engine.dialect.name=='sqlite': c.exec_driver_sql('BEGIN IMMEDIATE')
             else:
                 c.begin(); c.execute(select(meta).where(meta.c.key=='transaction_lock').with_for_update())
+            # connection.info outlives a pooled checkout: always start clean.
+            c.info['touched_cases']=touched
             try: yield c; c.commit()
-            except: c.rollback(); raise
+            except: touched.clear(); c.rollback(); raise
+            finally: c.info.pop('touched_cases',None)
+        # Optional reader of committed records (the per-case audit trail export).
+        if touched and self.on_commit: self.on_commit(touched)
     def add(self,c,kind,payload,case_id=None,dedupe=None):
         if dedupe:
             existing=c.execute(select(records).where(records.c.dedupe==dedupe)).mappings().first()
             if existing: return unpack(existing),False
         row={'id':uuid.uuid4().hex,'kind':kind,'case_id':case_id,'created_at':stamp(),'payload':json.dumps(payload,sort_keys=True),'dedupe':dedupe}
-        c.execute(insert(records).values(**row)); return unpack(row),True
+        c.execute(insert(records).values(**row))
+        if case_id and 'touched_cases' in c.info: c.info['touched_cases'].add(case_id)
+        return unpack(row),True
     def list(self,c,kind=None,case_id=None):
         q=select(records).order_by(records.c.created_at,records.c.id)
         if kind:q=q.where(records.c.kind==kind)

@@ -4,7 +4,7 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 from datetime import timedelta
 from fastapi import FastAPI, Request, Depends, Body, Query, BackgroundTasks
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from .localenv import load_local_env
 load_local_env()
@@ -161,6 +161,10 @@ async def create(data:Intake,who=Depends(actor)):
     result=await asyncio.to_thread(get_service().intake,data,who);return await settle(result['case']['id'],result)
 @app.get('/api/cases/{cid}')
 def detail(cid:str,who=Depends(actor)):return get_service().detail(cid)
+@app.get('/api/cases/{cid}/audit')
+def audit_trail(cid:str,who=Depends(actor)):
+    from .audit import render
+    return PlainTextResponse(render(get_service().detail(cid)),media_type='text/markdown')
 @app.post('/api/cases/{cid}/evidence')
 async def evidence(cid:str,data:EvidenceInput,who=Depends(actor)):
     result=await asyncio.to_thread(get_service().evidence,cid,data,who);return await settle(cid,result)

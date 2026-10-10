@@ -12,3 +12,4 @@ web/
 qa/
 .venv/
 *.db
+.audit/
