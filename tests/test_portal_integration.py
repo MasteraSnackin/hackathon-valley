@@ -31,8 +31,13 @@ def test_tenant_request_becomes_one_shared_staff_case(portal):
     response = portal.post('/api/tenant/conversations', json=submitted)
     assert response.status_code == 200, response.text
     conversation = response.json()
-    assert conversation['case_id'] and not conversation['missing_fields']
+    # The tenant checks the summary first; nothing reaches staff before confirmation.
+    assert conversation['awaiting_confirmation'] and not conversation['case_id'] and not conversation['missing_fields']
     assert portal.post('/api/tenant/conversations', json=submitted).json()['id'] == conversation['id']
+    confirmed = portal.post('/api/tenant/conversations/' + conversation['id'] + '/confirm')
+    assert confirmed.status_code == 200, confirmed.text
+    conversation = confirmed.json()
+    assert conversation['case_id']
     assert portal.get('/api/cases').status_code == 403
     assert portal.get('/api/policies').status_code == 403
     assert portal.post('/api/policy-assistant/interpret', json={'text': 'Set the spending review threshold to £250'}).status_code == 403

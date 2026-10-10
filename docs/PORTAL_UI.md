@@ -6,10 +6,20 @@ production login or authorisation mechanism.
 
 ## Tenant journey
 
-Start with a description of the problem. The conversation gathers the tenant's
-name, address and issue, retaining information already supplied and asking for
-missing details. A complete report creates one shared case. Further messages
-become original evidence on that case and wake its coordinator.
+Start with a description of the problem. Claude reads the whole conversation and
+gathers the tenant's name, address and each separate problem. If anything is
+missing it asks in a friendly way ("Hey, before I continue, could you clarify a few
+things for us?"), at most three questions at a time.
+
+When the details are complete, the tenant sees a **Here's what I've got** card with
+their name, address and numbered problems. Nothing reaches property management
+until the tenant presses **Yes, send it** (or replies that it is right). **Something's
+not right** lets them type a correction, which refreshes the summary. Confirming
+creates one shared case whose report keeps the tenant's own words first, followed
+by the labelled confirmed summary. On the staff side, Claude triage routes the case,
+splits separate problems into their own cases and the policy engine holds anything
+ambiguous for a person. Further tenant messages become original evidence on that
+case and wake its coordinator.
 
 The tenant session has a separate cookie and conversation ownership checks. Its
 API returns only the tenant's messages, supplied details and a plain-language
@@ -17,9 +27,13 @@ progress projection. It does not return internal reviews, policy controls, staff
 evidence or the shared case list. Supplying an address is not identity verification
 and supplying a statement is not permission to act.
 
-Conversation extraction is a bounded, local demonstration parser. Unrecognised
-wording needs clarification. This is not a verified general-purpose conversational
-model or a production identity service.
+Claude only proposes the summary. A name, address or problem is kept only if it
+occurs in the tenant's own messages, and the summary card appears only when all
+three are present, whatever Claude says. A tenant's confirmation records that they
+checked the wording; it does not verify identity, address or permission. When
+Claude is unavailable, the bounded local phrase parser fills the same card, and
+unrecognised wording needs clarification. This is not a production identity
+service. Tenant messages are sent to the Anthropic API before submission.
 
 ## Property-manager journey
 
@@ -59,7 +73,8 @@ authority. No source code is rewritten and no policy is published automatically.
 | `POST /api/tenant/session` | Establish a loopback-only demo tenant session |
 | `POST /api/tenant/conversations` | Begin a report with text and an idempotency key |
 | `GET /api/tenant/conversations/{id}` | Read an owned conversation and safe progress |
-| `POST /api/tenant/conversations/{id}/messages` | Add a message and continue the shared case |
+| `POST /api/tenant/conversations/{id}/messages` | Add a message: answer a question, correct the summary, or update the shared case |
+| `POST /api/tenant/conversations/{id}/confirm` | Confirm the summary and send the request to property management |
 | `POST /api/policy-assistant/interpret` | Interpret supported plain-English policy wording without saving |
 | `GET /api/policy-assistant/reviews/{id}/suggestion` | Suggest a reusable draft based on a resolved review |
 
