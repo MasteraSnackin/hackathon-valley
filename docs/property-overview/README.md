@@ -6,6 +6,22 @@ Open `index.html` through the local server to browse the overview. Switch betwee
 
 The shared panel has Summary, Questions and Evidence tabs. Summary shows every recorded item with its own evidence state, plus a proposed next question. “Why this needs checking” expands the reasoning. The persistent “View evidence” button opens the source quotations; the equivalent button beside an issue goes directly to that issue's evidence. Historical case status remains separate from issue evidence states.
 
+## Walkthrough
+
+![Looping overview walkthrough: filter Garden, select case 019, check item states, read evidence and use List](property-overview.gif)
+
+The GIF uses real screens from this overview. It shows how to find a record and check what its evidence supports. These are historical synthetic cases with invented map positions, not live repair progress. A [static map preview](updated-map.jpg) is also available.
+
+To follow the example after starting the local page:
+
+1. Choose **Garden** in the case-type filter and select **case 019**.
+2. Read the proposed next check and expand **Why this needs checking** for its reasoning.
+3. Compare the item states in **Summary**. Garden clearance is reported complete, while levelling, gravel and final usability remain unconfirmed.
+4. Use an item's **View evidence** button to open its supporting quotation. The **Questions** tab collects gaps and uncertainties in the record.
+5. Switch to **List** to browse without using the map. Both views keep the same selected property; clear the filters to see all 25 records again.
+
+No step sends a message, books a visit, updates a policy or confirms a physical repair. The walkthrough is a snapshot of a prototype that is still changing.
+
 ## Run locally
 
 From the repository root:
@@ -68,6 +84,8 @@ For a live property view, introduce a property register with a stable ID, verifi
 - `vendor/leaflet/`: Leaflet 1.9.4, licence and source hashes.
 - `interaction-checks-2026-10-10.json`: 17 focused browser checks recorded for the revised interface. The 390-pixel mobile check is not a full accessibility audit.
 - `updated-map.jpg`, `updated-list.jpg` and `updated-mobile.jpg`: captures of the revised interface.
+- `property-overview.gif`: a 30-second looping walkthrough using captured overview screens, with captions explaining the navigation and evidence states.
+- `walkthrough/`: editable animation source, captured screens, a capture manifest, render instructions and validation results.
 
 This output is separate from the running Property Desk application. It creates no cases, changes no policies and sends no communications.
 

@@ -31,9 +31,18 @@ The standalone [property overview](docs/property-overview/README.md) lets staff 
 
 Each item has its own source-backed evidence state: reported complete, planned, reported, unconfirmed or disputed. The panel proposes a next check and shows why it is needed, with links to the relevant quotations. Historical case closure stays separate from item-level evidence; none of the items is labelled independently verified.
 
-[![Property overview with a filtered demo map and a shared property panel showing the proposed next check](docs/property-overview/updated-map.jpg)](docs/property-overview/updated-map.jpg)
+![Looping property overview walkthrough: filter Garden, select case 019, compare evidence states, open source quotations and switch to List](docs/property-overview/property-overview.gif)
 
-This static screenshot was captured on 10 October 2026. The overview reads complete historical BUILD records and is separate from the running application. It does not show a live portfolio, assign owners or deadlines, send messages or execute actions. Its central London pins are invented demo positions, with no geocoding or verified property locations. See the [source and coverage notes](docs/property-overview/README.md), [recorded interaction checks](docs/property-overview/interaction-checks-2026-10-10.json) and [local start instructions](#open-the-standalone-property-overview).
+The loop uses real screens from the read-only overview. To try the same walkthrough after [starting the local page](#open-the-standalone-property-overview):
+
+1. Choose **Garden** in the case-type filter, then select **case 019** on the map or in the list.
+2. Read the **Summary** and the proposed next check. Garden clearance is reported complete; that does not confirm the levelling, gravel or final usability.
+3. Select **View evidence** beside an item to inspect its supporting quotation. Use **Questions** to see the gaps that still need checking.
+4. Switch between **Map** and **List** to browse the same records. Clear the filters to return to all 25 properties.
+
+[Static map preview](docs/property-overview/updated-map.jpg) · [Source and coverage notes](docs/property-overview/README.md) · [Recorded interaction checks](docs/property-overview/interaction-checks-2026-10-10.json)
+
+The overview reads complete historical BUILD records and is separate from the running application. It does not show a live portfolio, assign owners or deadlines, send messages or execute repairs. Its central London pins are invented demo positions, with no geocoding or verified property locations. The prototype is still changing; the walkthrough records one version of the interface.
 
 ### What the prototype does
 
