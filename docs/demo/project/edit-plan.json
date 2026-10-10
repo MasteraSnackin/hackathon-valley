@@ -1,0 +1,133 @@
+{
+  "status": "picture cuts locked after sampled source-frame inspection",
+  "duration_seconds": 54,
+  "canvas": [
+    1280,
+    900
+  ],
+  "source_viewport": [
+    1280,
+    800
+  ],
+  "external_actions": "simulated",
+  "physical_repair": "not completed or verified",
+  "scenes": [
+    {
+      "id": "01-request",
+      "programme_start": 0,
+      "duration": 8,
+      "title": "Tenant reports a repair",
+      "narration_start": 0.25,
+      "footage": "assets/selected/01-request.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 3.2,
+          "source_end_s": 11.2,
+          "playback_rate": 1,
+          "programme_start_s": 0
+        }
+      ],
+      "selected_footage_sha256": "56959e2ee5295c3ea34bd7c1c6e4c4cd442ea66832a9ebcc3cf92189f1cc63d6"
+    },
+    {
+      "id": "02-two-checks",
+      "programme_start": 8,
+      "duration": 11,
+      "title": "Two checks still need review",
+      "narration_start": 8.25,
+      "footage": "assets/selected/02-two-checks.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 13.52,
+          "source_end_s": 24.52,
+          "playback_rate": 1,
+          "programme_start_s": 8
+        }
+      ],
+      "selected_footage_sha256": "680922c54f4ff1a4b9f11c818de1b009f376efb472668a7d8721ed41dd31ddb4"
+    },
+    {
+      "id": "03-first-review",
+      "programme_start": 19,
+      "duration": 6,
+      "title": "One decision clears one blocker",
+      "narration_start": 19.25,
+      "footage": "assets/selected/03-first-review.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 43.2,
+          "source_end_s": 49.2,
+          "playback_rate": 1,
+          "programme_start_s": 19
+        }
+      ],
+      "selected_footage_sha256": "a7927f0bd32b81d7e5305e64152fa31fee7bab8c8576bee8c23e48a533fad056"
+    },
+    {
+      "id": "04-resume",
+      "programme_start": 25,
+      "duration": 12,
+      "title": "Workflow rechecks, then resumes",
+      "narration_start": 25.25,
+      "footage": "assets/selected/04-resume.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 58.32,
+          "source_end_s": 70.32,
+          "playback_rate": 1,
+          "programme_start_s": 25
+        }
+      ],
+      "selected_footage_sha256": "bccc9eadaa920e43b7baf93bcd80067b7a8f800e5f028bea7bb54ba0c0f742cb"
+    },
+    {
+      "id": "05-policy",
+      "programme_start": 37,
+      "duration": 9,
+      "title": "Unsaved policy suggestion",
+      "narration_start": 37.25,
+      "footage": "assets/selected/05-policy.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 77.0,
+          "source_end_s": 86.0,
+          "playback_rate": 1,
+          "programme_start_s": 37
+        }
+      ],
+      "selected_footage_sha256": "d72367e32a742ff5fa0ecb474fda3dd53183aa2d3176a45df4347f84e620c0d7"
+    },
+    {
+      "id": "06-result",
+      "programme_start": 46,
+      "duration": 8,
+      "title": "Quote request recorded. Repair unconfirmed.",
+      "narration_start": 46.25,
+      "footage": "assets/selected/06-result.mp4",
+      "source_ranges": [
+        {
+          "source": "04-complete-take.webm",
+          "source_start_s": 92.0,
+          "source_end_s": 100.0,
+          "playback_rate": 1,
+          "programme_start_s": 46
+        }
+      ],
+      "selected_footage_sha256": "7c557de2b2c1f304651c38d3aba5952d49497768946131aae4e78e5315f4d62d"
+    }
+  ],
+  "source_sha256": "13812d46f3bc803232042a57a9e6577bb64c3f7655e1265fef22de76183f2b7d",
+  "source_duration_s": 102.88,
+  "source_frame_rate": 25,
+  "output_frame_rate": 30,
+  "source_audio": false,
+  "source_creation_time": "2026-10-10T11:42:54.598Z",
+  "source_note": "Raw recording retained locally; derived selected clips packaged. Hard cuts remove waiting and evidence entry; no recorded actions are fabricated.",
+  "captured_app_commit": "23cec527a5f3848786b85c965b653982f15a9c57",
+  "interpreter": "Local literal interpreter; no live Claude or model evaluation is demonstrated."
+}

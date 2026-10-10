@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-10T11:46:58.612286+00:00",
+  "result": "passed",
+  "scope": "Read-only audit of the isolated fictional runtime used for the final screen recording.",
+  "method": "SQLite query-only snapshot and selected native Workflow record metadata. No app API mutations were performed by this audit.",
+  "fixture": {
+    "tenant_conversations": 1,
+    "cases": 1,
+    "title": "My kitchen tap is leaking",
+    "category": "plumbing",
+    "fictional_only": true
+  },
+  "decision_sequence": [
+    {
+      "step": "Initial assessment",
+      "outcome": "HUMAN REVIEW",
+      "blockers": [
+        "identity",
+        "route"
+      ]
+    },
+    {
+      "step": "Source evidence supplied",
+      "effect": "Identity and contact-route statements are recorded as unverified claims."
+    },
+    {
+      "step": "First scoped verification",
+      "requirement": "identity",
+      "decision": "correct",
+      "recorded_at_utc": "2026-10-10T11:43:39.701903+00:00",
+      "remaining_blockers": [
+        "route"
+      ],
+      "action_still_held": true
+    },
+    {
+      "step": "Second scoped verification",
+      "requirement": "route",
+      "decision": "correct",
+      "recorded_at_utc": "2026-10-10T11:43:55.012120+00:00",
+      "remaining_blockers": []
+    },
+    {
+      "step": "Native coordinator action",
+      "action": "request_quote",
+      "recorded_at_utc": "2026-10-10T11:43:55.044281+00:00",
+      "status": "succeeded",
+      "simulated": true
+    }
+  ],
+  "checks": {
+    "independent_verifications": true,
+    "verified_requirements": [
+      "classification",
+      "identity",
+      "route"
+    ],
+    "successful_actions_before_both_checks_passed": 0,
+    "access_permission_granted": false,
+    "completion_verified": false
+  },
+  "action_records": {
+    "append_only_intent_records": 1,
+    "successful_action_records": 1,
+    "distinct_business_actions": 1,
+    "simulated_provider_receipts": 1,
+    "action": "request_quote",
+    "actor": "native-case-coordinator",
+    "external_contact_or_booking": false
+  },
+  "native_workflow": {
+    "mode": "native_local",
+    "coordinator_runs": 1,
+    "run_status_at_audit": "running",
+    "completed_steps": 4,
+    "received_hooks": 3,
+    "application_workflow_receipts": 4,
+    "workflow_error_records": 0,
+    "note": "The long-running case coordinator remains available for further evidence; a running coordinator does not mean the quote action is incomplete."
+  },
+  "final_case": {
+    "status": "in_progress",
+    "stage": "NO FURTHER ACTION",
+    "last_verified_action": "request_quote",
+    "completion_state": "not established",
+    "meaning": "The quote action has a simulated receipt. The maintenance request remains in progress and the repair is not verified complete."
+  },
+  "policy_state": {
+    "published_version": 1,
+    "published_records": 1,
+    "new_saved_drafts": 0,
+    "new_published_versions": 0,
+    "note": "Only the initial demonstration policy is stored. Any policy interpretation shown in the recording was not saved or published."
+  },
+  "interpretation": {
+    "modes": [
+      "literal_demo"
+    ],
+    "live_model_used": false
+  },
+  "proof_boundary": [
+    "The audit is tied to the recorded source revision above. It does not validate later commits or live Claude behaviour.",
+    "This audit establishes the recorded local workflow state, not hosted Vercel execution.",
+    "The quote action and fixture evidence are explicitly simulated; no real tenant, contractor, visit or repair is established.",
+    "The screen recording and final video require separate visual and duration checks.",
+    "This summary omits cookies, tokens, raw runtime payloads and host filesystem paths."
+  ],
+  "recorded_source_revision": "23cec527a5f3848786b85c965b653982f15a9c57"
+}
