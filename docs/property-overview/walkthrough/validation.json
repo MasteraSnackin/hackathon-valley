@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-10",
+  "file": "../property-overview.gif",
+  "bytes": 1267778,
+  "sha256": "bc950c863ea21f7c1daee834e9c2f938b4c5f5f007a88d5614ffe78d8ebd91fd",
+  "dimensions": [
+    1200,
+    1200
+  ],
+  "frames": 360,
+  "duration_ms": 30000,
+  "loop": 0,
+  "hyperframes_version": "0.8.145",
+  "hyperframes_check": {
+    "ok": true,
+    "strict": true,
+    "sample_times_seconds": [
+      0,
+      2,
+      3.95,
+      4,
+      6,
+      7.95,
+      8,
+      10,
+      12.95,
+      13,
+      16,
+      18.95,
+      19,
+      22,
+      25.95,
+      26,
+      28,
+      29.95
+    ],
+    "findings": {
+      "lint": 0,
+      "runtime": 0,
+      "layout": 0,
+      "contrast": 0
+    }
+  },
+  "verification": "Decoded all GIF frames with Pillow; visual inspection of six sampled chapters. Loop metadata is 0 (infinite). This does not verify continuous playback in every browser or live maintenance actions."
+}

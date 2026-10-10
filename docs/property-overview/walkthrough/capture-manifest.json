@@ -1,0 +1,69 @@
+{
+  "captured_at": "2026-10-10",
+  "source": "http://127.0.0.1:54037/index.html",
+  "method": "Native browser screenshots after UI actions, retained without pixel edits. Detail shots are cropped by the composition for readability.",
+  "case_scope": [
+    "019"
+  ],
+  "source_revision": "9bcdca585955dfb930005ed742572606e68f5688",
+  "scenes": [
+    {
+      "file": "assets/01-overview.jpg",
+      "start_seconds": 0,
+      "duration_seconds": 4,
+      "title": "Start with the whole picture",
+      "crop_xywh": null
+    },
+    {
+      "file": "assets/02-filtered.jpg",
+      "start_seconds": 4,
+      "duration_seconds": 4,
+      "title": "Narrow the view",
+      "crop_xywh": null
+    },
+    {
+      "file": "assets/03-selected.jpg",
+      "start_seconds": 8,
+      "duration_seconds": 5,
+      "title": "Select a property",
+      "crop_xywh": null
+    },
+    {
+      "file": "assets/04-states.jpg",
+      "start_seconds": 13,
+      "duration_seconds": 6,
+      "title": "Check each item separately",
+      "crop_xywh": [
+        500,
+        312,
+        588,
+        588
+      ]
+    },
+    {
+      "file": "assets/05-evidence.jpg",
+      "start_seconds": 19,
+      "duration_seconds": 7,
+      "title": "Follow the evidence",
+      "crop_xywh": [
+        500,
+        72,
+        588,
+        690
+      ]
+    },
+    {
+      "file": "assets/06-list.jpg",
+      "start_seconds": 26,
+      "duration_seconds": 4,
+      "title": "Use the view that suits you",
+      "crop_xywh": null
+    }
+  ],
+  "limits": [
+    "Synthetic data",
+    "Invented locations, not geocoded addresses",
+    "Historical evidence, not live repair progress",
+    "No live operations or messages"
+  ]
+}

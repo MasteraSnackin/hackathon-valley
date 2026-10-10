@@ -1,0 +1,11 @@
+node_modules/
+.hyperframes/
+.media/
+snapshots/
+*.log
+check.json
+usage*.json
+meta.json
+AGENTS.md
+CLAUDE.md
+.thumbnails/

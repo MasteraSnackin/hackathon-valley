@@ -15,6 +15,7 @@ The recording follows a fictional tenant report, two separate human reviews, an 
 - [5. Key assumptions](#5-key-assumptions)
 - [6. Known limitations](#6-known-limitations)
 - [7. What we'd build next](#7-what-wed-build-next)
+- [Property overview: map, recorded items and evidence](#property-overview-map-recorded-items-and-evidence)
 
 ## 1. What operational problem it solves
 
@@ -23,6 +24,25 @@ A maintenance request can involve a tenant, property manager and contractor, eac
 Property Desk makes those decisions explicit. It gathers a tenant's report, proposes the next action, checks its evidence and authority, and either proceeds through a simulated adapter, asks for clarification, waits, routes a scoped decision to a person, or stops the affected action. The request can continue to gather information while that action is held. Staff see the reason and the evidence needed to resume.
 
 **Status:** this is an actively changing prototype. Native Workflow execution is implemented and has been verified locally. Contractor contact, bookings, work instructions and payment-related actions are **simulated**. The current case pipeline uses Jev for initial routing, with Claude handling uncertainty, detailed interpretation and tenant questions. A separate React staff dashboard now sits alongside the original tenant/staff interface. Earlier recordings and verification reports describe their recorded revision, not every later change. Hosted Vercel execution, PostgreSQL deployment and production identity integrations remain unverified. The interface is called Property Desk. The Python package is `property-workflow` and the FastAPI title is Property Workflow.
+
+### Property overview: map, recorded items and evidence
+
+The standalone [property overview](docs/property-overview/README.md) lets staff browse 25 synthetic BUILD properties and their 47 recorded issue, work or follow-up items. Map and List select the same property panel, with Summary, Questions and Evidence tabs. Search, case-type and evidence-gap filters help find records that need a particular check.
+
+Each item has its own source-backed evidence state: reported complete, planned, reported, unconfirmed or disputed. The panel proposes a next check and shows why it is needed, with links to the relevant quotations. Historical case closure stays separate from item-level evidence; none of the items is labelled independently verified.
+
+![Looping property overview walkthrough: filter Garden, select case 019, compare evidence states, open source quotations and switch to List](docs/property-overview/property-overview.gif)
+
+The loop uses real screens from the read-only overview. To try the same walkthrough after [starting the local page](#open-the-standalone-property-overview):
+
+1. Choose **Garden** in the case-type filter, then select **case 019** on the map or in the list.
+2. Read the **Summary** and the proposed next check. Garden clearance is reported complete; that does not confirm the levelling, gravel or final usability.
+3. Select **View evidence** beside an item to inspect its supporting quotation. Use **Questions** to see the gaps that still need checking.
+4. Switch between **Map** and **List** to browse the same records. Clear the filters to return to all 25 properties.
+
+[Static map preview](docs/property-overview/updated-map.jpg) · [Source and coverage notes](docs/property-overview/README.md) · [Recorded interaction checks](docs/property-overview/interaction-checks-2026-10-10.json)
+
+The overview reads complete historical BUILD records and is separate from the running application. It does not show a live portfolio, assign owners or deadlines, send messages or execute repairs. Its central London pins are invented demo positions, with no geocoding or verified property locations. The prototype is still changing; the walkthrough records one version of the interface.
 
 ### What the prototype does
 
@@ -52,6 +72,8 @@ The capture shows the working local dashboard with fictional records. See the [P
 
 Both interfaces use the same Python application. FastAPI serves the original tenant/staff interface at `/` and the built React staff dashboard at `/dashboard`; during frontend development the dashboard can also run through Vite, which proxies API requests to FastAPI. The case service, policy evaluator and native Workflow runtime share the Python process. Jev proposes a route; Claude handles the readings and questions that need it. Explicit policy checks decide whether an action can proceed. Application records and Workflow history use separate stores, both of which are needed for local recovery.
 
+The [standalone property overview](docs/property-overview/) is a separate static page with an embedded BUILD inventory. It has no connection to the case API, application database or Workflow runtime. Its reviewed evidence states and proposed checks are historical interpretations, not operational policies. [ARCHITECTURE.md](ARCHITECTURE.md) describes this boundary and the work needed for a live property view.
+
 ### Choose a diagram
 
 | Question | Diagram |
@@ -72,6 +94,24 @@ Both interfaces use the same Python application. FastAPI serves the original ten
 The rendered diagrams describe an earlier reviewed source snapshot and do not yet include the React dashboard, Jev routing or the current self-identification allowance. The current implementation is described in the text here and in [ARCHITECTURE.md](ARCHITECTURE.md). Operational actions remain simulated, and hosted Vercel and PostgreSQL operation remain unverified.
 
 ## 3. How to run it
+
+### Open the standalone property overview
+
+From the repository root, serve the committed files with Python 3:
+
+```sh
+python3 -m http.server 54037 --bind 127.0.0.1 --directory docs/property-overview
+```
+
+Open [the local property overview](http://127.0.0.1:54037/index.html). This starts only a local static server; it needs no application setup, API keys or model calls. The street-map background needs internet access for visible OpenStreetMap tiles. The property list and recorded evidence remain available if tiles fail.
+
+To rebuild after editing the reviewed overview data, run the following from the repository root. This requires the authorised read-only `data/build/` and `handoff/BUILD_MANIFEST.json`; the assembler checks source hashes and exact quotations before writing the generated files.
+
+```sh
+python3 docs/property-overview/assemble.py
+```
+
+The [overview guide](docs/property-overview/README.md) describes its files and review rules. The application instructions below are separate.
 
 ### Requirements
 
@@ -163,7 +203,7 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 
 | Variable | Purpose |
 | --- | --- |
-| `APP_MODE` | Defaults to `demo`; set `production` explicitly for hosted preparation. This disables demo sessions and requires database/staff configuration; `vercel.json` does not set it for you. |
+| `APP_MODE` | Defaults to `demo` (loopback only). `hosted_demo` keeps the labelled demo roles and tenant sessions open to anyone with the link and requires PostgreSQL; the Vercel project `property-desk` uses it. `production` disables demo sessions and requires database/staff configuration; `vercel.json` does not set either for you. |
 | `WORKFLOW_MODE` | Defaults to `native_local`; alternatives are `manual_demo` and prepared-but-unverified `native_cloud`. |
 | `WORKFLOW_TARGET_WORLD` | Set explicitly to `local` or, for hosted configuration, `vercel`. Mode/world mismatches are rejected. |
 | `DATABASE_URL` | Defaults to shared `var/property.db`. Override for isolated development; the deployment path requires PostgreSQL. |
@@ -255,6 +295,7 @@ Claude intake, interpretation and question drafting need **`ANTHROPIC_API_KEY` o
 | Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real outbound email, SMS, contractor system or payment service is connected |
 | ElevenLabs / Twilio intake | Voice-agent configuration, confirmed report webhook and signed post-call transcript endpoint; a separate inbound bridge supports fictional caller roles | Requires configured voice secrets and external agent/number setup. [Recorded phone checks](docs/VOICE_PHONE.md) do not establish a real Twilio call or a working post-call webhook |
 | Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
+| Property overview map | Vendored Leaflet 1.9.4 displays invented demo pins; OpenStreetMap supplies only visible background tiles over HTTPS | No API key, model call or geocoder. Tile requests use map coordinates, not property addresses or case descriptions; internet access is needed for the background |
 
 Claude's output is schema-validated. Case-triage quotes must occur verbatim in the source; tenant intake checks normalise whitespace and case. Assertions stay unverified until the named role checks them, apart from the configurable derived category label. Jev proposes routes without creating verified authority. A deterministic gate controls case follow-up messages; intake replies use the separate conversation route. Enabled model paths send relevant text and bounded context to their provider; the tenant fallback parser and the policy parser remain local. Voice intake adapters and ElevenLabs configuration are implemented; [the phone guide](docs/VOICE_PHONE.md) distinguishes recorded simulator/HTTP checks from unverified real calls and post-call delivery.
 
@@ -335,6 +376,7 @@ Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at
 - A responsible staff member can verify evidence, request more information or make a scoped decision. A review can suggest a policy draft, but only an authorised editor can save, preview and publish it. The system does not rewrite its code after a human decision.
 - Local native execution uses one running Python process and retains both application and Workflow storage. A recorded action, accepted wake or finished workflow is not proof of a physical repair.
 - Development replay knows only the selected history prefix. Later messages, retrospective summaries and attachment contents cannot be treated as facts available at an earlier decision.
+- The standalone property overview uses complete historical records, including retrospective summaries. Its 25 synthetic address labels are not verified property identities, and its 47 entries are not a count of unique active defects. This material must stay outside decision-time replay.
 
 ## 6. Known limitations
 
@@ -345,6 +387,7 @@ Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at
 | Identity and access | Production tenant login, staff SSO, organisation/property isolation and a real authority directory are unfinished. Tenant routes are disabled outside demo mode. |
 | React dashboard | A local staff interface with explicit demo loading, periodic case refresh, evidence review and a backend policy editor. Tenant intake and specialist approvals remain in the original workspace. FastAPI serves the built dashboard; production login and hosted Vercel verification remain unfinished. |
 | Dashboard outcomes | Counts and progress describe the current proposed action. A successful simulated receipt does not establish a completed repair or actual contractor contact. Review-derived policy suggestions carry the review ID into interpretation and retain provenance in the editable draft reason; there is no separate structured source-review field on the published policy. |
+| Property overview | A read-only historical BUILD view with invented map positions. It does not establish present property condition, occupancy or repair status, and has no live backend integration, owners, deadlines or operational actions. Recorded browser checks are focused checks, not a full accessibility audit. |
 | Hosted operation | Vercel cloud execution and PostgreSQL behaviour are unverified. Deployment configuration does not provision accounts, secrets, storage, authentication or a production environment. |
 | Durability and scale | Local delivery uses an in-memory queue plus persisted native history and startup recovery. One process owns the Workflow directory; hot reload and multiple workers are unsupported. The prototype serialises transactions and has no production capacity or availability claim. |
 | Evaluation | BUILD replay reports decisions and blockers, not accuracy. Development provenance does not support a claim of a completely blind holdout; see the disclosure below. |
@@ -362,6 +405,7 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 - Extend typed scheduling, accepted-source settings, holiday feeds and cumulative budget/invoice integration.
 - Label routing outcomes to compare Jev-only, Jev-plus-Claude and Claude handling, including missed hazards, unnecessary reviews and provider failures.
 - Complete specialist approval forms, add a structured source-review link to published policies, and decide whether to bring tenant intake into the React client.
+- Connect the property overview to a reviewed property register with stable IDs, reconciled address aliases and verified coordinates. Preserve evidence availability and chronology, keep unresolved identity conflicts visible, and avoid counting a parent report and its split issues twice.
 - Add operational metrics, tracing, alerting and service targets.
 - Extend review-derived policy suggestions with duplicate-rule checks and regression examples; retain explicit editor review and publication.
 - Verify a real phone call and the signed post-call webhook, strengthen production caller identity, and complete a clear handover to a person.
@@ -372,9 +416,9 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 
 - **Local demo:** [http://127.0.0.1:8027](http://127.0.0.1:8027), after starting the application.
 - **Walkthrough:** [Tenant and property-manager journey](docs/PORTAL_UI.md).
-- **Public demo URL:** `TODO: add after a hosted deployment is authorised and verified.`
+- **Public demo URL:** [property-desk-mauve.vercel.app](https://property-desk-mauve.vercel.app) (`APP_MODE=hosted_demo` on Vercel with native Python Workflow and Neon PostgreSQL; anyone with the link can act as any demo role, and all external operations are simulated).
 
-No public deployment is claimed. Screenshots must not expose credentials or reserved evaluation records.
+Hosted demo verified on 10 October 2026: a BUILD 002 import completed native Workflow cycles on Vercel, and a tenant message was read by Claude. Long-running timers and phone intake have not been verified on the hosted deployment. Screenshots must not expose credentials or reserved evaluation records.
 
 The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. They show an earlier version of the original interface, before the React dashboard and current self-identification allowance. Operational actions remain simulated.
 

@@ -22,8 +22,10 @@ def make_engine(url=None):
         @event.listens_for(engine,'connect')
         def configure(dbapi,_):
             dbapi.execute('PRAGMA foreign_keys=ON'); dbapi.execute('PRAGMA journal_mode=WAL')
-    metadata.create_all(engine)
     with engine.begin() as c:
+        # Concurrent serverless cold starts would otherwise race to create the schema.
+        if engine.dialect.name!='sqlite':c.exec_driver_sql('SELECT pg_advisory_xact_lock(7240531)')
+        metadata.create_all(c)
         if engine.dialect.name=='sqlite':
             c.exec_driver_sql("CREATE TRIGGER IF NOT EXISTS immutable_records_update BEFORE UPDATE ON records BEGIN SELECT RAISE(ABORT, 'Audit records are immutable'); END")
             c.exec_driver_sql("CREATE TRIGGER IF NOT EXISTS immutable_records_delete BEFORE DELETE ON records BEGIN SELECT RAISE(ABORT, 'Audit records are immutable'); END")

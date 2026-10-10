@@ -8,6 +8,8 @@ The React portfolio workspace adds related-incident review, evidence comparison,
 
 The implemented environment is a local demonstration. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. Recorded local checks cover native SDK execution and recovery; they do not establish Vercel cloud operation, PostgreSQL behaviour, production authentication, live model quality or real delivery. This document describes the source under `app/`, `static/` and `web/`, including the GUI refresh reconciled with GitHub main revision `38f3c70`. [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
 
+The [standalone property overview](#standalone-property-overview) is a separate read-only view under `docs/property-overview/`. It presents the 25 synthetic BUILD records without calling the application APIs or starting workflows. Its data flow and validation are documented below; the runtime sections retain their stated source and verification snapshots.
+
 ## Key Requirements
 
 - Preserve original reports and exact quoted assertions. Keep unverified claims, verified facts, missing information and conflicting sources distinguishable.
@@ -77,6 +79,7 @@ The [diagram guide](docs/diagrams/README.md) provides ten focused views with sta
 | [Decision and policy flows](docs/diagrams/README.md#action-decision-flow) | All blockers, valid publication and explicit policy reassessment |
 | [Data storage](docs/diagrams/README.md#data-storage) | Physical tables and application-level references |
 | [Local deployment](docs/diagrams/README.md#local-deployment) | One local process, two stores and the external model API |
+| [Property overview](#standalone-property-overview) | BUILD evidence, reviewed issue states, generated files and the independent map/list browser view |
 
 ## Component Details
 
@@ -110,6 +113,54 @@ These static-interface browser captures were taken on 10 October 2026 from a fre
 | --- | --- | --- |
 | [![Saved tenant maintenance report](docs/screenshots/tenant-request.jpg)](docs/screenshots/tenant-request.jpg) | [![Separate staff reviews for identity mapping and contact route](docs/screenshots/staff-review.jpg)](docs/screenshots/staff-review.jpg) | [![Unsaved policy proposal alongside published version 1](docs/screenshots/policy-settings.jpg)](docs/screenshots/policy-settings.jpg) |
 | The tenant sees their saved report and a progress message, with no booking or repair completion implied. | Each review exposes its own requirement, scope and owner while keeping the other blocker visible. | The proposed interpretation is explicitly unsaved and unpublished; version 1 is still the published policy. |
+
+### Standalone property overview
+
+Sources: [assembly and validation](docs/property-overview/assemble.py), [browser view](docs/property-overview/overview.js), [map adapter](docs/property-overview/map-view.js), [reviewed guidance](docs/property-overview/review-guidance.json) and [run guide](docs/property-overview/README.md).
+
+This static view groups 47 recorded issues, work items and follow-up matters under 25 synthetic property labels. A pin or list selection updates one shared panel with Summary, Questions and Evidence tabs. Every item has an evidence state, explanation and source references. Each property has a proposed next question; it is neither a sent message nor an approved action. Search, case-type and evidence-gap filters apply to both views. The URL fragment retains the selected case, view, filters and sort order.
+
+```mermaid
+flowchart LR
+    Sources["25 allowed BUILD cases<br/>index and history Markdown"] --> Assemble["assemble.py<br/>allowlist, hashes, labels and exact quotes"]
+    Manifest["BUILD_MANIFEST.json<br/>case IDs and source hashes"] --> Assemble
+    Notes["Reviewed issues and caveats<br/>part-a.json and part-b.json"] --> Assemble
+    Guidance["review-guidance.json<br/>issue states, categories, next questions"] --> Assemble
+    Locations["map-locations.json<br/>invented demo positions"] --> Assemble
+    Assemble --> Files["index.html with embedded inventory<br/>JSON, CSV and validation receipt"]
+    Files --> Browser["overview.js<br/>one shared property panel"]
+    Browser --> List["Filtered property list"]
+    Browser --> Map["map-view.js and local Leaflet<br/>labelled demo pins"]
+    Map -->|"Visible tile requests only"| OSM["OpenStreetMap tiles"]
+    Browser -->|"Open a cited source"| GitHub["Pinned public case record"]
+```
+
+The assembler validates the BUILD manifest and all 50 source Markdown hashes, checks the reviewed issue and caveat labels, and verifies quoted text within the cited file and event. It combines `metadata.json`, `part-a.json`, `part-b.json`, `review-guidance.json` and `map-locations.json`, then embeds the resulting inventory into `template.html`. It also writes downloadable JSON, an issue CSV and `validation.json`. Python's standard library is sufficient to build and serve this view.
+
+| Data | Meaning and boundary |
+| --- | --- |
+| `issues` and `caveats` | Reports, recorded work and questions with exact source quotations; missing evidence is distinct from conflicting evidence |
+| `recorded_status` and `recorded_outcome` | Historical case metadata and attributed outcome summary; neither establishes every item's completion or the present condition |
+| `review_guidance.issue_states` | Reviewed `reported_complete`, `unconfirmed`, `planned`, `reported` or `disputed` classifications, with explanation and source evidence; no independently verified state is assigned |
+| `review_guidance.question_groups` | Evidence-gap categories tied to the original caveats; these support filters, not urgency scores or automatic escalation |
+| `review_guidance.next_check` | Suggested question, rationale and cited basis; browsing or selecting it has no operational effect |
+| `display_location` | Explicit `kind: demo`, latitude, longitude and provenance; coordinates are invented and kept separate from source address facts |
+
+Case 019 illustrates the distinction: the agency reported garden clearance complete, while levelling, gravel coverage and final usability remain unconfirmed in the supplied record. Case 041 records a fixed washing machine alongside planned towel-rail fitting. These are readings of historical evidence, not new inspections.
+
+Leaflet 1.9.4, its licence and source hashes are vendored locally. OpenStreetMap supplies visible street tiles over HTTPS; no geocoder receives addresses or case content. Source links open the pinned GitHub record. There are no runtime model calls, API keys, database writes, policy publications or connections to FastAPI and Vercel Workflow in this view. The property list remains available if the map fails to load. GitHub displays the source files and screenshots; a local static server renders the interactive page.
+
+Run from the repository root:
+
+```sh
+python3 -m http.server 54037 --bind 127.0.0.1 --directory docs/property-overview
+```
+
+Open `http://127.0.0.1:54037/index.html`. To regenerate the checked-in output after editing reviewed guidance, run `python3 docs/property-overview/assemble.py` from the repository root. Use an available local port if 54037 is already occupied.
+
+The [source validation receipt](docs/property-overview/validation.json) records 460 exact quotation checks, including 188 for issue states and next questions; repeated quotations count more than once. The [interaction receipt](docs/property-overview/interaction-checks-2026-10-10.json) records 17 focused browser checks, including filters, empty-state recovery, keyboard evidence navigation and a 390-pixel mobile view. These checks do not establish full accessibility compliance or live operational behaviour.
+
+The overview uses complete histories and retrospective summaries. It must stay outside chronological decision replay and held-out evaluation input. Some synthetic dates are after the review date. A future live integration needs a property register, reviewed identity matching, verified coordinates and time-bounded evidence from the application before it can show owners, deadlines, live actions or geographic routing.
 
 ### FastAPI and authentication boundary
 
@@ -413,6 +464,7 @@ The static staff interface exposes evidence, claim provenance, decisions, review
 
 These changes remain to be implemented:
 
+- Connect the standalone property overview to a reviewed property register and authorised case projections, preserving unknown identity, issue-level evidence and chronological boundaries. Replace demo pins only when coordinates are verified.
 - Validate a separate Vercel staging deployment with shared PostgreSQL, generated routes, runtime identity and recovery checks across actual hosted invocations.
 - Implement staff SSO, verified tenant identity, organisation/property access rules, secure production session handling and a reviewed authorisation model.
 - Complete specialist React approval forms and evidence entry, add a structured source-review link on published policies and consider server-push updates. Define and verify operational metrics before adding daily repair-resolution counts.

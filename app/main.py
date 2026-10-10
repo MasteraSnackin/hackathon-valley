@@ -13,11 +13,16 @@ from .service import get_service,Forbidden,Conflict,VOICE_BRIDGE
 from . import ai, jev, parties
 from .build_data import list_build,import_case,snapshot
 from .voice import TUNNEL_PATHS,create_voice_router
+from .tenant import same_origin
 
 ROOT=Path(__file__).resolve().parent.parent
 MODE=os.getenv('APP_MODE','demo')
+# hosted_demo keeps the labelled demo roles without the loopback restriction,
+# for a shared deployment: anyone holding the link can act as any role.
+DEMO=MODE in {'demo','hosted_demo'}
+HOSTED=MODE=='hosted_demo'
 WORKFLOW_MODE=os.getenv('WORKFLOW_MODE','native_local')
-SESSIONS={}
+LOOPBACK={'127.0.0.1','::1','localhost','testclient'}
 
 async def wake(cid):
     service=get_service()
@@ -51,7 +56,8 @@ async def settle(cid,result):
 async def lifespan(app):
     from .workflows import validate_runtime_mode
     validate_runtime_mode(WORKFLOW_MODE)
-    if MODE!='demo':
+    if HOSTED and not os.getenv('DATABASE_URL','').startswith(('postgres','postgresql')):raise RuntimeError('Hosted demo requires PostgreSQL DATABASE_URL; serverless instances cannot share SQLite')
+    if not DEMO:
         if not os.getenv('DATABASE_URL','').startswith(('postgres','postgresql')):raise RuntimeError('Deployment requires PostgreSQL DATABASE_URL; local SQLite is not production storage')
         if not os.getenv('STAFF_TOKEN_ROLES'):raise RuntimeError('Deployment requires server-configured staff token identities; demonstration roles are disabled')
     get_service()
@@ -87,8 +93,7 @@ async def security(request,call_next):
         return JSONResponse({'detail':'Only the phone intake webhooks are reachable through a tunnel'},403)
     # No CORS, cookies SameSite strict, and reject cross-origin state changes.
     if request.method not in {'GET','HEAD','OPTIONS'}:
-        origin=request.headers.get('origin')
-        if origin and origin.rstrip('/')!=str(request.base_url).rstrip('/'):
+        if not same_origin(request,HOSTED):
             return JSONResponse({'detail':'Cross-origin mutations are not permitted'},403)
     response=await call_next(request)
     response.headers['X-Content-Type-Options']='nosniff'
@@ -99,11 +104,11 @@ async def security(request,call_next):
     return response
 
 def actor(request:Request):
-    if MODE=='demo':
+    if DEMO:
         host=request.client.host if request.client else ''
-        # TestClient is in-process; demo HTTP must be loopback.
-        if host not in {'127.0.0.1','::1','localhost','testclient'}:raise Forbidden('Demo sessions are restricted to this computer')
-        token=request.cookies.get('pw_session');session=SESSIONS.get(token)
+        # TestClient is in-process; local demo HTTP must be loopback.
+        if not HOSTED and host not in LOOPBACK:raise Forbidden('Demo sessions are restricted to this computer')
+        session=demo_session_record(request.cookies.get('pw_session'))
         if not session:raise Forbidden('Choose a labelled demonstration session first')
         return session
     token=request.headers.get('authorization','').removeprefix('Bearer ')
@@ -130,15 +135,24 @@ def model_status():
 def session(request:Request):
     try:who=actor(request)
     except Forbidden:who=None
-    return {'actor':who,'mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),'authentication':'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
+    # Clients offer the demo role picker when mode is 'demo'; hosted_demo has it too.
+    return {'actor':who,'mode':'demo' if DEMO else MODE,'hosted':HOSTED,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),'authentication':'Open hosted demonstration roles; anyone with the link can act' if HOSTED else 'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
 
 @app.post('/api/demo-session')
 def demo_session(request:Request,data:dict=Body(...)):
-    if MODE!='demo' or request.client.host not in {'127.0.0.1','::1','localhost','testclient'}:raise Forbidden('Demonstration sessions unavailable')
+    if not DEMO or (not HOSTED and request.client.host not in LOOPBACK):raise Forbidden('Demonstration sessions unavailable')
     role=data.get('role')
     if role not in ROLES:raise ValueError('Unknown role')
-    token=secrets.token_urlsafe(32);SESSIONS[token]={'id':'demo-'+role,'role':role}
-    response=JSONResponse({'actor':SESSIONS[token],'mode':'demo'});response.set_cookie('pw_session',token,httponly=True,samesite='strict',secure=False,max_age=28800);return response
+    token=secrets.token_urlsafe(32);who={'id':'demo-'+role,'role':role}
+    # Stored in the database: serverless instances do not share memory.
+    service=get_service()
+    with service.db.tx() as c:service.db.set_meta(c,'staff_session:'+hashlib.sha256(token.encode()).hexdigest(),who)
+    response=JSONResponse({'actor':who,'mode':'demo'});response.set_cookie('pw_session',token,httponly=True,samesite='strict',secure=HOSTED,max_age=28800);return response
+
+def demo_session_record(token):
+    if not token:return None
+    service=get_service()
+    with service.db.tx() as c:return service.db.get_meta(c,'staff_session:'+hashlib.sha256(token.encode()).hexdigest())
 
 @app.get('/api/cases')
 def case_list(who=Depends(actor)):return get_service().list_cases()

@@ -1,0 +1,1251 @@
+[
+  {
+    "case_id": "002",
+    "issues": [
+      {
+        "label": "Blocked toilet requiring removal and repiping",
+        "location": null,
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Toilet need to be removed to clear blockage. Run block lodged by pan connector."
+          },
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "The toilet requires repiping, but there is a risk of damaging it during removal due to rusted screws and no backup is available."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The contractor reported the toilet work complete. The history records closure followed by a dashboard fault and final supervisor completion; this is a historical completion record.",
+    "caveats": [
+      {
+        "label": "Completion files unavailable",
+        "detail": "The history refers to a completed image and invoice, but these cannot substantiate the physical result from the supplied text alone.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-034",
+            "quote": "The image and invoice remain unavailable."
+          },
+          {
+            "file": "history.md",
+            "event": "event-048",
+            "quote": "Added document(s): invoice (unavailable)"
+          }
+        ]
+      },
+      {
+        "label": "Appointment wording conflicts",
+        "detail": "An event dated 8 August describes the next day while the selected date and confirmation use 8 August. The later Sunday label also conflicts with the 15 August 2026 calendar date, which is a Saturday.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-009",
+            "quote": "They agree on a visit time for the next day after 10:30 AM."
+          },
+          {
+            "file": "history.md",
+            "event": "event-010",
+            "quote": "Visit date selected - 08/08/2026 10:30 am"
+          },
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "Confirmed Time Slot: Sunday (15/08/2026)"
+          }
+        ]
+      },
+      {
+        "label": "Closed case reappeared in the dashboard",
+        "detail": "A later hold explicitly attributes the reappearance to system issues. This is not evidence that the toilet repair failed.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-044",
+            "quote": "This job is showing 'All checks have been completed; the request is now closed' but it keeps coming into the dashboard."
+          },
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "Comment: Held due to system issues."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-034",
+        "quote": "confirms the completion of the job regarding the blocked toilet, attaches a completed image and invoice for the service."
+      },
+      {
+        "file": "history.md",
+        "event": "event-045",
+        "quote": "Comment: Held due to system issues."
+      },
+      {
+        "file": "history.md",
+        "event": "event-049",
+        "quote": "Task has been completed by supervisor"
+      }
+    ]
+  },
+  {
+    "case_id": "005",
+    "issues": [
+      {
+        "label": "Check-out cleaning, including appliances",
+        "location": "Throughout property",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Clean property through out as per check out to include all appliances"
+          }
+        ]
+      },
+      {
+        "label": "Freezer defrost",
+        "location": null,
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "freezer defrost"
+          }
+        ]
+      },
+      {
+        "label": "Bedroom carpet cleaning",
+        "location": "Bedroom two; later both bedrooms",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "a carpet clean in bedroom two."
+          },
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "Please ensure both bedroom carpets are cleaned please."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The case index says cleaning was completed and the property was ready for move-in. The history records returned keys and final closure, but does not explicitly confirm invoice receipt.",
+    "caveats": [
+      {
+        "label": "Different property mentioned in quote follow-up",
+        "detail": "A message under this case refers to a quote for a different flat and address. Do not merge that other property into this dossier.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "the quote for Flat 27, 117 Lantern Quay, Kingshaven, ZZ4 6ZZ hasnt attached."
+          }
+        ]
+      },
+      {
+        "label": "Completion chronology is ambiguous",
+        "detail": "A completed-stage update precedes a later note arranging cleaning. The phrase about checking completion and key return may be an instruction, rather than independent proof of that check.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-022",
+            "quote": "Request marked as completed, lets do the final checks"
+          },
+          {
+            "file": "history.md",
+            "event": "event-024",
+            "quote": "cleaning on Saturday AM."
+          },
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "Check clean completed and keys returned ready for move in on 30/11/2024."
+          }
+        ]
+      },
+      {
+        "label": "Invoice receipt not explicit",
+        "detail": "The history requests the invoice and later mentions an attachment query. The case overview expressly says that receipt was not confirmed.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-027",
+            "quote": "Waiting for invoice"
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "does not confirm that it was received."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "The cleaning was completed, the keys were returned, and the property was ready for move-in."
+      },
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "does not confirm that it was received."
+      },
+      {
+        "file": "history.md",
+        "event": "event-037",
+        "quote": "All checks have been completed; the request is now closed"
+      }
+    ]
+  },
+  {
+    "case_id": "006",
+    "issues": [
+      {
+        "label": "Burnt carpet replacement",
+        "location": "Studio",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Replace burnt carpet"
+          },
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Supply and fit large carpet to approx 27 sqm meters £240"
+          }
+        ]
+      },
+      {
+        "label": "Repainting",
+        "location": "Studio and bathroom",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "supply and paint full studio including bathroom in light grey £220"
+          }
+        ]
+      },
+      {
+        "label": "Bathroom vinyl replacement",
+        "location": "Bathroom",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Supper and fit new vinyl flooring to bathroom £100"
+          }
+        ]
+      },
+      {
+        "label": "Sink waste replacement",
+        "location": null,
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-013",
+            "quote": "Fit new chrome waste to sink £45"
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency recorded contractor completion, direct invoicing to the landlord, key return and closure. The text does not independently document each finished item.",
+    "caveats": [
+      {
+        "label": "Attendance note names another property",
+        "detail": "An attendance hold refers to a different flat and address from the case property. That visit cannot be assigned confidently to this property.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-018",
+            "quote": "attending Flat 12, 122 Juniper Mews, Westmarsh, ZZ8 7ZZ this week"
+          }
+        ]
+      },
+      {
+        "label": "Work scope expanded after the initial request",
+        "detail": "The initial request was carpet replacement and repainting. The later approved scope additionally includes bathroom vinyl and sink waste; those items are recorded work, not separately evidenced original defects.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "1) Replace burnt carpet\n2) Repaint through out"
+          },
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "Supper and fit new vinyl flooring to bathroom £100\n\nFit new chrome waste to sink £45"
+          }
+        ]
+      },
+      {
+        "label": "No supporting attachments supplied",
+        "detail": "The case contains no available attachments. Closure is recorded in the history, but invoice and photographic verification cannot be independently checked here.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          },
+          {
+            "file": "history.md",
+            "event": "event-027",
+            "quote": "All checks have been completed; the request is now closed"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "The landlord approved the quotation, and the contractor was recorded as having completed the work."
+      },
+      {
+        "file": "history.md",
+        "event": "event-023",
+        "quote": "invoices landlord directly"
+      },
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "Key return was confirmed and the request was closed after final checks."
+      }
+    ]
+  },
+  {
+    "case_id": "008",
+    "issues": [
+      {
+        "label": "Bedroom repainting, with other rooms subject to need",
+        "location": "Bedroom; other rooms unspecified",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repaint bedroom any other rooms if needed"
+          }
+        ]
+      },
+      {
+        "label": "Burnt bedroom carpet",
+        "location": "Bedroom",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Replace bedroom carpet that is burnt"
+          }
+        ]
+      },
+      {
+        "label": "Bathroom flooring replacement",
+        "location": "Bathroom",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Replace bathroom flooring"
+          }
+        ]
+      },
+      {
+        "label": "Broken plug; type unspecified",
+        "location": null,
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair broken plug"
+          }
+        ]
+      },
+      {
+        "label": "Dripping bath tap",
+        "location": "Bath",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair dripping bath tap"
+          }
+        ]
+      },
+      {
+        "label": "Damaged bathroom shelf",
+        "location": "Bathroom",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair damaged shelf in bathroom"
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency reported completed works and a lower final cost because the tap did not need replacing. The request was closed; a later landlord message approved payment.",
+    "caveats": [
+      {
+        "label": "Several messages refer to other properties",
+        "detail": "Quote and invoice messages under this case mention other addresses. A roof/rainwater discussion explicitly concerns another property and is not assigned as a defect at this case address.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-023",
+            "quote": "roof relayer work for Flat 18, 8 Alder Lane, Alderwick, ZZ9 7ZZ before interior refurbishment due to rainwater penetration"
+          },
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "invoice for Flat 13, 83 Harbour View, Eastmere, ZZ5 3ZZ - works are now complete."
+          }
+        ]
+      },
+      {
+        "label": "No completion photographs",
+        "detail": "The history explicitly records that no photos were attached. This is an evidence gap, not proof that the work remained unfinished.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-046",
+            "quote": "Reason provided: No photos attached"
+          }
+        ]
+      },
+      {
+        "label": "Tap replacement was not required",
+        "detail": "The later account reduces the scope and final charge. Do not infer from the initial request that a new tap was fitted.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-045",
+            "quote": "the tap didn't need replacing so it was cheaper then the original quote."
+          }
+        ]
+      },
+      {
+        "label": "Broken plug is not classified",
+        "detail": "The source does not say whether this was a drain plug or an electrical plug. The item can be listed without assigning a trade or a room.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Repair broken plug"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "The requested works were completed, and the final cost was lower than the original quote because the tap did not need replacing."
+      },
+      {
+        "file": "history.md",
+        "event": "event-048",
+        "quote": "All checks have been completed; the request is now closed"
+      },
+      {
+        "file": "history.md",
+        "event": "event-049",
+        "quote": "Ok to pay."
+      }
+    ]
+  },
+  {
+    "case_id": "013",
+    "issues": [
+      {
+        "label": "Integrated dishwasher starts, beeps and then stops",
+        "location": null,
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-003",
+            "quote": "Dishwasher starts then beeps and powers light flashes.  Just stops working. It’s  an integrated dishwasher ."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency stated that the dishwasher had been repaired on site and was running. The history subsequently records key return and closure.",
+    "caveats": [
+      {
+        "label": "Completion is an agency account",
+        "detail": "The source reports a successful repair but supplies no attachments for independent inspection; the appliance model and technical repair are not established in the readable record.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "They have repaired the dishwasher on site and it is all up and running."
+          },
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          }
+        ]
+      },
+      {
+        "label": "Later call does not establish a new fault",
+        "detail": "A call after closure records a wrong connection and ends. It should not automatically reopen the dishwasher issue.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-035",
+            "quote": "The caller realizes the error and ends the call."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-028",
+        "quote": "They have repaired the dishwasher on site and it is all up and running."
+      },
+      {
+        "file": "history.md",
+        "event": "event-033",
+        "quote": "Keys return confirmed"
+      },
+      {
+        "file": "history.md",
+        "event": "event-034",
+        "quote": "All checks have been completed; the request is now closed"
+      }
+    ]
+  },
+  {
+    "case_id": "016",
+    "issues": [
+      {
+        "label": "Back/garden door difficult to close and creaking",
+        "location": "Back/garden door",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "It is a little difficult to close. It could possibly be the heat, but it is also creaking and not closing smoothly. The hinges seem to be misaligned."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The contractor reported that the door was working after naturally settling and required no invoice. The agency completed the task without payment.",
+    "caveats": [
+      {
+        "label": "Invoice wording disagrees",
+        "detail": "The contractor says no invoice is required, while a later agency message says an invoice was needed. The final update records completion without payment; retain the conflicting wording.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-022",
+            "quote": "no invoice is required as the door is functioning well after naturally settling."
+          },
+          {
+            "file": "history.md",
+            "event": "event-024",
+            "quote": "the invoice was needed for this one as the door is functioning well after naturally settling."
+          },
+          {
+            "file": "history.md",
+            "event": "event-026",
+            "quote": "Task has been completed without payment"
+          }
+        ]
+      },
+      {
+        "label": "Door part described differently",
+        "detail": "The original report suggests misaligned hinges, while a scheduling call calls it a door-handle repair. This may describe the same visit, but does not establish a separate handle defect.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "The hinges seem to be misaligned."
+          },
+          {
+            "file": "history.md",
+            "event": "event-015",
+            "quote": "a maintenance visit to fix a door handle"
+          }
+        ]
+      },
+      {
+        "label": "Door photograph unavailable",
+        "detail": "The initial photograph is referenced but absent, so the original physical condition cannot be checked visually.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-003",
+            "quote": "A photo of the door was referenced as an attachment; the attachment is unavailable."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-022",
+        "quote": "the door repair job is complete and no invoice is required as the door is functioning well after naturally settling."
+      },
+      {
+        "file": "history.md",
+        "event": "event-026",
+        "quote": "Task has been completed without payment"
+      }
+    ]
+  },
+  {
+    "case_id": "017",
+    "issues": [
+      {
+        "label": "Kitchen extractor fan apparently not turning on",
+        "location": "Kitchen",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Extractor fan in kitchen does not seem to work (turn on)."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The tenant confirmed that the fan worked after locating the switch identified by the landlord. The agency closed the task without payment.",
+    "caveats": [
+      {
+        "label": "Reported fault resolved by operating guidance",
+        "detail": "The tenant confirmation supports a historical resolution without a repair. Do not list a currently broken fan or invent contractor work.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "There is a switch to the righthand side of the hob when needs to be switched on."
+          },
+          {
+            "file": "history.md",
+            "event": "event-011",
+            "quote": "The customer confirms that the extractor fan is working after locating the button."
+          }
+        ]
+      },
+      {
+        "label": "Referenced photograph unavailable",
+        "detail": "The photo is missing from the supplied record; the functional resolution is supported by the tenant response rather than an image.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-004",
+            "quote": "Attachment referenced: picture; unavailable."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-011",
+        "quote": "The customer confirms that the extractor fan is working after locating the button."
+      },
+      {
+        "file": "history.md",
+        "event": "event-014",
+        "quote": "Task has been completed without payment"
+      }
+    ]
+  },
+  {
+    "case_id": "018",
+    "issues": [
+      {
+        "label": "Overgrown tree and weeds",
+        "location": "Communal garden",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Garden vegetation, including a tree and weeds, has become overgrown and too large for the tenant to maintain."
+          },
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "**A:** communal area"
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency reported that garden maintenance had been done and would be invoiced off the rent. The landlord acknowledged this and a supervisor marked the task complete.",
+    "caveats": [
+      {
+        "label": "Private-garden assumption conflicts with tenant answer",
+        "detail": "The AI intake retained a private-garden assumption despite the tenant identifying a communal area. The location in this dossier follows the explicit tenant answer.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "Assuming this is a private garden rather than a communal area."
+          },
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "**A:** communal area"
+          }
+        ]
+      },
+      {
+        "label": "Safety and extent not established",
+        "detail": "The routine classification is not a completed hazard assessment: questions about immediate safety, tree height and contact with buildings or cables were unanswered.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "**Q:** Is anyone's safety currently at risk?\n  **A:** *(not answered)*"
+          },
+          {
+            "file": "history.md",
+            "event": "event-002",
+            "quote": "**Q:** How tall is the tree and is it touching the building, fences, paths, or any overhead cables?\n  **A:** *(not answered)*"
+          }
+        ]
+      },
+      {
+        "label": "Completion documents unavailable",
+        "detail": "The referenced garden photograph and invoice are unavailable. The supplied text supports an agency completion report, not independent visual verification.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "Attachment #1 (garden photograph referenced by provider; unavailable)"
+          },
+          {
+            "file": "history.md",
+            "event": "event-016",
+            "quote": "The invoice attachment is unavailable in the case record."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "The agency reported that the garden work was done and would be invoiced off the rent; the landlord acknowledged the message."
+      },
+      {
+        "file": "history.md",
+        "event": "event-017",
+        "quote": "Task has been completed by supervisor"
+      }
+    ]
+  },
+  {
+    "case_id": "019",
+    "issues": [
+      {
+        "label": "Rubbish and construction waste requiring clearance",
+        "location": "Back garden",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Removal of all rubbish and construction waste"
+          },
+          {
+            "file": "history.md",
+            "event": "event-018",
+            "quote": "back garden maintenance"
+          }
+        ]
+      },
+      {
+        "label": "Ground levelling requested",
+        "location": "Garden",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Levelling of the ground"
+          }
+        ]
+      },
+      {
+        "label": "Gravel or stone covering requested",
+        "location": "Garden",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Proper gravel/stone covering"
+          }
+        ]
+      },
+      {
+        "label": "Garden reported unsafe or unusable in its current condition",
+        "location": "Garden",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Making the garden safe and usable"
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency reported that the garden had been cleared, sent an invoice to the landlord and closed the request. The recorded completion is narrower than all the tenant’s initial requests.",
+    "caveats": [
+      {
+        "label": "Clearance does not confirm the full requested scope",
+        "detail": "The explicit landlord approval is for removal and the completion message says cleared. Levelling, gravel coverage and the final usability of the garden are not separately confirmed; this is a scope gap, not proof those works remain undone.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "Please go ahead with the removal."
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "Just to make you aware that the garden has now been cleared."
+          }
+        ]
+      },
+      {
+        "label": "Waste type needs evidence",
+        "detail": "The agency described specialised builders material requiring proper disposal, but the source does not identify the material. Do not label it hazardous or asbestos from this wording.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-019",
+            "quote": "the material that was left in the garden is a specialised builders material that needs disposing of properly."
+          }
+        ]
+      },
+      {
+        "label": "Photographs and invoice unavailable",
+        "detail": "The supplied record cannot independently substantiate the original or completed garden condition.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "The referenced garden pictures are unavailable."
+          },
+          {
+            "file": "history.md",
+            "event": "event-038",
+            "quote": "[Invoice attachment unavailable: attachment-83-document]"
+          }
+        ]
+      },
+      {
+        "label": "Workflow stages were entered after reported completion",
+        "detail": "Provider assignment and approval updates appear after a note saying the work was done. The history explains that the new provider lacked portal access, so the ordering may reflect later administration.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-031",
+            "quote": "This was done, awaiting the invoice from contractor"
+          },
+          {
+            "file": "history.md",
+            "event": "event-033",
+            "quote": "new provider so has no access to the portal and I was unable to send a job through."
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-038",
+        "quote": "Just to make you aware that the garden has now been cleared."
+      },
+      {
+        "file": "history.md",
+        "event": "event-038",
+        "quote": "Please see attached invoice for your record. I will process this on my side and deduct it off the rental amount."
+      },
+      {
+        "file": "history.md",
+        "event": "event-044",
+        "quote": "All checks have been completed; the request is now closed"
+      }
+    ]
+  },
+  {
+    "case_id": "020",
+    "issues": [
+      {
+        "label": "Landlord query about an unapproved dog flap",
+        "location": null,
+        "kind": "follow_up",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "a dog flap installation that was not approved"
+          }
+        ]
+      },
+      {
+        "label": "Spare front-door key query after a lock change",
+        "location": "Front door",
+        "kind": "follow_up",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "the retrieval of a spare front door key following a lock change."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The agency reported no issues at inspection and marked the inspection complete. A later landlord message raised dog-flap approval and spare-key questions; no resolution to those questions appears in this history.",
+    "caveats": [
+      {
+        "label": "Summary dates disagree with event dates",
+        "detail": "The index describes May 2026 appointments, while the dated history records February 2024 appointments. Use source dates visibly rather than silently reconciling the two accounts.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "A property inspection was scheduled for the morning of 11 May 2026."
+          },
+          {
+            "file": "history.md",
+            "event": "event-003",
+            "quote": "Scheduled property inspection for 13/02/2024 between 8:00AM and 12:00PM"
+          },
+          {
+            "file": "history.md",
+            "event": "event-012",
+            "quote": "Rescheduled visit time to: 2024-02-15 14:00:00"
+          }
+        ]
+      },
+      {
+        "label": "No-issues result does not settle later landlord questions",
+        "detail": "The later query concerns permission for an alteration and key custody. It is not necessarily a contradiction of the inspection result and does not itself establish a physical repair defect.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "No issues were identified during the inspection."
+          },
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "a dog flap installation that was not approved"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-017",
+        "quote": "No issues were identified during the inspection."
+      },
+      {
+        "file": "index.md",
+        "event": null,
+        "quote": "The inspection was completed, and the report stated that no issues were identified."
+      },
+      {
+        "file": "history.md",
+        "event": "event-020",
+        "quote": "a dog flap installation that was not approved and inquires about the retrieval of a spare front door key following a lock change."
+      }
+    ]
+  },
+  {
+    "case_id": "021",
+    "issues": [
+      {
+        "label": "Snapped conservatory back-door key with no spare",
+        "location": "Conservatory back door",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "The key snapped for the back door for the conservatory and we don’t have a spare"
+          }
+        ]
+      },
+      {
+        "label": "Lock replacement and distribution of four new keys",
+        "location": "Conservatory back door",
+        "kind": "recorded_work",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-008",
+            "quote": "replace the lock and provide 4 new keys, 2 for the tenants, 1 for us and 1 for the landlord."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The contractor reported replacing the cylinder and handles and promised to deliver the remaining keys. A later agency update confirms key return, followed by closure.",
+    "caveats": [
+      {
+        "label": "Promise to deliver keys is followed by confirmation",
+        "detail": "The initial completion message alone is a future delivery promise. The later key-return update provides additional evidence, so this should not be labelled an unresolved key-return conflict.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "I will drop off remaining keys to the office tomorrow."
+          },
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "Keys return confirmed"
+          }
+        ]
+      },
+      {
+        "label": "No independent completion attachments",
+        "detail": "The supplied history records the repair and key return but contains no available supporting attachments. The quote was explicitly waived because the repair was completed on site.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          },
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "No quote required, repaired on site"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-020",
+        "quote": "Job is completed, I have replaced Cylinder and handles. I will drop off remaining keys to the office tomorrow."
+      },
+      {
+        "file": "history.md",
+        "event": "event-028",
+        "quote": "Keys return confirmed"
+      },
+      {
+        "file": "history.md",
+        "event": "event-029",
+        "quote": "All checks have been completed; the request is now closed"
+      }
+    ]
+  },
+  {
+    "case_id": "023",
+    "issues": [
+      {
+        "label": "Balcony-door locking mechanism will not turn or lock",
+        "location": "Glass door to balcony",
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-003",
+            "quote": "The tenant has reported that the locking mechanism on the glass door which leads out to the balcony is not turning / locking."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The contractor reported the repair complete and the invoice sent. The agency subsequently confirmed key return and closed the case.",
+    "caveats": [
+      {
+        "label": "Access chase may have lagged behind work",
+        "detail": "An agency message asks whether the tenant has called back; the contractor responds that the work was already done. This can reflect delayed reporting rather than a failed repair.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-017",
+            "quote": "Have the tenants managed to call you back?"
+          },
+          {
+            "file": "history.md",
+            "event": "event-020",
+            "quote": "I’ve done the job and sent you the invoice yesterday"
+          }
+        ]
+      },
+      {
+        "label": "Completion attachments not supplied",
+        "detail": "The record supports a contractor completion statement and later key-return update, but no available attachments allow the repair to be independently inspected.",
+        "evidence": [
+          {
+            "file": "index.md",
+            "event": null,
+            "quote": "No attachments are required or available for this case."
+          },
+          {
+            "file": "history.md",
+            "event": "event-026",
+            "quote": "Keys return confirmed"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-020",
+        "quote": "I’ve done the job and sent you the invoice yesterday"
+      },
+      {
+        "file": "history.md",
+        "event": "event-026",
+        "quote": "Keys return confirmed"
+      },
+      {
+        "file": "history.md",
+        "event": "event-027",
+        "quote": "All checks have been completed; the request is now closed"
+      }
+    ]
+  },
+  {
+    "case_id": "025",
+    "issues": [
+      {
+        "label": "Oven and grill do not heat despite light and sound working",
+        "location": null,
+        "kind": "reported_issue",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-001",
+            "quote": "Does not work on any settings, the light still switches on and it makes a sound but does not heat up on oven or grill settings."
+          }
+        ]
+      }
+    ],
+    "recorded_outcome": "The contractor reported completing the oven repair under warranty with no charge to the landlord. The agency marked the case complete without payment.",
+    "caveats": [
+      {
+        "label": "Final function was not fully tested in the recorded call",
+        "detail": "A same-day call says the oven appeared fixed but had not been fully tested. Keep that qualification alongside the contractor’s later completion statement.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-060",
+            "quote": "The agent confirmed that the oven appeared to be fixed but had not been fully tested yet."
+          },
+          {
+            "file": "history.md",
+            "event": "event-062",
+            "quote": "The oven repair has been completed under warranty with no charge to the landlord."
+          }
+        ]
+      },
+      {
+        "label": "Installation year conflicts with the event timeline",
+        "detail": "A May 2024 message says the oven was fitted in March 2025 and was already outside a 12-month warranty. That chronology cannot be taken literally.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "The oven was fitted in March 2025 so it is just out of it's 12 month warranty."
+          }
+        ]
+      },
+      {
+        "label": "Appointment dates conflict",
+        "detail": "The recorded selected date, relative-date wording and later follow-up calls disagree. The history cannot provide one reliable appointment timeline without reconciliation.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-027",
+            "quote": "Visit date selected - 22/05/2024 12:00 am"
+          },
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "Confirmed Time Slot: tomorrow, 21st June (21/06/2024)"
+          },
+          {
+            "file": "history.md",
+            "event": "event-053",
+            "quote": "Friday, June 21st, between 8:30 AM and 1 PM."
+          },
+          {
+            "file": "history.md",
+            "event": "event-054",
+            "quote": "Thursday, June 25th, between 8:30am and 1pm."
+          }
+        ]
+      },
+      {
+        "label": "Warranty position changed after investigation",
+        "detail": "The earlier account refers to an expired 12-month warranty; the later contractor account identifies a two-year manufacturer warranty. This is a recorded change in understanding, not necessarily an unresolved contradiction.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-025",
+            "quote": "just out of it's 12 month warranty."
+          },
+          {
+            "file": "history.md",
+            "event": "event-042",
+            "quote": "the oven falls within a 2-year manufacturer's warranty"
+          }
+        ]
+      },
+      {
+        "label": "Oven description entered into the pets field",
+        "detail": "An appointment email puts the appliance fault in the pets field. That field cannot be used to infer pets or access conditions.",
+        "evidence": [
+          {
+            "file": "history.md",
+            "event": "event-028",
+            "quote": "Pets: Oven stopped working; not heating up; light still works"
+          }
+        ]
+      }
+    ],
+    "outcome_evidence": [
+      {
+        "file": "history.md",
+        "event": "event-062",
+        "quote": "The oven repair has been completed under warranty with no charge to the landlord."
+      },
+      {
+        "file": "history.md",
+        "event": "event-064",
+        "quote": "Task has been completed without payment"
+      }
+    ]
+  }
+]
