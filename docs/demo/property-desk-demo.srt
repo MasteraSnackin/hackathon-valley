@@ -1,0 +1,29 @@
+1
+00:00:00,250 --> 00:00:07,042
+Property Desk turns a maintenance report into a tracked case. A
+tenant reports a leaking kitchen tap.
+
+2
+00:00:08,250 --> 00:00:16,818
+Staff see the request and its blockers. Two checks still need
+review: the person and property, and a verified contact route.
+
+3
+00:00:19,250 --> 00:00:22,433
+Resolving the first check leaves the second open.
+
+4
+00:00:25,250 --> 00:00:35,213
+Once both are resolved, the local Vercel Workflow rechecks the
+case and records a simulated quote request. The action history
+shows what happened.
+
+5
+00:00:37,250 --> 00:00:43,426
+Staff can propose a policy change. This suggestion remains
+unsaved and unpublished.
+
+6
+00:00:46,250 --> 00:00:52,762
+The repair is not yet confirmed. This is a local demo. External
+actions are simulated.

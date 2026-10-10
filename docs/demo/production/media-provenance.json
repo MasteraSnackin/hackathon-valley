@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-10",
+  "narration": {
+    "kind": "Generic synthetic voice",
+    "engine": "Installed macOS say",
+    "voice": "Daniel (British English)",
+    "rate_words_per_minute": 130,
+    "voice_clone": false,
+    "external_generation": false,
+    "source_format": "AIFF; originals preserved in local production directory",
+    "derived_format": "48 kHz mono PCM WAV via FFmpeg",
+    "script_word_count": 96,
+    "speech_duration_s": 41.192917,
+    "candidate_rejected": "Cached Kokoro model was available, but espeak library referenced a nonexistent build-runner data directory. No Kokoro audio was generated."
+  },
+  "music": "None",
+  "external_imagery": "None",
+  "typeface": {
+    "family": "Inter",
+    "weights": [
+      400,
+      700
+    ],
+    "source": "Installed hyperframes-creative frame-presets/code-editorial/fonts",
+    "licence": "SIL Open Font License; editor copies OFL alongside font files"
+  },
+  "evidence_boundary": "Source capture has been validated by the final editor. This record describes source preparation; consult the delivery report for checks bound to the final movie. No external communication or repair completion is asserted.",
+  "audio_checks": {
+    "duration": "ffprobe",
+    "source_sample_02_integrated_lufs": -20.33,
+    "source_sample_02_true_peak_dbtp": -2.37,
+    "normalisation": "Final editor applies and measures final mix; source WAVs retain original level",
+    "continuous_listening": "Not performed by this subagent"
+  },
+  "record_scope": "Source media provenance and source audio measurements. Export-specific picture, duration, caption, loudness and integrity checks are recorded in the separate delivery report.",
+  "delivery_report": "../delivery-report.json",
+  "capture_context": {
+    "app_commit": "23cec527a5f3848786b85c965b653982f15a9c57",
+    "interpreter_mode": "literal_demo",
+    "workflow_backend": "native_local",
+    "claude_used": false
+  }
+}

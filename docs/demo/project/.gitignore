@@ -1,0 +1,7 @@
+node_modules/
+.hyperframes/
+.hyperframes-cache/
+.hyperframes-history/
+snapshots/
+/*.mp4
+*.log

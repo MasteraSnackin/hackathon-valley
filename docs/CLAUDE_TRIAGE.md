@@ -2,6 +2,10 @@
 
 With the default `router: jev` policy, TypeSafe Jev routes each message first and Claude reads only what Jev hands off or routed with facts to extract; see [Jev routing](JEV_ROUTING.md). The rest of this page describes Claude's reading. With `router: claude`, or without a TypeSafe key, Claude reads every incoming message, chooses the workflow route, extracts quoted assertions and drafts tenant questions. The policy engine and named staff still decide what may happen. There is no keyword interpreter: when Claude is unavailable, a person triages the message.
 
+## Tenant intake (before submission)
+
+In the tenant portal, Claude (`ai.tenant_intake`, effort `CLAUDE_INTAKE_EFFORT`, default `low`) reads the conversation, extracts name, address and each separate problem, and writes the reply. Missing details get a friendly "Hey, before I continue, could you clarify a few things for us?" with at most three questions. `ai.checked_intake` keeps only values found in the tenant's own words; the summary card is shown only when name, address and a problem are all present. Nothing is submitted until the tenant confirms. A confirming reply counts only after a summary was shown. When Claude is unavailable, the local phrase parser fills the same card.
+
 ## Where it runs
 
 Each case has one native Vercel Workflow coordinator (`app.workflows.case_coordinator`). It runs three kinds of durable step:
@@ -77,7 +81,7 @@ Sending is a simulated in-app thread. Reminders count from the actual send time;
 
 - Model: `CLAUDE_MODEL`, default `claude-opus-5`.
 - API: Anthropic Python SDK `beta.messages.parse` with Pydantic structured output.
-- Thinking: adaptive. Effort is `CLAUDE_TRIAGE_EFFORT` (default `medium`) for triage and `CLAUDE_DRAFT_EFFORT` (default `low`) for drafts.
+- Thinking: adaptive. Effort is `CLAUDE_TRIAGE_EFFORT` (default `medium`) for triage, `CLAUDE_DRAFT_EFFORT` (default `low`) for drafts and `CLAUDE_INTAKE_EFFORT` (default `low`) for the tenant intake assistant.
 - Fallbacks: server-side `fallbacks: "default"` (`server-side-fallback-2026-07-01`). A refusal still hands the message to a person.
 - Caching: the static system prompt carries a `cache_control` breakpoint. In the live native test, about 3.9k prompt tokens were read from the cache.
 - Audit: each reading records the model, request ID, prompt version, effort, token usage and whether a fallback was used.

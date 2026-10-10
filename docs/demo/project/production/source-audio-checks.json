@@ -1,0 +1,80 @@
+{
+  "source_audio_checks": [
+    {
+      "file": "01-request.wav",
+      "duration_s": 6.791854,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    },
+    {
+      "file": "02-two-checks.wav",
+      "duration_s": 8.567542,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    },
+    {
+      "file": "03-first-review.wav",
+      "duration_s": 3.183104,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    },
+    {
+      "file": "04-resume.wav",
+      "duration_s": 9.962604,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    },
+    {
+      "file": "05-policy.wav",
+      "duration_s": 6.175875,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    },
+    {
+      "file": "06-result.wav",
+      "duration_s": 6.511938,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "full_decode": "passed"
+    }
+  ],
+  "continuous_listening": "not performed",
+  "final_mix": "See separate delivery report for measurements of the final movie.",
+  "record_scope": "Source WAV checks only; final movie checks recorded separately.",
+  "delivery_report": "../../delivery-report.json"
+}

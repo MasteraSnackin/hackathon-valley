@@ -2,6 +2,12 @@
 
 Maintenance requests with explicit decisions, human review and a visible next step. Built with Python and native Vercel Workflow.
 
+**[Watch the 54-second working-product demo](docs/demo/property-desk-demo.mp4)** — the MP4 is stored in this repository.
+
+[![Property Desk working-product demo: a maintenance request with independent human review checks](docs/demo/poster.jpg)](docs/demo/property-desk-demo.mp4)
+
+The recording follows a fictional tenant report, two separate human reviews, an automatic local Workflow recheck and a simulated quote request. It also shows an unsaved policy suggestion. External actions are simulated and the repair remains unconfirmed. [Captions, recording details and editable production files](docs/demo/README.md) are included.
+
 - [1. What operational problem it solves](#1-what-operational-problem-it-solves)
 - [2. Architecture](#2-architecture)
 - [3. How to run it](#3-how-to-run-it)
@@ -103,7 +109,7 @@ Use one process without `--reload`. Local timers require a running process; star
 
 ### Try the tenant and staff journeys
 
-1. In **Tenant** view, enter the fictional report: “My name is Alex Taylor. I live at 18 Example Road. My kitchen tap is leaking.” Answer any missing-detail question. Explicit `Name:`, `Address:` and `Issue:` wording is available for corrections the local parser does not understand.
+1. In **Tenant** view, enter the fictional report: “My name is Alex Taylor. I live at 18 Example Road. My kitchen tap is leaking.” Claude asks for anything missing, then shows a **Here's what I've got** summary. Press **Yes, send it**; nothing reaches property management before that. Without Claude, the local parser fills the summary and understands explicit `Name:`, `Address:` and `Issue:` wording.
 2. Switch to **Property management** to inspect the case and outstanding requirements. Providing an address does not verify identity or grant access. The view switch is a demonstration convenience, not production login.
 3. As **Case manager**, create a fictional dishwasher case at `DEMO-FLAT-1` with category `appliance`. This identifier has an explicit demo-only trusted property/contact mapping. Choose **Instruct work** to see missing requirements separately.
 4. Add original evidence and exact quoted claims. Switch to the role named on a review to correct a supported fact or grant a scoped approval. Remaining blockers stay visible.
@@ -127,12 +133,12 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 | `VERCEL_QUEUE_BASE_URL` | Must be unset for the embedded local mode; this app does not configure an external local queue delivery route. |
 | `ANTHROPIC_API_KEY` | Claude triage and tenant drafting. Keep it in `.env.local` or the hosting environment; never in source, screenshots or fixtures. Without it, messages go to manual triage. |
 | `CLAUDE_MODEL` | Default `claude-opus-5`. |
-| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_EXTRACT_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low` (extraction runs when Jev already chose the route). |
+| `CLAUDE_TRIAGE_EFFORT` / `CLAUDE_DRAFT_EFFORT` / `CLAUDE_INTAKE_EFFORT` / `CLAUDE_EXTRACT_EFFORT` | Adaptive-thinking effort, default `medium` / `low` / `low` / `low` (extraction runs when Jev already chose the route). |
 | `TYPESAFE_API_KEY` | Jev routing. Same handling as the Anthropic key. Without it, Jev is skipped and Claude triages every message. |
 | `JEV_MODEL` | Default `jev-1.13.0` (pinned; router thresholds are tuned for this version). |
 | `STAFF_TOKEN_ROLES` | Production API configuration: JSON records with `id`, `role` and bearer-secret `sha256`. Does not provide browser login or organisation isolation. |
 
-Tenant name/address/issue extraction and plain-English policy drafting remain local parsers. A completed tenant report, later updates and staff evidence without structured claims are read by Claude, so those texts are sent to the Anthropic API.
+Claude reads the tenant conversation to prepare the summary the tenant confirms (the local parser is the offline fallback); plain-English policy drafting remains a local parser. Tenant messages before and after submission, and staff evidence without structured claims, are read by Claude, so those texts are sent to the Anthropic API.
 
 #### Editable policy settings
 
@@ -151,7 +157,7 @@ Tenant name/address/issue extraction and plain-English policy drafting remain lo
 | `tenant_messages` | `claude_decides` | `claude_decides`: Claude may auto-send within the gate; `staff_approval`: every tenant message waits for a case manager; `off`: no tenant drafting. |
 | `tenant_auto_send_topics` | all topics | Question topics Claude may send without staff review. |
 | `tenant_max_questions` / `tenant_follow_ups` | 3 / 1 | Questions per message; narrower follow-ups after a partial answer. |
-| `tenant_self_identification` | `clarify`, `request_quote` | Actions for which the name and address a tenant gives in their own portal session satisfy identity and route. Limited to these two; corrected details fall back to the case manager. |
+| `tenant_self_identification` | `clarify`, `request_quote` | Actions for which the name and address a tenant confirms in their own portal session satisfy identity and route. Limited to these two; corrected details fall back to the case manager. |
 | `router` and `router_*` | `jev`, see [Jev routing](docs/JEV_ROUTING.md) | Jev routes first; thresholds for Jev-only, hand-off to Claude and hazard escalation. |
 
 Rules combine supported fact states with ALL/ANY conditions, action/property/category filters, a response and an owner. The `total` fact must be the full comparable cumulative job commitment including tax; the prototype does not calculate it across invoices. Unknown is not zero. Precise appointment values, conflicting slot reconciliation and accepted-source configuration remain future work.
@@ -186,7 +192,7 @@ Claude triage needs an **Anthropic API key**; nothing else needs an external acc
 
 | Component or service | Current use | Credentials and verification boundary |
 | --- | --- | --- |
-| Tenant and policy parsers | Local name/address/issue extraction and a bounded vocabulary for policy suggestions | Not general-purpose model conversations; policy publication remains explicit |
+| Tenant intake and policy parser | Claude prepares the tenant-confirmed summary (local phrase parser as fallback); a bounded vocabulary for policy suggestions | A tenant's confirmation is not identity verification; policy publication remains explicit |
 | Anthropic Claude API | Message triage (route, work item, issue split, quoted assertions, ambiguities, answers) and tenant-question drafting with a send recommendation. Python SDK `anthropic==1.13.0`, `beta.messages.parse` with structured output, adaptive thinking, server-side `fallbacks: "default"`, cached system prompt; model `CLAUDE_MODEL` (default `claude-opus-5`) | Requires `ANTHROPIC_API_KEY`; verified locally with live calls. Without it, every message goes to manual triage |
 | TypeSafe Jev API | Routes each new message before Claude (route Choice with an explicit `unknown`, category Choice, five yes/no signals) in one request. Python SDK `typesafe-sdk==0.7.4`, model `jev-1.13.0` | Requires `TYPESAFE_API_KEY`; verified locally with live calls and a BUILD replay evaluation ([results](docs/evals/JEV_ROUTER_EVAL.md)). Without it, Claude triages every message |
 | Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
@@ -195,7 +201,7 @@ Claude triage needs an **Anthropic API key**; nothing else needs an external acc
 | Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real email, SMS, phone, contractor system or payment service is connected |
 | Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
 
-Claude's output is schema-validated and every quote must occur verbatim in the source. Its assertions stay unverified until the named role checks them, and a deterministic gate controls every tenant message. Tenant reports, updates and unstructured staff evidence are sent to the Anthropic API; the tenant slot parser and the policy parser remain local. No ElevenLabs integration is implemented.
+Claude's output is schema-validated and every quote must occur verbatim in the source. Its assertions stay unverified until the named role checks them, and a deterministic gate controls every tenant message. Tenant conversations, updates and unstructured staff evidence are sent to the Anthropic API; the tenant fallback parser and the policy parser remain local. No ElevenLabs integration is implemented.
 
 ### Libraries and runtime
 
