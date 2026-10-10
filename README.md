@@ -46,6 +46,20 @@ flowchart TD
 ```
 
 
+## Interactive architecture diagrams
+
+Explore the system through the [architecture gallery](docs/diagrams/index.html) or go straight to the [interactive system map (C2)](docs/diagrams/c4/c2-containers.html). The gallery includes C1–C4 views, request and human-review sequences, policy flows, storage and deployment diagrams.
+
+GitHub displays these HTML files as source. To use the interactive views, run this from the repository root:
+
+```sh
+python3 -m http.server 63575 --bind 127.0.0.1 --directory docs/diagrams
+```
+
+Then open the [local architecture gallery](http://127.0.0.1:63575/index.html) or [local interactive system map](http://127.0.0.1:63575/c4/c2-containers.html). These local links work on the computer running the server; they are not publicly hosted pages. If that port is already serving the diagrams, open the links directly.
+
+The interactive diagrams describe source snapshot `2732af6`, before Jev routing, the React dashboard and the Reality Test runner. See [ARCHITECTURE.md](ARCHITECTURE.md) for the newer paths and the [diagram guide](docs/diagrams/README.md) for static previews, source files and verification limits.
+
 # How to run it
 
 You can either use Demo link: [property-desk-mauve.vercel.app](https://property-desk-mauve.vercel.app) or call agent (I have demo Twilio account so only works from my phone, sorry!)
