@@ -2,6 +2,12 @@
 
 Maintenance requests with explicit decisions, human review and a visible next step. Built with Python and native Vercel Workflow.
 
+**[Watch the 54-second working-product demo](docs/demo/property-desk-demo.mp4)** — the MP4 is stored in this repository.
+
+[![Property Desk working-product demo: a maintenance request with independent human review checks](docs/demo/poster.jpg)](docs/demo/property-desk-demo.mp4)
+
+The recording follows a fictional tenant report, two separate human reviews, an automatic local Workflow recheck and a simulated quote request. It also shows an unsaved policy suggestion. External actions are simulated and the repair remains unconfirmed. [Captions, recording details and editable production files](docs/demo/README.md) are included.
+
 - [1. What operational problem it solves](#1-what-operational-problem-it-solves)
 - [2. Architecture](#2-architecture)
 - [3. How to run it](#3-how-to-run-it)

@@ -1,0 +1,9 @@
+{
+  "duration": 12,
+  "assertions": [
+    {
+      "kind": "staysInFrame",
+      "selector": ".rail"
+    }
+  ]
+}
