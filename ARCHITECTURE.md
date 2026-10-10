@@ -6,7 +6,7 @@ Property Workflow is a Python maintenance case application branded **Property De
 
 The React portfolio workspace adds related-incident review, evidence comparison, contractor visit planning, property and asset history, recorded case playback and policy comparison. These views use the existing case store; grouping and planning do not grant authority or start operational actions.
 
-The implemented environment is a local demonstration. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. Recorded local checks cover native SDK execution and recovery; they do not establish Vercel cloud operation, PostgreSQL behaviour, production authentication, live model quality or real delivery. This document describes the source under `app/`, `static/` and `web/`, including the GUI refresh reconciled with GitHub main revision `38f3c70`. [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
+The application supports a local demonstration and an open hosted-demo mode. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. The hosting task recorded a basic Vercel/Neon workflow check on 10 October; see [the hosting record](README.md#screenshots-and-demo). The new Portfolio tools are verified locally in [their separate record](docs/PORTFOLIO_VERIFICATION.md). Neither check establishes production authentication, long-running hosted recovery, model quality or real delivery. This document describes the merged source under `app/`, `static/` and `web/`. [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
 
 The [standalone property overview](#standalone-property-overview) is a separate read-only view under `docs/property-overview/`. It presents the 25 synthetic BUILD records without calling the application APIs or starting workflows. Its data flow and validation are documented below; the runtime sections retain their stated source and verification snapshots.
 
@@ -91,7 +91,7 @@ The client uses HTML, CSS and plain JavaScript with locally vendored Lucide icon
 
 **React dashboard:** [App.tsx](web/src/App.tsx), [API client](web/src/lib/api.ts), [presentation mapping](web/src/lib/pipeline.ts), [Vite configuration](web/vite.config.ts).
 
-The React 19, TypeScript, Vite and Tailwind application is a separate staff client. Its typed fetch adapters call the existing session, case, evidence/review and policy endpoints. The static interface remains the tenant intake and specialist staff workspace. The development proxy targets FastAPI on port 8017. Vite builds into `static/dashboard/`, and FastAPI serves that committed bundle at `/dashboard`; hosted Vercel operation remains unverified.
+The React 19, TypeScript, Vite and Tailwind application is a separate staff client. Its typed fetch adapters call the existing session, case, evidence/review and policy endpoints. The static interface remains the tenant intake and specialist staff workspace. The development proxy targets FastAPI on port 8017. Vite builds into `static/dashboard/`, and FastAPI serves that committed bundle at `/dashboard`; the new Portfolio flows have been checked locally, not on the hosted demo.
 
 The dashboard also exposes held message drafts and explicit timer checks through the existing service. Message delivery remains simulated. The session header reports runtime mode and whether model credentials are configured, without exposing them.
 
@@ -378,6 +378,7 @@ Python dependencies are pinned in [pyproject.toml](pyproject.toml) and locked in
 | --- | --- |
 | Local `native_local` | Supported demonstration: one Python process, SQLite, the SDK local World and embedded queue; recorded native execution/restart checks exist. The optional Vite dashboard adds a separate Node process. |
 | Local `manual_demo` | Policy/API demonstration without native background hooks or timers; explicit ticks run application logic |
+| `hosted_demo` with `native_cloud` | Open demonstration roles with PostgreSQL required; anyone with the link can choose a demo role. The hosting task records a basic Vercel/Neon cycle. Portfolio, long-running timers and phone intake remain unverified there. |
 | Staging | **Not provisioned or verified.** Intended acceptance environment for Vercel runtime identity, generated workflow routes, shared PostgreSQL and production identity integration |
 | Production `native_cloud` | Deployment configuration is prepared, but hosted operation is unverified; requires a Vercel World, shared storage, staff identity configuration and further operational controls |
 

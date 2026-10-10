@@ -11,7 +11,7 @@ PROPERTY_LOCAL_ENV=off ANTHROPIC_API_KEY= ANTHROPIC_AUTH_TOKEN= TYPESAFE_API_KEY
   .venv/bin/python -m pytest -q -m 'not claude and not jev'
 ```
 
-Result: **237 passed, 13 deselected**. The deselected tests require live Claude or Jev access. One existing Starlette/AnyIO deprecation warning remains. The new feature suites account for 41 tests: 25 portfolio tests, 13 insight tests and three HTTP integration tests.
+Result: **237 passed, 13 deselected**, including a repeat after merging the current map and hosting changes. The deselected tests require live Claude or Jev access. One existing Starlette/AnyIO deprecation warning remains. The new feature suites account for 41 tests: 25 portfolio tests, 13 insight tests and three HTTP integration tests.
 
 From `web/`:
 
