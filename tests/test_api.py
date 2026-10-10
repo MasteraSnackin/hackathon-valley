@@ -38,3 +38,10 @@ def test_reserved_cases_not_available(client):
     session(client)
     assert len(client.get('/api/build-cases').json())==25
     assert client.post('/api/build-cases/001/import',json={}).status_code==400
+
+def test_react_dashboard_served_same_origin(client):
+    # The committed web/ build is served by FastAPI, under the same CSP as the API.
+    page=client.get('/dashboard')
+    assert page.status_code==200 and '/static/dashboard/assets/index.js' in page.text
+    assert "script-src 'self'" in page.headers['content-security-policy']
+    assert client.get('/static/dashboard/assets/index.js').status_code==200

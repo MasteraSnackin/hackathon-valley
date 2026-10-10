@@ -1,16 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  createDemoSession,
+  ROLE_LABELS,
+  approveMessage,
   getCaseDetail,
+  getSession,
   importBuildCase,
   listCases,
+  rejectMessage,
   respondToReview,
+  reviewPolicySuggestion,
+  runTimers,
+  type Role,
 } from './lib/api';
-import type { CaseDetail, CaseListItem } from './lib/types';
+import type { CaseDetail, CaseListItem, ReviewResponseInput, SessionInfo } from './lib/types';
 import {
   computeActions,
   computeDetailedPipeline,
   computeStageRows,
+  formatTime,
+  primaryResolution,
+  readableFactKey,
+  reviewForTopBlocker,
   severityOf,
   stagePillOf,
   toCaseSummaryVM,
@@ -21,23 +31,24 @@ import CaseList from './components/CaseList';
 import RightPanel from './components/RightPanel';
 import Pipeline from './components/Pipeline';
 import StageDetailCard from './components/StageDetailCard';
-import PolicyEngine from './components/PolicyEngine';
-import {
-  DEFAULT_THRESHOLDS,
-  SEED_POLICIES,
-  detectCategory,
-  detectThreshold,
-  newPolicyId,
-  type Policy,
-  type PolicySource,
-  type Thresholds,
-} from './lib/policies';
+import PolicyEngine, { type PolicyRequest } from './components/PolicyEngine';
+import MessageDrafts from './components/MessageDrafts';
+
+/** The workflow advances cases in the background (routing, Claude reading,
+ * drafting, timers), so the dashboard polls for the latest state. */
+const POLL_MS = 4000;
+
+const WORKFLOW_LABELS: Record<string, string> = {
+  native_local: 'Native workflow · local',
+  native_cloud: 'Native workflow · Vercel',
+  manual_demo: 'Manual demo mode',
+};
 
 /** A curated spread of BUILD cases (varied category/complexity/event-count)
- * seeded once so the dashboard has enough variety to demo — real imports via
- * the real API, not fabricated data. Re-running the app won't re-seed: we
- * check the existing case titles first (BUILD imports are titled
- * "BUILD {id} · through event {n}"). */
+ * loaded on request so the dashboard has enough variety to demo — real
+ * imports via the real API, not fabricated data. Loading twice won't
+ * duplicate: we check the existing case titles first (BUILD imports are
+ * titled "BUILD {id} · through event {n}"). */
 const SEED_CASES: [buildId: string, eventCount: number][] = [
   ['013', 2],
   ['016', 2],
@@ -55,23 +66,6 @@ const SEVERITY_BADGE: Record<Severity, string> = {
   amber: 'bg-[var(--color-attention-bg)] text-[var(--color-attention)]',
   green: 'bg-[var(--color-success-bg)] text-[var(--color-success)]',
 };
-
-/** Module-level guard so React 18 StrictMode's dev-only double-invoke of
- * this effect (mount → unmount → mount) can't race two parallel seed runs
- * that both read the same pre-seed case list and both import the same
- * BUILD cases. Real double page-loads will still race (acceptable for a
- * local demo); this only needs to survive a single page's lifecycle. */
-let bootstrapPromise: Promise<CaseListItem[]> | null = null;
-function ensureBootstrapped(): Promise<CaseListItem[]> {
-  if (!bootstrapPromise) {
-    bootstrapPromise = (async () => {
-      const initial = await listCases();
-      await seedCasesIfNeeded(initial);
-      return listCases();
-    })();
-  }
-  return bootstrapPromise;
-}
 
 async function seedCasesIfNeeded(existing: CaseListItem[]): Promise<void> {
   const alreadyImported = (buildId: string) =>
@@ -102,7 +96,7 @@ async function seedCasesIfNeeded(existing: CaseListItem[]): Promise<void> {
           (r) => r.rule_id === topBlocker?.rule_id && r.status === 'open',
         );
         if (review) {
-          await respondToReview(review.id, {
+          await respondToReview(review.id, review.owner as Role, {
             decision: 'reject',
             reason: 'Flagged for escalation during demo seeding',
           });
@@ -122,50 +116,60 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [responding, setResponding] = useState(false);
+  const [seeding, setSeeding] = useState(false);
+  const [session, setSession] = useState<SessionInfo | null>(null);
+  const [lastSync, setLastSync] = useState<Date | null>(null);
+  const [syncError, setSyncError] = useState(false);
 
-  // Policy engine (front-end-only demo state).
   const [view, setView] = useState<'operations' | 'policies'>('operations');
-  const [policies, setPolicies] = useState<Policy[]>(SEED_POLICIES);
-  const [thresholds, setThresholds] = useState<Thresholds>(DEFAULT_THRESHOLDS);
-  // Human-in-the-loop: after an approval, offer to capture the decision as a
-  // reusable policy. Holds the pre-filled suggestion text, or null when hidden.
-  const [policySuggestion, setPolicySuggestion] = useState<string | null>(null);
+  // Human-in-the-loop: after a decision, the backend policy assistant may
+  // offer a conservative reusable rule built from that review.
+  const [policySuggestion, setPolicySuggestion] = useState<{ text: string; reviewId: string } | null>(
+    null,
+  );
+  const [policyRequest, setPolicyRequest] = useState<PolicyRequest | null>(null);
 
-  function addPolicy(text: string, source: PolicySource) {
-    setPolicies((prev) => [
-      {
-        id: newPolicyId(),
-        text,
-        category: detectCategory(text),
-        threshold: detectThreshold(text),
-        enabled: true,
-        source,
-      },
-      ...prev,
-    ]);
-  }
+  // Refs let the polling loop read the latest selection and skip a tick
+  // while a mutation is in flight.
+  const selectedIdRef = useRef<string | null>(null);
+  const busyRef = useRef(false);
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+  }, [selectedId]);
+  useEffect(() => {
+    busyRef.current = responding || seeding;
+  }, [responding, seeding]);
 
-  function togglePolicy(id: string) {
-    setPolicies((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, enabled: !p.enabled } : p)),
-    );
-  }
+  const refresh = useCallback(async () => {
+    const list = await listCases();
+    setCases(list);
+    const id = selectedIdRef.current;
+    if (id) {
+      const detail = await getCaseDetail(id);
+      // Ignore a late response for a case the user has since left.
+      if (selectedIdRef.current === id) setSelectedDetail(detail);
+    }
+    setLastSync(new Date());
+    setSyncError(false);
+    return list;
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
     async function bootstrap() {
       try {
-        await createDemoSession('case_manager');
-        const finalList = await ensureBootstrapped();
+        setSession(await getSession());
+        const list = await listCases();
         if (cancelled) return;
-        setCases(finalList);
+        setCases(list);
+        setLastSync(new Date());
         // Open on a case that genuinely needs a human decision, so the
         // "Action required" hero is the first thing on screen — fall back to
         // the first case if none are pending review.
-        const firstPending = finalList.find(
+        const firstPending = list.find(
           (c) => c.outcome === 'HUMAN REVIEW' || c.outcome === 'CLARIFY',
         );
-        setSelectedId(firstPending?.id ?? finalList[0]?.id ?? null);
+        setSelectedId(firstPending?.id ?? list[0]?.id ?? null);
       } catch (err) {
         if (!cancelled) setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -179,7 +183,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!selectedId) return;
+    if (!selectedId) {
+      setSelectedDetail(null);
+      return;
+    }
     let cancelled = false;
     getCaseDetail(selectedId)
       .then((detail) => {
@@ -193,59 +200,108 @@ function App() {
     };
   }, [selectedId]);
 
+  // Live view of background workflow progress.
+  useEffect(() => {
+    if (loading) return;
+    const timer = window.setInterval(() => {
+      if (document.hidden || busyRef.current) return;
+      refresh().catch(() => setSyncError(true));
+    }, POLL_MS);
+    return () => window.clearInterval(timer);
+  }, [loading, refresh]);
+
+  async function loadDemoCases() {
+    setSeeding(true);
+    setActionError(null);
+    try {
+      await seedCasesIfNeeded(await listCases());
+      const list = await refresh();
+      if (!selectedIdRef.current) {
+        const firstPending = list.find((c) => c.outcome === 'HUMAN REVIEW' || c.outcome === 'CLARIFY');
+        setSelectedId(firstPending?.id ?? list[0]?.id ?? null);
+      }
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Could not load demo cases');
+    } finally {
+      setSeeding(false);
+    }
+  }
+
+  /** Run a case mutation, show its result at once, then pick up whatever the
+   * workflow does next on the following poll. */
+  async function mutate(call: () => Promise<CaseDetail>): Promise<CaseDetail | null> {
+    setResponding(true);
+    setActionError(null);
+    try {
+      const updated = await call();
+      setSelectedDetail(updated);
+      setCases(await listCases());
+      return updated;
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Unknown error');
+      return null;
+    } finally {
+      setResponding(false);
+    }
+  }
+
   async function handleAction(key: ActionKey) {
     if (!selectedDetail?.decision || responding) return;
-    const topBlocker = selectedDetail.decision.blockers[0];
-    if (!topBlocker) return;
-    const review = selectedDetail.reviews.find(
-      (r) => r.rule_id === topBlocker.rule_id && r.status === 'open',
-    );
+    const review = reviewForTopBlocker(selectedDetail);
     if (!review) {
       setActionError('No open review found for this blocker — it may already be resolved.');
       return;
     }
+    const primary = primaryResolution(selectedDetail, review);
+    const dayFromNow = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
 
-    const reasonByKey: Record<ActionKey, string> = {
-      approve: 'Approved via ops dashboard',
-      reject: 'Rejected via ops dashboard',
-      defer: 'Deferred via ops dashboard',
-      more_evidence: 'Requested more information via ops dashboard',
-    };
-    const body: Parameters<typeof respondToReview>[1] = {
-      decision: key,
-      reason: reasonByKey[key],
-    };
-    if (key === 'approve') {
-      body.source_id = selectedDetail.evidence[0]?.id;
-      body.expires_at = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
-      body.scope = selectedDetail.decision.scope;
-    }
-    if (key === 'defer') {
-      body.deadline = new Date(Date.now() + 24 * 3600 * 1000).toISOString();
+    let body: ReviewResponseInput;
+    switch (key) {
+      case 'approve':
+        body = {
+          decision: 'approve',
+          reason: 'Approved via staff dashboard',
+          source_id: review.source_ids[0] ?? selectedDetail.evidence[0]?.id,
+          expires_at: dayFromNow,
+          scope: selectedDetail.decision.scope,
+        };
+        break;
+      case 'verify': {
+        const claim = primary?.claim;
+        if (!claim) return;
+        body = {
+          decision: 'correct',
+          reason: 'Verified against the quoted source via staff dashboard',
+          claim_id: claim.id,
+          source_id: claim.source_id,
+          key: review.key,
+        };
+        break;
+      }
+      case 'defer':
+        body = { decision: 'defer', reason: 'Deferred via staff dashboard', deadline: dayFromNow };
+        break;
+      case 'reject':
+        body = { decision: 'reject', reason: 'Rejected via staff dashboard' };
+        break;
+      case 'more_evidence':
+        body = { decision: 'more_evidence', reason: 'Requested more information via staff dashboard' };
+        break;
     }
 
-    setResponding(true);
-    setActionError(null);
+    setPolicySuggestion(null);
+    // Each review belongs to one role (app/service.py respond); act as it.
+    const updated = await mutate(() => respondToReview(review.id, review.owner as Role, body));
+    if (!updated || (key !== 'approve' && key !== 'reject')) return;
+    // A committed human decision is the kind of judgement worth turning into a
+    // reusable rule. The backend assistant suggests one only where that is safe.
     try {
-      const updated = await respondToReview(review.id, body);
-      setSelectedDetail(updated);
-      const refreshed = await listCases();
-      setCases(refreshed);
-      // Human-in-the-loop: a committed human decision is exactly the kind of
-      // judgement worth turning into a reusable rule — offer to capture it,
-      // pre-filling a suggestion that reflects the decision just made.
-      const cat = selectedDetail.case.category;
-      const suggestionByKey: Record<ActionKey, string> = {
-        approve: `Auto-approve and assign a contractor for verified ${cat} requests at known properties.`,
-        reject: `Hold ${cat} requests for manual review when the property or identity is unverified.`,
-        defer: `Give ${cat} requests an extra working day before escalating.`,
-        more_evidence: `Request supporting evidence for ${cat} requests before acting.`,
-      };
-      setPolicySuggestion(suggestionByKey[key]);
-    } catch (err) {
-      setActionError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setResponding(false);
+      const suggestion = await reviewPolicySuggestion(review.id);
+      if (suggestion.suggested_text) {
+        setPolicySuggestion({ text: suggestion.suggested_text, reviewId: review.id });
+      }
+    } catch {
+      // No suggestion is fine; the decision itself already succeeded.
     }
   }
 
@@ -295,11 +351,13 @@ function App() {
   // (anything other than ready-to-act or already resolved). This drives the
   // amber hero callout.
   const topBlocker = selectedDetail?.decision?.blockers[0];
+  const topReview = selectedDetail ? reviewForTopBlocker(selectedDetail) : undefined;
+  const primary = selectedDetail && topReview ? primaryResolution(selectedDetail, topReview) : undefined;
   const needsDecision = Boolean(
-    topBlocker &&
+    topReview &&
+      topBlocker &&
       (topBlocker.response === 'HUMAN REVIEW' || topBlocker.response === 'CLARIFY'),
   );
-  const canApprove = topBlocker?.key === 'authority' || topBlocker?.key === 'finance';
 
   return (
     <div className="flex h-screen w-screen flex-col overflow-hidden bg-[var(--color-canvas)] font-[var(--font-body)] text-[var(--color-ink)]">
@@ -332,26 +390,45 @@ function App() {
             ))}
           </div>
         </div>
-        <span
-          className="rounded-full border px-3 py-1 text-[11px] font-medium"
-          style={{
-            background: 'rgba(33,88,72,.08)',
-            color: '#215848',
-            borderColor: 'rgba(33,88,72,.2)',
-          }}
-        >
-          Local demonstration — no real actions taken
-        </span>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => refresh().catch(() => setSyncError(true))}
+            title="Refresh now"
+            className="flex items-center gap-1.5 text-[11px] text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: syncError ? 'var(--color-danger)' : 'var(--color-success)' }}
+            />
+            {syncError ? 'Backend unreachable — retrying' : `Live · ${formatTime(lastSync?.toISOString()) ?? '—'}`}
+          </button>
+          {session && (
+            <span className="text-[11px] text-[var(--color-muted)]">
+              {WORKFLOW_LABELS[session.workflow_mode] ?? session.workflow_mode} · Claude{' '}
+              {session.model.credential_configured ? 'connected' : 'not configured'}
+            </span>
+          )}
+          <span
+            className="rounded-full border px-3 py-1 text-[11px] font-medium"
+            style={{
+              background: 'rgba(33,88,72,.08)',
+              color: '#215848',
+              borderColor: 'rgba(33,88,72,.2)',
+            }}
+          >
+            Local demonstration — no real actions taken
+          </span>
+        </div>
       </nav>
 
       {view === 'policies' ? (
         <div className="min-h-0 flex-1 overflow-y-auto">
           <PolicyEngine
-            policies={policies}
-            onAdd={(text) => addPolicy(text, 'Manual')}
-            onToggle={togglePolicy}
-            thresholds={thresholds}
-            onThresholdChange={(patch) => setThresholds((prev) => ({ ...prev, ...patch }))}
+            request={policyRequest}
+            onPublished={() => {
+              refresh().catch(() => setSyncError(true));
+            }}
           />
         </div>
       ) : (
@@ -368,10 +445,21 @@ function App() {
                   {selectedSummary.property_ref}
                   <span className="text-[var(--color-muted)]"> · {selectedSummary.category}</span>
                 </span>
-                <span
-                  className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium ${SEVERITY_BADGE[selectedSeverity]}`}
-                >
-                  {stagePillOf(selectedSummary)}
+                <span className="flex shrink-0 items-center gap-3">
+                  <button
+                    type="button"
+                    disabled={responding}
+                    onClick={() => void mutate(() => runTimers(selectedSummary.id))}
+                    title="Process due reminders, escalations and review deadlines now"
+                    className="text-[11px] font-medium text-[var(--color-muted)] hover:text-[var(--color-ink)] disabled:opacity-50"
+                  >
+                    Run due timers
+                  </button>
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${SEVERITY_BADGE[selectedSeverity]}`}
+                  >
+                    {stagePillOf(selectedSummary)}
+                  </span>
                 </span>
               </>
             ) : (
@@ -382,7 +470,14 @@ function App() {
           <div className="flex-1 overflow-y-auto px-6 py-6">
             {selectedDetail ? (
               <>
-                {needsDecision && selectedSummary && (
+                <MessageDrafts
+                  messages={selectedDetail.tenant_messages ?? []}
+                  busy={responding}
+                  onSend={(id, text) => void mutate(() => approveMessage(id, text))}
+                  onReject={(id, reason, redraft) => void mutate(() => rejectMessage(id, reason, redraft))}
+                />
+
+                {needsDecision && selectedSummary && topReview && (
                   <div
                     className="mb-5 rounded-[var(--radius-md)] px-5 py-4"
                     style={{
@@ -397,20 +492,31 @@ function App() {
                       {selectedSummary.property_ref}
                     </p>
                     <p className="mt-0.5 text-[13px] text-[var(--color-ink)]/80">
-                      {selectedDetail.decision?.next_step}
+                      {readableFactKey(topReview.key)}: {selectedDetail.decision?.next_step}
                     </p>
-                    <button
-                      type="button"
-                      onClick={() => handleAction('approve')}
-                      disabled={responding}
-                      className="mt-3 rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-60"
-                    >
-                      {canApprove ? 'Approve & assign contractor' : 'Approve this action'}
-                    </button>
-                    {!canApprove && (
+                    {primary ? (
+                      <>
+                        <p className="mt-2 text-[12px] italic text-[var(--color-ink)]/70">
+                          {primary.explanation}
+                        </p>
+                        <div className="mt-3 flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => handleAction(primary.key)}
+                            disabled={responding}
+                            className="rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-60"
+                          >
+                            {primary.label}
+                          </button>
+                          <span className="text-[11px] text-[var(--color-attention)]">
+                            as {ROLE_LABELS[topReview.owner] ?? topReview.owner} (demo role)
+                          </span>
+                        </div>
+                      </>
+                    ) : (
                       <p className="mt-2 text-[11px] text-[var(--color-attention)]">
-                        This review needs the underlying source verified rather than a general
-                        approval — use the responses below.
+                        Nothing on file can settle this yet — request more information, defer or
+                        reject below.
                       </p>
                     )}
                   </div>
@@ -435,10 +541,10 @@ function App() {
 
                 {policySuggestion !== null && (
                   <PolicySuggestion
-                    value={policySuggestion}
-                    onChange={setPolicySuggestion}
+                    value={policySuggestion.text}
+                    onChange={(text) => setPolicySuggestion({ ...policySuggestion, text })}
                     onAdd={(text) => {
-                      addPolicy(text, 'AI-learned');
+                      setPolicyRequest({ text, reviewId: policySuggestion.reviewId, nonce: Date.now() });
                       setPolicySuggestion(null);
                       setView('policies');
                     }}
@@ -446,6 +552,25 @@ function App() {
                   />
                 )}
               </>
+            ) : cases.length === 0 ? (
+              <div className="mx-auto mt-16 max-w-sm text-center">
+                <p className="text-[15px] font-semibold text-[var(--color-ink)]">No cases yet</p>
+                <p className="mt-1 text-[13px] text-[var(--color-muted)]">
+                  Cases arrive from the tenant portal, or load nine replayed BUILD cases into this
+                  local demo store.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => void loadDemoCases()}
+                  disabled={seeding}
+                  className="mt-4 rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-60"
+                >
+                  {seeding ? 'Loading demo cases…' : 'Load demo cases'}
+                </button>
+                {actionError && (
+                  <p className="mt-3 text-[12px] text-[var(--color-danger)]">{actionError}</p>
+                )}
+              </div>
             ) : (
               <p className="text-sm text-[var(--color-muted)]">Select a case to see its pipeline.</p>
             )}
@@ -481,7 +606,8 @@ function PolicySuggestion({
     >
       <p className="text-[13px] font-semibold text-[var(--color-ink)]">Add this as a policy?</p>
       <p className="mt-0.5 text-[12px] text-[var(--color-muted)]">
-        Capture this decision so the agent can handle similar cases on its own next time.
+        The policy assistant suggests a reusable rule from this decision. You preview its impact
+        before anything is published.
       </p>
       <input
         type="text"
@@ -496,7 +622,7 @@ function PolicySuggestion({
           disabled={!value.trim()}
           className="rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-50"
         >
-          Add to Policy Engine
+          Draft in Policy Engine
         </button>
         <button
           type="button"

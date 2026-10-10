@@ -7,12 +7,13 @@
  * in one place so both the coarse (list/summary) and detailed (selected-case)
  * views stay consistent.
  */
-import type { CaseDetail, CaseListItem, Claim, TimelineEvent } from './types';
+import type { CaseDetail, CaseListItem, Claim, Review, TimelineEvent } from './types';
 import type {
   ActivityItem,
   ActivityTone,
   CaseSummaryVM,
   PipelineNode,
+  PrimaryResolution,
   Severity,
   StageAction,
   StageDetailRow,
@@ -152,7 +153,11 @@ export function computeDetailedPipeline(detail: CaseDetail): PipelineNode[] {
       latestVerifiedByKey.set(claim.key, claim);
     }
   }
-  const contactedEvent = timeline.find((e) => e.kind === 'signal_outbox');
+  // First simulated outbound contact: a sent tenant message or a clarification
+  // to another party. (signal_outbox is only the internal workflow wake.)
+  const contactedEvent = timeline.find(
+    (e) => e.kind === 'tenant_message_sent' || e.kind === 'simulated_clarification',
+  );
   const isDone = decision?.outcome === 'NO FURTHER ACTION';
 
   function completedFor(key: (typeof PIPELINE_STAGES)[number]['key']): boolean {
@@ -163,7 +168,7 @@ export function computeDetailedPipeline(detail: CaseDetail): PipelineNode[] {
       case 'contacted':
         return Boolean(contactedEvent);
       case 'replied':
-        return Boolean(contactedEvent) && evidence.length > 2;
+        return Boolean(contactedEvent) && evidence.some((e) => e.created_at > contactedEvent!.created_at);
       case 'done':
         return checksByKey.get('completion')?.status === 'PASS';
       default: {
@@ -218,6 +223,8 @@ export function computeDetailedPipeline(detail: CaseDetail): PipelineNode[] {
       time = formatTime(claim?.created_at ?? (state === 'current' ? decision?.assessed_at : undefined));
     }
 
+    // Nobody has acted on a stage that hasn't been reached yet.
+    if (state === 'future') return { key: stage.key, label: stage.label, state };
     return { key: stage.key, label: stage.label, state, actor, time };
   });
 }
@@ -236,6 +243,8 @@ const FACT_LABELS: Record<string, string> = {
   total: 'Full job cost',
   urgent: 'Urgent hazard check',
   supported: 'Supported action',
+  finance: 'Financial review',
+  triage: "Claude's reading",
 };
 
 export function readableFactKey(key: string): string {
@@ -278,44 +287,96 @@ export function computeStageRows(detail: CaseDetail): StageDetailRow[] {
   ];
 }
 
+/** The open (or deferred) review raised for the case's top blocker, if any. */
+export function reviewForTopBlocker(detail: CaseDetail): Review | undefined {
+  const topBlocker = detail.decision?.blockers[0];
+  if (!topBlocker) return undefined;
+  return detail.reviews.find(
+    (r) =>
+      r.key === topBlocker.key &&
+      r.rule_id === topBlocker.rule_id &&
+      (r.status === 'open' || r.status === 'deferred'),
+  );
+}
+
+/** An unverified, unsuperseded source claim that could settle a fact review
+ * once a person checks it against its quote (a `correct` response). */
+export function verifiableClaim(detail: CaseDetail, review: Review): Claim | undefined {
+  const candidates = detail.claims.filter(
+    (c) => c.key === review.key && !c.verified && !c.superseded_by && c.scope_valid !== false,
+  );
+  return (
+    candidates.find((c) => review.claim_ids.includes(c.id)) ??
+    candidates.sort((a, b) => b.created_at.localeCompare(a.created_at))[0]
+  );
+}
+
+/** The one response that would actually clear this review, mirroring
+ * app/service.py respond(): approval only for authority/finance or a custom
+ * human-review rule, confirmation for a finished Claude reading, verification
+ * when a source claim exists. Anything else needs new evidence. */
+export function primaryResolution(detail: CaseDetail, review: Review): PrimaryResolution | undefined {
+  const isCustomRule = review.key.startsWith('rule:') && review.rule_id === review.key.slice(5);
+  if (review.key === 'authority' || review.key === 'finance' || isCustomRule) {
+    return {
+      key: 'approve',
+      label: review.key === 'finance' ? 'Approve this cost' : 'Approve this scope',
+      explanation: 'Grants a scoped approval for this exact action only; it expires within the policy limit.',
+    };
+  }
+  if (review.key === 'triage') {
+    const triage = detail.case.triage;
+    if (triage?.state === 'done' && !triage.confirmed) {
+      return {
+        key: 'approve',
+        label: "Confirm Claude's reading",
+        explanation: triage.summary ?? 'Accept the model reading of the latest message.',
+      };
+    }
+    return undefined;
+  }
+  const claim = verifiableClaim(detail, review);
+  if (claim) {
+    return {
+      key: 'verify',
+      label: 'Verify from source',
+      explanation: `“${claim.source_quote}”`,
+      claim,
+    };
+  }
+  return undefined;
+}
+
 /** Which decision buttons are actually valid for the current top blocker,
- * mirroring app/service.py's respond() constraints (e.g. a generic "approve"
- * only applies to authority/finance reviews) so we never show a button that
- * is guaranteed to fail. */
+ * mirroring app/service.py's respond() constraints so we never show a button
+ * that is guaranteed to fail. The primary resolution (approve/confirm/verify)
+ * is rendered separately in the action-required callout. */
 export function computeActions(detail: CaseDetail): {
   actions: StageAction[];
   disabledNote?: string;
 } {
   const topBlocker = detail.decision?.blockers[0];
   if (!topBlocker) return { actions: [] };
-
-  if (topBlocker.response === 'HUMAN REVIEW') {
-    const canApprove = topBlocker.key === 'authority' || topBlocker.key === 'finance';
-    const actions: StageAction[] = [];
-    if (canApprove) actions.push({ key: 'approve', label: 'Approve', primary: true });
-    actions.push({ key: 'reject', label: 'Reject' });
-    actions.push({ key: 'more_evidence', label: 'Request more information' });
-    actions.push({ key: 'defer', label: 'Defer' });
+  const review = reviewForTopBlocker(detail);
+  if (!review) {
     return {
-      actions,
-      disabledNote: canApprove
-        ? undefined
-        : "Approve isn't available here — this needs the underlying source corrected or verified, not a general approval.",
+      actions: [],
+      disabledNote:
+        topBlocker.response === 'WAIT'
+          ? 'This is waiting on an external step and does not need a decision yet.'
+          : 'The workflow has not raised a review for this blocker yet.',
     };
   }
-  if (topBlocker.response === 'CLARIFY') {
-    return { actions: [{ key: 'more_evidence', label: 'Request more information', primary: true }] };
-  }
-  if (topBlocker.response === 'STOP ACTION') {
-    return {
-      actions: [{ key: 'reject', label: 'Reject' }],
-      disabledNote: 'Other actions are unavailable while this is flagged as stopped.',
-    };
-  }
-  // WAIT
+  const actions: StageAction[] = [
+    { key: 'more_evidence', label: 'Request more information' },
+    { key: 'defer', label: 'Defer a day' },
+    { key: 'reject', label: 'Reject this action' },
+  ];
   return {
-    actions: [{ key: 'defer', label: 'Defer' }],
-    disabledNote: 'This is waiting on an external step and does not need a decision yet.',
+    actions,
+    disabledNote: primaryResolution(detail, review)
+      ? undefined
+      : 'Approval cannot stand in for a missing fact — this needs new evidence from the tenant, landlord or contractor.',
   };
 }
 
@@ -345,7 +406,7 @@ const ACTIVITY_LABELS: Record<string, string> = {
   review_overdue: 'Review overdue',
   review_response: 'Review answered',
   review_superseded: 'Review superseded',
-  signal_outbox: 'Email sent to landlord',
+  signal_outbox: 'Workflow notified',
   simulated_clarification: 'Clarification sent (simulated)',
   simulated_provider_receipt: 'Provider receipt received (simulated)',
   evidence_received: 'Evidence received',
@@ -356,6 +417,16 @@ const ACTIVITY_LABELS: Record<string, string> = {
   review_responded: 'Staff responded to review',
   simulated_action: 'Action attempted (simulated)',
   simulated_result_reconciled: 'Uncertain result reconciled',
+  routing: 'Message routed',
+  issue_split: 'Issue split into its own case',
+  route_changed: 'Action route changed',
+  triage_retry: 'Message reading retried',
+  question_followup: 'Follow-up question needed',
+  triage_confirmed: "Claude's reading confirmed",
+  tenant_message: 'Claude drafted a tenant message',
+  tenant_message_drafted: 'Claude drafted a tenant message',
+  tenant_message_sent: 'Tenant message sent (simulated)',
+  tenant_message_rejected: 'Tenant draft rejected',
   workflow_recovery: 'Workflow step recorded',
   workflow_receipt: 'Workflow step recorded',
   workflow_error: 'Workflow step recorded',

@@ -26,7 +26,7 @@ export interface StageDetailRow {
   value: string
 }
 
-export type ActionKey = 'approve' | 'reject' | 'more_evidence' | 'defer'
+export type ActionKey = 'approve' | 'verify' | 'reject' | 'more_evidence' | 'defer'
 
 export interface StageAction {
   key: ActionKey
@@ -41,4 +41,12 @@ export interface ActivityItem {
   label: string // already translated to human language by the caller, e.g. "Tenant message received" — just render it, don't interpret raw event kinds yourself
   time: string // short formatted time
   tone: ActivityTone
+}
+
+/** The response that would clear the top review (see lib/pipeline.ts primaryResolution). */
+export interface PrimaryResolution {
+  key: 'approve' | 'verify'
+  label: string
+  explanation: string
+  claim?: import('../lib/types').Claim
 }
