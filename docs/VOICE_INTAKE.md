@@ -23,7 +23,7 @@ Content-Type: application/json
 | `channel` | `voice` (default), `sms` or `email`. |
 | `occurred_at` | Optional ISO timestamp with timezone. |
 
-Set `VOICE_BRIDGE_TOKEN` in the git-ignored `.env.local`. Without a token, only a loopback staff demo session can post (the **Demo tools → Simulate a call** panel).
+Set `VOICE_BRIDGE_TOKEN` in the git-ignored `.env.local`. Without a token, only a loopback staff demo session can post (the **Demo tools → Simulate a call** panel). Through a tunnel (for example ngrok), `/api/inbound` accepts only the bearer token. Every other staff route stays closed, as for the ElevenLabs tenant line in [Phone intake](VOICE_PHONE.md).
 
 ## Response (fast, no model call)
 

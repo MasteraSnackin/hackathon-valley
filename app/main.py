@@ -77,11 +77,13 @@ async def conflict_handler(request,exc):return JSONResponse({'detail':str(exc)},
 @app.exception_handler(ValueError)
 async def value_handler(request,exc):return JSONResponse({'detail':str(exc)},status_code=400)
 
+def tunnelled(request):return bool({'x-forwarded-for','x-forwarded-host','forwarded'}&set(request.headers.keys()))
+
 @app.middleware('http')
 async def security(request,call_next):
     # Demo sessions trust loopback, and a tunnel (ngrok) arrives from loopback too:
     # proxied requests may only reach the secret-authenticated phone webhooks.
-    if MODE=='demo' and {'x-forwarded-for','x-forwarded-host','forwarded'}&set(request.headers.keys()) and request.url.path not in TUNNEL_PATHS:
+    if MODE=='demo' and tunnelled(request) and request.url.path not in TUNNEL_PATHS|{'/api/inbound'}:
         return JSONResponse({'detail':'Only the phone intake webhooks are reachable through a tunnel'},403)
     # No CORS, cookies SameSite strict, and reject cross-origin state changes.
     if request.method not in {'GET','HEAD','OPTIONS'}:
@@ -116,6 +118,8 @@ def voice_bridge(request:Request):
     expected=os.getenv('VOICE_BRIDGE_TOKEN','')
     token=request.headers.get('authorization','').removeprefix('Bearer ')
     if expected and token and hmac.compare_digest(hashlib.sha256(token.encode()).digest(),hashlib.sha256(expected.encode()).digest()):return VOICE_BRIDGE
+    # Through a tunnel only the bridge token counts; a staff session never does.
+    if tunnelled(request):raise Forbidden('Voice bridge token required')
     return {**VOICE_BRIDGE,'via':actor(request)['id']}
 
 def model_status():

@@ -231,3 +231,19 @@ def test_live_claude_reads_a_landlord_approval_and_drafts_a_landlord_question(tm
     detail = service.detail(cid)
     approvals = [x for x in detail['claims'] if x['key'] == 'authority']
     assert approvals and all(x['party'] == 'agency' and not x['verified'] and not x.get('hearsay') for x in approvals)
+
+
+def test_tunnel_reaches_inbound_only_with_the_bridge_token(tmp_path, monkeypatch, models):
+    from app import main
+    monkeypatch.setattr(service_module, '_service', Service(Store('sqlite:///' + str(tmp_path / 'tunnel.db'))))
+    monkeypatch.setattr(main, 'WORKFLOW_MODE', 'manual_demo')
+    monkeypatch.setenv('VOICE_BRIDGE_TOKEN', 'fictional-test-bridge-secret')
+    client = TestClient(main.app)
+    client.post('/api/demo-session', json={'role': 'case_manager'})
+    body = {'call_id': 'tunnel-1', 'caller_number': TENANT, 'transcript': 'Hi, the boiler is not heating the flat.'}
+    proxied = {'X-Forwarded-For': '203.0.113.9'}
+    # A staff cookie is not enough through the tunnel; other staff routes stay closed.
+    assert client.post('/api/inbound', json=body, headers=proxied).status_code == 403
+    assert client.get('/api/cases', headers=proxied).status_code == 403
+    response = client.post('/api/inbound', json=body, headers={**proxied, 'Authorization': 'Bearer fictional-test-bridge-secret'})
+    assert response.status_code == 200 and response.json()['outcome'] == 'new_case'
