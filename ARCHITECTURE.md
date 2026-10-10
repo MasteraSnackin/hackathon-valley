@@ -20,7 +20,7 @@ The implemented environment is a local demonstration. Contractor contact, clarif
 
 ## High-Level Architecture
 
-FastAPI serves the static client and JSON APIs. The separate React application calls those APIs through Vite's development proxy; FastAPI does not serve its build output. The API authenticates the current demonstration or configured staff identity, validates input and delegates mutations to the application service. The service owns transactions and calls a pure policy evaluator. Jev and Claude can propose routes and source assertions, but policy checks and role-checked review responses decide whether an action is permitted.
+FastAPI serves the static client, the built React dashboard at `/dashboard` and the JSON APIs. During frontend development, the React application can instead call those APIs through Vite's development proxy. The API authenticates the current demonstration or configured staff identity, validates input and delegates mutations to the application service. The service owns transactions and calls a pure policy evaluator. Jev and Claude can propose routes and source assertions, but policy checks and role-checked review responses decide whether an action is permitted.
 
 Native Workflow stores its history separately from case data. Its registered coordinator runs separate assessment, Jev routing, Claude reading and tenant-message steps, waits on a typed hook or absolute timer, then reads current case and policy state in a fresh step. The local SDK owns its event history and embedded queue; the application does not implement a substitute scheduler.
 
@@ -81,11 +81,11 @@ The client uses HTML, CSS and plain JavaScript with locally vendored Lucide icon
 
 **React dashboard:** [App.tsx](web/src/App.tsx), [API client](web/src/lib/api.ts), [presentation mapping](web/src/lib/pipeline.ts), [Vite configuration](web/vite.config.ts).
 
-The React 19, TypeScript, Vite and Tailwind application is a separate staff-facing prototype. Its typed fetch adapter calls the existing case-list, detail, BUILD-import and review-response endpoints with a demo-session cookie. Its eight displayed stages are presentation mappings of backend outcomes and fact checks, not an additional workflow engine. The static interface remains the tenant and policy-editing surface.
+The React 19, TypeScript, Vite and Tailwind application is a separate staff-facing prototype. Its typed fetch adapter calls the existing case, review, tenant-message, timer, policy and policy-assistant endpoints. Each mutation runs as the demo role the backend requires, and the adapter polls so background workflow progress appears without a reload. Its eight displayed stages are presentation mappings of backend outcomes and fact checks, not an additional workflow engine. The static interface remains the tenant surface and provides the full evidence and structured policy editors.
 
 Opening this dashboard can change the connected demonstration database: bootstrap creates a case-manager session, imports missing cases from a fixed nine-case BUILD selection and attempts to reject the top open review for up to two newly seeded cases. Use isolated storage. Approve, reject, defer and evidence-request buttons call real backend review operations; backend scope and role checks can reject them. The dashboard does not supply every specialised staff role or the full correction workflow.
 
-The React dashboard starts in the case-manager role. Its approval button also appears for factual blockers, where a generic approval is rejected, while authority and financial approvals require the approver role. Complete these reviews in the original staff interface using the assigned role and supporting evidence.
+The React dashboard answers each review as the review's owning role. Its primary response matches what the backend accepts: verification of a quoted source claim, a scoped approval for authority, finance or custom human-review rules, or confirmation of a finished Claude reading. Facts with no source claim still need new evidence through the original staff interface or the tenant portal.
 
 The initial selection prefers the first case with a `HUMAN REVIEW` or `CLARIFY` outcome. An “Action required” panel presents its next step and an approval response. The “Approve & assign contractor” label appears for authority/finance blockers, but the button only submits a review response: it does not select or assign a contractor. Backend role and evidence checks still apply; a general approval cannot verify an underlying identity, access or completion fact.
 
@@ -284,7 +284,7 @@ Database references inside JSON are largely enforced by service checks, rather t
 
 [Open the local-deployment diagram](docs/diagrams/operations/local-deployment.html).
 
-Python dependencies are pinned in [pyproject.toml](pyproject.toml) and locked in [uv.lock](uv.lock): Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Psycopg, Pydantic, HTTPX, the Anthropic and TypeSafe SDKs, and the Python Vercel Workflow SDK. The optional dashboard has a separate [Node package manifest](web/package.json) and [lockfile](web/package-lock.json) for React, TypeScript, Vite and Tailwind. [vercel.json](vercel.json) selects the FastAPI framework, and `[[tool.vercel.workflows]]` identifies `app.workflows:wf`; it does not configure deployment of the React build. There is no container, Kubernetes cluster, separate message broker or load balancer defined by this application.
+Python dependencies are pinned in [pyproject.toml](pyproject.toml) and locked in [uv.lock](uv.lock): Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Psycopg, Pydantic, HTTPX, the Anthropic and TypeSafe SDKs, and the Python Vercel Workflow SDK. The optional dashboard has a separate [Node package manifest](web/package.json) and [lockfile](web/package-lock.json) for React, TypeScript, Vite and Tailwind. [vercel.json](vercel.json) selects the FastAPI framework, and `[[tool.vercel.workflows]]` identifies `app.workflows:wf`. The React build is committed under `static/`, so it ships with the FastAPI application without a Node build step. There is no container, Kubernetes cluster, separate message broker or load balancer defined by this application.
 
 | Environment or mode | Current position |
 | --- | --- |
@@ -319,7 +319,7 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open the local URL printed by Vite. Its proxy requires the backend on port 8017 unless [vite.config.ts](web/vite.config.ts) is changed to match. Use this only with the isolated demonstration database because dashboard bootstrap imports BUILD cases and records review rejections. `npm run build` produces a frontend bundle; serving that bundle with API routing, authentication and a production origin is separate deployment work.
+Open the local URL printed by Vite. Its proxy requires the backend on port 8017 unless [vite.config.ts](web/vite.config.ts) is changed to match. Use this only with the isolated demonstration database because dashboard bootstrap imports BUILD cases and records review rejections. `npm run build` writes the bundle to `static/dashboard/`, which FastAPI serves at `/dashboard` on the API's origin; production authentication for it is separate deployment work.
 
 **Unknown deployment details:** Vercel project/account, region, public domain, database provider and sizing, TLS/database connection policy, secret manager, attachment/object store, backup schedule, retention periods and release pipeline. These need explicit deployment decisions; this document does not assume them.
 
@@ -376,7 +376,7 @@ These changes remain to be implemented:
 
 - Validate a separate Vercel staging deployment with shared PostgreSQL, generated routes, runtime identity and recovery checks across actual hosted invocations.
 - Implement staff SSO, verified tenant identity, organisation/property access rules, secure production session handling and a reviewed authorisation model.
-- Complete the React dashboard's policy and specialised-review paths, align approval labels with the actual review operation, remove automatic demonstration seeding from operational use, add deliberate refresh behaviour and integrate its deployment. Define operational metrics and date filters before presenting daily resolution counts.
+- Add evidence entry to the React dashboard, plus server-push updates in place of polling. Define operational metrics and date filters before presenting daily resolution counts.
 - Connect coordinator questions to the tenant conversation and add any future voice/email input adapter through the same evidence, identity and policy boundaries. These are not current channels.
 - Add real adapters only with committed delivery intent, provider idempotency, read-back/reconciliation and an explicit operational authorisation boundary.
 - Define data retention, backup/restore and recovery objectives; exercise recovery of the application database and workflow state together.

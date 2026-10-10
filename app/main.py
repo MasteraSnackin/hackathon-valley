@@ -205,4 +205,10 @@ app.include_router(create_voice_router(wake, actor))
 
 @app.get('/')
 def index():return FileResponse(ROOT/'static/index.html')
+@app.get('/dashboard')
+def dashboard():
+    # React staff dashboard (web/), built into static/dashboard by `npm run build`.
+    page=ROOT/'static/dashboard/index.html'
+    if not page.exists():return JSONResponse({'detail':'Dashboard not built. Run `npm run build` in web/.'},404)
+    return FileResponse(page)
 app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')
