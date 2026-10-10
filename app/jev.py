@@ -75,7 +75,8 @@ def state_for(text, context):
     known = {} if case['first_report'] else {'current_next_step': case['current_action'], 'work_item': case['work_item'], 'category': case['category'],
                                              'last_completed_action': case.get('last_completed_action')}
     return {
-        'new_message': {'from': context.get('new_message_label', ''), 'text': text[:6000]},
+        'new_message': {'from': context.get('new_message_label', ''), 'text': text[:6000],
+                        **({'sender_kind': context['sender_party']['kind']} if context.get('sender_party') else {})},
         'case': {'new_case': case['first_report'], **known},
         'earlier_messages': [{'from': e['label'], 'text': e['text'][:600]} for e in context.get('earlier_messages', [])[-3:]],
         'open_questions_to_tenant': [q['question'] for q in context.get('open_questions', [])],

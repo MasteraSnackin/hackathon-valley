@@ -2,13 +2,14 @@ export type Severity = 'red' | 'amber' | 'green'
 
 export interface CaseSummaryVM {
   id: string
+  outcome?: string // Backend outcome for filtering; ACT is open, even when displayed in green.
   address: string // e.g. "Flat 2, 42 Beacon Close, Bellmere"
   issueType: string // e.g. "Plumbing" or a short title
   stagePill: string // free text, e.g. "Verifying", "Scheduled", "Monitoring", "Blocked", "Done"
   severity: Severity
   timestamp: string // ISO datetime string — format it yourself for display
-  progressPct: number // 0-100, how far through an 8-stage pipeline
-  resolvedInHours?: number // only present for finished/done cases
+  progressPct: number // Compatibility value only; never present as measured repair progress.
+  resolvedInHours?: number // Optional measured duration only; not derived from current clock.
 }
 
 export type NodeState = 'completed' | 'current' | 'future'
@@ -26,7 +27,7 @@ export interface StageDetailRow {
   value: string
 }
 
-export type ActionKey = 'approve' | 'reject' | 'more_evidence' | 'defer'
+export type ActionKey = 'approve' | 'verify' | 'reject' | 'more_evidence' | 'defer'
 
 export interface StageAction {
   key: ActionKey
@@ -41,4 +42,12 @@ export interface ActivityItem {
   label: string // already translated to human language by the caller, e.g. "Tenant message received" — just render it, don't interpret raw event kinds yourself
   time: string // short formatted time
   tone: ActivityTone
+}
+
+/** A suggested review response; choosing and checking the source stays explicit. */
+export interface PrimaryResolution {
+  key: 'approve' | 'verify'
+  label: string
+  explanation: string
+  claim?: import('../lib/types').Claim
 }

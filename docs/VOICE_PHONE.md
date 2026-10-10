@@ -15,9 +15,9 @@ caller ─► Twilio number ─► ElevenLabs agent (questions, read-back, "is t
 
 The prompt is in [`voice/agent_prompt.md`](../voice/agent_prompt.md). Its questions come from what staff repeatedly had to chase in the BUILD cases:
 
-- **Required:** name, full address with flat number and postcode (read back letter by letter), and each problem kept separate.
-- **For each problem:** what and where, since when, whether it is getting worse, appliance make or error code, and what the caller already tried. Trying a plunger or cleaning a filter changes who handles the job.
-- **Then:** availability, whether a contractor may contact them directly, access notes (pets, alarm, keys), and whether they have photos.
+- **Style:** one short sentence per turn, one question at a time, no filler or repetition.
+- **Required:** name, address with postcode (postcode and flat number spelled back), and each problem kept separate.
+- **Then one combined question:** what the caller already tried and when they are usually in. Trying a plunger or cleaning a filter changes who handles the job. Appliance make, error codes, access and photos are recorded only if the caller mentions them.
 - **Safety first:** for a gas smell, 999 situations, water near electrics or flooding, the agent gives the safety step, then still sends a short report with the `danger` field filled so a person sees it.
 - **Never:** promises a visit, time, cost or approval; says who pays; invents a reference; claims something was logged unless the tool returned a reference.
 

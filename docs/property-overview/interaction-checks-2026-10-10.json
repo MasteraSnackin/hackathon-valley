@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-10",
+  "surface": "http://127.0.0.1:54037/index.html",
+  "checks": [
+    {
+      "check": "List view preserves case019",
+      "pass": true
+    },
+    {
+      "check": "Combined garden and identity filters produce empty state",
+      "pass": true
+    },
+    {
+      "check": "Clear filters restores25 records",
+      "pass": true
+    },
+    {
+      "check": "Search finds case019",
+      "pass": true
+    },
+    {
+      "check": "Arrow key selects Questions tab",
+      "pass": true
+    },
+    {
+      "check": "Persistent evidence button reveals sources",
+      "pass": true
+    },
+    {
+      "check": "Case038 distinguishes planned work",
+      "pass": true
+    },
+    {
+      "check": "Reload preserves view, search and selection",
+      "pass": true
+    },
+    {
+      "check": "Case041 separates washer completion and rail plan",
+      "pass": true
+    },
+    {
+      "check": "Map returns after list filtering with selected pin",
+      "pass": true
+    },
+    {
+      "check": "Mobile390px has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "check": "Item evidence receives keyboard focus",
+      "pass": true
+    },
+    {
+      "check": "Space on map pin selects property",
+      "pass": true
+    },
+    {
+      "check": "Scope filter combines with garden type",
+      "pass": true
+    },
+    {
+      "check": "Sort orders garden cases by recorded items",
+      "pass": true
+    },
+    {
+      "check": "Evidence jump clears sticky toolbar",
+      "pass": true
+    },
+    {
+      "check": "Skip link retains URL filters and selection",
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "Focused browser checks, not a full accessibility audit.",
+    "No live workflow, communications or geographic verification performed."
+  ],
+  "screenshots": [
+    "updated-map.jpg",
+    "updated-list.jpg",
+    "updated-mobile.jpg"
+  ]
+}

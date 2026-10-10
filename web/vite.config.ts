@@ -10,7 +10,22 @@ import { defineConfig } from 'vite'
 // touched.
 const BACKEND = 'http://127.0.0.1:8017'
 
-export default defineConfig({
+// `npm run build` writes into the backend's static directory so FastAPI serves
+// the dashboard at /dashboard on the same origin as the API (no proxy, no
+// CORS). Stable file names keep rebuilds as small, reviewable diffs.
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/static/dashboard/' : '/',
+  build: {
+    outDir: '../static/dashboard',
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name][extname]',
+      },
+    },
+  },
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
@@ -25,4 +40,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

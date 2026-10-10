@@ -2,9 +2,11 @@
 
 ## Overview
 
-Property Workflow is a Python maintenance case application branded **Property Desk**. It combines a modular FastAPI application, a transactional case store and a native Python Vercel Workflow coordinator. The FastAPI-served interface provides tenant conversations, staff reviews and policy editing; a separate React/Vite dashboard presents the staff case list, progress and review actions. Jev routes new case messages first, with Claude handling uncertain routes, evidence extraction and follow-up drafting. Deterministic policies decide which actions are allowed and retain every blocker and its evidence.
+Property Workflow is a Python maintenance case application branded **Property Desk**. It combines a modular FastAPI application, a transactional case store and a native Python Vercel Workflow coordinator. The FastAPI-served interface provides tenant conversations, staff reviews and policy editing; a separate React/Vite dashboard presents the staff queue, evidence, scoped review responses and backend policy editing. Jev routes new case messages first, with Claude handling uncertain routes, evidence extraction and follow-up drafting. Deterministic policies decide which actions are allowed and retain every blocker and its evidence.
 
-The implemented environment is a local demonstration. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. Recorded local checks cover native SDK execution and recovery; they do not establish Vercel cloud operation, PostgreSQL behaviour, production authentication, live model quality or real delivery. This document describes the source under `app/`, `static/` and `web/`, checked against the GitHub main snapshot [712f5e0](https://github.com/MasteraSnackin/hackathon-valley/tree/712f5e0971f51fc1d572d7ced7bead2cdb24186a). [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
+The implemented environment is a local demonstration. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. Recorded local checks cover native SDK execution and recovery; they do not establish Vercel cloud operation, PostgreSQL behaviour, production authentication, live model quality or real delivery. This document describes the source under `app/`, `static/` and `web/`, including the GUI refresh reconciled with GitHub main revision `38f3c70`. [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
+
+The [standalone property overview](#standalone-property-overview) is a separate read-only view under `docs/property-overview/`. It presents the 25 synthetic BUILD records without calling the application APIs or starting workflows. Its data flow and validation are documented below; the runtime sections retain their stated source and verification snapshots.
 
 ## Key Requirements
 
@@ -20,7 +22,7 @@ The implemented environment is a local demonstration. Contractor contact, clarif
 
 ## High-Level Architecture
 
-FastAPI serves the static client and JSON APIs. The separate React application calls those APIs through Vite's development proxy; FastAPI does not serve its build output. The API authenticates the current demonstration or configured staff identity, validates input and delegates mutations to the application service. The service owns transactions and calls a pure policy evaluator. Jev and Claude can propose routes and source assertions, but policy checks and role-checked review responses decide whether an action is permitted.
+FastAPI serves the static client, the built React dashboard at `/dashboard` and the JSON APIs. During frontend development, the React application can instead call those APIs through Vite's development proxy. The API authenticates the current demonstration or configured staff identity, validates input and delegates mutations to the application service. The service owns transactions and calls a pure policy evaluator. Jev and Claude can propose routes and source assertions, but policy checks and role-checked review responses decide whether an action is permitted.
 
 Native Workflow stores its history separately from case data. Its registered coordinator runs separate assessment, Jev routing, Claude reading and tenant-message steps, waits on a typed hook or absolute timer, then reads current case and policy state in a fresh step. The local SDK owns its event history and embedded queue; the application does not implement a substitute scheduler.
 
@@ -70,6 +72,7 @@ The [diagram guide](docs/diagrams/README.md) provides ten focused views with sta
 | [Decision and policy flows](docs/diagrams/README.md#action-decision-flow) | All blockers, valid publication and explicit policy reassessment |
 | [Data storage](docs/diagrams/README.md#data-storage) | Physical tables and application-level references |
 | [Local deployment](docs/diagrams/README.md#local-deployment) | One local process, two stores and the external model API |
+| [Property overview](#standalone-property-overview) | BUILD evidence, reviewed issue states, generated files and the independent map/list browser view |
 
 ## Component Details
 
@@ -81,17 +84,19 @@ The client uses HTML, CSS and plain JavaScript with locally vendored Lucide icon
 
 **React dashboard:** [App.tsx](web/src/App.tsx), [API client](web/src/lib/api.ts), [presentation mapping](web/src/lib/pipeline.ts), [Vite configuration](web/vite.config.ts).
 
-The React 19, TypeScript, Vite and Tailwind application is a separate staff-facing prototype. Its typed fetch adapter calls the existing case-list, detail, BUILD-import and review-response endpoints with a demo-session cookie. Its eight displayed stages are presentation mappings of backend outcomes and fact checks, not an additional workflow engine. The static interface remains the tenant and policy-editing surface.
+The React 19, TypeScript, Vite and Tailwind application is a separate staff client. Its typed fetch adapters call the existing session, case, evidence/review and policy endpoints. The static interface remains the tenant intake and specialist staff workspace. The development proxy targets FastAPI on port 8017. Vite builds into `static/dashboard/`, and FastAPI serves that committed bundle at `/dashboard`; hosted Vercel operation remains unverified.
 
-Opening this dashboard can change the connected demonstration database: bootstrap creates a case-manager session, imports missing cases from a fixed nine-case BUILD selection and attempts to reject the top open review for up to two newly seeded cases. Use isolated storage. Approve, reject, defer and evidence-request buttons call real backend review operations; backend scope and role checks can reject them. The dashboard does not supply every specialised staff role or the full correction workflow.
+The dashboard also exposes held message drafts and explicit timer checks through the existing service. Message delivery remains simulated. The session header reports runtime mode and whether model credentials are configured, without exposing them.
 
-The React dashboard starts in the case-manager role. Its approval button also appears for factual blockers, where a generic approval is rejected, while authority and financial approvals require the approver role. Complete these reviews in the original staff interface using the assigned role and supporting evidence.
+Bootstrap reads cases and obtains a demo session when needed. Importing the fixed nine-case BUILD selection requires **Load demo cases**; imports do not record review answers. Use isolated storage because explicit review responses and policy publications mutate the local database. A visible demo role selector never grants production identity, and server role checks remain authoritative.
 
-The initial selection prefers the first case with a `HUMAN REVIEW` or `CLARIFY` outcome. An “Action required” panel presents its next step and an approval response. The “Approve & assign contractor” label appears for authority/finance blockers, but the button only submits a review response: it does not select or assign a contractor. Backend role and evidence checks still apply; a general approval cannot verify an underlying identity, access or completion fact.
+The searchable queue separates open actions from `NO FURTHER ACTION`. Selecting a case loads its full detail. Each blocker remains visible, with its owner and matching review record identified by fact, rule, policy version and action revision. Responses require a reason; deferral requires a deadline and rejection requires confirmation. Permitted case-manager source verification uses an explicitly selected current assertion. Authority, finance and custom scoped approvals remain in the original staff workspace.
 
-The current dashboard refreshes on initial load, case selection and its own review responses; it does not continuously poll workflow changes. Its “Resolved today” number counts all cases whose outcome is `NO FURTHER ACTION`, without filtering by date. That outcome describes the current proposal and does not prove a physical repair or a complete case resolution. Browser display stages and demo-seeded outcomes must not be treated as verified progress or evaluation results.
+The four displayed steps are request recorded, action assessed, required checks and a successful simulated result. They describe the current proposal, not physical repair progress. `signal_outbox` is labelled **Workflow notified**, with no implication that an email was delivered. Summary counts do not claim daily repair resolution.
 
-The dashboard also labels an internal `signal_outbox` wake record as “Email sent to landlord” and uses it to mark “Contacted”. This records neither an outbound email nor verified contact; these display labels need correction.
+A visible-page refresh runs every 20 seconds, uses bounded requests, preserves selected cases and stops automatic retries after three failures. Cached detail is keyed by case and guarded by revision. Cases and Policies remain mounted after the first policy visit so tab switching preserves filters, review input and unsaved policy work; page reloads still discard unsaved browser state.
+
+[PolicyEngine.tsx](web/src/components/PolicyEngine.tsx) reads published policy versions and uses the existing deterministic plain-English interpreter. Supported suggestions are adopted into a draft explicitly. The `policy_editor` role saves a draft, previews current-case effects and publishes after a separate confirmation. Editing settings invalidates the preview. Unsupported wording remains a clarification or unsupported result. The backend enforces stale-base/preview checks and reassessment holds. A case with `policy_pending` shows a role-aware **Reassess with current policy** button, which calls the existing evaluation endpoint and reports the resulting version and remaining blockers. Post-review suggestions pass the source review ID to the interpreter, which embeds review, case and evidence provenance in the editable draft reason. A separate structured source-review field on published policy remains future work.
 
 #### UI examples
 
@@ -101,6 +106,54 @@ These static-interface browser captures were taken on 10 October 2026 from a fre
 | --- | --- | --- |
 | [![Saved tenant maintenance report](docs/screenshots/tenant-request.jpg)](docs/screenshots/tenant-request.jpg) | [![Separate staff reviews for identity mapping and contact route](docs/screenshots/staff-review.jpg)](docs/screenshots/staff-review.jpg) | [![Unsaved policy proposal alongside published version 1](docs/screenshots/policy-settings.jpg)](docs/screenshots/policy-settings.jpg) |
 | The tenant sees their saved report and a progress message, with no booking or repair completion implied. | Each review exposes its own requirement, scope and owner while keeping the other blocker visible. | The proposed interpretation is explicitly unsaved and unpublished; version 1 is still the published policy. |
+
+### Standalone property overview
+
+Sources: [assembly and validation](docs/property-overview/assemble.py), [browser view](docs/property-overview/overview.js), [map adapter](docs/property-overview/map-view.js), [reviewed guidance](docs/property-overview/review-guidance.json) and [run guide](docs/property-overview/README.md).
+
+This static view groups 47 recorded issues, work items and follow-up matters under 25 synthetic property labels. A pin or list selection updates one shared panel with Summary, Questions and Evidence tabs. Every item has an evidence state, explanation and source references. Each property has a proposed next question; it is neither a sent message nor an approved action. Search, case-type and evidence-gap filters apply to both views. The URL fragment retains the selected case, view, filters and sort order.
+
+```mermaid
+flowchart LR
+    Sources["25 allowed BUILD cases<br/>index and history Markdown"] --> Assemble["assemble.py<br/>allowlist, hashes, labels and exact quotes"]
+    Manifest["BUILD_MANIFEST.json<br/>case IDs and source hashes"] --> Assemble
+    Notes["Reviewed issues and caveats<br/>part-a.json and part-b.json"] --> Assemble
+    Guidance["review-guidance.json<br/>issue states, categories, next questions"] --> Assemble
+    Locations["map-locations.json<br/>invented demo positions"] --> Assemble
+    Assemble --> Files["index.html with embedded inventory<br/>JSON, CSV and validation receipt"]
+    Files --> Browser["overview.js<br/>one shared property panel"]
+    Browser --> List["Filtered property list"]
+    Browser --> Map["map-view.js and local Leaflet<br/>labelled demo pins"]
+    Map -->|"Visible tile requests only"| OSM["OpenStreetMap tiles"]
+    Browser -->|"Open a cited source"| GitHub["Pinned public case record"]
+```
+
+The assembler validates the BUILD manifest and all 50 source Markdown hashes, checks the reviewed issue and caveat labels, and verifies quoted text within the cited file and event. It combines `metadata.json`, `part-a.json`, `part-b.json`, `review-guidance.json` and `map-locations.json`, then embeds the resulting inventory into `template.html`. It also writes downloadable JSON, an issue CSV and `validation.json`. Python's standard library is sufficient to build and serve this view.
+
+| Data | Meaning and boundary |
+| --- | --- |
+| `issues` and `caveats` | Reports, recorded work and questions with exact source quotations; missing evidence is distinct from conflicting evidence |
+| `recorded_status` and `recorded_outcome` | Historical case metadata and attributed outcome summary; neither establishes every item's completion or the present condition |
+| `review_guidance.issue_states` | Reviewed `reported_complete`, `unconfirmed`, `planned`, `reported` or `disputed` classifications, with explanation and source evidence; no independently verified state is assigned |
+| `review_guidance.question_groups` | Evidence-gap categories tied to the original caveats; these support filters, not urgency scores or automatic escalation |
+| `review_guidance.next_check` | Suggested question, rationale and cited basis; browsing or selecting it has no operational effect |
+| `display_location` | Explicit `kind: demo`, latitude, longitude and provenance; coordinates are invented and kept separate from source address facts |
+
+Case 019 illustrates the distinction: the agency reported garden clearance complete, while levelling, gravel coverage and final usability remain unconfirmed in the supplied record. Case 041 records a fixed washing machine alongside planned towel-rail fitting. These are readings of historical evidence, not new inspections.
+
+Leaflet 1.9.4, its licence and source hashes are vendored locally. OpenStreetMap supplies visible street tiles over HTTPS; no geocoder receives addresses or case content. Source links open the pinned GitHub record. There are no runtime model calls, API keys, database writes, policy publications or connections to FastAPI and Vercel Workflow in this view. The property list remains available if the map fails to load. GitHub displays the source files and screenshots; a local static server renders the interactive page.
+
+Run from the repository root:
+
+```sh
+python3 -m http.server 54037 --bind 127.0.0.1 --directory docs/property-overview
+```
+
+Open `http://127.0.0.1:54037/index.html`. To regenerate the checked-in output after editing reviewed guidance, run `python3 docs/property-overview/assemble.py` from the repository root. Use an available local port if 54037 is already occupied.
+
+The [source validation receipt](docs/property-overview/validation.json) records 460 exact quotation checks, including 188 for issue states and next questions; repeated quotations count more than once. The [interaction receipt](docs/property-overview/interaction-checks-2026-10-10.json) records 17 focused browser checks, including filters, empty-state recovery, keyboard evidence navigation and a 390-pixel mobile view. These checks do not establish full accessibility compliance or live operational behaviour.
+
+The overview uses complete histories and retrospective summaries. It must stay outside chronological decision replay and held-out evaluation input. Some synthetic dates are after the review date. A future live integration needs a property register, reviewed identity matching, verified coordinates and time-bounded evidence from the application before it can show owners, deadlines, live actions or geographic routing.
 
 ### FastAPI and authentication boundary
 
@@ -121,6 +174,12 @@ Self-identification is not verified identity. The default policy nevertheless ac
 Session hashes, conversation projections, owner indexes, pending deliveries and request receipts are stored in mutable `meta` entries. Message delivery is reserved durably before entering the separately transactional case service. Stable request keys let retries converge after an interrupted case commit. Completed reports and subsequent updates become immutable case evidence. This design does not make every pre-submission conversation field an immutable audit record.
 
 Tenant responses expose owned conversation messages, supplied details and plain-language progress; they exclude staff evidence, internal reviews, policy controls and the shared case list. The portal projection does not currently expose the coordinator's separate tenant-question records, so a complete question-and-answer round trip between those two interfaces is not established. Tenant routes are disabled outside demo mode because production tenant identity and organisation access are not implemented.
+
+### Voice intake adapters
+
+[voice.py](app/voice.py) accepts confirmed phone reports with a configured tool secret and signed post-call transcripts. The ElevenLabs agent and tool configuration live under `voice/`; Twilio supplies the intended phone-number path. Reports become unverified case evidence. Recorded simulator and HTTP checks, plus outstanding real-call and webhook verification, are documented in [VOICE_PHONE.md](docs/VOICE_PHONE.md).
+
+`POST /api/inbound` handles report/update turns and filtered status enquiries for tenants, landlords, agencies, contractors and unknown callers. [parties.py](app/parties.py) supplies the fictional directory. Role-specific source rules constrain which assertions can satisfy a fact, while authority still requires an approver. The bridge accepts a configured bearer token through a tunnel; demo staff/tenant routes remain loopback-only. [VOICE_INTAKE.md](docs/VOICE_INTAKE.md) describes idempotency, caller matching and the production identity limitations. Outbound operational messages remain simulated.
 
 ### Jev routing, Claude interpretation and policy drafting
 
@@ -284,7 +343,7 @@ Database references inside JSON are largely enforced by service checks, rather t
 
 [Open the local-deployment diagram](docs/diagrams/operations/local-deployment.html).
 
-Python dependencies are pinned in [pyproject.toml](pyproject.toml) and locked in [uv.lock](uv.lock): Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Psycopg, Pydantic, HTTPX, the Anthropic and TypeSafe SDKs, and the Python Vercel Workflow SDK. The optional dashboard has a separate [Node package manifest](web/package.json) and [lockfile](web/package-lock.json) for React, TypeScript, Vite and Tailwind. [vercel.json](vercel.json) selects the FastAPI framework, and `[[tool.vercel.workflows]]` identifies `app.workflows:wf`; it does not configure deployment of the React build. There is no container, Kubernetes cluster, separate message broker or load balancer defined by this application.
+Python dependencies are pinned in [pyproject.toml](pyproject.toml) and locked in [uv.lock](uv.lock): Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Psycopg, Pydantic, HTTPX, the Anthropic and TypeSafe SDKs, and the Python Vercel Workflow SDK. The optional dashboard has a separate [Node package manifest](web/package.json) and [lockfile](web/package-lock.json) for React, TypeScript, Vite and Tailwind. [vercel.json](vercel.json) selects the FastAPI framework, and `[[tool.vercel.workflows]]` identifies `app.workflows:wf`. The React build is committed under `static/`, so it ships with the FastAPI application without a Node build step. There is no container, Kubernetes cluster, separate message broker or load balancer defined by this application.
 
 | Environment or mode | Current position |
 | --- | --- |
@@ -311,7 +370,7 @@ env -u VERCEL_QUEUE_BASE_URL \
 
 This creates separate storage and leaves the shared default database untouched. For a recovery check, reuse the printed directory and both paths; do not run `mktemp` again. Set environment variables before import, omit hot reload, and retain one worker. The server can load git-ignored `.env.local`; existing environment values win, and `PROPERTY_LOCAL_ENV=off` disables that file load. Anthropic uses `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`; Jev uses `TYPESAFE_API_KEY`. [.env.example](.env.example) documents settings without credentials. Port 8017 matches the current Vite proxy; this example does not establish that it is available.
 
-The static tenant/staff/policy interface is available from the Python server. To run the additional React dashboard, use a second terminal:
+The original tenant/staff interface is available at `/`, and the committed React dashboard is available at `/dashboard`. To develop the React dashboard with hot reload, use a second terminal:
 
 ```sh
 cd web
@@ -319,7 +378,7 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open the local URL printed by Vite. Its proxy requires the backend on port 8017 unless [vite.config.ts](web/vite.config.ts) is changed to match. Use this only with the isolated demonstration database because dashboard bootstrap imports BUILD cases and records review rejections. `npm run build` produces a frontend bundle; serving that bundle with API routing, authentication and a production origin is separate deployment work.
+Open the local URL printed by Vite. Its proxy requires the backend on port 8017 unless [vite.config.ts](web/vite.config.ts) is changed to match. Use an isolated demonstration database: imports, review responses and policy publication are explicit local mutations. `npm run build` writes `static/dashboard/`, which FastAPI serves at `/dashboard` on the API origin. Commit rebuilt assets with frontend changes. Production authentication and hosted deployment verification remain separate work.
 
 **Unknown deployment details:** Vercel project/account, region, public domain, database provider and sizing, TLS/database connection policy, secret manager, attachment/object store, backup schedule, retention periods and release pipeline. These need explicit deployment decisions; this document does not assume them.
 
@@ -344,13 +403,13 @@ Demo cookies are `HttpOnly` and `SameSite=Strict`, restricted to loopback and in
 
 Production staff bearer values are compared against configured SHA-256 hashes using constant-time comparison. Production tenant authentication, organisation membership, row-level access control and a staff login interface are unimplemented. Authorised staff currently operate on the shared application case set; tenant conversation ownership checks do not prove multi-organisation tenant isolation.
 
-Sources are treated as untrusted evidence. Model output must pass schema validation. Case-triage quotes must match the source verbatim; intake extraction checks ignore whitespace and case differences. Model readings remain distinct from verified permission and cannot publish policy. The configured routing path sends bounded source/context text to TypeSafe, and Claude intake/triage/drafting send their inputs to Anthropic. Production data use requires a deliberate data-protection decision for both providers. Voice-based role recognition and production identity verification are not implemented.
+Sources are treated as untrusted evidence. Model output must pass schema validation. Case-triage quotes must match the source verbatim; intake extraction checks ignore whitespace and case differences. Model readings remain distinct from verified permission and cannot publish policy. The configured routing path sends bounded source/context text to TypeSafe, and Claude intake/triage/drafting send their inputs to Anthropic. Production data use requires a deliberate data-protection decision for both providers. The inbound bridge maps caller IDs through a fictional directory; this is not production identity verification and does not protect against caller-ID spoofing.
 
 No audit certification, regulatory compliance, encryption at rest, production key management or tenant-isolation assurance is established. Property reports may contain personal data. Before real use, define lawful processing and access, retention/deletion handling, external processor arrangements and incident procedures. In particular, immutable application history and deletion obligations need a designed retention approach; the present triggers alone do not resolve that requirement.
 
 ## Observability
 
-The static staff interface exposes evidence, claim provenance, decisions, reviews, actions and timeline records. Each decision retains the policy and claim snapshot needed to explain its result. Routing records retain Jev's proposed/applied mode, source, confidence, reasons and fallback metadata; the case projection retains the latest router and model interpretation. Workflow transport receipts, error types, startup recovery receipts and cycle checkpoints record the distinction between accepted wake, processing and simulated action outcome. Native SDK event history separately records step replay, hooks and timers. The React dashboard's progress mappings are a condensed presentation, not the complete audit record.
+The static staff interface exposes evidence, claim provenance, decisions, reviews, actions and timeline records. Each decision retains the policy and claim snapshot needed to explain its result. Routing records retain Jev's proposed/applied mode, source, confidence, reasons and fallback metadata; the case projection retains the latest router and model interpretation. Workflow transport receipts, error types, startup recovery receipts and cycle checkpoints record the distinction between accepted wake, processing and simulated action outcome. Native SDK event history separately records step replay, hooks and timers. The React dashboard exposes source evidence and blockers, with a condensed activity list. The original staff workspace retains specialist review controls and the fuller audit tools.
 
 `GET /api/health` reports application/workflow modes, the simulated-operation flag, model configuration and Jev credential presence/router version. It is a liveness/configuration response, not a database, queue, provider or cloud-readiness probe. Uvicorn supplies ordinary server/access output; the application has no configured central log sink, metrics exporter, distributed tracing or alerting service. **Unknown:** production monitoring provider, service-level indicators, alert thresholds and on-call ownership.
 
@@ -358,7 +417,7 @@ The static staff interface exposes evidence, claim provenance, decisions, review
 
 | Decision | Reason and consequence |
 | --- | --- |
-| Modular Python application with two browser clients | The static interface provides tenant and policy workflows; the separate React prototype adds a staff progress view using the same service and case data. Their deployment and feature coverage remain distinct. |
+| Modular Python application with two browser clients | The static interface provides tenant intake and specialist staff workflows; React provides case review and policy editing against the same service and case data. Their deployment and feature coverage remain distinct. |
 | Deterministic policy outside interpretation | Makes action permission inspectable and prevents model text from creating authority; factual verification remains explicit staff work |
 | Jev routes first; Claude reads when needed; policy decides | Simple eligible messages can avoid a Claude reading; uncertain inputs fall back to full triage, and objections produce human review. This adds another provider and policy thresholds whose quality requires evaluation. Tenant intake still uses Claude with a deterministic completeness gate and local fallback parser. |
 | Limited portal self-identification | Lets a confirmed portal report proceed to clarification or quote requests without claiming verified identity; contradictions, corrected details and more consequential actions keep their separate requirements. |
@@ -374,10 +433,11 @@ The static staff interface exposes evidence, claim provenance, decisions, review
 
 These changes remain to be implemented:
 
+- Connect the standalone property overview to a reviewed property register and authorised case projections, preserving unknown identity, issue-level evidence and chronological boundaries. Replace demo pins only when coordinates are verified.
 - Validate a separate Vercel staging deployment with shared PostgreSQL, generated routes, runtime identity and recovery checks across actual hosted invocations.
 - Implement staff SSO, verified tenant identity, organisation/property access rules, secure production session handling and a reviewed authorisation model.
-- Complete the React dashboard's policy and specialised-review paths, align approval labels with the actual review operation, remove automatic demonstration seeding from operational use, add deliberate refresh behaviour and integrate its deployment. Define operational metrics and date filters before presenting daily resolution counts.
-- Connect coordinator questions to the tenant conversation and add any future voice/email input adapter through the same evidence, identity and policy boundaries. These are not current channels.
+- Complete specialist React approval forms and evidence entry, add a structured source-review link on published policies and consider server-push updates. Define and verify operational metrics before adding daily repair-resolution counts.
+- Complete the coordinator-question round trip in the tenant portal, verify the real phone and post-call paths, and extend production caller identity. Any further email or voice channel must retain the existing evidence and policy boundaries.
 - Add real adapters only with committed delivery intent, provider idempotency, read-back/reconciliation and an explicit operational authorisation boundary.
 - Define data retention, backup/restore and recovery objectives; exercise recovery of the application database and workflow state together.
 - Add versioned schema migrations and evaluate per-case locking, indexed queries and bounded history reads when measured workload justifies them.

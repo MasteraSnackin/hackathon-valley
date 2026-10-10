@@ -6,6 +6,7 @@ from copy import deepcopy
 import hashlib, json, math
 from pydantic import BaseModel, Field, ConfigDict, model_validator
 from typing import Literal, Any
+from .parties import PARTY_KINDS, PARTY_TOPICS
 
 UTC = timezone.utc
 ROLES = {'case_manager','policy_editor','access_officer','approver','reviewer'}
@@ -64,7 +65,10 @@ DEFAULT_SETTINGS = {'access_immediate_review':False,'reminder_hours':8,'escalati
  'router':'jev','router_min_confidence':0.5,'router_jev_only_confidence':0.8,'router_jev_only_routes':['archive','request_quote'],'router_hazard_threshold':0.3,'router_signal_threshold':0.35,
  # Actions for which a tenant's own name and address, given in their portal
  # session, satisfy identity and route (replies go back to that same thread).
- 'tenant_self_identification':['clarify','request_quote']}
+ 'tenant_self_identification':['clarify','request_quote'],
+ # Questions to landlords, letting agencies and contractors on directory
+ # properties (see app/parties.py). Sending is simulated, as for tenants.
+ 'party_messages':'claude_decides','party_auto_send_topics':['approval','quote']}
 SELF_IDENTIFICATION_ACTIONS={'clarify','request_quote'}
 ROUTERS={'claude','jev_shadow','jev'}
 
@@ -121,6 +125,21 @@ class EvidenceInput(StrictModel):
         if self.occurred_at is not None: dt(self.occurred_at)
         for c in self.claims:
             if c.source_quote not in self.text: raise ValueError('Every source quote must occur exactly in the submitted evidence')
+        return self
+
+class InboundCall(StrictModel):
+    """One caller turn from the voice agent (or the demo call panel)."""
+    call_id: str = Field(min_length=1,max_length=200)
+    caller_number: str | None = Field(default=None,max_length=40)
+    transcript: str = Field(min_length=1,max_length=20000)
+    channel: Literal['voice','sms','email'] = 'voice'
+    # The voice agent's own reading. A status enquiry is answered from a
+    # filtered summary and is not added to the case as evidence.
+    intent: Literal['report','status_enquiry'] = 'report'
+    occurred_at: str | None = None
+    @model_validator(mode='after')
+    def valid(self):
+        if self.occurred_at is not None: dt(self.occurred_at)
         return self
 
 class ProposalInput(StrictModel):
@@ -180,6 +199,8 @@ class PolicyInput(StrictModel):
         for k,hi in [('tenant_max_questions',5),('tenant_follow_ups',3)]:
             if isinstance(s[k],bool) or not isinstance(s[k],int) or not 0<=s[k]<=hi: raise ValueError(f'Invalid {k}')
         if s['tenant_max_questions']<1: raise ValueError('Tenant messages need at least one question')
+        if s['party_messages'] not in {'claude_decides','staff_approval','off'}: raise ValueError('Party messages must be claude_decides, staff_approval or off')
+        if not isinstance(s['party_auto_send_topics'],list) or set(s['party_auto_send_topics'])-set(PARTY_TOPICS): raise ValueError('Unsupported party auto-send topic')
         if s['router'] not in ROUTERS: raise ValueError('Router must be claude, jev_shadow or jev')
         # Only information-gathering actions may rest on a tenant's own statement.
         if not isinstance(s['tenant_self_identification'],list) or set(s['tenant_self_identification'])-SELF_IDENTIFICATION_ACTIONS: raise ValueError('Tenant self-identification is limited to clarify and request_quote')
@@ -273,7 +294,9 @@ def triage_check(t):
 def evaluate(case,claims,approvals,policy,uncertain=False,at=None):
     at=at or now(); p=case['proposal']; action=p['action']; s=policy['settings']
     superseded={x for c in claims if c.get('verified') for x in c.get('supersedes',[])}
-    current=[c for c in claims if c['id'] not in superseded and scope_matches(c['scope'],case) and (not c.get('expires_at') or dt(c['expires_at'])>at)]
+    # Hearsay (a positive claim from a party with no say over that fact) is kept
+    # for staff but never satisfies or contradicts a check.
+    current=[c for c in claims if c['id'] not in superseded and not c.get('hearsay') and scope_matches(c['scope'],case) and (not c.get('expires_at') or dt(c['expires_at'])>at)]
     checkmap={}
     for key in FACTS:
         rows=[c for c in current if c['key']==key]

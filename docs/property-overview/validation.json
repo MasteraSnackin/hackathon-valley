@@ -1,0 +1,18 @@
+{
+  "scope": "Authorised BUILD files only; no runtime app state, PDFs or reserved evaluation cases accessed.",
+  "dataset_revision": "9bcdca585955dfb930005ed742572606e68f5688",
+  "properties": 25,
+  "unique_property_labels": 25,
+  "issues": 47,
+  "caveats": 76,
+  "history_events": 752,
+  "source_markdown_hashes_verified": 50,
+  "exact_quotes_verified": 460,
+  "issue_evidence_states": 47,
+  "suggested_next_checks": 25,
+  "guidance_quotes_verified": 188,
+  "outcomes_with_direct_evidence": 25,
+  "demo_locations": 25,
+  "verified_locations": 0,
+  "html_sha256": "136b3de6db4375c6ef466c329d64ed7abefba1ba04ed973c3c260e2f32992370"
+}
