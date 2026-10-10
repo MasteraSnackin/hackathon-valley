@@ -68,7 +68,7 @@ text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
   <text x="712" y="204" class="name-lg">Case service</text>
   <text x="712" y="236" class="name">Explicit policy checks</text>
   <text x="712" y="264" class="detail">All requirements + scoped reviews</text>
-  <text x="712" y="292" class="detail">Owns each SQL transaction</text>
+  <text x="712" y="292" class="detail">Owns case transactions</text>
 </g>
 <g data-node="sql">
   <rect class="store" x="1032" y="184" width="208" height="128" rx="8"/>

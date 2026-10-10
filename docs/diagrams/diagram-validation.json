@@ -34,7 +34,19 @@
       "focal_nodes": 1
     }
   },
-  "visual_qa": "Pending separate root-agent browser inspection; static checks do not prove rendered layout.",
+  "visual_qa": {
+    "status": "pass",
+    "reviewer": "root agent",
+    "date": "2026-10-10",
+    "viewport": "1280 x 720",
+    "findings": "Both final HTML diagrams were rendered in the in-app browser and inspected. No clipping, node-label overlap or unclear connector routing observed. The overview capture includes the final Owns case transactions wording.",
+    "screenshots": [
+      "system-overview-browser.png",
+      "decision-flow-browser.png"
+    ],
+    "scope": "Visual review of local rendering only; does not validate live services.",
+    "publishing_check": "Both saved captures inspected before push; exported SVG trees match the final HTML sources."
+  },
   "fidelity_note": "See diagram-style.md; components are grouped responsibilities and blocker outcomes are compressed.",
   "unverified": [
     "Hosted Vercel runtime",
