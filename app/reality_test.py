@@ -401,56 +401,9 @@ def _worker(input_path: Path, config_path: Path, case_dir: Path):
 
 
 def markdown_evidence(case_id, case_dir, provenance, config, result):
-    evidence = load_json(case_dir / "evidence.json") if (case_dir / "evidence.json").exists() else {"cases": []}
-    label = "OFFICIAL RUN" if config.mode == "official" else "PREPARATION ONLY — not official Reality Test results"
-    answer = [f"# Case {case_id}", "", label, "", f"Runner status: **{result['status']}**.",
-              "External operations are simulated. An action receipt does not prove a real repair, delivery or booking.", "",
-              f"Frozen/running commit: `{provenance['git_commit']}`.",
-              f"Configuration SHA-256: `{provenance['config_sha256']}`.",
-              f"Input SHA-256: `{provenance['input_sha256']}`.", ""]
-    if result.get("error"):
-        answer += ["Failure: " + result["error"], ""]
-    if result.get("routing_fallback_count"):
-        answer += [f"Jev was unavailable for {result['routing_fallback_count']} recorded routing attempts; the product handed those messages to Claude. Recorded causes: {', '.join(result['routing_fallback_errors'])}.", ""]
-    reasoning = [f"# Recorded decision evidence — {case_id}", "", label, "",
-                 "This is an export of the system's recorded policy assessments and concise model rationale, not a reconstructed answer or hidden model reasoning.", "",
-                 "Full source inputs: `input.json`. Raw structured evidence, source IDs, assertions, decisions, reviews, actions and native execution events: `evidence.json`.",
-                 "Per-input decision snapshots: `checkpoint-*.json`. No human approvals were supplied by this runner.", ""]
-    for detail in evidence["cases"]:
-        case, decision = detail["case"], detail.get("decision") or {}
-        answer += [f"## System case {case['id']}", "", f"State: {case['status']}.",
-                   f"Recorded decision: **{decision.get('outcome', 'not assessed')}**.",
-                   f"Proposed action: `{case['proposal']['action']}`.",
-                   f"Next step: {decision.get('next_step', 'No next step recorded')}.", "",
-                   f"Policy version: {decision.get('policy_version', 'unknown')}.",
-                   f"Actions recorded: {len(detail['actions'])}; open/deferred human reviews: {sum(r['status'] in {'open', 'deferred'} for r in detail['reviews'])}.", ""]
-        for action in detail["actions"]:
-            answer += [f"- Action `{action.get('business_id', action.get('id'))}`: {action['status']}; simulated={action.get('simulated')}."]
-        reasoning += [f"## System case {case['id']}", "", f"Decision record: `{decision.get('id', 'none')}`; policy `{decision.get('policy_id', 'none')}`.", ""]
-        for blocker in decision.get("blockers", []):
-            reasoning += [f"- `{blocker['key']}` → {blocker['response']}: {blocker['reason']} Sources: {', '.join(blocker.get('source_ids', [])) or 'none recorded'}. Rule: `{blocker.get('rule_id', 'none')}`."]
-        for row in detail["timeline"]:
-            if row["kind"] == "routing":
-                recorded = row["payload"]
-                reasoning += ["", f"Routing `{row['id']}`: mode `{recorded.get('mode')}`; model `{recorded.get('model', recorded.get('requested_model'))}`; source `{recorded.get('source_id')}`.",
-                              " ".join(recorded.get("decision", {}).get("reasons", []))]
-                if recorded.get("error_type"):
-                    reasoning += [f"Recorded router fallback: {recorded['error_type']}."]
-            if row["kind"] == "interpretation":
-                recorded = row["payload"]
-                reasoning += ["", f"Interpretation `{row['id']}`: {recorded.get('status')}; source `{recorded.get('source_id')}`."]
-                if recorded.get("status") == "ok":
-                    reasoning += [recorded.get("result", {}).get("rationale", "No rationale recorded.")]
-                else:
-                    reasoning += [f"Recorded model failure: {recorded.get('error_type', 'unknown')}."]
-        reasoning += [""]
-    if not evidence["cases"]:
-        answer += ["No application case evidence was produced. This is not an executed decision.", ""]
-    if result["status"] != "settled":
-        answer += ["Any recorded state is partial. Do not present it as a completed run or repair.", ""]
-    answer += ["Human review / information waits are preserved; the runner does not approve, correct or complete cases on the system's behalf.", ""]
-    atomic_text(case_dir / "ANSWER.md", "\n".join(answer))
-    atomic_text(case_dir / "REASONING.md", "\n".join(reasoning))
+    # Formatting only: ANSWER.md / REASONING.md / AUDIT.md from the recorded evidence.
+    from .answer_export import write_answers
+    write_answers(case_id, case_dir, provenance, config, result)
 
 
 def run_batch(manifest_path: Path, config_path: Path, output: Path):
