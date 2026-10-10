@@ -201,6 +201,15 @@ export interface CaseDetail {
   timeline: TimelineEvent[];
 }
 
+/** One row from GET /api/cases (app/service.py Service.list_cases()): a Case
+ * plus a cheap-to-compute `outcome` (mirrors case.stage, or 'unassessed') and
+ * `open_reviews` count — enough for list/summary views without a full detail
+ * fetch per case. */
+export interface CaseListItem extends Case {
+  outcome: string;
+  open_reviews: number;
+}
+
 /** One catalogue entry from GET /api/build-cases (app/build_data.py list_build()). */
 export interface BuildCaseSummary {
   case_id: string;
