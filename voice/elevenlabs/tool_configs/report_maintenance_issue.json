@@ -1,0 +1,30 @@
+{
+  "type": "webhook",
+  "name": "report_maintenance_issue",
+  "description": "Send the caller's maintenance report to the property management team. Call exactly once, only after reading the full summary back and the caller clearly confirming it is correct. Returns a reference to read to the caller.",
+  "response_timeout_secs": 20,
+  "api_schema": {
+    "url": "https://PUBLIC_BASE_URL/api/voice/report",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_headers": {
+      "X-Voice-Tool-Secret": {"secret_id": "VOICE_TOOL_SECRET_ID"}
+    },
+    "request_body_schema": {
+      "type": "object",
+      "description": "The maintenance report exactly as the caller confirmed it.",
+      "required": ["conversation_id", "caller_confirmed", "name", "address", "problems"],
+      "properties": {
+        "conversation_id": {"type": "string", "dynamic_variable": "system__conversation_id"},
+        "caller_confirmed": {"type": "boolean", "description": "true only if the caller clearly said the read-back summary is correct."},
+        "name": {"type": "string", "description": "The caller's full name as they said it."},
+        "address": {"type": "string", "description": "Full address as confirmed: flat or house number, street, town and postcode."},
+        "problems": {"type": "string", "description": "Each separate problem on its own line, in the caller's words: what is wrong, where, since when, getting worse, appliance make or error code if given."},
+        "danger": {"type": "string", "description": "Anything the caller said about danger (gas smell, water near electrics, flooding, no heating with someone vulnerable, cannot lock the door). Empty if none."},
+        "already_tried": {"type": "string", "description": "What the caller has already tried themselves. Empty if not mentioned."},
+        "availability": {"type": "string", "description": "When someone could visit or when the caller is usually home. Empty if not mentioned."},
+        "access_notes": {"type": "string", "description": "Whether a contractor may contact them directly, pets, alarm, keys, parking, and whether they have photos or videos. Empty if not mentioned."}
+      }
+    }
+  }
+}

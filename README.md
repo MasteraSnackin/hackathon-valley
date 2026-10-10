@@ -28,6 +28,7 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 
 - Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts.
 - Claude triage as native workflow steps: every stored message is read by Claude, which picks the workflow route, names the work item, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Unreadable, ambiguous, hazardous or disputed readings hold the action for a person; there is no keyword fallback. See [Claude triage](docs/CLAUDE_TRIAGE.md).
+- Phone intake: an ElevenLabs voice agent on a Twilio number asks for the caller's name, address and problems, reads the summary back and, after a clear yes, sends it in as an unverified report that follows the same triage path. See [Phone intake](docs/VOICE_PHONE.md).
 - Claude-drafted tenant questions: Claude recommends auto-send or staff review from the case data and policy, and a deterministic gate decides. Staff approve, edit or reject drafts; replies close answered questions. Sending is simulated.
 - Per-action **PASS / FAIL / UNKNOWN / CONFLICT** checks that retain all relevant blockers and source links.
 - Editable ALL/ANY rules, action/property/category filters, review ownership, thresholds and working-hour follow-ups.
