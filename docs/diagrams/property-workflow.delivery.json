@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/darkcomet/.codex/.chatgpt-projects/g-p-6ac970305f2481919eebbb5c44f3b350/property-workflow/docs/diagrams/property-workflow.architecture.json",
+  "output": "/Users/darkcomet/.codex/.chatgpt-projects/g-p-6ac970305f2481919eebbb5c44f3b350/property-workflow/docs/diagrams/property-workflow.html",
+  "specification": {
+    "sha256": "1e03882be7b9f790de8381afab41b30ebe1e53b500a4c2b4aefcbd0d6fa0c682",
+    "bytes": 6104
+  },
+  "artifact": {
+    "sha256": "d036e1c0e6f6a6a08e00667b8ab604bd412bead91c5bc61f99ef3a6b99bd37c3",
+    "bytes": 815991
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

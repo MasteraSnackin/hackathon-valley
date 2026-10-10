@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Property Desk architecture",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "views": [
+      {
+        "id": "report-path",
+        "label": "Report and assessment",
+        "focus": [
+          "browser",
+          "api",
+          "service",
+          "database"
+        ],
+        "note": "Reports enter the shared case service. Current evidence and every action requirement determine the next step."
+      },
+      {
+        "id": "native-runtime",
+        "label": "Native orchestration",
+        "focus": [
+          "api",
+          "workflow",
+          "service",
+          "workflow-store"
+        ],
+        "note": "Commit before wake; native steps reassess current state. Local restart needs both stores and recovery."
+      },
+      {
+        "id": "permission-boundary",
+        "label": "Permission and interpretation",
+        "focus": [
+          "service",
+          "policy",
+          "interpreter",
+          "model",
+          "simulator"
+        ],
+        "note": "Interpretation proposes assertions. Policy and scoped human decisions control simulated action."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      55,
+      100
+    ],
+    "cols": 4,
+    "cellW": 182,
+    "cellH": 72,
+    "gapX": 155,
+    "gapY": 128
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "frontend",
+      "label": "Browser views",
+      "sublabel": "Tenant and staff",
+      "tag": "Local demonstration",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI boundary",
+      "sublabel": "Server authorisation",
+      "tag": "main.py \u00b7 tenant.py",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "service",
+      "type": "backend",
+      "label": "Case service",
+      "sublabel": "Evidence and reviews",
+      "tag": "service.py",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "database",
+      "type": "database",
+      "label": "Application store",
+      "sublabel": "Local SQLite",
+      "tag": "store.py",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "workflow-store",
+      "type": "database",
+      "label": "Workflow events",
+      "sublabel": "SDK event directory",
+      "tag": "Retain across restarts",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "workflow",
+      "type": "messagebus",
+      "label": "Native Workflow",
+      "sublabel": "Hooks, steps, timers",
+      "tag": "Local embedded queue",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "id": "policy",
+      "type": "security",
+      "label": "Action policy",
+      "sublabel": "Scoped requirements",
+      "tag": "domain.py",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "id": "simulator",
+      "type": "backend",
+      "label": "Simulated actions",
+      "sublabel": "One receipt per ID",
+      "tag": "No external delivery",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "id": "interpreter",
+      "type": "backend",
+      "label": "Source interpreter",
+      "sublabel": "Literal by default",
+      "tag": "ai.py \u00b7 no authority",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "id": "model",
+      "type": "external",
+      "label": "OpenAI Responses",
+      "sublabel": "Opt-in live mode",
+      "tag": "Optional \u00b7 unverified",
+      "row": 2,
+      "col": 3
+    }
+  ],
+  "connections": [
+    {
+      "id": "browser-api",
+      "from": "browser",
+      "to": "api",
+      "label": "Same-origin JSON",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-service",
+      "from": "api",
+      "to": "service",
+      "label": "Validated requests",
+      "variant": "emphasis",
+      "labelAt": [
+        566,
+        350
+      ]
+    },
+    {
+      "id": "service-database",
+      "from": "service",
+      "to": "database",
+      "label": "SQL transaction",
+      "variant": "emphasis",
+      "labelAt": [
+        957.5,
+        360
+      ]
+    },
+    {
+      "id": "api-workflow",
+      "from": "api",
+      "to": "workflow",
+      "label": "Committed-event wake"
+    },
+    {
+      "id": "workflow-service",
+      "from": "workflow",
+      "to": "service",
+      "label": "Fresh cycle step"
+    },
+    {
+      "id": "workflow-events",
+      "from": "workflow",
+      "to": "workflow-store",
+      "label": "Native replay history"
+    },
+    {
+      "id": "service-policy",
+      "from": "service",
+      "to": "policy",
+      "label": "Evaluate all checks",
+      "variant": "security"
+    },
+    {
+      "id": "service-simulator",
+      "from": "service",
+      "to": "simulator",
+      "label": "Only after ACT"
+    },
+    {
+      "id": "simulator-store",
+      "from": "simulator",
+      "to": "database",
+      "label": "Simulated receipt",
+      "labelAt": [
+        1126,
+        174
+      ]
+    },
+    {
+      "id": "service-interpreter",
+      "from": "service",
+      "to": "interpreter",
+      "label": "Source assertions",
+      "labelAt": [
+        789,
+        374
+      ]
+    },
+    {
+      "id": "interpreter-model",
+      "from": "interpreter",
+      "to": "model",
+      "label": "Optional HTTPS",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Assertions and permission",
+      "items": [
+        "Tenant details and interpretation remain unverified. Staff resolve scoped reviews; every blocker still applies.",
+        "Policy suggestions require save, preview and publication."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Local recovery and effects",
+      "items": [
+        "Retain SQLite and SDK events. Startup restores interrupted work and timers.",
+        "All operational effects are simulated. Stable business IDs protect receipts."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Evidence boundary",
+      "items": [
+        "Reviewed local source; no Git snapshot. Source links and BUILD disclosure: source-notes.md.",
+        "Cloud, PostgreSQL, live models and production identity remain unverified."
+      ]
+    }
+  ]
+}

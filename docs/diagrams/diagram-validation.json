@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-10",
+  "scope": "New Diagram Design documentation figures only",
+  "source_authority": [
+    "../../ARCHITECTURE.md",
+    "../../DESIGN.md",
+    "../../AGENTS.md"
+  ],
+  "outputs": [
+    "system-overview.html",
+    "system-overview.svg",
+    "decision-flow.html",
+    "decision-flow.svg",
+    "diagram-style.md"
+  ],
+  "checks": {
+    "html_skill_self_check": {
+      "system-overview.html": "pass",
+      "decision-flow.html": "pass"
+    },
+    "svg_xml_parse": "pass",
+    "exports": "Exact first-inline-SVG extraction from matching HTML source",
+    "network_dependencies": "none",
+    "visible_font_size_min_px": 16,
+    "view_box": "0 0 1280 720",
+    "system_overview": {
+      "nodes": 8,
+      "edges": 8,
+      "focal_nodes": 1
+    },
+    "decision_flow": {
+      "nodes": 6,
+      "edges": 6,
+      "focal_nodes": 1
+    }
+  },
+  "visual_qa": {
+    "status": "pass",
+    "reviewer": "root agent",
+    "date": "2026-10-10",
+    "viewport": "1280 x 720",
+    "findings": "Both final HTML diagrams were rendered in the in-app browser and inspected. No clipping, node-label overlap or unclear connector routing observed. The overview capture includes the final Owns case transactions wording.",
+    "screenshots": [
+      "system-overview-browser.png",
+      "decision-flow-browser.png"
+    ],
+    "scope": "Visual review of local rendering only; does not validate live services.",
+    "publishing_check": "Both saved captures inspected before push; exported SVG trees match the final HTML sources."
+  },
+  "fidelity_note": "See diagram-style.md; components are grouped responsibilities and blocker outcomes are compressed.",
+  "unverified": [
+    "Hosted Vercel runtime",
+    "Live model quality",
+    "Real operational delivery",
+    "Physical repair completion"
+  ]
+}
