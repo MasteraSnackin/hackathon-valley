@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Every action returns to the full set of checks — Property Desk</title>
+<style>html,body{margin:0;background:#F5F6F2;color:#192C30}main{max-width:1280px;margin:0 auto}figure{margin:0}svg{display:block;width:100%;height:auto}@media print{@page{size:landscape;margin:0}main{max-width:none}}</style></head>
+<body><main><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="decision-flow-title decision-flow-desc">
+<title id="decision-flow-title">Every action returns to the full set of checks</title>
+<desc id="decision-flow-desc">A report, evidence, review or deadline wake reloads current evidence and policy; every requirement must pass before a simulated action, while unresolved requirements lead to clarification, waiting, human review or a scoped stop and new information triggers fresh checks.</desc>
+<defs><style>
+text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill: #192C30; }
+.title { font-size: 32px; font-weight: 650; letter-spacing: -0.4px; }
+.subtitle { font-size: 20px; fill: #647376; }
+.name { font-size: 20px; font-weight: 600; }
+.name-lg { font-size: 24px; font-weight: 650; }
+.detail, .caption, .edge-label { font-size: 16px; }
+.detail, .caption { fill: #647376; }
+.edge-label { font-weight: 600; letter-spacing: 0.4px; fill: #647376; }
+.node { fill: #FFFFFF; stroke: #647376; stroke-width: 1.2; }
+.input { fill: #EDF0EC; stroke: #647376; stroke-width: 1.2; }
+.store { fill: #EDF0EC; stroke: #647376; stroke-width: 1.2; }
+.focal { fill: #E7F0E9; stroke: #215848; stroke-width: 1.6; }
+.connector { fill: none; stroke: #647376; stroke-width: 1.6; marker-end: url(#decision-flow-arrow); }
+.async { stroke-dasharray: 8 4; }
+.mask { fill: #F5F6F2; }
+.rule { stroke: #DCE3DF; stroke-width: 1; }
+</style>
+<marker id="decision-flow-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#647376"/></marker>
+<marker id="decision-flow-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#215848"/></marker>
+<marker id="decision-flow-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#355C85"/></marker>
+</defs>
+<rect width="1280" height="720" fill="#F5F6F2"/>
+
+<text x="40" y="52" class="title">Every action returns to the full set of checks</text>
+<text x="40" y="88" class="subtitle">New information can change a decision. An approval never clears unrelated requirements.</text>
+<g aria-hidden="true">
+  <path id="trigger-to-reload" class="connector" d="M640 188 V232"/>
+  <path id="reload-to-check" class="connector" d="M640 304 V340"/>
+  <path id="check-to-action" class="connector" d="M820 424 H948"/>
+  <path id="check-to-hold" class="connector" d="M640 508 V548"/>
+  <path id="hold-to-new-input" class="connector" d="M468 588 H348"/>
+  <path id="new-input-to-reload" class="connector" d="M192 540 V284 Q192 276 200 276 H468"/>
+</g>
+<g>
+  <rect class="mask" x="840" y="388" width="80" height="28"/>
+  <text x="880" y="408" text-anchor="middle" class="edge-label">YES</text>
+  <rect class="mask" x="648" y="512" width="56" height="28"/>
+  <text x="676" y="532" text-anchor="middle" class="edge-label">NO</text>
+  <rect class="mask" x="264" y="240" width="140" height="28"/>
+  <text x="334" y="260" text-anchor="middle" class="edge-label">FRESH CHECKS</text>
+</g>
+<g data-node="trigger">
+  <rect class="input" x="468" y="124" width="344" height="64" rx="32"/>
+  <text x="640" y="152" text-anchor="middle" class="name">Report / evidence / review</text>
+  <text x="640" y="176" text-anchor="middle" class="detail">or deadline wake</text>
+</g>
+<g data-node="reload">
+  <rect class="node" x="468" y="232" width="344" height="72" rx="8"/>
+  <text x="640" y="264" text-anchor="middle" class="name">Reload current evidence</text>
+  <text x="640" y="288" text-anchor="middle" class="detail">and applicable policy</text>
+</g>
+<g data-node="check">
+  <path class="focal" d="M640 340 L820 424 L640 508 L460 424 Z"/>
+  <text x="640" y="416" text-anchor="middle" class="name">Check every requirement</text>
+  <text x="640" y="444" text-anchor="middle" class="name">All pass?</text>
+</g>
+<g data-node="action">
+  <rect class="node" x="948" y="376" width="292" height="112" rx="8"/>
+  <text x="968" y="416" class="name-lg">Simulate the action</text>
+  <text x="968" y="448" class="detail">Record a receipt and result</text>
+  <text x="968" y="472" class="detail">No real operational delivery</text>
+</g>
+<g data-node="hold">
+  <rect class="node" x="468" y="548" width="344" height="80" rx="8"/>
+  <text x="640" y="580" text-anchor="middle" class="name">Clarify / wait / human review</text>
+  <text x="640" y="608" text-anchor="middle" class="detail">or stop the affected action</text>
+</g>
+<g data-node="new-input">
+  <rect class="input" x="40" y="540" width="308" height="96" rx="8"/>
+  <text x="60" y="572" class="name">New evidence,</text>
+  <text x="60" y="600" class="detail">scoped response or</text>
+  <text x="60" y="624" class="detail">revised proposal</text>
+</g>
+<g aria-label="Uncertain-result handling">
+  <line x1="948" y1="532" x2="948" y2="612" stroke="#647376" stroke-width="1.2"/>
+  <text x="968" y="552" class="detail">If the result is uncertain:</text>
+  <text x="968" y="580" class="detail">hold and reconcile before</text>
+  <text x="968" y="608" class="detail">rechecking the action.</text>
+</g>
+<line class="rule" x1="40" y1="656" x2="1240" y2="656"/>
+<text x="40" y="680" class="caption">An action receipt is separate from verified repair completion. A deadline wake cannot create permission.</text>
+
+</svg></figure></main></body></html>

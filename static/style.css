@@ -35,6 +35,11 @@ body{min-width:320px}.skip-link{position:fixed;top:-70px;left:20px;z-index:2000;
 .tenant-composer .send-button{width:auto;min-width:94px;height:auto;min-height:44px;padding:10px 14px;flex-shrink:0}
 .check-reason,.review-context,.review-detail,.form-field small,.assistant-footer p,.policy-assistant-result p,.policy-assistant-result ul,.policy-nudge p,.policy-examples>span{font-size:12px}
 .policy-assistant-result p,.policy-assistant-result ul{color:var(--muted)}
-#case-record-panel{scroll-margin-top:20px}
-#case-record-panel:focus-visible{outline:3px solid #7aab91;outline-offset:3px}
+#case-record-panel,#active-case-reviews{scroll-margin-top:20px}
+#case-record-panel:focus-visible,#active-case-reviews:focus-visible{outline:3px solid #7aab91;outline-offset:3px}
 @media(max-width:620px){.tenant-tools{align-items:flex-start;flex-wrap:wrap}.tenant-tools>.actions{margin-left:auto}.tenant-tools .btn{padding:8px 10px}.tenant-composer .send-button{padding:10px 12px}.composer-bottom{gap:10px}}
+
+.previous-decisions{margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+.previous-decisions>summary{min-height:44px;padding:12px 0;font-size:12px;font-weight:600;color:var(--green);cursor:pointer}
+.previous-decisions>summary:focus-visible{outline:3px solid #7aab91;outline-offset:3px}
+.previous-decisions-body{padding-top:10px}

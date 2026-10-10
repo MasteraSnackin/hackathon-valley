@@ -24,20 +24,9 @@ FastAPI serves both the static client and JSON APIs. The API authenticates the c
 
 Native Workflow stores its history separately from case data. Its registered coordinator invokes the service through a registered step, waits on a typed hook or absolute timer, then reads current case and policy state in a fresh step. The local SDK owns its event history and embedded queue; the application does not implement a substitute scheduler.
 
-```mermaid
-flowchart LR
-    Tenant["Tenant browser"] --> API["FastAPI and static client"]
-    Staff["Staff browser"] --> API
-    API --> Service["Case service and policy engine"]
-    API --> Workflow["Native Python Workflow runtime"]
-    Workflow --> Service
-    Service --> Store[("Application database")]
-    Workflow --> Events[("Native workflow event store")]
-    Service --> Interpreter["Source interpreter"]
-    Interpreter -. "Optional live mode" .-> Model["OpenAI Responses API"]
-    Service --> Sim["Simulated action ledger"]
-    Sim --> Store
-```
+![System overview showing the shared case and policy service, native Workflow coordinator and separate application and workflow stores](docs/diagrams/system-overview.svg)
+
+[Open the standalone system overview](docs/diagrams/system-overview.html). The figure groups components by responsibility, not separate deployments. Its project-local visual tokens are recorded in [diagram-style.md](docs/diagrams/diagram-style.md).
 
 The diagram groups the code by responsibility; each box does not represent a separate deployed service. In the supported local mode, FastAPI, the application service and the embedded SDK queue share one process; the application database and native workflow directory must both survive a restart. The live model connection is optional and unverified; the action ledger records simulations only.
 
@@ -82,9 +71,11 @@ Tenant responses expose owned messages, supplied details and plain-language prog
 
 **Sources:** [ai.py](app/ai.py), [policy_assistant.py](app/policy_assistant.py).
 
-`app.ai` validates a structured interpretation against an exact quotation in the submitted text. Its default `AI_MODE=literal_demo` uses local patterns and makes no model request. Explicit live mode uses HTTPX to call the OpenAI Responses API and validates the returned structure and quotations. If interpretation fails, its result is recorded as unavailable and requires manual review.
+`app.ai` validates a structured interpretation against an exact quotation in the submitted text. Its default `AI_MODE=literal_demo` uses local patterns and makes no model request. Explicit `AI_MODE=live` (normalised to `live_model`) uses HTTPX to POST to `https://api.openai.com/v1/responses`, with the configured `OPENAI_MODEL` default of `gpt-4.1-mini`, and validates the returned structure and quotations. `MODEL_MODE` is a compatibility alias consulted only when `AI_MODE` is absent. A key alone does not enable live calls. The configured model name is not evidence that live calls or account availability have been verified. If interpretation fails, the service records it as unavailable with a manual-review notice; permission still depends on the evidence and policy checks.
 
 Interpretation claims remain unverified. Two demo fixtures are exceptions: the literal intake detector may verify a derived category label, and the fictional `DEMO-FLAT-1` directory supplies demonstration identity/route claims. Neither establishes real identity, consent, authority or completion.
+
+Tenant name/address/issue extraction remains local. However, completed tenant intake and later updates call `Service.intake` and `Service.evidence`, which invoke the evidence interpreter. In live mode those report and update texts can leave the application for OpenAI; local slot extraction does not imply that the complete tenant journey is offline.
 
 The policy assistant is also deterministic: it translates a bounded vocabulary of plain-English settings and conditions into a proposed `PolicyInput`, or returns clarification/unsupported results. It can derive a conservative suggestion from a resolved review, preserving its provenance. It does not write policy, rewrite code or generalise a case-specific permission. Saving, previewing and publishing remain separate service operations.
 
@@ -140,32 +131,20 @@ The loader enforces a fixed allowlist, validates manifest membership and history
 
 An intake or evidence request is validated and interpreted before the service transaction. The service stores original evidence and source claims, updates the case projection, records an `incoming_event` and `signal_outbox`, then assesses every applicable requirement. After commit, the API starts or finds the coordinator and sends a wake. Transport acceptance is recorded independently from the cycle checkpoint that acknowledges processed events.
 
-```mermaid
-sequenceDiagram
-    actor Person as Tenant or staff
-    participant API as FastAPI
-    participant Service as Case service
-    participant DB as Application database
-    participant WF as Native Workflow
-    Person->>API: Submit evidence with request key
-    API->>Service: Validate and interpret source
-    Service->>DB: Commit evidence, claims, state, event and outbox
-    Service-->>API: Current case or tenant projection
-    API->>WF: Start or find owner, then signal event
-    API-->>Person: Saved result
-    WF->>Service: Run fresh case-cycle step
-    Service->>DB: Load current evidence, policy and approvals
-    alt Requirements remain unresolved
-        Service->>DB: Record decision and scoped reviews
-    else Every requirement passes
-        Service->>DB: Record intent, simulated receipt and result
-    end
-    Service->>DB: Commit cycle checkpoint
-    Service-->>WF: Revision and next wake time
-    WF->>WF: Wait for hook or absolute timer
-```
+![Decision flow showing a fresh assessment, held actions returning through new evidence or human decisions, and simulated action receipts](docs/diagrams/decision-flow.svg)
 
-The sequence shows that the database commit completes before the workflow receives a wake. A saved request or accepted hook signal does not prove action completion. A human response follows the same path: the API checks role and scope, the service appends the response, and the next cycle reassesses all remaining blockers before any simulated action.
+[Open the standalone decision flow](docs/diagrams/decision-flow.html). The figure combines the clarification, waiting, review and stop branches into one held-action path; the policy outcome still determines which response is permitted. A stopped action may need a revised proposal, and an uncertain receipt requires reconciliation before retry.
+
+The transaction and wake sequence is:
+
+1. Validate the request and interpret source text before entering the case transaction.
+2. Commit evidence, assertions, the case projection, initial assessment, incoming event and wake intent together.
+3. After commit, the API starts or finds the native coordinator and signals the event.
+4. The coordinator runs a fresh service step that reloads current evidence, policy and scoped decisions.
+5. Record unresolved requirements and reviews, or an authorised simulated action and its receipt.
+6. Commit the cycle checkpoint, then wait for a new event or the next absolute deadline.
+
+The database commit completes before the workflow receives a wake. A saved request or accepted hook signal does not prove action completion. A human response follows the same path: the API checks role and scope, the service appends the response, and the next cycle reassesses all remaining blockers before any simulated action.
 
 ### Policy change
 
@@ -248,7 +227,7 @@ This creates separate storage and leaves the shared default database untouched. 
 - **SDK coupling:** Local lifecycle and interrupted-step recovery use narrowly checked private SDK interfaces because the pinned beta SDK lacks equivalent public APIs. Version guards fail on another SDK version; upgrades require revalidation.
 - **Terminal semantics:** Administrative archive ends the coordinator. Verified resolution and successful intermediate actions have distinct case states; neither a finished workflow nor a simulated receipt proves physical repair.
 
-The [runtime document](docs/WORKFLOW_RUNTIME.md) records local native hook/timer/restart tests, real FastAPI/service integration and forced interrupted-step recovery with one simulated receipt. The [71-test report](docs/VERIFICATION.md) is a historical source snapshot. Documentation checks do not establish current full-suite results, cloud operation, PostgreSQL behaviour or real provider delivery.
+The [runtime document](docs/WORKFLOW_RUNTIME.md) records local native hook/timer/restart tests, real FastAPI/service integration and forced interrupted-step recovery with one simulated receipt. The [verification history](docs/VERIFICATION.md) includes the earlier 71-test baseline and later 132-test snapshots. Documentation checks do not establish current full-suite results, cloud operation, PostgreSQL behaviour or real provider delivery.
 
 ## Security & Compliance
 
@@ -296,4 +275,8 @@ These changes remain to be implemented:
 - Add operational metrics, structured correlation across request/case/run/action IDs, readiness probes and alerts for pending wakes, failed steps and unresolved uncertain results.
 - Replace private local SDK hooks with public lifecycle/recovery interfaces when available and revalidate the pinned integration before upgrades.
 
-The two Mermaid diagrams use standard flowchart and sequence syntax. They were inspected as source for this documentation change but were not rendered or parser-validated locally because no Mermaid renderer/parser was available in the project or command path.
+## Diagram sources and scope
+
+The embedded figures use the Diagram Design skill referenced by the project owner. Each has a self-contained HTML source and an SVG export in `docs/diagrams/`. The system overview combines the two browser views into one component and the case service/policy evaluator into one decision component. The decision figure groups the held outcomes so the resume loop remains readable. Detailed roles, API contracts, separate storage ownership and individual outcomes remain documented above.
+
+The figures are documentation of the local implementation, not a cloud deployment receipt or a claim that a physical maintenance action occurred. The earlier interactive Archify map remains available as a separate artefact.

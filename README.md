@@ -1,31 +1,24 @@
 # Property Desk
 
-Manage maintenance requests, check the evidence and involve staff when a decision needs them. Built with Python and Vercel Workflow.
+Maintenance requests with explicit decisions, human review and a visible next step. Built with Python and native Vercel Workflow.
 
-## Description
+- [1. What operational problem it solves](#1-what-operational-problem-it-solves)
+- [2. Architecture](#2-architecture)
+- [3. How to run it](#3-how-to-run-it)
+- [4. Models, APIs and external services used](#4-models-apis-and-external-services-used)
+- [5. Key assumptions](#5-key-assumptions)
+- [6. Known limitations](#6-known-limitations)
+- [7. What we'd build next](#7-what-wed-build-next)
 
-Property Desk is a local prototype for tenants and property management staff. Tenants report maintenance problems through a conversation; staff see the evidence, proposed action, outstanding checks and decisions that need a person. Staff can edit the rules that let the agent act, ask for clarification, wait or escalate. Approving one requirement never clears unrelated blockers.
+## 1. What operational problem it solves
+
+A maintenance request can involve a tenant, property manager and contractor, each holding a different part of the history. A contractor saying the work is finished may conflict with a tenant reporting that it is still broken. An invoice does not prove completion; a spending approval does not establish permission to enter. Staff need to work out which evidence is missing, which action is safe to take, and whose decision is required.
+
+Property Desk makes those decisions explicit. It gathers a tenant's report, proposes the next action, checks its evidence and authority, and either proceeds through a simulated adapter, asks for clarification, waits, routes a scoped decision to a person, or stops the affected action. The request can continue to gather information while that action is held. Staff see the reason and the evidence needed to resume.
 
 **Status:** native Workflow execution is implemented and has been verified locally. Contractor contact, bookings, work instructions and payment-related actions are **simulated**. Hosted Vercel execution, PostgreSQL deployment, live model calls and production identity integrations remain unverified. The interface is called Property Desk. The Python package is `property-workflow` and the FastAPI title is Property Workflow.
 
-## Table of Contents
-
-- [Description](#description)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture Overview](#architecture-overview)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Screenshots / Demo](#screenshots--demo)
-- [API / CLI Reference](#api--cli-reference)
-- [Tests](#tests)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact / Support](#contact--support)
-
-## Features
+### What the prototype does
 
 - Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts.
 - Per-action **PASS / FAIL / UNKNOWN / CONFLICT** checks that retain all relevant blockers and source links.
@@ -37,44 +30,25 @@ Property Desk is a local prototype for tenants and property management staff. Te
 - Stable action identities, duplicate handling and reconciliation of uncertain acknowledgements.
 - Chronological replay of the fixed 25-case BUILD partition, with source hash checks and later material withheld.
 
-## Tech Stack
+## 2. Architecture
 
-| Layer | Implementation |
-| --- | --- |
-| Language | Python 3.12; project constraint `>=3.12,<3.13` |
-| API and validation | FastAPI 0.118.0, Uvicorn 0.37.0, Pydantic 2.14.0 |
-| Workflow | Native Python `vercel-workflow==0.11.1`; local event store and embedded queue |
-| Persistence | SQLAlchemy 2.0.43; SQLite locally; unverified PostgreSQL/psycopg deployment path |
-| Interface | Static HTML, CSS and vanilla JavaScript served by FastAPI; vendored Lucide icons |
-| Interpretation | Local literal parser by default; optional HTTPX adapter to the OpenAI Responses API |
-| Testing | pytest 8.4.2, API checks and native Workflow subprocess tests |
-| Deployment preparation | FastAPI configuration in `vercel.json`; Workflow entry point in `pyproject.toml` |
-
-[requirements.lock](requirements.lock) pins the recorded dependencies. Serving the interface requires no frontend build; Node.js is only needed for the optional JavaScript syntax check.
-
-## Architecture Overview
-
-```mermaid
-flowchart LR
-    Tenant["Tenant browser"] --> API["FastAPI routes"]
-    Staff["Staff browser"] --> API
-    API --> Service["Case service and policy checks"]
-    Service --> DB[("Case data and audit records")]
-    API --> Workflow["Native Vercel Workflow"]
-    Workflow --> Service
-    Workflow --> World[("Workflow events and timers")]
-    Service --> Interpreter["Evidence interpreter"]
-    Interpreter -. "Optional live mode" .-> Model["External model API"]
-    Service --> Adapter["Simulated operational adapter"]
-```
+![Property Desk system overview: browser views, case and policy service, native Workflow and separate stores](docs/diagrams/system-overview.svg)
 
 Both browser views share the case service and policy checks. Incoming evidence and events commit before the workflow is signalled; the coordinator reassesses current requirements before recording a simulated action. Application records and native Workflow events use separate storage, both of which are needed for local recovery.
 
 [ARCHITECTURE.md](ARCHITECTURE.md) describes the components, data flows, deployment constraints and design decisions.
 
-Open the [interactive architecture map](docs/diagrams/property-workflow.html) to explore components and three guided views. Its [editable JSON](docs/diagrams/property-workflow.architecture.json), [delivery receipt](docs/diagrams/property-workflow.delivery.json) and [source notes](docs/diagrams/source-notes.md) are kept alongside it. The map describes reviewed local code; it does not represent a verified cloud deployment.
+### Property Desk architecture
 
-## Installation
+[![Property Desk architecture map showing browser views, case service, policy checks, native Workflow, storage and simulated actions](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)
+
+[Download the interactive architecture map](docs/diagrams/property-workflow.html) using GitHub’s **Download raw file** button, then open the HTML file locally to explore components and three guided views. GitHub displays the static preview above; it does not run the interactive HTML inside the README.
+
+The map’s [editable JSON](docs/diagrams/property-workflow.architecture.json), [delivery receipt](docs/diagrams/property-workflow.delivery.json) and [source notes](docs/diagrams/source-notes.md) are kept alongside it. It describes reviewed local code; it does not represent a verified cloud deployment.
+
+The companion [decision flow](docs/diagrams/decision-flow.html) shows how a held action returns to a fresh assessment. The [standalone system overview](docs/diagrams/system-overview.html) is the editable HTML source of the embedded figure. Both diagrams describe the implemented local system; optional live interpretation and hosted deployment are explicitly distinguished.
+
+## 3. How to run it
 
 ### Requirements
 
@@ -94,8 +68,6 @@ mkdir -p var
 ```
 
 Use an existing prepared `.venv` when dependencies are already installed. The application does **not** automatically load a copied `.env` file; [`.env.example`](.env.example) documents available settings.
-
-## Usage
 
 ### Start the native local application
 
@@ -128,18 +100,18 @@ Use one process without `--reload`. Local timers require a running process; star
 3. As **Case manager**, create a fictional dishwasher case at `DEMO-FLAT-1` with category `appliance`. This identifier has an explicit demo-only trusted property/contact mapping. Choose **Instruct work** to see missing requirements separately.
 4. Add original evidence and exact quoted claims. Switch to the role named on a review to correct a supported fact or grant a scoped approval. Remaining blockers stay visible.
 5. For routine automatic progress, propose **Request a quote** for that dishwasher. Once its smaller requirement set passes, native mode records one simulated action. Completing a quote request does not resolve the repair.
-6. As **Policy editor**, change a setting or ALL/ANY rule, then save, preview, compare and publish. Explicitly reassess affected pending actions. Supported plain-English wording and **Make this a policy** produce drafts for review.
+6. As **Policy editor**, change a setting or ALL/ANY rule, then save, preview, compare and publish. Explicitly reassess affected pending actions. Supported plain-English wording and **Review suggested policy** produce drafts for review.
 7. Optionally import a BUILD case through a chosen event count. Interpretation receives only that chronological prefix, without later events or attachment bytes.
 
 For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess timers** and **Simulate action**; native background hooks and timers do not run. See [the portal guide](docs/PORTAL_UI.md) for both journeys.
 
-## Configuration
+### Configuration
 
-### Environment
+#### Environment
 
 | Variable | Purpose |
 | --- | --- |
-| `APP_MODE` | Defaults to `demo`; deployment configuration uses `production`, disabling demo sessions and requiring database/staff configuration. |
+| `APP_MODE` | Defaults to `demo`; set `production` explicitly for hosted preparation. This disables demo sessions and requires database/staff configuration; `vercel.json` does not set it for you. |
 | `WORKFLOW_MODE` | Defaults to `native_local`; alternatives are `manual_demo` and prepared-but-unverified `native_cloud`. |
 | `WORKFLOW_TARGET_WORLD` | Set explicitly to `local` or, for hosted configuration, `vercel`. Mode/world mismatches are rejected. |
 | `DATABASE_URL` | Defaults to shared `var/property.db`. Override for isolated development; the deployment path requires PostgreSQL. |
@@ -151,9 +123,9 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 | `OPENAI_MODEL` | Configured default `gpt-4.1-mini`; account availability has not been verified. |
 | `STAFF_TOKEN_ROLES` | Production API configuration: JSON records with `id`, `role` and bearer-secret `sha256`. Does not provide browser login or organisation isolation. |
 
-Tenant conversation extraction and plain-English policy drafting remain bounded local parsers; enabling the evidence-model adapter does not replace them.
+Tenant name/address/issue extraction and plain-English policy drafting remain local parsers. In live mode, a completed tenant report and later updates pass through the case service to the external evidence interpreter; those source texts can therefore be sent to OpenAI.
 
-### Editable policy settings
+#### Editable policy settings
 
 | Setting | Demo default | Meaning |
 | --- | --- | --- |
@@ -169,37 +141,64 @@ Tenant conversation extraction and plain-English policy drafting remain bounded 
 
 Rules combine supported fact states with ALL/ANY conditions, action/property/category filters, a response and an owner. The `total` fact must be the full comparable cumulative job commitment including tax; the prototype does not calculate it across invoices. Unknown is not zero. Precise appointment values, conflicting slot reconciliation and accepted-source configuration remain future work.
 
-## Screenshots / Demo
+### BUILD replay
 
-- **Local demo:** [http://127.0.0.1:8027](http://127.0.0.1:8027), after starting the application.
-- **Walkthrough:** [Tenant and property-manager journey](docs/PORTAL_UI.md).
-- **Public demo URL:** `TODO: add after a hosted deployment is authorised and verified.`
+```sh
+.venv/bin/python -m app.replay --all-first --output var/build-replay-first-events.json
+.venv/bin/python -m app.replay --case 013 --events 2
+```
 
-No public deployment is claimed. Screenshots must not expose credentials or reserved evaluation records.
+Replay verifies the source manifest, uses temporary isolated storage, disables live models and executes no adapters. It reports blockers, not an accuracy score. Index pages, later events and all binary attachments are excluded; see [BUILD replay boundaries](docs/BUILD_REPLAY_BOUNDARY.md), including retrospective material in BUILD 008.
 
-The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. Operational actions remain simulated.
+### Checks
 
-### Tenant request
+The test framework is **pytest**. From the prepared environment:
 
-![Tenant conversation showing a saved fictional report about a leaking kitchen tap](docs/screenshots/tenant-request.jpg)
+```sh
+.venv/bin/python -m pytest -q
+.venv/bin/python -m pytest tests/test_native_workflow.py tests/test_native_api.py -q
+node --check static/app.js
+```
 
-The tenant's report is saved for the property manager to check. The confirmation distinguishes a recorded request from a booking or completed repair.
+Coverage includes independent blockers, evidence conflicts, roles and revisions, policy changes during a wait, duplicate handling, tenant ownership, bounded policy interpretation, uncertain-result reconciliation and native hook/timer/restart behaviour. Tests use isolated storage; do not point them at the shared application database.
 
-### Staff review
+[Recorded verification](docs/VERIFICATION.md) includes the earlier baseline and later 132-test checks. It and the [runtime evidence](docs/WORKFLOW_RUNTIME.md) describe dated checks. They are historical snapshots, not a claim that subsequent revisions passed the same run. Local SDK and simulated-receipt tests do not establish cloud operation, model accuracy, message delivery or physical repairs.
 
-![Staff review queue with separate person-and-property and contact-route requirements](docs/screenshots/staff-review.jpg)
+## 4. Models, APIs and external services used
 
-Two open reviews block the proposed quote request: person/property mapping and the verified contact route. Each review shows its scope, owner and other remaining blocker.
+The default local demonstration needs **no external model or cloud account**. The following table describes implemented calls and configured options, not sponsor affiliations or planned integrations.
 
-### Policy settings
+| Component or service | Current use | Credentials and verification boundary |
+| --- | --- | --- |
+| Local evidence parser | `AI_MODE=literal_demo`: detects a limited set of source assertions and categories without a model call | No credentials; does not infer verified consent or authority |
+| Tenant and policy parsers | Local name/address/issue extraction and a bounded vocabulary for policy suggestions | Not general-purpose model conversations; policy publication remains explicit |
+| OpenAI Responses API | Optional live evidence interpretation: HTTPX `POST https://api.openai.com/v1/responses`; configured model default `gpt-4.1-mini` | Requires explicit `AI_MODE=live`, `OPENAI_API_KEY`, and optionally `OPENAI_MODEL`; live calls and account/model availability are unverified |
+| Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
+| SQLite / SQLAlchemy | Application case state, evidence, decisions, policies and local tenant state | Local storage; PostgreSQL/psycopg is an unverified hosted path, not a provisioned service |
+| FastAPI JSON API | Same-origin browser access to tenant conversations, case decisions and policy operations | Demo sessions locally; production staff bearer configuration is separate from a browser login |
+| Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real email, SMS, phone, contractor system or payment service is connected |
+| Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
 
-![Policy editor showing an unsaved proposal to escalate missing access permission](docs/screenshots/policy-settings.jpg)
+The live evidence adapter validates the returned structure and exact source quotations. Its assertions still need the policy and review checks. Enabling live mode can send a completed tenant report and subsequent update text to OpenAI through the case service; it does not replace the tenant slot parser or the policy parser. No Anthropic or ElevenLabs integration is implemented in this application.
 
-A plain-English instruction produces a proposed change to route missing access permission to immediate human review. The proposal is unsaved and unpublished; published version 1 remains visible below it.
+### Libraries and runtime
 
-## API / CLI Reference
+| Layer | Implementation |
+| --- | --- |
+| Language | Python 3.12; project constraint `>=3.12,<3.13` |
+| API and validation | FastAPI 0.118.0, Uvicorn 0.37.0, Pydantic 2.14.0 |
+| Workflow | Native Python `vercel-workflow==0.11.1`; local event store and embedded queue |
+| Persistence | SQLAlchemy 2.0.43; SQLite locally; unverified PostgreSQL/psycopg deployment path |
+| Interface | Static HTML, CSS and vanilla JavaScript served by FastAPI; vendored Lucide icons |
+| Interpretation | Local literal parser by default; optional HTTPX adapter to the OpenAI Responses API |
+| Testing | pytest 8.4.2, API checks and native Workflow subprocess tests |
+| Deployment preparation | FastAPI configuration in `vercel.json`; Workflow entry point in `pyproject.toml` |
 
-### Minimal staff API example
+[requirements.lock](requirements.lock) pins the recorded dependencies. Serving the interface requires no frontend build; Node.js is only needed for the optional JavaScript syntax check.
+
+### Application API
+
+#### Minimal staff API example
 
 With the local server running, create a demo session and submit a fictional quote request:
 
@@ -245,32 +244,31 @@ The response includes the case and current assessment. Native execution can adva
 
 Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at`, and `claims` with `key`, `value`, `source_quote` and optional `scope`. Quotes must match the submitted text. Corrections identify a claim, source and reason; approvals identify the requirement, source, scope and expiry. Hook tokens are not authorisation credentials. See `/docs` for complete request schemas.
 
-### BUILD replay
+## 5. Key assumptions
 
-```sh
-.venv/bin/python -m app.replay --all-first --output var/build-replay-first-events.json
-.venv/bin/python -m app.replay --case 013 --events 2
-```
+- This is a **single-organisation local demonstration**, using fictional UI reports or only the authorised BUILD partition. The view toggle and demo roles are not production authentication.
+- A name, address, message, document or model assertion is evidence to assess. It does not automatically establish identity, consent, authority or completion. The documented literal-category fixture and `DEMO-FLAT-1` directory are demo-only exceptions.
+- Permissions and approvals apply to the relevant property, work item, action, provider and access method. Every applicable check must pass; resolving one blocker leaves the others in place.
+- Demo thresholds, role mappings and Monday–Friday 09:00–17:00 Europe/London working hours are illustrative. An operational owner must supply real authority mappings, thresholds, accepted evidence and urgent-response procedures.
+- A responsible staff member can verify evidence, request more information or make a scoped decision. A review can suggest a policy draft, but only an authorised editor can save, preview and publish it. The system does not rewrite its code after a human decision.
+- Local native execution uses one running Python process and retains both application and Workflow storage. A recorded action, accepted wake or finished workflow is not proof of a physical repair.
+- Development replay knows only the selected history prefix. Later messages, retrospective summaries and attachment contents cannot be treated as facts available at an earlier decision.
 
-Replay verifies the source manifest, uses temporary isolated storage, disables live models and executes no adapters. It reports blockers, not an accuracy score. Index pages, later events and all binary attachments are excluded; see [BUILD replay boundaries](docs/BUILD_REPLAY_BOUNDARY.md), including retrospective material in BUILD 008.
+## 6. Known limitations
+
+| Area | Present limit |
+| --- | --- |
+| Real operations | All external operational effects are simulated. No contractor visit, message delivery, payment or physical repair is established by a demo receipt. |
+| Conversation and evidence | Local parsing supports limited wording. Live model quality, attachment ingestion, image understanding and a voice conversation are not verified or implemented as complete flows. |
+| Identity and access | Production tenant login, staff SSO, organisation/property isolation and a real authority directory are unfinished. Tenant routes are disabled outside demo mode. |
+| Hosted operation | Vercel cloud execution and PostgreSQL behaviour are unverified. Deployment configuration does not provision accounts, secrets, storage, authentication or a production environment. |
+| Durability and scale | Local delivery uses an in-memory queue plus persisted native history and startup recovery. One process owns the Workflow directory; hot reload and multiple workers are unsupported. The prototype serialises transactions and has no production capacity or availability claim. |
+| Evaluation | BUILD replay reports decisions and blockers, not accuracy. Development provenance does not support a claim of a completely blind holdout; see the disclosure below. |
+| Operations and governance | Production monitoring, migrations, backup/restore objectives, retention/deletion procedures and security assessment remain work to do. The append-only ledger is not administrator-tamper-proof. |
 
 The earlier policy audit saw the complete corpus before splitting, and a later shared-runtime UI check exposed a reserved record. That record was not used to tune the implementation, but the shared store and displayed case cannot be described as untouched evaluation material. Preserve this disclosure and use separately controlled evaluation storage.
 
-## Tests
-
-The test framework is **pytest**. From the prepared environment:
-
-```sh
-.venv/bin/python -m pytest -q
-.venv/bin/python -m pytest tests/test_native_workflow.py tests/test_native_api.py -q
-node --check static/app.js
-```
-
-Coverage includes independent blockers, evidence conflicts, roles and revisions, policy changes during a wait, duplicate handling, tenant ownership, bounded policy interpretation, uncertain-result reconciliation and native hook/timer/restart behaviour. Tests use isolated storage; do not point them at the shared application database.
-
-[Recorded verification](docs/VERIFICATION.md) and [runtime evidence](docs/WORKFLOW_RUNTIME.md) describe dated checks. They are historical snapshots, not a claim that subsequent revisions passed the same run. Local SDK and simulated-receipt tests do not establish cloud operation, model accuracy, message delivery or physical repairs.
-
-## Roadmap
+## 7. What we'd build next
 
 - Label acceptable outcomes and run separately controlled evaluation after freezing code and policies.
 - Add production staff/tenant identity, organisation access controls and a real property/authority directory.
@@ -280,8 +278,40 @@ Coverage includes independent blockers, evidence conflicts, roles and revisions,
 - Extend typed scheduling, accepted-source settings, holiday feeds and cumulative budget/invoice integration.
 - Validate live model interpretation and broader conversation understanding.
 - Add operational metrics, tracing, alerting and service targets.
+- Extend review-derived policy suggestions with duplicate-rule checks and regression examples; retain explicit editor review and publication.
+- Add a voice intake adapter that confirms missing details, preserves the transcript and calls the same case API, with a clear handover to a person.
 
-## Contributing
+## Project reference
+
+### Screenshots and demo
+
+- **Local demo:** [http://127.0.0.1:8027](http://127.0.0.1:8027), after starting the application.
+- **Walkthrough:** [Tenant and property-manager journey](docs/PORTAL_UI.md).
+- **Public demo URL:** `TODO: add after a hosted deployment is authorised and verified.`
+
+No public deployment is claimed. Screenshots must not expose credentials or reserved evaluation records.
+
+The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. Operational actions remain simulated.
+
+#### Tenant request
+
+![Tenant conversation showing a saved fictional report about a leaking kitchen tap](docs/screenshots/tenant-request.jpg)
+
+The tenant's report is saved for the property manager to check. The confirmation distinguishes a recorded request from a booking or completed repair.
+
+#### Staff review
+
+![Staff review queue with separate person-and-property and contact-route requirements](docs/screenshots/staff-review.jpg)
+
+Two open reviews block the proposed quote request: person/property mapping and the verified contact route. Each review shows its scope, owner and other remaining blocker.
+
+#### Policy settings
+
+![Policy editor showing an unsaved proposal to escalate missing access permission](docs/screenshots/policy-settings.jpg)
+
+A plain-English instruction produces a proposed change to route missing access permission to immediate human review. The proposal is unsaved and unpublished; published version 1 remains visible below it.
+
+### Contributing
 
 - Read [AGENTS.md](AGENTS.md), [the architecture](ARCHITECTURE.md) and [data boundaries](docs/DATA_BOUNDARIES.md).
 - Keep `handoff/` and `data/build/` read-only. Develop only against the authorised BUILD partition; do not inspect reserved cases to tune rules.
@@ -290,13 +320,13 @@ Coverage includes independent blockers, evidence conflicts, roles and revisions,
 - Describe changes, checks and limitations in a pull request. Local development does not imply real communications or deployment.
 - Open an [issue](https://github.com/MasteraSnackin/hackathon-valley/issues) for a defect or a [pull request](https://github.com/MasteraSnackin/hackathon-valley/pulls) for a proposed change. Repository access is required.
 
-## License
+### Licence
 
 **Project licence: not specified.** No project-wide `LICENSE` file is present; this README does not grant or choose one on the maintainer's behalf.
 
 `TODO: choose the project licence and add a root LICENSE file before public reuse.` Third-party assets retain their own terms; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
 
-## Contact / Support
+### Contact and support
 
 - **Maintainer:** `TODO: add maintainer or team name.`
 - **Support channel:** [GitHub issues](https://github.com/MasteraSnackin/hackathon-valley/issues), for users with repository access.

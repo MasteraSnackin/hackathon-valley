@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="system-overview-title system-overview-desc">
+<title id="system-overview-title">How Property Desk fits together</title>
+<desc id="system-overview-desc">Browser views reach FastAPI and a transactional case service with explicit policy checks, optional evidence interpretation and simulated adapters; native Vercel Workflow wakes only after commit, calls a fresh service cycle and owns a separate World store.</desc>
+<defs><style>
+text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; fill: #192C30; }
+.title { font-size: 32px; font-weight: 650; letter-spacing: -0.4px; }
+.subtitle { font-size: 20px; fill: #647376; }
+.name { font-size: 20px; font-weight: 600; }
+.name-lg { font-size: 24px; font-weight: 650; }
+.detail, .caption, .edge-label { font-size: 16px; }
+.detail, .caption { fill: #647376; }
+.edge-label { font-weight: 600; letter-spacing: 0.4px; fill: #647376; }
+.node { fill: #FFFFFF; stroke: #647376; stroke-width: 1.2; }
+.input { fill: #EDF0EC; stroke: #647376; stroke-width: 1.2; }
+.store { fill: #EDF0EC; stroke: #647376; stroke-width: 1.2; }
+.focal { fill: #E7F0E9; stroke: #215848; stroke-width: 1.6; }
+.connector { fill: none; stroke: #647376; stroke-width: 1.6; marker-end: url(#system-overview-arrow); }
+.async { stroke-dasharray: 8 4; }
+.mask { fill: #F5F6F2; }
+.rule { stroke: #DCE3DF; stroke-width: 1; }
+</style>
+<marker id="system-overview-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#647376"/></marker>
+<marker id="system-overview-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#215848"/></marker>
+<marker id="system-overview-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#355C85"/></marker>
+</defs>
+<rect width="1280" height="720" fill="#F5F6F2"/>
+
+<text x="40" y="52" class="title">How Property Desk fits together</text>
+<text x="40" y="88" class="subtitle">Application policy decides; native Workflow coordinates the next fresh check.</text>
+<!-- Connectors precede nodes; each relationship has a distinct attachment point. -->
+<g aria-hidden="true">
+  <path id="browser-to-api" class="connector" d="M256 240 H328"/>
+  <path id="api-to-service" class="connector" d="M576 240 H696"/>
+  <path id="service-to-sql" class="connector" d="M984 248 H1032"/>
+  <path id="api-to-workflow" class="connector async" d="M400 296 V440"/>
+  <path id="workflow-to-service" class="connector async" d="M632 488 H656 Q664 488 664 480 V300 Q664 292 672 292 H696"/>
+  <path id="workflow-to-world" class="connector" d="M328 504 H256"/>
+  <path id="service-to-interpretation" class="connector" d="M760 320 V432"/>
+  <path id="service-to-adapters" class="connector" d="M920 320 V384 Q920 392 928 392 H1128 Q1136 392 1136 400 V440"/>
+</g>
+<g>
+  <rect class="mask" x="592" y="204" width="88" height="28"/>
+  <text x="636" y="224" text-anchor="middle" class="edge-label">MUTATE</text>
+  <rect class="mask" x="244" y="352" width="148" height="28"/>
+  <text x="318" y="372" text-anchor="middle" class="edge-label">AFTER COMMIT</text>
+  <rect class="mask" x="520" y="368" width="136" height="28"/>
+  <text x="588" y="388" text-anchor="middle" class="edge-label">FRESH CYCLE</text>
+  <rect class="mask" x="768" y="356" width="120" height="28"/>
+  <text x="828" y="376" text-anchor="middle" class="edge-label">INTERPRET</text>
+  <rect class="mask" x="980" y="360" width="104" height="24"/>
+  <text x="1032" y="380" text-anchor="middle" class="edge-label">SIMULATE</text>
+</g>
+<g data-node="browser">
+  <rect class="input" x="40" y="184" width="216" height="112" rx="8"/>
+  <text x="56" y="224" class="name">Browser views</text>
+  <text x="56" y="256" class="detail">Tenant + management</text>
+  <text x="56" y="280" class="detail">Same-origin requests</text>
+</g>
+<g data-node="api">
+  <rect class="node" x="328" y="184" width="248" height="112" rx="8"/>
+  <text x="344" y="224" class="name-lg">FastAPI</text>
+  <text x="344" y="256" class="detail">Validation + role checks</text>
+  <text x="344" y="280" class="detail">Serves client and APIs</text>
+</g>
+<g data-node="service">
+  <rect class="focal" x="696" y="168" width="288" height="152" rx="8"/>
+  <text x="712" y="204" class="name-lg">Case service</text>
+  <text x="712" y="236" class="name">Explicit policy checks</text>
+  <text x="712" y="264" class="detail">All requirements + scoped reviews</text>
+  <text x="712" y="292" class="detail">Owns each SQL transaction</text>
+</g>
+<g data-node="sql">
+  <rect class="store" x="1032" y="184" width="208" height="128" rx="8"/>
+  <text x="1048" y="216" class="name">SQL application</text>
+  <text x="1048" y="240" class="name">store</text>
+  <text x="1048" y="272" class="detail">State + evidence</text>
+  <text x="1048" y="296" class="detail">Wake intent + receipts</text>
+</g>
+<g data-node="world">
+  <rect class="store" x="40" y="448" width="216" height="120" rx="8"/>
+  <text x="56" y="480" class="name">Native World store</text>
+  <text x="56" y="512" class="detail">Workflow-owned history</text>
+  <text x="56" y="540" class="detail">Runs, hooks, steps, waits</text>
+</g>
+<g data-node="workflow">
+  <rect class="node" x="328" y="440" width="304" height="128" rx="8"/>
+  <text x="344" y="476" class="name-lg">Native Vercel Workflow</text>
+  <text x="344" y="508" class="detail">Coordinator, hooks + timers</text>
+  <text x="344" y="536" class="detail">Calls a fresh service cycle</text>
+</g>
+<g data-node="interpretation">
+  <rect class="node" x="720" y="432" width="264" height="136" rx="8"/>
+  <text x="736" y="464" class="name">Evidence interpretation</text>
+  <text x="736" y="496" class="detail">Local patterns by default</text>
+  <text x="736" y="520" class="detail">Optional live evidence model</text>
+  <text x="736" y="548" class="detail">Before the transaction</text>
+</g>
+<g data-node="adapters">
+  <rect class="node" x="1032" y="440" width="208" height="128" rx="8"/>
+  <text x="1048" y="476" class="name">Simulated adapters</text>
+  <text x="1048" y="508" class="detail">No contact or charge</text>
+  <text x="1048" y="536" class="detail">Receipt stored in SQL</text>
+</g>
+<text x="40" y="604" class="caption">Evidence, state and wake intent commit together. FastAPI wakes the coordinator only after commit.</text>
+<line class="rule" x1="40" y1="624" x2="1240" y2="624"/>
+<text x="40" y="648" class="caption">One local process; two separately owned stores. Cloud operation and live model quality remain unverified.</text>
+<path d="M40 676 H80" fill="none" stroke="#647376" stroke-width="1.6" stroke-dasharray="8 4"/>
+<text x="96" y="676" class="caption">Dashed arrows: asynchronous coordination</text>
+<text x="640" y="676" class="caption">Boxes group responsibilities, not separate deployments.</text>
+
+</svg>
