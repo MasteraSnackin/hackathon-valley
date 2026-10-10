@@ -6,8 +6,11 @@ from datetime import timedelta
 from fastapi import FastAPI, Request, Depends, Body, Query
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
+from .localenv import load_local_env
+load_local_env()
 from .domain import *
 from .service import get_service,Forbidden,Conflict
+from . import ai, jev
 from .build_data import list_build,import_case,snapshot
 
 ROOT=Path(__file__).resolve().parent.parent
@@ -17,7 +20,12 @@ SESSIONS={}
 
 async def wake(cid):
     service=get_service()
-    if WORKFLOW_MODE=='manual_demo':return {'mode':'manual_demo','notice':'Native workflow not running'}
+    if WORKFLOW_MODE=='manual_demo':
+        # Labelled manual mode: Claude reads and drafts inline in this request;
+        # timers and actions still wait for the staff buttons.
+        spawned=await asyncio.to_thread(service.claude_steps,cid)
+        for new_id in spawned:await wake(new_id)
+        return {'mode':'manual_demo','notice':'Native workflow not running','split_case_ids':spawned}
     from .workflows import start_case_coordinator,signal_case_event
     try:
         run_id=await start_case_coordinator(cid)
@@ -31,6 +39,12 @@ async def wake(cid):
     except Exception as exc:
         with service.db.tx() as c:service.db.add(c,'workflow_error',{'error_type':type(exc).__name__,'notice':'Event is durably stored; pending recovery. Native orchestration has not been confirmed.'},cid)
         return {'status':'pending_recovery','error_type':type(exc).__name__}
+
+async def settle(cid,result):
+    """Wake the coordinator; in manual mode return the state after inline Claude steps."""
+    await wake(cid)
+    if WORKFLOW_MODE=='manual_demo':return await asyncio.to_thread(get_service().detail,cid)
+    return result
 
 @asynccontextmanager
 async def lifespan(app):
@@ -92,11 +106,15 @@ def actor(request:Request):
             return {'id':identity['id'],'role':identity['role']}
     raise Forbidden('Valid staff authentication required')
 
+def model_status():
+    # Reports whether a credential is configured, never the credential.
+    return {'provider':'anthropic','model':ai.model_id(),'credential_configured':ai.configured(),'prompt_version':ai.PROMPT_VERSION}
+
 @app.get('/api/session')
 def session(request:Request):
     try:who=actor(request)
     except Forbidden:who=None
-    return {'actor':who,'mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','authentication':'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
+    return {'actor':who,'mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),'authentication':'Loopback-only demonstration sessions, unsuitable for production' if MODE=='demo' else 'Server-configured staff API credentials'}
 
 @app.post('/api/demo-session')
 def demo_session(request:Request,data:dict=Body(...)):
@@ -110,30 +128,45 @@ def demo_session(request:Request,data:dict=Body(...)):
 def case_list(who=Depends(actor)):return get_service().list_cases()
 @app.post('/api/cases')
 async def create(data:Intake,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().intake,data,who);await wake(result['case']['id']);return result
+    result=await asyncio.to_thread(get_service().intake,data,who);return await settle(result['case']['id'],result)
 @app.get('/api/cases/{cid}')
 def detail(cid:str,who=Depends(actor)):return get_service().detail(cid)
 @app.post('/api/cases/{cid}/evidence')
 async def evidence(cid:str,data:EvidenceInput,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().evidence,cid,data,who);await wake(cid);return result
+    result=await asyncio.to_thread(get_service().evidence,cid,data,who);return await settle(cid,result)
 @app.post('/api/cases/{cid}/proposal')
 async def proposal(cid:str,data:ProposalInput,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().proposal,cid,data,who);await wake(cid);return result
+    result=await asyncio.to_thread(get_service().proposal,cid,data,who);return await settle(cid,result)
 @app.post('/api/cases/{cid}/evaluate')
 async def assess(cid:str,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().evaluate_case,cid,who);await wake(cid);return result
+    result=await asyncio.to_thread(get_service().evaluate_case,cid,who);return await settle(cid,result)
 @app.post('/api/cases/{cid}/execute')
 async def execute(cid:str,data:dict=Body(default={}),who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().execute,cid,who,data.get('outcome','success'));await wake(cid);return result
+    result=await asyncio.to_thread(get_service().execute,cid,who,data.get('outcome','success'));return await settle(cid,result)
 @app.post('/api/cases/{cid}/reconcile')
 async def reconcile(cid:str,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().reconcile,cid,who);await wake(cid);return result
+    result=await asyncio.to_thread(get_service().reconcile,cid,who);return await settle(cid,result)
 @app.post('/api/cases/{cid}/tick')
 async def tick(cid:str,who=Depends(actor)):
-    get_service().role(who,{'case_manager'});await asyncio.to_thread(get_service().tick,cid);await wake(cid);return get_service().detail(cid)
+    get_service().role(who,{'case_manager'});await asyncio.to_thread(get_service().tick,cid);await wake(cid);return await asyncio.to_thread(get_service().detail,cid)
+@app.post('/api/cases/{cid}/tenant-reply')
+async def tenant_reply(cid:str,data:dict=Body(...),who=Depends(actor)):
+    if set(data)-{'text'} or not isinstance(data.get('text'),str) or not data['text'].strip():raise ValueError('Send {"text": "..."} only')
+    result=await asyncio.to_thread(get_service().tenant_reply,cid,data['text'][:50000],who);return await settle(cid,result)
+@app.post('/api/cases/{cid}/triage/retry')
+async def retry_triage(cid:str,who=Depends(actor)):
+    result=await asyncio.to_thread(get_service().retry_triage,cid,who);return await settle(cid,result)
+@app.post('/api/messages/{mid}/approve')
+async def approve_message(mid:str,data:dict=Body(default={}),who=Depends(actor)):
+    if set(data)-{'text'}:raise ValueError('Only an optional edited text is accepted')
+    result=await asyncio.to_thread(get_service().approve_message,mid,who,data.get('text'));return await settle(result['case']['id'],result)
+@app.post('/api/messages/{mid}/reject')
+async def reject_message(mid:str,data:dict=Body(...),who=Depends(actor)):
+    if set(data)-{'reason','redraft'}:raise ValueError('Send reason and optional redraft only')
+    result=await asyncio.to_thread(get_service().reject_message,mid,who,data.get('reason',''),bool(data.get('redraft')));return await settle(result['case']['id'],result)
 @app.post('/api/reviews/{rid}/respond')
 async def respond(rid:str,data:ReviewResponse,who=Depends(actor)):
-    result=await asyncio.to_thread(get_service().respond,rid,data,who);await wake(result['case']['id']);return result
+    result=await asyncio.to_thread(get_service().respond,rid,data,who);return await settle(result['case']['id'],result)
 @app.get('/api/policies')
 def policies(who=Depends(actor)):return get_service().policies()
 @app.post('/api/policies/draft')
@@ -152,9 +185,10 @@ def build_snapshot(bid:str,event_count:int=Query(default=1,ge=1),who=Depends(act
 @app.post('/api/build-cases/{bid}/import')
 async def import_build(bid:str,data:dict=Body(default={}),who=Depends(actor)):
     if set(data)-{'event_count'}:raise ValueError('Only event_count is supported')
-    result=await asyncio.to_thread(import_case,get_service(),bid,who,data.get('event_count',1));await wake(result['case']['id']);return result
+    result=await asyncio.to_thread(import_case,get_service(),bid,who,data.get('event_count',1));return await settle(result['case']['id'],result)
 @app.get('/api/health')
-def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated'}
+def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'external_operations':'simulated','model':model_status(),
+    'router':{'provider':'typesafe','model':jev.model_id(),'credential_configured':jev.configured(),'router_version':jev.ROUTER_VERSION}}
 
 # Tenant sessions have their own ownership-checked routes. The view switch is
 # demonstration navigation; it is never used as an authorisation boundary.

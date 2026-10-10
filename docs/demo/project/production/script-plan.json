@@ -1,0 +1,59 @@
+{
+  "status": "Source audio preparation complete; source capture validated by final editor. Final movie checks are recorded separately in the delivery report.",
+  "voice": "Generic synthetic macOS Daniel, British English; no voice cloning",
+  "segments": [
+    {
+      "id": "01-request",
+      "text": "Property Desk turns a maintenance report into a tracked case. A tenant reports a leaking kitchen tap.",
+      "word_count": 17,
+      "evidence_required": "Tenant portal: submit and see the saved maintenance request.",
+      "audio_duration_s": 6.791854
+    },
+    {
+      "id": "02-two-checks",
+      "text": "Staff see the request and its blockers. Two checks still need review: the person and property, and a verified contact route.",
+      "word_count": 21,
+      "evidence_required": "Staff case: person/property and verified contact route reviews remain open; classification has already passed.",
+      "audio_duration_s": 8.567542
+    },
+    {
+      "id": "03-first-review",
+      "text": "Resolving the first check leaves the second open.",
+      "word_count": 8,
+      "evidence_required": "Person/property review resolved; verified contact route remains open.",
+      "audio_duration_s": 3.183104
+    },
+    {
+      "id": "04-resume",
+      "text": "Once both are resolved, the local Vercel Workflow rechecks the case and records a simulated quote request. The action history shows what happened.",
+      "word_count": 23,
+      "evidence_required": "Contact route review resolved, native_local run resumes and simulated action receipt appears in Action history.",
+      "audio_duration_s": 9.962604
+    },
+    {
+      "id": "05-policy",
+      "text": "Staff can propose a policy change. This suggestion remains unsaved and unpublished.",
+      "word_count": 12,
+      "evidence_required": "Actual policy assistant shows a proposed change that remains unsaved and unpublished.",
+      "audio_duration_s": 6.175875
+    },
+    {
+      "id": "06-result",
+      "text": "The repair is not yet confirmed. This is a local demo. External actions are simulated.",
+      "word_count": 15,
+      "evidence_required": "Result: action recorded, repair not yet confirmed; retain visible simulation label.",
+      "audio_duration_s": 6.511938
+    }
+  ],
+  "engine": "macOS say at 130 words per minute",
+  "record_scope": "Source narration assets, measured audio durations and planned scene alignment; not final movie acceptance.",
+  "delivery_report": "../../delivery-report.json",
+  "capture_context": {
+    "app_commit": "23cec527a5f3848786b85c965b653982f15a9c57",
+    "interpreter_mode": "literal_demo",
+    "workflow_backend": "native_local",
+    "source_validation": "Source capture checked by final editor",
+    "programme_duration_s": 54
+  },
+  "listening_review": "No continuous listening performed by source audio preparer; consult final delivery report for export review scope."
+}

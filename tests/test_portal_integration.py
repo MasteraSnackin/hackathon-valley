@@ -14,7 +14,8 @@ from app.store import Store
 def portal(tmp_path, monkeypatch):
     monkeypatch.setattr(service, '_service', Service(Store('sqlite:///' + str(tmp_path / 'portal.db'))))
     monkeypatch.setattr(main, 'WORKFLOW_MODE', 'manual_demo')
-    monkeypatch.setenv('AI_MODE', 'literal_demo')
+    # Offline: no model credential, so Claude triage hands messages to staff.
+    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
     with TestClient(main.app) as client:
         yield client
 
@@ -30,8 +31,13 @@ def test_tenant_request_becomes_one_shared_staff_case(portal):
     response = portal.post('/api/tenant/conversations', json=submitted)
     assert response.status_code == 200, response.text
     conversation = response.json()
-    assert conversation['case_id'] and not conversation['missing_fields']
+    # The tenant checks the summary first; nothing reaches staff before confirmation.
+    assert conversation['awaiting_confirmation'] and not conversation['case_id'] and not conversation['missing_fields']
     assert portal.post('/api/tenant/conversations', json=submitted).json()['id'] == conversation['id']
+    confirmed = portal.post('/api/tenant/conversations/' + conversation['id'] + '/confirm')
+    assert confirmed.status_code == 200, confirmed.text
+    conversation = confirmed.json()
+    assert conversation['case_id']
     assert portal.get('/api/cases').status_code == 403
     assert portal.get('/api/policies').status_code == 403
     assert portal.post('/api/policy-assistant/interpret', json={'text': 'Set the spending review threshold to £250'}).status_code == 403
@@ -46,7 +52,8 @@ def test_tenant_request_becomes_one_shared_staff_case(portal):
     assert portal.post('/api/tenant/conversations/' + conversation['id'] + '/messages', json=note).status_code == 200
     assert portal.post('/api/tenant/conversations/' + conversation['id'] + '/messages', json=note).status_code == 200
     after = portal.get('/api/cases/' + conversation['case_id']).json()
-    assert after['case']['revision'] == before + 1
+    # One stored update (the repeat is deduplicated), then its manual-mode reading.
+    assert after['case']['revision'] > before
     assert sum(item['text'] == note['text'] for item in after['evidence']) == 1
 
 
@@ -91,6 +98,7 @@ def test_resolved_access_review_suggests_policy_without_granting_global_permissi
     detail = portal.post('/api/cases', json={
         'title': 'Fictional window repair', 'property_ref': 'DEMO-FLAT-1',
         'report': 'The window handle is broken.', 'category': 'windows',
+        'action': 'instruct_work', 'triage': 'staff',
     }).json()
     review = next(r for r in detail['reviews'] if r['key'] == 'access' and r['status'] == 'open')
     staff(portal, 'access_officer')

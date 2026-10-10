@@ -28,7 +28,7 @@ Native Workflow stores its history separately from case data. Its registered coo
 
 [Open the standalone system overview](docs/diagrams/system-overview.html). The figure groups components by responsibility, not separate deployments. Its project-local visual tokens are recorded in [diagram-style.md](docs/diagrams/diagram-style.md).
 
-The diagram groups the code by responsibility; each box does not represent a separate deployed service. In the supported local mode, FastAPI, the application service and the embedded SDK queue share one process; the application database and native workflow directory must both survive a restart. The live model connection is optional and unverified; the action ledger records simulations only.
+The diagram groups the code by responsibility; each box does not represent a separate deployed service. In the supported local mode, FastAPI, the application service and the embedded SDK queue share one process; the application database and native workflow directory must both survive a restart. The Claude connection has been verified locally with live calls; without a key, messages go to manual triage. The action ledger records simulations only.
 
 The [interactive Archify map](docs/diagrams/property-workflow.html) provides component focus, search and guided views for report assessment, native orchestration and permission checks. Keep its [editable JSON](docs/diagrams/property-workflow.architecture.json), [delivery receipt](docs/diagrams/property-workflow.delivery.json) and [source notes](docs/diagrams/source-notes.md) together. It passed all nine showcase checks with no errors or warnings, automated browser checks at four desktop sizes, and visual review of both themes. Manual control testing was blocked by the in-app browser's restriction on local file URLs; this does not change the recorded automated results.
 
@@ -61,7 +61,7 @@ In demo mode, staff sessions are random, loopback-only cookies backed by an in-m
 
 **Source:** [tenant.py](app/tenant.py); [portal behaviour](docs/PORTAL_UI.md).
 
-The tenant router owns a separate session cookie, conversation ownership checks and an allowlisted response projection. A bounded local parser gathers name, address and issue while retaining original messages. Once these fields are present, a server-side bridge creates one case through `Service.intake`; subsequent messages use `Service.evidence`. Names and addresses remain unverified, and a tenant cannot activate the reserved fictional directory alias by entering it as an address.
+The tenant router owns a separate session cookie, conversation ownership checks and an allowlisted response projection. Claude reads the conversation and proposes name, address and separate problems; only values found in the tenant's own words are kept, and a bounded local parser is the fallback. When all are present the tenant sees a summary and must confirm it; only then does a server-side bridge create one case through `Service.intake`. Subsequent messages use `Service.evidence`. Names and addresses remain unverified, and a tenant cannot activate the reserved fictional directory alias by entering it as an address.
 
 Session hashes, conversation projections, owner indexes, pending deliveries and request receipts are stored in mutable `meta` entries. Message delivery is reserved durably before entering the separately transactional case service. Stable request keys let retries converge after an interrupted case commit. Completed reports and subsequent updates become immutable case evidence. This design does not make every pre-submission conversation field an immutable audit record.
 
@@ -71,11 +71,11 @@ Tenant responses expose owned messages, supplied details and plain-language prog
 
 **Sources:** [ai.py](app/ai.py), [policy_assistant.py](app/policy_assistant.py).
 
-`app.ai` validates a structured interpretation against an exact quotation in the submitted text. Its default `AI_MODE=literal_demo` uses local patterns and makes no model request. Explicit `AI_MODE=live` (normalised to `live_model`) uses HTTPX to POST to `https://api.openai.com/v1/responses`, with the configured `OPENAI_MODEL` default of `gpt-4.1-mini`, and validates the returned structure and quotations. `MODEL_MODE` is a compatibility alias consulted only when `AI_MODE` is absent. A key alone does not enable live calls. The configured model name is not evidence that live calls or account availability have been verified. If interpretation fails, the service records it as unavailable with a manual-review notice; permission still depends on the evidence and policy checks.
+`app.ai` calls Claude through the Anthropic Python SDK (`beta.messages.parse`, Pydantic structured output, adaptive thinking, server-side fallbacks, cached system prompt; model `CLAUDE_MODEL`, default `claude-opus-5`). The `triage_case_messages` workflow step reads each stored message: Claude chooses a route that maps to one policy action, names the work item, splits separate problems into new cases and returns quoted assertions, ambiguities and answers to open questions. The `compose_tenant_messages` step drafts tenant questions with a send recommendation that a deterministic gate checks. Quotes absent from the source are dropped. If Claude is unavailable, refuses or returns invalid output, the message is handed to a case manager; there is no keyword fallback. See [Claude triage](docs/CLAUDE_TRIAGE.md). Before that step, `route_case_messages` asks TypeSafe Jev (`app.jev`) for a route with calibrated confidence; code decides whether Jev's route stands alone, stands with Claude extracting under it, or is handed to Claude in full. See [Jev routing](docs/JEV_ROUTING.md).
 
-Interpretation claims remain unverified. Two demo fixtures are exceptions: the literal intake detector may verify a derived category label, and the fictional `DEMO-FLAT-1` directory supplies demonstration identity/route claims. Neither establishes real identity, consent, authority or completion.
+Interpretation claims remain unverified. Two exceptions exist: policy `triage_auto_accept` may accept Claude's derived category label at sufficient confidence, and the fictional `DEMO-FLAT-1` directory supplies demonstration identity/route claims. Neither establishes real identity, consent, authority or completion.
 
-Tenant name/address/issue extraction remains local. However, completed tenant intake and later updates call `Service.intake` and `Service.evidence`, which invoke the evidence interpreter. In live mode those report and update texts can leave the application for OpenAI; local slot extraction does not imply that the complete tenant journey is offline.
+Tenant name/address/issue extraction remains local. However, completed tenant intake and later updates call `Service.intake` and `Service.evidence`, and Claude then reads them in the coordinator's triage step, so those texts are sent to the Anthropic API; local slot extraction does not imply that the complete tenant journey is offline.
 
 The policy assistant is also deterministic: it translates a bounded vocabulary of plain-English settings and conditions into a proposed `PolicyInput`, or returns clarification/unsupported results. It can derive a conservative suggestion from a resolved review, preserving its provenance. It does not write policy, rewrite code or generalise a case-specific permission. Saving, previewing and publishing remain separate service operations.
 
@@ -205,14 +205,13 @@ env -u VERCEL_QUEUE_BASE_URL \
   APP_MODE=demo \
   WORKFLOW_MODE=native_local \
   WORKFLOW_TARGET_WORLD=local \
-  AI_MODE=literal_demo \
   DATABASE_URL="sqlite:///$property_demo_dir/application.db" \
   WORKFLOW_LOCAL_DATA_DIR="$property_demo_dir/native-world" \
   .venv/bin/python -m uvicorn app.main:app \
   --host 127.0.0.1 --port 8027 --workers 1
 ```
 
-This creates separate storage and leaves the shared default database untouched. For a recovery check, reuse the printed directory and both paths; do not run `mktemp` again. Set environment variables before import, omit hot reload, and retain one worker. The command does not automatically load `.env`; [.env.example](.env.example) documents available settings without credentials. The example does not establish that port 8027 is currently available.
+This creates separate storage and leaves the shared default database untouched. For a recovery check, reuse the printed directory and both paths; do not run `mktemp` again. Set environment variables before import, omit hot reload, and retain one worker. The server loads only the git-ignored `.env.local` (for `ANTHROPIC_API_KEY`); [.env.example](.env.example) documents available settings without credentials. The example does not establish that port 8027 is currently available.
 
 **Unknown deployment details:** Vercel project/account, region, public domain, database provider and sizing, TLS/database connection policy, secret manager, attachment/object store, backup schedule, retention periods and release pipeline. These need explicit deployment decisions; this document does not assume them.
 
@@ -237,7 +236,7 @@ Demo cookies are `HttpOnly` and `SameSite=Strict`, restricted to loopback and in
 
 Production staff bearer values are compared against configured SHA-256 hashes using constant-time comparison. Production tenant authentication, organisation membership, row-level access control and a staff login interface are unimplemented. Authorised staff currently operate on the shared application case set; tenant conversation ownership checks do not prove multi-organisation tenant isolation.
 
-Sources are treated as untrusted evidence. Model output must pass schema and exact-quote validation, remains distinct from verified permission and cannot publish policy. Live model mode would send submitted source text to the configured external API; production data use requires a deliberate data-protection decision before enabling it.
+Sources are treated as untrusted evidence. Model output must pass schema and exact-quote validation, remains distinct from verified permission and cannot publish policy. Claude triage sends submitted source text to the Anthropic API; production data use requires a deliberate data-protection decision.
 
 No audit certification, regulatory compliance, encryption at rest, production key management or tenant-isolation assurance is established. Property reports may contain personal data. Before real use, define lawful processing and access, retention/deletion handling, external processor arrangements and incident procedures. In particular, immutable application history and deletion obligations need a designed retention approach; the present triggers alone do not resolve that requirement.
 
@@ -253,7 +252,7 @@ The staff interface exposes evidence, claim provenance, decisions, reviews, acti
 | --- | --- |
 | Modular Python application with a static client | Keeps the demonstration understandable and deployable through FastAPI; it shares one service and data model rather than separate microservices |
 | Deterministic policy outside interpretation | Makes action permission inspectable and prevents model text from creating authority; factual verification remains explicit staff work |
-| Bounded local parsers by default | Avoids an undeclared model dependency and returns uncertainty for unsupported wording; conversational coverage is deliberately limited |
+| Claude reads and routes; policy decides | Claude handles open-ended wording, routing and tenant questions; deterministic gates and named roles keep permission and verification out of the model. Tenant intake uses Claude with a deterministic completeness gate and a local fallback parser; the policy parser remains local |
 | Append-only records plus mutable projections | Preserves decisions while supporting current views; administrator tamper resistance and full relational integrity are outside this design |
 | Native SDK orchestration plus application idempotency | Provides genuine replay/hooks/timers while protecting business effects from step retry; requires two persistent stores and careful recovery |
 | Global transaction serialisation | Favours straightforward correctness for the prototype; constrains throughput and needs redesign before substantial parallel load |

@@ -30,9 +30,6 @@ def active():
 def service(tmp_path, monkeypatch):
     instance = Service(Store('sqlite:///' + str(tmp_path / 'policy-assistant-fictional.db')))
     monkeypatch.setattr(service_module, '_service', instance)
-    monkeypatch.setattr(service_module, 'interpret', lambda _: {
-        'mode': 'fictional_fixture', 'category': 'plumbing', 'claims': [],
-        'source_quote': '', 'summary': 'Fictional test input; no external model.'})
     return instance
 
 
@@ -72,7 +69,7 @@ def case(service):
     return service.intake(Intake(
         title='Fictional tap repair', property_ref='FICTIONAL-FLAT-A',
         report='Fictional fixture: the kitchen tap requires inspection.',
-        category='plumbing', work_item='Kitchen tap', action='instruct_work'), actor())
+        category='plumbing', work_item='Kitchen tap', action='instruct_work', triage='staff'), actor())
 
 
 def access_review(service, decision='correct'):

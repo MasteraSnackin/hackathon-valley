@@ -4,7 +4,7 @@ Checked on 10 October 2026 against the [official Python guide](https://workflow-
 
 ## Execution boundary
 
-`app.workflows:wf` is an actual `vercel.workflow.Workflows` registry. `case_coordinator` is registered with `@wf.workflow`; `run_case_cycle` is registered with `@wf.step`. Typed `CaseSignal` instances resume a native `BaseHook`, and absolute aware datetimes go to `workflow.sleep`. The native SDK records and replays its own events. The application database stores case evidence and policy state; it is not a replacement workflow scheduler.
+`app.workflows:wf` is an actual `vercel.workflow.Workflows` registry. `case_coordinator` is registered with `@wf.workflow`; `run_case_cycle`, `route_case_messages` (Jev routes new messages and hands uncertain ones to Claude; see `docs/JEV_ROUTING.md`), `triage_case_messages` (Claude reads and routes new messages) and `compose_tenant_messages` (Claude drafts tenant questions under the policy gate) are registered with `@wf.step`. See `docs/CLAUDE_TRIAGE.md`. Typed `CaseSignal` instances resume a native `BaseHook`, and absolute aware datetimes go to `workflow.sleep`. The native SDK records and replays its own events. The application database stores case evidence and policy state; it is not a replacement workflow scheduler.
 
 The SDK's local World uses native Workflow replay and an embedded Queue service. Local execution is real SDK execution, with a development queue in this process. It is not a Vercel cloud deployment. Workflow events persist in `WORKFLOW_LOCAL_DATA_DIR`; the embedded delivery queue is in memory. Keep the application database and the workflow directory together when restarting the demonstration.
 
@@ -22,8 +22,13 @@ def coordinator_cycle(case_id: str) -> dict:
         "terminal": False,
         "next_wake_at": "2026-10-12T09:00:00+01:00",  # or None
         "revision": 7,
+        "needs_routing": False,         # unrouted messages: run route_case_messages (Jev)
+        "needs_triage": False,          # routed, unread messages: run triage_case_messages
+        "needs_tenant_message": False,  # open tenant question: run compose_tenant_messages
     }
 ```
+
+When a flag is set, the coordinator runs that model step and then a fresh cycle before waiting, at most eight model steps per wake. Model results are committed with idempotent keys, so a retried step never applies a reading or sends a message twice. The workflow sandbox re-imports application modules during replay and forbids file access, so module import must remain side-effect free: local credentials are loaded only by process entry points (`app.localenv`).
 
 The step calls that function in a worker thread. It must use its own database connection/transaction. It must drain committed events in order, deduplicate event IDs, load current authority/policy, reconcile uncertain actions and persist its consumed revision. Step retries can occur after a database transaction committed. A stable business-action ID and transactional intent are therefore still necessary; a workflow retry does not establish exactly-once external effects.
 

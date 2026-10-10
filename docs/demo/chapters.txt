@@ -1,0 +1,6 @@
+00:00 Tenant request
+00:08 Two independent checks
+00:19 One check remains
+00:25 Workflow resumes
+00:37 Unsaved policy suggestion
+00:46 Result and demo boundary

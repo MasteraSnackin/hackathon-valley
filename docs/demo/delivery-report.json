@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "status": "Final movie rendered and technically validated; perceptual review limited to sampled frames",
+  "deliverable": {
+    "file": "property-desk-demo.mp4",
+    "sha256": "dc4bb0e905fe0c253d32d665bcd8513e31b6c8d6058baf506e72ca4ad621a80a",
+    "bytes": 5631105,
+    "duration_seconds": 54.0,
+    "frames": 1620,
+    "canvas": [
+      1280,
+      900
+    ],
+    "codec": "H.264",
+    "pixel_format": "yuv420p",
+    "frame_rate": 30,
+    "audio": "AAC, 48000Hz, stereo",
+    "captions": "selectable English mov_text plus property-desk-demo.srt",
+    "fast_start": true
+  },
+  "captured_application": {
+    "commit": "23cec527a5f3848786b85c965b653982f15a9c57",
+    "workflow_mode": "native_local",
+    "interpreter": "literal_demo",
+    "live_model_used": false,
+    "external_actions": "simulated",
+    "physical_repair_confirmed": false,
+    "policy_suggestion_saved": false,
+    "policy_suggestion_published": false,
+    "evidence": "workflow-evidence.json",
+    "workflow_evidence_sha256": "1b9951411b7edfaf3ceed714554698c63d28fc24e0286651bc7e14675d42d540"
+  },
+  "source": {
+    "file": "04-complete-take.webm",
+    "sha256": "13812d46f3bc803232042a57a9e6577bb64c3f7655e1265fef22de76183f2b7d",
+    "duration_seconds": 102.88,
+    "dimensions": [
+      1280,
+      800
+    ],
+    "frame_rate": 25,
+    "audio": false,
+    "archived": "Raw source preserved locally. Six bounded selected clips are included in project/assets/selected/.",
+    "mapping": "project/edit-plan.json",
+    "pointer": "Recorded cursor overlay follows real UI actions.",
+    "edits": "Normal-speed hard cuts remove waiting and evidence entry. No reconstructed UI or generated footage. 25fps source is resampled to the supported 30fps HyperFrames delivery cadence."
+  },
+  "narration": {
+    "source_plan": "production/narration-plan.json",
+    "provenance": "production/media-provenance.json",
+    "kind": "Generic synthetic macOS Daniel British English voice, no voice cloning",
+    "source_records": "Source-stage audio records. This report establishes the final movie evidence.",
+    "final_integrated_lufs": -16.08,
+    "final_true_peak_dbtp": -2.01,
+    "continuous_listening": false
+  },
+  "editor": {
+    "framework": "HyperFrames",
+    "version": "0.8.145",
+    "render": "screenshot capture; hardware GPU; two workers",
+    "duration_driver": "Six measured speech clips with reading holds, fixed 54-second programme",
+    "editable_project": "project/",
+    "edit_plan_sha256": "26bce0720165358c8e720526aa62c67c29c7ed2157677a168191614e1799c03f",
+    "composition_sha256": "f014da0b481dc36e65b3ef605119807033e24a8e5f1f936c32da3f1894df59e6",
+    "finishing_script": "finish_video.py",
+    "rebuild_instructions": "EDITING.md"
+  },
+  "verification": {
+    "hyperframes_gate": "passed, zero errors and warnings",
+    "runtime_browser_ran": true,
+    "layout_samples": [
+      3,
+      9,
+      15,
+      21,
+      27,
+      33,
+      39,
+      45,
+      51
+    ],
+    "contrast_checks_passed": 20,
+    "full_stream_decode": "passed by editor and independently by parent",
+    "caption_roundtrip": "Extracted SRT text and timestamps exactly match supplied SRT",
+    "chapter_boundaries_seconds": [
+      0,
+      8,
+      19,
+      25,
+      37,
+      46,
+      54
+    ],
+    "selected_footage_frames": "First, midpoint and last frame of all six selected clips inspected",
+    "assembled_midpoints": "All six scene midpoints and final reading hold inspected before render",
+    "final_frame_samples_seconds": [
+      0,
+      4,
+      7.966,
+      8,
+      13.5,
+      18.966,
+      19,
+      22,
+      24.966,
+      25,
+      31,
+      36.966,
+      37,
+      41.5,
+      45.966,
+      46,
+      50,
+      53.966
+    ],
+    "final_contact_sheet": "verification/final-contact.jpg",
+    "parent_review": "Independently decoded final video/audio and inspected 18-frame contact sheet plus native-size poster on same final SHA256.",
+    "continuous_watch_through": false,
+    "continuous_listening": false,
+    "fresh_package_install": "npm ci succeeded; lockfile preserved",
+    "packaged_project_check": "passed; verification/packaged-project-check.json",
+    "fresh_package_full_render": "Not repeated; delivered render used matching composition/media in the working project."
+  },
+  "poster": {
+    "file": "poster.jpg",
+    "source": "Final MP4 frame at 50 seconds",
+    "sha256": "d2c4b00682275dc00acf026c19760d4a0eccfa90e895cc454070697d48c61c93"
+  },
+  "limits": [
+    "Local synthetic example; no cloud deployment is demonstrated.",
+    "No live Claude/model interpretation is demonstrated.",
+    "No real contractor contact, booking, entry permission or completed repair is demonstrated.",
+    "Policy suggestion remains unsaved and unpublished.",
+    "Technical decoding and sampled frames do not establish a continuous watch-through or listening review.",
+    "Repository visibility remains a separate user-controlled setting."
+  ]
+}

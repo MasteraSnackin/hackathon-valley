@@ -14,7 +14,7 @@ This conservative exclusion limits replay coverage. The app accepts pasted evide
 
 ## Interpretation and scoring
 
-Replay uses the local literal demonstration interpreter and a clean isolated database. It never calls a live model, sends an external communication or executes an adapter. Generated source assertions stay distinct from verified facts. The replay report shows outcomes and blockers; it does not treat eventual historical closure as an acceptable-outcome label or an accuracy score.
+Replay sends each selected chronological prefix (never attachments, later events or index summaries) to Claude through the Anthropic API, using a clean isolated database. Claude triages it and may draft tenant questions, which stay in the simulated thread; no external communication is sent and no adapter executes. Generated source assertions stay distinct from verified facts. The replay report shows outcomes and blockers; it does not treat eventual historical closure as an acceptable-outcome label or an accuracy score.
 
 All 50 original cases informed an earlier generic audit before this split. The other partition is reserved from this implementation onward, rather than previously unseen. The source loader and replay command address only the BUILD partition. A later evaluator should freeze code/policy/labels and test the reserved partition separately.
 

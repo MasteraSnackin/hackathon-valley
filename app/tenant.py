@@ -1,5 +1,9 @@
 """Local tenant conversations: source statements, never identity or permission grants.
 
+Claude reads the conversation, asks for anything missing and prepares a summary.
+Nothing reaches property management until the tenant confirms that summary. The
+local phrase parser is the offline fallback when Claude is unavailable.
+
 Conversation ownership, pending deliveries and request receipts use Store's durable
 primitives. Service.intake/evidence remain the only routes into the shared case.
 The separate server bridge actor is not a browser session or a staff credential.
@@ -18,12 +22,21 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import Field, field_validator
 
+from . import ai
 from .domain import EvidenceInput, Intake, StrictModel, digest, dt, now, stamp
 from .service import get_service
 
 COOKIE = 'pw_tenant_session'
 AUTHENTICATION = ('Loopback-only tenant demonstration session; identity is unverified. '
-                  'Common phrases are extracted by a literal demo parser, not a live model.')
+                  'Claude reads the conversation and the tenant confirms a summary before it is sent; '
+                  'without Claude, a literal demo parser extracts common phrases.')
+CLARIFY_OPENING = 'Hey, before I continue, could you clarify a few things for us?'
+READY_REPLY = ('Thanks, I think I have everything. Please check the summary below '
+               'before I send it to your property manager.')
+SENT_REPLY = ('Thanks! I’ve sent your request to your property manager. They’ll check the details '
+              'and decide the next step. You can add an update here at any time.')
+CONFIRM_TEXT = 'Yes, that’s right. Please send it.'
+DANGER_NOTE = 'If anyone is in danger right now, please call 999.'
 BRIDGE_ACTOR = {'id': 'tenant-portal-bridge', 'role': 'case_manager',
                 'source': 'unverified tenant conversation'}
 FIELD_NAMES = ('name', 'address', 'issue')
@@ -164,11 +177,51 @@ def _missing(fields):
 
 
 def _question(missing):
-    labels = {'name': 'your name', 'address': 'the property address',
-              'issue': 'what needs attention'}
-    items = [labels[key] for key in missing]
-    joined = items[0] if len(items) == 1 else ', '.join(items[:-1]) + ' and ' + items[-1]
-    return 'To get this to the right person, please tell me ' + joined + '.'
+    labels = {'name': 'What’s your name?', 'address': 'What’s the address of the property?',
+              'issue': 'What needs attention, and where is it?'}
+    return _clarify([labels[key] for key in missing])
+
+
+def _clarify(questions):
+    return CLARIFY_OPENING + '\n' + '\n'.join('- ' + q for q in questions)
+
+
+def _read_request(messages, parser_fields, summary_shown):
+    """Claude reads the whole conversation; the literal parser is the offline fallback."""
+    if ai.configured():
+        transcript = '\n\n'.join(m['text'] for m in messages if m['role'] == 'user')
+        try:
+            result, meta = ai.tenant_intake(messages, summary_shown)
+            return {**ai.checked_intake(result, transcript), 'mode': 'claude', 'model': meta.get('model')}
+        except ai.ClaudeUnavailable:
+            pass
+    missing = _missing(parser_fields)
+    issue = parser_fields.get('issue')
+    return {'name': parser_fields.get('name'), 'address': parser_fields.get('address'),
+            'problems': [{'summary': issue[:120], 'source_quote': issue}] if issue else [],
+            'questions': [], 'reply': READY_REPLY if not missing else _question(missing),
+            'ready': not missing, 'confirms_summary': False, 'danger': False, 'mode': 'basic'}
+
+
+def _submit_case(service, owner, cid, conversation):
+    """Send the tenant-confirmed request to property management as one shared case."""
+    summary = conversation['summary']
+    transcript = '\n\n'.join(m['text'] for m in conversation['messages'] if m['role'] == 'user')
+    # The tenant's own words come first; the confirmed summary is labelled as such.
+    report = (transcript + '\n\nSummary checked and confirmed by the tenant:\n'
+              + 'Name: ' + summary['name'] + '\nAddress: ' + summary['address'] + '\nProblems:\n'
+              + '\n'.join('- ' + p for p in summary['problems']))
+    actor = {**BRIDGE_ACTOR, 'tenant_conversation_id': cid, 'tenant_owner_id': owner}
+    # A tenant cannot activate Service's reserved fictional directory alias.
+    result = service.intake(Intake(
+        title=summary['problems'][0][:140],
+        property_ref='Unverified address: ' + summary['address'],
+        report=report[:30000],  # Claude chooses the route on the staff side
+        work_item='Tenant-reported maintenance',
+        idempotency_key='tenant-conversation:' + cid), actor,
+        # The name and address the tenant confirmed; policy decides what they unlock.
+        self_identification={'name': summary['name'], 'address': summary['address'], 'conversation_id': cid})
+    return result['case']['id']
 
 
 def _message(role, text):
@@ -190,11 +243,16 @@ def _projection(service, c, conversation):
     """Allowlist projection. Never return staff evidence, policy, reviews or actors."""
     missing = _missing(conversation['fields'])
     status, stage = 'collecting_details', 'awaiting_details'
-    next_step = _question(missing) if missing else 'Your property manager will check the details.'
+    next_step = 'Answer the questions above so I can pass this on.'
     updated_at = conversation['updated_at']
+    awaiting = bool(conversation.get('awaiting_confirmation') and not conversation['case_id'])
+    if awaiting:
+        status, stage = 'awaiting_confirmation', 'awaiting_confirmation'
+        next_step = 'Check the summary and confirm it, or tell me what to change.'
     if conversation['case_id']:
         case = service.db.case(c, conversation['case_id'])
         status, stage = 'submitted', 'under_review'
+        next_step = 'Your property manager will check the details.'
         if case.get('status') == 'in_progress':
             status, stage = 'in_progress', 'under_review'
             next_step = 'Your report is being handled. You can add an update here.'
@@ -212,6 +270,7 @@ def _projection(service, c, conversation):
     return {'id': conversation['id'], 'case_id': conversation['case_id'],
             'title': conversation['title'], 'status': status, 'stage': stage,
             'fields': deepcopy(conversation['fields']), 'missing_fields': missing,
+            'summary': deepcopy(conversation.get('summary')), 'awaiting_confirmation': awaiting,
             'messages': deepcopy(conversation['messages']), 'next_step': next_step,
             'updated_at': updated_at}
 
@@ -252,31 +311,54 @@ def _reserve(service, owner, cid, data):
 def _deliver(service, owner, cid, operation):
     if operation['completed']:
         return
-    missing = _missing(operation['fields'])
     case_id = operation['case_id']
     actor = {**BRIDGE_ACTOR, 'tenant_conversation_id': cid, 'tenant_owner_id': owner}
+    update = {}
     if case_id:
         service.evidence(case_id, EvidenceInput(
             text=operation['message']['text'],
             source_label='Tenant conversation: unverified statement',
             idempotency_key='tenant:' + operation['message']['id']), actor)
+        if operation['corrected']:
+            service.identity_corrected(case_id, operation['fields'], actor)
         reply = ('Thanks, I’ve passed on your corrected details for your property manager to check.'
                  if operation['corrected'] else
                  'Thanks, I’ve added your update to the report for your property manager.')
-    elif not missing:
-        fields = operation['fields']
-        # A tenant cannot activate Service's reserved fictional directory alias.
-        result = service.intake(Intake(
-            title=fields['issue'][:140],
-            property_ref='Unverified address: ' + fields['address'],
-            report=operation['transcript'], action='request_quote',
-            work_item='Tenant-reported maintenance',
-            idempotency_key='tenant-conversation:' + cid), actor)
-        case_id = result['case']['id']
-        reply = ('Thanks, I’ve saved your report. Your property manager will check the details. '
-                 'You can add an update here.')
     else:
-        reply = _question(missing)
+        with service.db.tx() as c:
+            conversation = _owned(service.db, c, cid, owner)
+        awaiting = conversation.get('awaiting_confirmation')
+        # The model call happens outside any database transaction.
+        reading = _read_request(conversation['messages'], operation['fields'],
+                                conversation.get('summary') if awaiting else None)
+        if awaiting and reading['confirms_summary']:
+            case_id = _submit_case(service, owner, cid, conversation)
+            reply = SENT_REPLY
+            update = {'awaiting_confirmation': False, 'confirmed_at': stamp()}
+        else:
+            previous = conversation['fields']
+            problems = [p['summary'].strip()[:120] for p in reading['problems']]
+            fields = {'name': reading['name'] or previous.get('name'),
+                      'address': reading['address'] or previous.get('address'),
+                      'issue': '; '.join(problems) or previous.get('issue')}
+            # Claude proposes readiness; the summary needs every field and a problem.
+            ready = bool(reading['ready'] and fields['name'] and fields['address'] and problems)
+            if ready:
+                reply = reading['reply'].strip() or READY_REPLY
+            elif reading['mode'] == 'claude' and not reading.get('overruled') and reading['reply'].strip():
+                reply = reading['reply'].strip()
+            elif reading['questions'] and not reading.get('overruled'):
+                reply = _clarify(reading['questions'])
+            else:
+                # The gate overruled Claude's readiness: ask for what is actually missing.
+                reply = _question(_missing(fields) or ['issue'])
+            if reading['danger']:
+                reply = DANGER_NOTE + '\n\n' + reply
+            update = {'fields': fields, 'awaiting_confirmation': ready, 'intake_mode': reading['mode'],
+                      'summary': {'name': fields['name'], 'address': fields['address'],
+                                  'problems': problems} if ready else None}
+            if problems:
+                update['title'] = problems[0][:140]
 
     # A repeated delivery can safely converge after an interrupted service commit.
     with service.db.tx() as c:
@@ -288,6 +370,7 @@ def _deliver(service, owner, cid, operation):
             raise HTTPException(409, 'The conversation changed; retry this same request')
         assistant = _message('assistant', reply)
         conversation['messages'].append(assistant)
+        conversation.update(update)
         conversation.update(case_id=case_id, pending=None, updated_at=assistant['created_at'])
         if operation['corrected']:
             conversation['correction_pending'] = True
@@ -305,6 +388,27 @@ def _submit(service, owner, cid, data):
             break
     with service.db.tx() as c:
         return _projection(service, c, _owned(service.db, c, cid, owner))
+
+
+def _confirm(service, owner, cid):
+    """The tenant checked the summary; only now does the request reach property management."""
+    with service.db.tx() as c:
+        conversation = _owned(service.db, c, cid, owner)
+        if conversation['case_id']:
+            return _projection(service, c, conversation)
+        if conversation.get('pending'):
+            raise HTTPException(409, 'Still working on your last message; please try again in a moment')
+        if not conversation.get('awaiting_confirmation') or not conversation.get('summary'):
+            raise HTTPException(409, 'There is nothing to confirm yet')
+    case_id = _submit_case(service, owner, cid, conversation)
+    with service.db.tx() as c:
+        conversation = _owned(service.db, c, cid, owner)
+        if not conversation['case_id']:
+            conversation['messages'] += [_message('user', CONFIRM_TEXT), _message('assistant', SENT_REPLY)]
+            conversation.update(case_id=case_id, awaiting_confirmation=False, confirmed_at=stamp(),
+                                updated_at=conversation['messages'][-1]['created_at'])
+            service.db.set_meta(c, _conversation_key(cid), conversation)
+        return _projection(service, c, conversation)
 
 
 def _start(service, owner, data):
@@ -405,6 +509,13 @@ def create_tenant_router(wake, mode='demo') -> APIRouter:
         result = await asyncio.to_thread(_submit, get_service(), session['id'], cid, data)
         if result['case_id']:
             await wake(result['case_id'])
+        return result
+
+    @router.post('/conversations/{cid}/confirm')
+    async def confirm(cid: str, request: Request):
+        session = identity(request)
+        result = await asyncio.to_thread(_confirm, get_service(), session['id'], cid)
+        await wake(result['case_id'])
         return result
 
     return router
