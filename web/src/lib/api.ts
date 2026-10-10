@@ -4,11 +4,17 @@
  * dev) and include the httpOnly `pw_session` cookie set by createDemoSession.
  */
 import type {
+  Actor,
   BuildCaseSummary,
   CaseDetail,
   CaseListItem,
   ReviewResponseInput,
 } from './types';
+
+export class ApiError extends Error {
+  status: number;
+  constructor(message: string, status: number) { super(message); this.status = status; }
+}
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -27,13 +33,21 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
         typeof (body as { detail?: unknown }).detail === 'string'
       ) {
         message = (body as { detail: string }).detail;
+      } else if (body && typeof body === 'object' && 'detail' in body && Array.isArray(body.detail)) {
+        message = body.detail.map((error: { loc?: (string | number)[]; msg?: string }) =>
+          `${error.loc?.filter((part) => part !== 'body').join('.') || 'Request'}: ${error.msg || 'Invalid value'}`,
+        ).join('; ');
       }
     } catch {
       // Response body was not JSON; keep the status-based message.
     }
-    throw new Error(message);
+    throw new ApiError(message, response.status);
   }
   return response.json() as Promise<T>;
+}
+
+export async function getSession(signal?: AbortSignal): Promise<{ actor: Actor | null; mode: string }> {
+  return request('/api/session', { signal });
 }
 
 /** Create a loopback-only demo session cookie for the given role. */
@@ -45,8 +59,8 @@ export async function createDemoSession(role: string): Promise<void> {
 }
 
 /** List all live cases (cheap summary rows, not full detail). */
-export async function listCases(): Promise<CaseListItem[]> {
-  return request<CaseListItem[]>('/api/cases');
+export async function listCases(signal?: AbortSignal): Promise<CaseListItem[]> {
+  return request<CaseListItem[]>('/api/cases', { signal });
 }
 
 /** List the fixed BUILD catalogue of demo cases. */
@@ -67,8 +81,8 @@ export async function importBuildCase(
 }
 
 /** Fetch the full detail of a live case. */
-export async function getCaseDetail(id: string): Promise<CaseDetail> {
-  return request<CaseDetail>(`/api/cases/${id}`);
+export async function getCaseDetail(id: string, signal?: AbortSignal): Promise<CaseDetail> {
+  return request<CaseDetail>(`/api/cases/${encodeURIComponent(id)}`, { signal });
 }
 
 /** Respond to an open review (approve/correct/reject/defer/more_evidence). */
@@ -80,4 +94,9 @@ export async function respondToReview(
     method: 'POST',
     body: JSON.stringify(body),
   });
+}
+
+/** Reassess the selected action with the current policy; all permission checks still apply. */
+export async function evaluateCase(id: string): Promise<CaseDetail> {
+  return request<CaseDetail>(`/api/cases/${encodeURIComponent(id)}/evaluate`, { method: 'POST', body: '{}' });
 }

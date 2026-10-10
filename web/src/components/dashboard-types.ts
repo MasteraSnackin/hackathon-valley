@@ -2,13 +2,14 @@ export type Severity = 'red' | 'amber' | 'green'
 
 export interface CaseSummaryVM {
   id: string
+  outcome?: string // Backend outcome for filtering; ACT is open, even when displayed in green.
   address: string // e.g. "Flat 2, 42 Beacon Close, Bellmere"
   issueType: string // e.g. "Plumbing" or a short title
   stagePill: string // free text, e.g. "Verifying", "Scheduled", "Monitoring", "Blocked", "Done"
   severity: Severity
   timestamp: string // ISO datetime string — format it yourself for display
-  progressPct: number // 0-100, how far through an 8-stage pipeline
-  resolvedInHours?: number // only present for finished/done cases
+  progressPct: number // Compatibility value only; never present as measured repair progress.
+  resolvedInHours?: number // Optional measured duration only; not derived from current clock.
 }
 
 export type NodeState = 'completed' | 'current' | 'future'

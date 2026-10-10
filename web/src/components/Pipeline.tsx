@@ -29,21 +29,18 @@ function CheckIcon() {
 function Node({ node }: { node: PipelineNode }) {
   const caption = node.actor && node.time ? `${node.actor} · ${node.time}` : null
   return (
-    <div className="flex w-[56px] shrink-0 flex-col items-center gap-1.5">
+    <div className="flex min-w-0 flex-1 flex-col items-center gap-2" aria-current={node.state === 'current' ? 'step' : undefined}>
       <div
-        className={`flex h-5 w-5 items-center justify-center rounded-full ${DOT_CLASSES[node.state]} ${
-          node.state === 'current' ? 'pulse-ring' : ''
-        }`}
-        style={node.state === 'current' ? { animation: 'dot-pulse 1.9s ease-out infinite' } : undefined}
+        className={`flex h-6 w-6 items-center justify-center rounded-full ${DOT_CLASSES[node.state]}`}
+        aria-hidden="true"
       >
         {node.state === 'completed' && <CheckIcon />}
       </div>
-      <span className={`max-w-[56px] text-center text-[9px] leading-tight ${LABEL_CLASSES[node.state]}`}>
+      <span className={`text-center text-xs leading-snug ${LABEL_CLASSES[node.state]}`}>
         {node.label}
+        <span className="sr-only">: {node.state === 'completed' ? 'complete' : node.state === 'current' ? 'current step' : 'not reached'}</span>
       </span>
-      <span className="h-[11px] text-center text-[9px] leading-tight text-[var(--color-muted)]">
-        {caption}
-      </span>
+      {caption && <span className="break-words text-center text-xs text-[var(--color-muted)]">{caption}</span>}
     </div>
   )
 }
@@ -51,18 +48,18 @@ function Node({ node }: { node: PipelineNode }) {
 /** Horizontal pipeline track: circular stage dots joined by thin connector lines. */
 export default function Pipeline({ nodes }: PipelineProps) {
   return (
-    <div className="flex items-start">
+    <ol aria-label="Current action progress" className="flex w-full max-w-2xl items-start">
       {nodes.map((node, index) => (
-        <div key={node.key} className="flex items-start">
+        <li key={node.key} className="flex min-w-0 flex-1 items-start">
           <Node node={node} />
           {index < nodes.length - 1 && (
             <div
-              className="mt-2.5 h-px w-5 shrink-0 self-start bg-[var(--color-border)]"
+              className="mx-1 mt-3 h-px w-3 shrink-0 self-start bg-[var(--color-border)] sm:w-6"
               aria-hidden="true"
             />
           )}
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
   )
 }

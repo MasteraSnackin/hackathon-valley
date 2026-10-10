@@ -1,109 +1,84 @@
-/**
- * Front-end-only policy model for the Policy Engine panel. This is a
- * presentation/demo layer: policies live in React state, are seeded with
- * plausible examples, and category detection is keyword-based. No backend
- * call is involved (the real policy engine in app/ has its own structured
- * rule format; this panel is the plain-English operator view on top).
- */
-
-export type PolicyCategory = 'Urgency' | 'Cost' | 'Escalation' | 'Contractor' | 'Comms';
-export type PolicySource = 'Manual' | 'AI-learned';
-
-export const POLICY_CATEGORIES: PolicyCategory[] = [
-  'Urgency',
-  'Cost',
-  'Escalation',
-  'Contractor',
-  'Comms',
-];
-
-export interface Policy {
+/** Backend policy contracts. Only published server records are described as active. */
+export interface PolicyRule {
   id: string;
-  text: string;
-  category: PolicyCategory;
-  threshold?: string;
-  enabled: boolean;
-  source: PolicySource;
+  conditions: { key: string; status: string }[];
+  match: 'all' | 'any';
+  actions: string[];
+  response: string;
+  owner: string;
+  required: boolean;
+  property_ref?: string | null;
+  category?: string | null;
 }
 
-export interface Thresholds {
-  emergencyLimit: number; // £, 0–2000
-  escalateAfterMin: number; // minutes, 30–240
-  pingAfterHr: number; // hours, 1–48
-  maxResolveDays: number; // days, 1–14
+export interface PolicySettings {
+  access_immediate_review: boolean;
+  reminder_hours: number;
+  escalation_hours: number;
+  reminder_limit: number;
+  review_limit: number;
+  approval_hours: number;
+  [key: string]: unknown;
 }
 
-export const DEFAULT_THRESHOLDS: Thresholds = {
-  emergencyLimit: 500,
-  escalateAfterMin: 120,
-  pingAfterHr: 24,
-  maxResolveDays: 7,
+export interface PolicyDraftInput {
+  base_version: number;
+  settings: PolicySettings;
+  rules: PolicyRule[];
+  reason: string;
+}
+
+export interface PolicyRecord extends PolicyDraftInput {
+  id: string;
+  version: number;
+  status: string;
+  author: string;
+  effective_at?: string;
+}
+
+export interface PolicyCollection {
+  active: PolicyRecord;
+  drafts: PolicyRecord[];
+}
+
+export interface PolicySuggestion {
+  status: 'ready' | 'clarification' | 'unsupported';
+  summary: string;
+  questions: string[];
+  warnings: string[];
+  draft: PolicyDraftInput | null;
+}
+
+export interface PolicyPreview {
+  preview_id: string;
+  draft_id: string;
+  active_version: number;
+  affected: {
+    case_id: string;
+    title: string;
+    before: string;
+    after: string;
+    blockers: string[];
+    changed: boolean;
+  }[];
+}
+
+export const POLICY_LABELS: Record<string, string> = {
+  identity: 'Person and property identity', route: 'Contact route', access: 'Access permission',
+  keys: 'Key custody', authority: 'Authority', schedule: 'Appointment', evidence: 'Supporting evidence',
+  classification: 'Work category', completion: 'Completion evidence', commitments: 'Outstanding commitments',
+  total: 'Total cost', finance: 'Financial review', urgent: 'Urgent hazard', supported: 'Supported action',
+  clarify: 'Ask for clarification', request_quote: 'Request a quote', confirm_appointment: 'Confirm a visit',
+  supply_keys: 'Supply keys', instruct_work: 'Instruct work', close_item: 'Close a repair', archive: 'Archive',
+  case_manager: 'Property manager', access_officer: 'Access officer', approver: 'Approver',
+  reviewer: 'Reviewer', policy_editor: 'Policy editor',
+  PASS: 'confirmed', FAIL: 'refused or failed', UNKNOWN: 'missing or unverified', CONFLICT: 'conflicting',
+  CLARIFY: 'Ask for clarification', WAIT: 'Wait', 'HUMAN REVIEW': 'Human review', 'STOP ACTION': 'Stop the action',
+  ACT: 'Ready for an action', 'NO FURTHER ACTION': 'No further action',
 };
+export const policyLabel = (value: string) => POLICY_LABELS[value] ?? value.replaceAll('_', ' ');
 
-/** Keyword buckets, checked in priority order so a cost+urgency sentence
- * lands on the most operationally specific category. */
-const CATEGORY_KEYWORDS: [PolicyCategory, RegExp][] = [
-  ['Cost', /\b(£|\$|cost|budget|limit|spend|spending|quote|price|invoice|approv\w* spend|sign-?off)\b/i],
-  ['Urgency', /\b(emergency|urgent|hazard|immediat\w*|safety|danger|leak|flood|gas|fire|no (hot water|heating))\b/i],
-  ['Escalation', /\b(escalat\w*|manager|overdue|no reply|no response|deadline|breach|SLA|within \d)\b/i],
-  ['Contractor', /\b(contractor|provider|engineer|dispatch|assign|vetted|directory|trade|plumber|electrician)\b/i],
-  ['Comms', /\b(remind\w*|message|contact|notify|notif\w*|email|call|chase|ping|update the tenant|keep .* informed)\b/i],
-];
-
-/** Best-guess category for a free-text policy. Falls back to Comms when
- * nothing matches, since an un-categorised rule is usually a notification. */
-export function detectCategory(text: string): PolicyCategory {
-  for (const [category, pattern] of CATEGORY_KEYWORDS) {
-    if (pattern.test(text)) return category;
-  }
-  return 'Comms';
+export function draftFromPublished(policy: PolicyRecord): PolicyDraftInput {
+  return { base_version: policy.version, settings: structuredClone(policy.settings),
+    rules: structuredClone(policy.rules), reason: '' };
 }
-
-/** Pull a human threshold badge out of free text if one is stated, e.g.
- * "£500", "2 working days", "48 hours". Returns undefined when none found. */
-export function detectThreshold(text: string): string | undefined {
-  const money = text.match(/£\s?\d[\d,]*/);
-  if (money) return `${money[0].replace(/\s/g, '')} limit`;
-  const duration = text.match(/\b(\d+)\s?(working day|day|days|hour|hours|hr|hrs|min|minute|minutes)\b/i);
-  if (duration) return `${duration[1]} ${duration[2].replace(/s$/, '')} limit`;
-  return undefined;
-}
-
-let seq = 0;
-export function newPolicyId(): string {
-  seq += 1;
-  return `pol-${Date.now()}-${seq}`;
-}
-
-export const SEED_POLICIES: Policy[] = [
-  {
-    id: 'seed-1',
-    text: 'Emergency repairs affecting safety (gas, flooding, no heating in winter) are dispatched immediately without waiting for landlord approval.',
-    category: 'Urgency',
-    enabled: true,
-    source: 'Manual',
-  },
-  {
-    id: 'seed-2',
-    text: 'Any repair quoted above £500 requires landlord sign-off before a contractor is instructed.',
-    category: 'Cost',
-    threshold: '£500 limit',
-    enabled: true,
-    source: 'Manual',
-  },
-  {
-    id: 'seed-3',
-    text: "If the landlord hasn't replied within 2 working days, escalate the case to a property manager.",
-    category: 'Escalation',
-    threshold: '2 working day limit',
-    enabled: true,
-    source: 'Manual',
-  },
-  {
-    id: 'seed-4',
-    text: 'Only instruct vetted contractors from the approved directory for gas and electrical work.',
-    category: 'Contractor',
-    enabled: false,
-    source: 'AI-learned',
-  },
-];

@@ -35,14 +35,14 @@ export default function StageDetailCard({
       <h2 className="text-[15px] font-bold text-[var(--color-ink)]">{stageTitle}</h2>
 
       {rows.length > 0 && (
-        <div className="mt-3 grid grid-cols-[120px_1fr] gap-x-3 gap-y-2 text-sm">
+        <dl className="mt-3 grid grid-cols-1 gap-x-3 gap-y-2 text-sm sm:grid-cols-[120px_minmax(0,1fr)]">
           {rows.map((row) => (
             <div key={row.label} className="contents">
-              <span className="text-[var(--color-muted)]">{row.label}</span>
-              <span className="text-[var(--color-ink)]">{row.value}</span>
+              <dt className="text-[var(--color-muted)]">{row.label}</dt>
+              <dd className="mb-2 break-words text-[var(--color-ink)] sm:mb-0">{row.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       )}
 
       {actions && actions.length > 0 && (
@@ -80,7 +80,7 @@ export default function StageDetailCard({
                     className="mt-[1px] h-1.5 w-1.5 shrink-0 translate-y-[2px] rounded-full"
                     style={{ background: TONE_COLOR[item.tone] }}
                   />
-                  <span className="truncate">{item.label}</span>
+                  <span className="break-words">{item.label}</span>
                 </span>
                 <span className="shrink-0">{item.time}</span>
               </li>

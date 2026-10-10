@@ -37,6 +37,7 @@ export interface Case {
   policy_pending: boolean;
   created_at: string;
   interpretation?: unknown;
+  triage?: { state?: string; confirmed?: boolean; [key: string]: unknown };
   stage?: string;
   rejected_action_revision?: number;
   last_assessed_at?: string;

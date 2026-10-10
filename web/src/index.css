@@ -30,6 +30,22 @@
   color-scheme: light;
 }
 
+* { box-sizing: border-box; }
+
+button, input, select, textarea { font-family: inherit; }
+button, select { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button, input:not([type="checkbox"]):not([type="radio"]), select { min-height: 44px; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--color-information);
+  outline-offset: 3px;
+}
+::selection { background: var(--color-success-bg); color: var(--color-ink); }
+
+@media (max-width: 639px) {
+  input, select, textarea { font-size: 16px; }
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -45,5 +61,5 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(33, 88, 72, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pulse-ring { animation: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

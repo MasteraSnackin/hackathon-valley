@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Hackathon Valley — Property Desk
-description: Target UI brief for tenant requests, property management and understandable policies.
+description: Design contract for the current staff dashboard and the approved tenant and policy experience.
 colors:
   primary: "#215848"
   primary-hover: "#143D32"
@@ -68,7 +68,7 @@ components:
     textColor: "{colors.primary}"
 ---
 
-# Property Desk: tenant and property management UI brief
+# Property Desk design contract
 
 ## Overview
 
@@ -78,12 +78,14 @@ The defining interaction is a clear handover: the agent explains what it needs, 
 
 ### Authority and status
 
-- **Status:** target design brief, prepared on 10 October 2026. This document requests design work; it does not claim the described screens are implemented.
-- **Product direction:** the user's request for a tenant conversation, a management queue, editable policies in plain English, and policy suggestions after human review.
+- **Mode:** reconcile the approved product direction with the local React implementation. The working changes start from Git revision `48e450d`; this document covers uncommitted changes made on 10 October 2026.
+- **Product direction:** retain the user's tenant conversation, management queue, editable policies in plain English, and optional policy suggestion after human review. The detailed tenant journey below remains an approved target wherever it exceeds the current implementation.
+- **Current surfaces:** `web/src/App.tsx` is a separate React staff dashboard. The original tenant conversation and staff interface remain in `static/`, served by FastAPI. The React dashboard does not replace that tenant interface, provide a shared tenant/staff switch, or deliver voice intake.
+- **Visual authority:** retain the forest-green, warm-neutral palette from `static/style.css`. The current React theme in `web/src/index.css` uses the same semantic colours and 7px/12px/14px radii. Front matter preserves the approved foundation; the React font fallback additionally includes Roboto. Exact screen layouts and tenant examples below remain targets unless identified as current.
+- **Implementation authority:** current React components and their backend API contracts establish what controls can do. The current React contract below describes local code, not a production deployment or a claim of verified accessibility. Browser validation is reported separately from this document.
 - **Working name:** Property Desk, within the Hackathon Valley repository. Final branding can change without changing these journeys.
-- **Visual starting point:** the existing forest-green, warm-neutral palette and values in `static/style.css`. Front-matter values retain that source foundation. New screen layouts and interaction examples below are design proposals.
 - **Terminology:** use **request** for the tenant's maintenance issue and **case** where staff need an operational term. The user's “claims” means these requests here. Reserve “source assertion” or “claim” for the underlying evidence model; do not make tenants learn those terms.
-- **Scope:** design and handoff only. No application fixes, deployment, automatic policy publication or new live integrations are part of this deliverable.
+- **Scope:** maintain the design contract alongside the staff UI changes. External communications and operational actions remain simulated; policy changes require an explicit authorised publication step.
 
 ### Outcomes the UI must support
 
@@ -120,20 +122,28 @@ Use clear amounts such as **£100 including VAT**, explicit appointment dates an
 
 ## Layout
 
-### Shared shell and view switch
+### Current React shell
+
+The React application has **Cases** and **Policies** views for staff. The source keeps both views mounted after the first policy visit so that switching views retains the selected case, queue search and filters, and unsaved policy edits. These values remain in page memory; they are not saved across a reload. This behaviour is source-checked here; browser verification is recorded separately. Explicit demo-role controls change the local staff session; they are demonstration controls, not production authentication.
+
+Opening the dashboard must not import cases or submit review decisions. Loading the permitted BUILD examples is a separate, labelled action. Surface import failures and preserve the existing queue. Label the application as a local demonstration with simulated external actions.
+
+The staff queue supports search and status filters. Put stopped actions and cases needing human review ahead of other work, without describing them as a severity or urgency judgement that the backend has not made. Show the last refresh time and retain an explicit refresh control. The dashboard polls every 20 seconds while the page is visible, suspends refresh during its case mutations and pauses automatic retries after three failures. Keep the last loaded cases visible and label the failed refresh; this is periodic fetching, not a live event stream.
+
+### Shared shell and view switch — approved target
 
 Use a top-level segmented switch labelled **Tenant** and **Property management** in the demonstration. Keep it visually separate from task actions. Preserve each view's context and unfinished input when switching.
 
 In a deployed product, the switch only exposes views the signed-in person may use. Changing the visible view must not grant staff permissions or expose another tenant's requests. Real tenant identity, property matching and staff authentication are integration requirements, not behaviours created by the switch.
 
-### Tenant composition
+### Tenant composition — approved target
 
 - Start with one welcoming prompt and a large message composer, centred in a comfortable reading column. There is no mandatory address/name form before the tenant can describe the problem.
 - Once the conversation starts, move the welcome prompt into the conversation header. Keep the composer available at the bottom and show a compact request summary alongside it on wide screens.
 - On mobile, place the summary behind a labelled **Request details** disclosure. Keep the newest reply, requested answer and send action visible above the keyboard.
 - Include **My requests** as secondary navigation so tenants can resume an existing request instead of submitting a duplicate.
 
-### Management composition
+### Management composition — target and current direction
 
 - Use navigation for **Requests**, **Policies** and, when needed, **Activity**. Default to Requests → Needs attention.
 - On wide screens, use a searchable queue on the left and selected request details on the right. The decision card comes before the full event history.
@@ -159,6 +169,21 @@ Retain the 12px card radius, modestly rounded inputs/buttons and simple line ico
 Use generous whitespace around the tenant's composer and tighter, consistent spacing between management rows. Add brief transitions for opening details or changing a status, and respect reduced-motion preferences. No decorative pulsing, animated completion claims or artificial “thinking” progress.
 
 ## Components
+
+### Current React interaction contract
+
+These rules apply to the staff implementation in `web/`. The numbered sections that follow retain the broader product target.
+
+- **Queue and counts:** use the same backend outcome for the list, detail and filters. A finished action is not a verified repair. Avoid date-qualified totals unless the calculation actually filters by date.
+- **Action progress:** the stage display describes the current proposed action, available evidence, policy checks and recorded result. Do not mark booking, contractor assignment, work or payment as complete from an internal checkpoint. A completed simulated action remains labelled as simulated.
+- **Human review:** show the affected action, the outstanding check, its source evidence and the role that may answer. A reason is required for a response. Factual verification uses a correction with a selected source and fact; an approval cannot manufacture a missing fact. The current React form can request evidence, verify an existing supported source assertion, defer a review, reject the proposed action or confirm an eligible completed interpretation. Scoped authority, finance and custom-rule approvals use the original staff workspace, where the authorised person chooses a source and expiry. Keep that limitation visible instead of displaying a generic approval button.
+- **Independent requirements:** refresh the case after a saved response and show what remains blocked. Resolve one review at a time; never imply a single approval authorises every action on the case.
+- **Policy workflow:** load the published policy from the backend, interpret supported plain-English wording, save a draft, preview its effect, then publish explicitly. Keep the original intent visible. Editing a draft after preview invalidates that preview. Drafts and previews do not change the active policy.
+- **Policy reassessment:** when the selected case has a pending policy change, show **Reassess with current policy** and explain that the action remains held until reassessment. Enable it for the supported staff roles and call the existing case-evaluation API explicitly. Show the policy version used and every remaining blocker after success; preserve the selected case and show a retryable error after failure. Reassessment grants no permission and does not settle conflicting facts. If all requirements pass, the workflow may continue with simulated actions.
+- **Guided policy controls:** the current form exposes missing-access escalation, a spending-review amount, approval validity, reminder and escalation working hours, a reminder limit and a change reason. Other stored settings survive the edit. Additional rules are readable, but React does not provide a general structured rule builder. Unsupported wording must remain a clarification or unsupported result.
+- **Policy permissions:** require the `policy_editor` demo role before writing or publishing policies. The backend remains responsible for authorisation; switching a demo role does not establish real staff identity.
+- **After a review:** offer optional policy wording based on the saved decision, including its reason. The current suggestion opens the policy interpreter; it is not a saved rule or a durable link to the review record. A reusable draft should retain provenance as the integration develops. Do not turn a case-specific approval into automatic future approval. Taking or dismissing this offer must not alter the saved review.
+- **Recovery:** show loading, empty and error states in context. Preserve user input after a recoverable error, prevent repeated submissions while a request is pending and report backend validation without pretending an action succeeded.
 
 ### 1. Tenant welcome and composer
 
@@ -324,9 +349,9 @@ Use calm, direct UK English. Explain the next step without blame: “I have two 
 
 ## Delivery and acceptance
 
-### Design deliverables for teammates
+### Remaining target deliverables for teammates
 
-Produce a connected prototype, a reusable component set and an annotated handoff for these screens:
+Use the following as the broader delivery checklist. A listed screen is not a claim that it exists in React:
 
 | Tenant workstream | Management workstream |
 | --- | --- |
@@ -351,7 +376,7 @@ Cover desktop and mobile layouts, components and interaction states. Attach beha
 
 The existing staff prototype provides a useful starting point for requests, source records, per-action checks, role-scoped reviews and versioned policy draft/preview/publication. Those concepts should survive the redesign.
 
-The target tenant journey, real tenant identity/property isolation, conversational clarification, plain-English policy translation, richer scheduling conditions, assignment behaviour and post-review suggestions need explicit integration contracts. Their presence in a mockup does not mean they work. Source inspection during this brief found tenant/policy-assistant router references under concurrent development; their end-to-end behaviour was not verified.
+The original static interface has tenant intake and a supported local policy interpreter. React is a staff surface that uses the policy APIs; it does not include the tenant conversation, voice intake or real contractor assignment. Real tenant identity/property isolation, richer scheduling conditions, assignment behaviour and a unified tenant/staff shell remain integration work. The current React contract does not imply those targets are complete.
 
 Existing custom rules primarily operate on supported facts and their pass/fail/unknown/conflict states, with action/property/category filters and limited settings. Do not promise arbitrary natural-language business logic or silently add unimplemented thresholds. Define supported operators, units and responses together with the backend owner.
 
@@ -378,5 +403,5 @@ Final logo/brand name, exact responsive refinements, component library, the prod
 
 ### Document provenance and validation
 
-This target brief is based on the user's UI direction and current local source inspection, not an implementation or a usability study. The retained tokens come from `static/style.css`; the divider expresses its existing 1px border treatment as a reusable separator. Its structure follows the [DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md). Structural validation cannot establish rendered accessibility, functional enforcement or product readiness.
+This reconciliation uses the user's approved UI direction, the existing design brief, `static/style.css`, the React theme and current React components and API clients. It is not a usability study. The retained tokens come from the original theme; the divider expresses its 1px border treatment as a reusable separator. Its structure follows the [DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md), checked with `@google/design.md` 0.4.0. Structural validation cannot establish rendered accessibility, functional enforcement or product readiness. Record interaction and viewport checks separately with the implementation evidence.
 
