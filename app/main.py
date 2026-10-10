@@ -218,9 +218,13 @@ def health():return {'status':'ok','mode':MODE,'workflow_mode':WORKFLOW_MODE,'ex
 # demonstration navigation; it is never used as an authorisation boundary.
 from .tenant import create_tenant_router
 from .policy_assistant import create_policy_assistant_router
+from .portfolio import create_portfolio_router
+from .insights import create_insights_router
 app.include_router(create_tenant_router(wake, mode=MODE))
 app.include_router(create_policy_assistant_router(actor))
 app.include_router(create_voice_router(wake, actor))
+app.include_router(create_portfolio_router(actor))
+app.include_router(create_insights_router(actor))
 
 @app.get('/')
 def index():return FileResponse(ROOT/'static/index.html')

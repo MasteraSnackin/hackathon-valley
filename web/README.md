@@ -50,6 +50,7 @@ Without provider credentials, case reading that requires a model remains unavail
 - Explicit **Reassess with current policy** for a selected case awaiting a policy change. Supported staff roles can rerun its checks through the existing evaluation API; the result shows the policy version and remaining blockers. Reassessment grants no permission. If every requirement passes, the workflow can continue with simulated actions.
 - Held message drafts with edit, simulated send and rejection/redraft controls, plus explicit due-timer checks. These require the selected case-manager role.
 - Optional policy wording after a saved review, including the recorded reason and review ID. It opens the policy interpreter and follows the same draft and publication process; it cannot silently become a recurring permission.
+- **Portfolio** adds related incidents, evidence comparison, tentative visit planning, property/asset history, recorded decision playback and saved-policy comparisons. The [workspace guide](../docs/PORTFOLIO_WORKSPACE.md) explains each flow. Profiles, incident decisions and plans require the property manager role; policy comparison requires the policy editor role.
 
 The stage display describes the current action's evidence and decision state. A completed quote request or simulated action does not prove the repair is complete. An approval records a scoped decision; it does not contact or assign a contractor.
 
@@ -61,7 +62,7 @@ Only the authorised BUILD cases may be used for development or UI examples. Do n
 
 Changing the demo role changes the backend session. It is useful for reviewing the different permissions, but it is not real login. Review decisions, policy drafts, publications and explicit reassessments are genuine writes to the connected local store. Use an isolated demo database and workflow directory, not the shared default store or production data.
 
-External operational actions remain simulated. This application does not send contractor messages, make bookings or payments, or provide a voice channel.
+External operational actions remain simulated. The dashboard does not send contractor messages, make bookings or payments, or provide a voice interface; backend voice intake adapters are documented separately.
 
 ## Checks
 
@@ -71,6 +72,7 @@ Run from `web/`:
 npm run build
 npm run lint
 node --experimental-strip-types --test src/lib/pipeline.test.ts
+node --experimental-strip-types --test src/lib/portfolio-api.test.ts
 ```
 
 The build checks TypeScript and writes assets to `../static/dashboard/`. Lint checks source rules. These checks do not verify browser interactions, backend authorisation, model availability or a deployed Vercel workflow.
@@ -84,6 +86,7 @@ For a browser check, use the isolated backend above. Check an empty queue before
 - Policy interpretation supports the backend's rule vocabulary. Additional rules are readable, but React does not have a general structured rule builder. The policy flow does not execute arbitrary instructions or generate code from a human decision.
 - Case ownership, contractor assignment and verified physical repair completion must not be inferred from a review button or action status.
 - The dashboard refreshes after its own case actions, on explicit refresh and every 20 seconds while visible. It pauses automatic refresh after three failures and keeps the last loaded data visible. This is periodic fetching, not a live event stream.
-- The source keeps both views mounted after the first policy visit to preserve the selected case, queue filters and unsaved policy edits while switching views. This is page-memory state, not storage across reloads; browser verification is reported separately.
+- Cases, Policies and Portfolio remain mounted after their first visit to preserve selections and unsaved forms while switching workspaces. Evidence/playback panels reload their snapshot when switched. This is page-memory state, not storage across reloads.
+- Contractor availability and case planning windows are staff-entered. Tentative plans check trade, window and slot conflicts but do not optimise routes or verify travel time. Property history uses explicit staff grouping rather than inferring a building from a map pin.
 - The interpreter records source-review provenance in the editable draft reason; published policy has no separate structured source-review field.
 - FastAPI serves the committed React build, but hosted Vercel operation and production identity remain unverified. External operational adapters are still simulated.

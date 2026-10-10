@@ -4,6 +4,8 @@
 
 Property Workflow is a Python maintenance case application branded **Property Desk**. It combines a modular FastAPI application, a transactional case store and a native Python Vercel Workflow coordinator. The FastAPI-served interface provides tenant conversations, staff reviews and policy editing; a separate React/Vite dashboard presents the staff queue, evidence, scoped review responses and backend policy editing. Jev routes new case messages first, with Claude handling uncertain routes, evidence extraction and follow-up drafting. Deterministic policies decide which actions are allowed and retain every blocker and its evidence.
 
+The React portfolio workspace adds related-incident review, evidence comparison, contractor visit planning, property and asset history, recorded case playback and policy comparison. These views use the existing case store; grouping and planning do not grant authority or start operational actions.
+
 The implemented environment is a local demonstration. Contractor contact, clarification messages, bookings, key supply, work instructions and other operational actions are simulated. Recorded local checks cover native SDK execution and recovery; they do not establish Vercel cloud operation, PostgreSQL behaviour, production authentication, live model quality or real delivery. This document describes the source under `app/`, `static/` and `web/`, including the GUI refresh reconciled with GitHub main revision `38f3c70`. [The verification report](docs/VERIFICATION.md) records an earlier test snapshot; later changes need their own checks. The [BUILD replay boundary](docs/BUILD_REPLAY_BOUNDARY.md) explains the limits on evaluation, including the reserved record exposed during a shared-runtime check.
 
 ## Key Requirements
@@ -31,6 +33,11 @@ flowchart TD
     Proxy --> API
     API --> Service["Case service + deterministic policy"]
     Service <--> SQL[("Application SQL store")]
+    API --> Portfolio["Portfolio profiles, incident links and tentative plans"]
+    Portfolio <--> SQL
+    API --> Insights["Read-only evidence, playback and policy comparison"]
+    SQL --> Insights
+    Insights --> Pure["Pure policy evaluation on copied inputs"]
     API -->|"Wake after commit"| WF["Native Vercel Workflow coordinator"]
     WF <--> World[("Native Workflow World")]
     WF --> Cycle["run_case_cycle"]
@@ -50,7 +57,7 @@ flowchart TD
     Service -->|"Unresolved requirement"| Hold["Clarification, wait or scoped staff review"]
 ```
 
-The flow above includes the current routing and React paths. The expanded image below and the standalone diagram set describe an earlier snapshot, as explained in the diagram guide.
+The flow above includes the current routing, React, portfolio and read-only insight paths. The expanded image below and the standalone diagram set describe an earlier snapshot, as explained in the diagram guide.
 
 [![C2 container view with the Python application, Anthropic API and separate application and Workflow stores](docs/diagrams/c4/c2-containers.png)](docs/diagrams/c4/c2-containers.png)
 
@@ -176,6 +183,25 @@ Reviews identify a requirement, owner, evidence, claim IDs, current scope, polic
 
 Policy drafts and published versions are append-only records. Publication requires the editor's current saved impact preview. Incomplete current actions are held for explicit reassessment under the new version; completed actions retain their historical decision. Only the demonstration policy profile is configured.
 
+### Portfolio planning and case insights
+
+**Sources:** [portfolio.py](app/portfolio.py), [insights.py](app/insights.py), [PortfolioWorkspace.tsx](web/src/components/PortfolioWorkspace.tsx), [PortfolioOperations.tsx](web/src/components/PortfolioOperations.tsx), [portfolio API adapter](web/src/lib/portfolio-api.ts).
+
+The routers share the existing staff authentication dependency. All configured staff roles can read portfolio and case insights; portfolio mutations require `case_manager`, and policy comparison requires `policy_editor`. Input models validate references, bounded fields and timezone-aware planning windows. These endpoints do not wake Workflow, call a model, dispatch a contractor or modify case facts, proposals and permission checks.
+
+| Feature | Implementation and boundary |
+| --- | --- |
+| Related incidents | `GET /api/portfolio` proposes case pairs with the same staff-confirmed property key, matching recorded signals and intake timestamps within 30 days. Intake time is not proof of when a fault occurred. A manager confirms or dismisses the connection; no shared cause is inferred. Confirmed groups suppress their subset suggestions. Dismissals retain their reviewed source snapshot so new information can be reviewed later. |
+| Evidence comparison | `GET /api/cases/{cid}/insights` groups structured claims by fact and applicable scope. Exact quotations, sources, submitters and verification remain visible. Superseded, expired, hearsay and out-of-scope claims remain distinguishable from current disagreement; unstructured text is not silently converted into facts. |
+| Contractor planning | `/api/portfolio/contractors` stores staff-supplied resource availability. `/api/portfolio/plans` checks trades, supplied appointment windows and overlapping contractor or case reservations. Saved plans are tentative, with current case blockers and an unconfirmed-visit requirement. Travel, job duration, resource identity and real availability are not externally verified. Cancellation releases the local reservation only. |
+| Property and asset history | Staff profiles retain a shared property key, optional asset reference, trade, original property reference and source reason. The UI groups linked cases and their recorded dates; it does not infer recurring causes, verified addresses or completed repairs. Unknown assets and windows can remain blank. |
+| Recorded playback | Insight frames contain each stored decision and only the evidence and ledger entries received by that point. Source occurrence dates do not move later information into an earlier frame. Playback neither reinterprets history using the current case projection nor reruns a decision. |
+| Policy comparison | `POST /api/policy-comparison` evaluates a saved draft and active policy against the same current inputs and timestamp without creating decisions, reviews or questions. It shows changed checks, blockers, owners and outcomes; the proposed policy is a new version, so existing version-scoped approvals do not carry over. Completed actions retain their recorded decision and simulated receipt. |
+
+Profile changes, incident decisions, candidate dismissals, contractor records, plans and cancellations append `portfolio_*` audit records with actor, time and source references. Projections are rebuilt from those records after restart. New profiles supersede earlier metadata without rewriting it. Plans capture profile IDs, case revisions and policy version; reads identify stale plans and explain current trade, window, access and policy blockers. Grouping never transfers permission between cases, and resolving an incident never closes its individual repairs.
+
+Policy comparison is an inspection view, separate from the saved impact preview required for publication. It excludes publication reassessment holds to compare underlying rules and does not reproduce every operational question or reminder state. A stale draft can be inspected but still needs a current base and publication preview. These boundaries also apply to the React controls; client role selection cannot bypass server checks.
+
 ### Native Workflow coordinator
 
 **Source:** [workflows.py](app/workflows.py); [runtime contract and recorded checks](docs/WORKFLOW_RUNTIME.md).
@@ -283,6 +309,9 @@ The main logical entities and relationships are:
 | Event, outbox and checkpoint | Incoming event has a revision; outbox references its event ID; checkpoint records consumed event IDs and assessed revision. `message_routed`, `route_changed` and `triage_completed` distinguish a routing decision, proposal update and completed interpretation |
 | Action and receipt | Stable business ID hashes case ID, action revision and canonical scope; intent/result records reference the decision and simulated provider receipt |
 | Tenant conversation and self-identification | Conversation is owned by a tenant demonstration session and links to at most one shared case, with pending deliveries and request receipts. The case stores the portal-supplied identity source and correction state; this supports only the configured limited policy exception |
+| Portfolio profile | Append-only staff grouping metadata references its case, original property reference, source records and prior profile; it does not replace canonical case identity or grant access |
+| Incident and suggestion review | Confirmed links retain individual case/profile/source references. Separate status and dismissal records preserve the reviewed snapshot; current cases remain independent |
+| Contractor resource and tentative plan | Staff-supplied resource windows and trades support local reservations. Plans capture case revisions, profile IDs and policy version; appended cancellations release reservations without changing external bookings |
 
 Database references inside JSON are largely enforced by service checks, rather than SQL foreign keys. The immutable ledger is not tamper-proof against an administrator who can alter schema, files or triggers.
 
@@ -377,6 +406,8 @@ The static staff interface exposes evidence, claim provenance, decisions, review
 | Versioned policy with explicit reassessment | Prevents a publication from silently changing the authority of an already assessed action; adds a deliberate staff checkpoint |
 | Conservative BUILD-prefix replay | Preserves chronology and avoids retrospective attachment content; limits coverage and cannot establish evaluation accuracy |
 | Separate native Reality Test runner | Isolates each case and records source/configuration provenance, waits and failures. Its output contract still needs checking against the organisers' actual release. |
+| Portfolio metadata separate from case authority | Allows related investigations, history and tentative scheduling while retaining each case's independent facts, conversation and permission checks. Availability and route feasibility remain staff responsibilities. |
+| Read-only policy comparison and recorded playback | Makes evidence and proposed rule effects inspectable without rewriting history or triggering work. A pure comparison is not a prediction of every operational follow-up. |
 
 ## Future Improvements
 
@@ -397,7 +428,7 @@ These changes remain to be implemented:
 
 ## Diagram sources and scope
 
-The [diagram guide](docs/diagrams/README.md) describes the earlier source snapshot, each view's scope and the checks performed. Archify generates the four C4 maps, two sequences and two flow diagrams from editable typed JSON. Diagram Design provides the data-storage and local-deployment figures as self-contained HTML with SVG exports. Humanizer was used for the explanatory prose and labels. Those artefacts have not been regenerated for Jev, the React client or the Reality Test runner; the inline high-level flow and current prose document the additional paths.
+The [diagram guide](docs/diagrams/README.md) describes the earlier source snapshot, each view's scope and the checks performed. Archify generates the four C4 maps, two sequences and two flow diagrams from editable typed JSON. Diagram Design provides the data-storage and local-deployment figures as self-contained HTML with SVG exports. Humanizer was used for the explanatory prose and labels. Those artefacts have not been regenerated for Jev, the React client, portfolio and insight modules or the Reality Test runner; the inline high-level flow and current prose document the additional paths.
 
 Static previews work in GitHub Markdown. Interactive HTML must be downloaded and opened locally or served by a documentation host. The JSON, HTML, Mermaid sources and validation receipts stay beside each diagram so later changes can be reviewed and regenerated.
 

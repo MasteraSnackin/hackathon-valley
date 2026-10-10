@@ -40,6 +40,11 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 - Native Workflow steps, typed hooks, timers and startup recovery; authorised routine actions progress through simulated adapters.
 - Stable action identities, duplicate handling and reconciliation of uncertain acknowledgements.
 - Chronological replay of the fixed 25-case BUILD partition, with source hash checks and later material withheld.
+- A [Portfolio workspace](docs/PORTFOLIO_WORKSPACE.md) with six tools: related-incident suggestions, source evidence comparison, tentative contractor visit planning, property and asset history, recorded case playback, and saved-policy comparisons. Open **Portfolio** in the React dashboard. Grouping cases never transfers their permissions, and planning a visit does not book or dispatch it.
+
+[![Portfolio workspace showing conflicting completion evidence from two fictional sources](docs/screenshots/portfolio/evidence-comparison.png)](docs/PORTFOLIO_WORKSPACE.md)
+
+The capture shows the working local dashboard with fictional records. See the [Portfolio guide](docs/PORTFOLIO_WORKSPACE.md) and [checks and screenshots](docs/PORTFOLIO_VERIFICATION.md) for the six flows and their limits.
 
 ## 2. Architecture
 

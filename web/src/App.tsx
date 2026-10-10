@@ -10,6 +10,7 @@ import PolicyEngine, { type PolicyRequest } from './components/PolicyEngine';
 import { reviewPolicySuggestion } from './lib/policy-api';
 import MessageDrafts from './components/MessageDrafts';
 import CaseReviewPanel from './components/CaseReviewPanel';
+import PortfolioWorkspace from './components/PortfolioWorkspace';
 
 /** Only these chronological BUILD prefixes are imported, after an explicit click. */
 const DEMO_CASES: [string, number][] = [['013', 2], ['016', 2], ['017', 3], ['021', 2], ['023', 4], ['027', 1], ['028', 2], ['034', 3], ['049', 2]];
@@ -48,7 +49,8 @@ function App() {
   const [mode, setMode] = useState('');
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
   const [runningTimers, setRunningTimers] = useState(false);
-  const [view, setView] = useState<'operations' | 'policies'>('operations');
+  const [view, setView] = useState<'operations' | 'policies' | 'portfolio'>('operations');
+  const [portfolioVisited, setPortfolioVisited] = useState(false);
   const [policyVisited, setPolicyVisited] = useState(false);
   const [policySuggestion, setPolicySuggestion] = useState<{ text: string; reviewId: string } | null>(null);
   const [policyRequest, setPolicyRequest] = useState<PolicyRequest | null>(null);
@@ -230,7 +232,7 @@ function App() {
       <div className="flex flex-wrap items-center gap-4">
         <span className="text-base font-semibold">Property Desk</span>
         <div className="flex gap-1 rounded-[var(--radius-sm)] bg-[var(--color-canvas)] p-1">
-          {(['operations', 'policies'] as const).map((tab) => <button key={tab} type="button" disabled={busy} aria-current={view === tab ? 'page' : undefined} onClick={() => { if (tab === 'policies') setPolicyVisited(true); setView(tab); }} className={`rounded px-3 py-2 text-sm font-medium ${view === tab ? 'bg-[var(--color-surface)] text-[var(--color-primary)] shadow-sm' : 'text-[var(--color-muted)]'}`}>{tab === 'operations' ? 'Cases' : 'Policies'}</button>)}
+          {(['operations', 'policies', 'portfolio'] as const).map((tab) => <button key={tab} type="button" disabled={busy} aria-current={view === tab ? 'page' : undefined} onClick={() => { if (tab === 'policies') setPolicyVisited(true); if (tab === 'portfolio') setPortfolioVisited(true); setView(tab); }} className={`rounded px-3 py-2 text-sm font-medium ${view === tab ? 'bg-[var(--color-surface)] text-[var(--color-primary)] shadow-sm' : 'text-[var(--color-muted)]'}`}>{tab === 'operations' ? 'Cases' : tab === 'policies' ? 'Policies' : 'Portfolio'}</button>)}
         </div>
         <a className="text-sm underline underline-offset-4" href={originalWorkspace} target="_blank" rel="noreferrer">Tenant and staff workspace</a>
       </div>
@@ -253,6 +255,7 @@ function App() {
       {notice && <div role="status" className="flex items-start justify-between gap-2 rounded bg-[var(--color-success-bg)] p-3 text-sm"><span>{notice}</span><button type="button" aria-label="Dismiss notice" className="underline" onClick={() => setNotice(null)}>Dismiss</button></div>}
     </div>}
     {policyVisited && <main className={view === 'policies' ? 'min-h-0 flex-1 overflow-y-auto' : 'hidden'}><PolicyEngine request={policyRequest} onDraftConsumed={() => setPolicyRequest(null)} sessionRole={sessionRole} onRoleChange={setSessionRole} onPublished={() => void refresh(true)} /></main>}
+    {portfolioVisited && <main className={view === 'portfolio' ? 'min-h-0 flex-1 overflow-y-auto' : 'hidden'}><PortfolioWorkspace cases={cases} selectedCaseId={selectedId} sessionRole={sessionRole} onSelectCase={(id) => { selectCase(id, true); setView('operations'); }} onOpenPolicies={() => { setPolicyVisited(true); setView('policies'); }} /></main>}
     <div className={view === 'operations' ? 'contents' : 'hidden'}>
       <div className="grid grid-cols-3 gap-3 border-b border-[var(--color-border)] px-4 py-3 text-xs xl:hidden" aria-label="Case overview">
         <div><strong className="block text-xl">{stats.active}</strong>Active actions</div><div><strong className="block text-xl">{stats.escalations}</strong>Actions stopped</div><div><strong className="block text-xl">{stats.resolvedToday}</strong>Action complete</div>
