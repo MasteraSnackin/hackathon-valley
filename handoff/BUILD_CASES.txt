@@ -1,0 +1,34 @@
+PROPERTY MANAGEMENT — BUILD CASES
+25 cases. Source revision: 9bcdca585955dfb930005ed742572606e68f5688
+Complexity labels describe the whole historical workflow, not measured model difficulty.
+All 50 cases have already informed the audit. EVAL is reserved from this point forward, not previously unseen.
+
+Case | Whole-case complexity | Original source title
+002 | higher | Blocked toilet at Flat 3, 15 Willowmere Road, Alderwick, ZZ3 2ZZ
+005 | higher | Check-Out Cleaning
+006 | medium | Check-Out Works: Carpet Replacement and Repainting
+008 | higher | Check-Out Works
+013 | lower | Integrated Dishwasher Repair Request
+016 | lower | Garden Door Repair Request
+017 | lower | Kitchen Extractor Fan Repair Request
+018 | medium | Garden Maintenance Request
+019 | higher | Garden Maintenance Request
+020 | higher | Property inspection
+021 | medium | Key Replacement Request
+023 | medium | Balcony Door Lock Repair
+025 | higher | Oven Repair Request
+027 | lower | Blocked Bath Drain Request
+028 | lower | Loose Water Pipe in the Back Garden
+031 | medium | Plumbing request
+034 | lower | Shower Repair Request
+036 | higher | Shower Tap Repair
+038 | medium | Washing Machine Replacement Request
+041 | medium | Washing Machine Repair Request
+043 | higher | Washing Machine Repair Request
+045 | higher | Kitchen Window and Patio Door Window Repair
+047 | medium | Bedroom Window Repair Request
+048 | higher | Bathroom Window Repair Request
+049 | medium | Shed Door Repair Request
+
+Complexity balance: 6 lower, 9 medium, 10 higher.
+Use only source material available at the evaluation decision point; do not expose future outcomes.

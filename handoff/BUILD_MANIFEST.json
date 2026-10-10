@@ -1,0 +1,600 @@
+{
+  "source_commit": "9bcdca585955dfb930005ed742572606e68f5688",
+  "allowed_case_ids": [
+    "002",
+    "005",
+    "006",
+    "008",
+    "013",
+    "016",
+    "017",
+    "018",
+    "019",
+    "020",
+    "021",
+    "023",
+    "025",
+    "027",
+    "028",
+    "031",
+    "034",
+    "036",
+    "038",
+    "041",
+    "043",
+    "045",
+    "047",
+    "048",
+    "049"
+  ],
+  "cases": [
+    {
+      "case_id": "002",
+      "partition": "build",
+      "title": "Blocked toilet at Flat 3, 15 Willowmere Road, Alderwick, ZZ3 2ZZ",
+      "whole_case_complexity": "higher",
+      "task_family": "plumbing",
+      "history_events": 49,
+      "attachment_count": 0,
+      "source_directory": "Property Management/002",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/002"
+    },
+    {
+      "case_id": "005",
+      "partition": "build",
+      "title": "Check-Out Cleaning",
+      "whole_case_complexity": "higher",
+      "task_family": "checkout_cleaning",
+      "history_events": 37,
+      "attachment_count": 3,
+      "source_directory": "Property Management/005",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/005"
+    },
+    {
+      "case_id": "006",
+      "partition": "build",
+      "title": "Check-Out Works: Carpet Replacement and Repainting",
+      "whole_case_complexity": "medium",
+      "task_family": "checkout_refurbishment",
+      "history_events": 27,
+      "attachment_count": 0,
+      "source_directory": "Property Management/006",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/006"
+    },
+    {
+      "case_id": "008",
+      "partition": "build",
+      "title": "Check-Out Works",
+      "whole_case_complexity": "higher",
+      "task_family": "checkout_refurbishment",
+      "history_events": 49,
+      "attachment_count": 4,
+      "source_directory": "Property Management/008",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/008"
+    },
+    {
+      "case_id": "013",
+      "partition": "build",
+      "title": "Integrated Dishwasher Repair Request",
+      "whole_case_complexity": "lower",
+      "task_family": "appliance",
+      "history_events": 35,
+      "attachment_count": 0,
+      "source_directory": "Property Management/013",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/013"
+    },
+    {
+      "case_id": "016",
+      "partition": "build",
+      "title": "Garden Door Repair Request",
+      "whole_case_complexity": "lower",
+      "task_family": "doors_locks",
+      "history_events": 26,
+      "attachment_count": 0,
+      "source_directory": "Property Management/016",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/016"
+    },
+    {
+      "case_id": "017",
+      "partition": "build",
+      "title": "Kitchen Extractor Fan Repair Request",
+      "whole_case_complexity": "lower",
+      "task_family": "appliance",
+      "history_events": 14,
+      "attachment_count": 0,
+      "source_directory": "Property Management/017",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/017"
+    },
+    {
+      "case_id": "018",
+      "partition": "build",
+      "title": "Garden Maintenance Request",
+      "whole_case_complexity": "medium",
+      "task_family": "garden",
+      "history_events": 17,
+      "attachment_count": 0,
+      "source_directory": "Property Management/018",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/018"
+    },
+    {
+      "case_id": "019",
+      "partition": "build",
+      "title": "Garden Maintenance Request",
+      "whole_case_complexity": "higher",
+      "task_family": "garden",
+      "history_events": 44,
+      "attachment_count": 0,
+      "source_directory": "Property Management/019",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/019"
+    },
+    {
+      "case_id": "020",
+      "partition": "build",
+      "title": "Property inspection",
+      "whole_case_complexity": "higher",
+      "task_family": "inspection",
+      "history_events": 20,
+      "attachment_count": 1,
+      "source_directory": "Property Management/020",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/020"
+    },
+    {
+      "case_id": "021",
+      "partition": "build",
+      "title": "Key Replacement Request",
+      "whole_case_complexity": "medium",
+      "task_family": "doors_locks",
+      "history_events": 29,
+      "attachment_count": 0,
+      "source_directory": "Property Management/021",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/021"
+    },
+    {
+      "case_id": "023",
+      "partition": "build",
+      "title": "Balcony Door Lock Repair",
+      "whole_case_complexity": "medium",
+      "task_family": "doors_locks",
+      "history_events": 27,
+      "attachment_count": 0,
+      "source_directory": "Property Management/023",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/023"
+    },
+    {
+      "case_id": "025",
+      "partition": "build",
+      "title": "Oven Repair Request",
+      "whole_case_complexity": "higher",
+      "task_family": "appliance",
+      "history_events": 64,
+      "attachment_count": 0,
+      "source_directory": "Property Management/025",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/025"
+    },
+    {
+      "case_id": "027",
+      "partition": "build",
+      "title": "Blocked Bath Drain Request",
+      "whole_case_complexity": "lower",
+      "task_family": "plumbing",
+      "history_events": 17,
+      "attachment_count": 0,
+      "source_directory": "Property Management/027",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/027"
+    },
+    {
+      "case_id": "028",
+      "partition": "build",
+      "title": "Loose Water Pipe in the Back Garden",
+      "whole_case_complexity": "lower",
+      "task_family": "plumbing",
+      "history_events": 14,
+      "attachment_count": 0,
+      "source_directory": "Property Management/028",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/028"
+    },
+    {
+      "case_id": "031",
+      "partition": "build",
+      "title": "Plumbing request",
+      "whole_case_complexity": "medium",
+      "task_family": "plumbing",
+      "history_events": 27,
+      "attachment_count": 0,
+      "source_directory": "Property Management/031",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/031"
+    },
+    {
+      "case_id": "034",
+      "partition": "build",
+      "title": "Shower Repair Request",
+      "whole_case_complexity": "lower",
+      "task_family": "plumbing",
+      "history_events": 17,
+      "attachment_count": 0,
+      "source_directory": "Property Management/034",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/034"
+    },
+    {
+      "case_id": "036",
+      "partition": "build",
+      "title": "Shower Tap Repair",
+      "whole_case_complexity": "higher",
+      "task_family": "plumbing",
+      "history_events": 52,
+      "attachment_count": 0,
+      "source_directory": "Property Management/036",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/036"
+    },
+    {
+      "case_id": "038",
+      "partition": "build",
+      "title": "Washing Machine Replacement Request",
+      "whole_case_complexity": "medium",
+      "task_family": "appliance",
+      "history_events": 13,
+      "attachment_count": 0,
+      "source_directory": "Property Management/038",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/038"
+    },
+    {
+      "case_id": "041",
+      "partition": "build",
+      "title": "Washing Machine Repair Request",
+      "whole_case_complexity": "medium",
+      "task_family": "appliance",
+      "history_events": 25,
+      "attachment_count": 0,
+      "source_directory": "Property Management/041",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/041"
+    },
+    {
+      "case_id": "043",
+      "partition": "build",
+      "title": "Washing Machine Repair Request",
+      "whole_case_complexity": "higher",
+      "task_family": "appliance",
+      "history_events": 25,
+      "attachment_count": 0,
+      "source_directory": "Property Management/043",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/043"
+    },
+    {
+      "case_id": "045",
+      "partition": "build",
+      "title": "Kitchen Window and Patio Door Window Repair",
+      "whole_case_complexity": "higher",
+      "task_family": "windows",
+      "history_events": 38,
+      "attachment_count": 0,
+      "source_directory": "Property Management/045",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/045"
+    },
+    {
+      "case_id": "047",
+      "partition": "build",
+      "title": "Bedroom Window Repair Request",
+      "whole_case_complexity": "medium",
+      "task_family": "windows",
+      "history_events": 36,
+      "attachment_count": 0,
+      "source_directory": "Property Management/047",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/047"
+    },
+    {
+      "case_id": "048",
+      "partition": "build",
+      "title": "Bathroom Window Repair Request",
+      "whole_case_complexity": "higher",
+      "task_family": "windows",
+      "history_events": 36,
+      "attachment_count": 0,
+      "source_directory": "Property Management/048",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/048"
+    },
+    {
+      "case_id": "049",
+      "partition": "build",
+      "title": "Shed Door Repair Request",
+      "whole_case_complexity": "medium",
+      "task_family": "doors_locks",
+      "history_events": 14,
+      "attachment_count": 0,
+      "source_directory": "Property Management/049",
+      "source_url": "https://github.com/DwellyOrg/HackatonPublicCases/tree/9bcdca585955dfb930005ed742572606e68f5688/Property%20Management/049"
+    }
+  ],
+  "files": [
+    {
+      "case_id": "002",
+      "path": "002/history.md",
+      "sha256": "7dfd10fe92722f27ec9ed3c0705bf6f4034b7222e0fd723588baf54e1ece91c6"
+    },
+    {
+      "case_id": "002",
+      "path": "002/index.md",
+      "sha256": "fee33fc3157d462c5136f8e3ac8c45c9ba3d0466cbc24405bba150b14af727ec"
+    },
+    {
+      "case_id": "005",
+      "path": "005/attachments/attachment-01-check-out-inspection-report.pdf",
+      "sha256": "84316f43e1ff9194a323cef5317b936dd3aa5ca01aefd31ad0eca843d78d4ff0"
+    },
+    {
+      "case_id": "005",
+      "path": "005/attachments/attachment-02-cleaning-quote.pdf",
+      "sha256": "f697b2c33efd2f7ab745da8fb099ccad9620bd33ddc1faa20dace61506357351"
+    },
+    {
+      "case_id": "005",
+      "path": "005/attachments/attachment-03-cleaning-quote.pdf",
+      "sha256": "c2108bd68cb6a6aab6dafa8d1b5a7e014a38c52ece5a9f330233227a8236458a"
+    },
+    {
+      "case_id": "005",
+      "path": "005/history.md",
+      "sha256": "f56a378925d16686c260bbc743b2c2849c7b6d1f8d967bbfbb1c6e63f395f29a"
+    },
+    {
+      "case_id": "005",
+      "path": "005/index.md",
+      "sha256": "e796ccdf59faf4fef54cf3dc52f4169c1019686d161fa38bc40bdb647a637619"
+    },
+    {
+      "case_id": "006",
+      "path": "006/history.md",
+      "sha256": "e33e990a26f56808326248dabde83782defe2ccf2ae2cd50746e3339d6c32acf"
+    },
+    {
+      "case_id": "006",
+      "path": "006/index.md",
+      "sha256": "c73156b66bf29149e13814685357870d76d42c4fa6eaa8d86372f86953701f98"
+    },
+    {
+      "case_id": "008",
+      "path": "008/attachments/attachment-01-check-out-inspection-report.pdf",
+      "sha256": "fc864937b6f698416b85a4ff8edacdbecffb1624fb14a2f966ff43ba266c1138"
+    },
+    {
+      "case_id": "008",
+      "path": "008/attachments/attachment-02-estimate.pdf",
+      "sha256": "99ab9cfc392e5c03064f86ad626c41d1e39db0e85e2ed051a6a4ee50c4793639"
+    },
+    {
+      "case_id": "008",
+      "path": "008/attachments/attachment-03-check-out-inspection-report.pdf",
+      "sha256": "3cc740fb45ffeedc2102c58bfe05ee59b307a1a3e7bd884f2cdc38f4a6c38e3b"
+    },
+    {
+      "case_id": "008",
+      "path": "008/attachments/attachment-04-invoice.pdf",
+      "sha256": "7ccf6d790505889f7bd6a985610e9ad5c48157e9c174cd16252de16556ed35ff"
+    },
+    {
+      "case_id": "008",
+      "path": "008/history.md",
+      "sha256": "1335074bf892e522d28c64baf19382c8d1ead851bca21ffd37e9509be85c3919"
+    },
+    {
+      "case_id": "008",
+      "path": "008/index.md",
+      "sha256": "6854ec02177dce4e98ac13051022fec9410035e8d9817bc0a548ea3b953cd106"
+    },
+    {
+      "case_id": "013",
+      "path": "013/history.md",
+      "sha256": "146e50e521e06c85a74c1b39980a3b4dd0042e2d397c93892e0e2f8b32e1785e"
+    },
+    {
+      "case_id": "013",
+      "path": "013/index.md",
+      "sha256": "fb62e9ba4a1e26c3e44ae07e1bcd6cac53aaa148f89bb9d07e07b39d0e51dcce"
+    },
+    {
+      "case_id": "016",
+      "path": "016/history.md",
+      "sha256": "528103049d6f7fa283cee80def4e65006b1daec5cca7a5534aa2d6f9a3943824"
+    },
+    {
+      "case_id": "016",
+      "path": "016/index.md",
+      "sha256": "2fa9d89af643a2c34a10c4feedb7bfa55d9c95d1c6bd6c4a3d205a3ec5a6cc1e"
+    },
+    {
+      "case_id": "017",
+      "path": "017/history.md",
+      "sha256": "4e6841b2ce52d8b2fcbfb7af0ff2f2ad6099ea495b5143add1dd6b3ad54911b0"
+    },
+    {
+      "case_id": "017",
+      "path": "017/index.md",
+      "sha256": "8a8cc4d76c80701d5f100d1fbc0f7daea2430b8c65d724ec5331ab4490f26251"
+    },
+    {
+      "case_id": "018",
+      "path": "018/history.md",
+      "sha256": "50e64b8e30e0dd14fce3bde93fec14a5d2c9a7038f2f3379df51a52017d25607"
+    },
+    {
+      "case_id": "018",
+      "path": "018/index.md",
+      "sha256": "1954ad83f485362a92bf1772ea7bb5aca277db76e9e6e05643ead520a4b19b54"
+    },
+    {
+      "case_id": "019",
+      "path": "019/history.md",
+      "sha256": "7529c886fb9b6a48c01388fba4db4bfba9d46460d7eeb3594f4f78cd10ee81cd"
+    },
+    {
+      "case_id": "019",
+      "path": "019/index.md",
+      "sha256": "6ef4f40eec012db529b70c0b5ebe39bebba62af1fc78cdf190c8cfae30549c19"
+    },
+    {
+      "case_id": "020",
+      "path": "020/attachments/attachment-01-property-inspection-report.pdf",
+      "sha256": "10a7f9ef517497544699def0f960e216671aeaa4687e3b0267075acaabe1b4aa"
+    },
+    {
+      "case_id": "020",
+      "path": "020/history.md",
+      "sha256": "f124e50e11036aed13bbd4cf0463ae9cd7bcdb4d5399ae63a085a4c513ea80d4"
+    },
+    {
+      "case_id": "020",
+      "path": "020/index.md",
+      "sha256": "b3d93b0c03de19de1cd612f7741dd41a975e2cd4966134b85e0c5007bda38349"
+    },
+    {
+      "case_id": "021",
+      "path": "021/history.md",
+      "sha256": "50c6900b3b4c1be040cba1aab6f293d726502ae8fd4d1ca76aa57a9c2b3d100e"
+    },
+    {
+      "case_id": "021",
+      "path": "021/index.md",
+      "sha256": "75f2be29d3947109aa123c072760b9c9ea294d4330ea9eeb35b1730ed825f27e"
+    },
+    {
+      "case_id": "023",
+      "path": "023/history.md",
+      "sha256": "b705d2d76ffed69348c8403c220638878237996556895ec241fa299fb24e066f"
+    },
+    {
+      "case_id": "023",
+      "path": "023/index.md",
+      "sha256": "e382c97998c2df9b9fed4b17cd37b79c242b38165fe22e9faef93bf3f7df0ad7"
+    },
+    {
+      "case_id": "025",
+      "path": "025/history.md",
+      "sha256": "8101970309d2eb0c5db0d0bad3d03f13402ac5b9d560a7b9d2367f5e45cc7a04"
+    },
+    {
+      "case_id": "025",
+      "path": "025/index.md",
+      "sha256": "b9bd191d2e2387051296183e626eba980c81fd5bcdc3144fa98b85b9820c68bd"
+    },
+    {
+      "case_id": "027",
+      "path": "027/history.md",
+      "sha256": "ee63740d757d7957b5d56933945c1a683a38e8690d0071275616084370e5b0a6"
+    },
+    {
+      "case_id": "027",
+      "path": "027/index.md",
+      "sha256": "9cd66b88f700a08298d0e90e4ba31df7206385378ccaca3344682097a4a74b22"
+    },
+    {
+      "case_id": "028",
+      "path": "028/history.md",
+      "sha256": "a9182218c4900faa8f252fea39af93a12b58068ce5678aec365662ad04ee8d5e"
+    },
+    {
+      "case_id": "028",
+      "path": "028/index.md",
+      "sha256": "257e55256e2ed04fd06eef2602f49a7dcd81d71450416f0823b9623330e0240e"
+    },
+    {
+      "case_id": "031",
+      "path": "031/history.md",
+      "sha256": "f87371b639057d12f5702c25cd4b6aee06b681ac3cef369740373585dfb1ccca"
+    },
+    {
+      "case_id": "031",
+      "path": "031/index.md",
+      "sha256": "92ac61deabf51015387b112f6650259822354e5a88862e746fafb924ec2c2b90"
+    },
+    {
+      "case_id": "034",
+      "path": "034/history.md",
+      "sha256": "9a9fac8066e100080777e6d68e1c42327b4023be4f5888841628ebdb4e2c6432"
+    },
+    {
+      "case_id": "034",
+      "path": "034/index.md",
+      "sha256": "f4d0ae3149b7994a766a70fc02db2cef2e81f1722095cf872121555f9626a6cb"
+    },
+    {
+      "case_id": "036",
+      "path": "036/history.md",
+      "sha256": "dab973ea0f326c23f045e655c87f3dba226ab497483f9be851809d02b0aa79a7"
+    },
+    {
+      "case_id": "036",
+      "path": "036/index.md",
+      "sha256": "c43c3ad53e93d3dc43295425e98bb99fab20b8cf0dc1aa22d425b2c57a8c2111"
+    },
+    {
+      "case_id": "038",
+      "path": "038/history.md",
+      "sha256": "24c97eb2511d80141c8b3d95b2d147c791e4ba4f7d83a0d16c1176f7525842ff"
+    },
+    {
+      "case_id": "038",
+      "path": "038/index.md",
+      "sha256": "c9293563b50118b75167c87ca1dd46e61f7c0bb46f511f26c11c5b19eab788bc"
+    },
+    {
+      "case_id": "041",
+      "path": "041/history.md",
+      "sha256": "0d506fb6f12ec12b440537e991ddabda9e6c737c4859d1de1616b6ae88b98fa0"
+    },
+    {
+      "case_id": "041",
+      "path": "041/index.md",
+      "sha256": "6070aa970fe72e29731fa84784bc7b80660136e73fd8b58317e7c8efc958d4a7"
+    },
+    {
+      "case_id": "043",
+      "path": "043/history.md",
+      "sha256": "d4dea4806876acf00e6d40a8fa9c494be6f826823ccbd2debb0f91b06a996a39"
+    },
+    {
+      "case_id": "043",
+      "path": "043/index.md",
+      "sha256": "e491f05bde4b49306deae16060db32794389a97077b2cc33ff20a4fc47102e3f"
+    },
+    {
+      "case_id": "045",
+      "path": "045/history.md",
+      "sha256": "3e0752837d192a18668f9a085cbbb9eb03f0568c58a15727bf493260df82bdcc"
+    },
+    {
+      "case_id": "045",
+      "path": "045/index.md",
+      "sha256": "c37074a252117e3fc1e9fc6196fdc5b88e5b02690322616b82d39261dffde78d"
+    },
+    {
+      "case_id": "047",
+      "path": "047/history.md",
+      "sha256": "aff7f65cc7a966f30e7efd892060a8cb7c58aa0f6aa7999b26af9c6a148153f6"
+    },
+    {
+      "case_id": "047",
+      "path": "047/index.md",
+      "sha256": "77f01c5d8e4c906f4392029380b42a5df80fdb068eb78d3b01dc79ebdb7ef645"
+    },
+    {
+      "case_id": "048",
+      "path": "048/history.md",
+      "sha256": "be829723d4b22630f9f2874d2b884f7a6a98e70150f4a2a8915fdccfec3f5e54"
+    },
+    {
+      "case_id": "048",
+      "path": "048/index.md",
+      "sha256": "e9dcf55f4a741cc2472260dd600662498474c755e1f2297c6586622fd1035605"
+    },
+    {
+      "case_id": "049",
+      "path": "049/history.md",
+      "sha256": "e42f3ea31ec4f31f60c6069eb55f3d0ff1dc8aa87ce75278c9ddb2fcb7105994"
+    },
+    {
+      "case_id": "049",
+      "path": "049/index.md",
+      "sha256": "910ae2d6763d2c034f5f7365d3f2f6a504206f93e5115e02d304e23f7bde0fa7"
+    }
+  ],
+  "note": "BUILD ONLY. Historical outcomes may inform development but must be excluded from decision-time replay inputs. Never access the reserved cases or the full audit."
+}

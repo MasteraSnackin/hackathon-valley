@@ -1,0 +1,37 @@
+# Data, authority and architecture boundaries
+
+## Allowed material
+
+The fixed BUILD allowlist is `002,005,006,008,013,016,017,018,019,020,021,023,025,027,028,031,034,036,038,041,043,045,047,048,049`. The handoff manifest pins source commit `9bcdca585955dfb930005ed742572606e68f5688` and 58 files. `app.build_data.verify_sources()` checks SHA-256 for all supplied files. No reserved evaluation case, full split manifest, earlier audit, original plan or sibling app was used in implementation. The generic policy plan itself had been informed by an earlier all-corpus audit. Reserved evaluation is therefore **reserved from this build**, not previously unseen.
+
+The loader only opens the explicitly allowed BUILD history file after checking its hash. A replay snapshot is a chronological prefix with an explicit event count. The UI imports event 001 only. Neither index.md nor an eventual historical outcome enters interpretation, policy evaluation or a replay prompt. Catalogue titles/complexity labels remain catalogue metadata. No snapshot uses a later event, final status, amended task description or attachment merely because it is present in the directory.
+
+BUILD 008's `attachment-02-estimate.pdf` was inspected as permitted development reference. Its extracted text includes an observation referring to a later case overview: the quoted replacement of the bathroom tap was later said not to be required. The document is therefore contaminated for an early decision snapshot. The complete original is preserved unchanged and hash-verified. The implementation excludes **all attachments**, including this estimate, from replay input. No claim of a contemporaneous clean estimate is made; no derivative was needed. Binary attachment parsing and temporal availability controls remain a future integration.
+
+Test names and fictional sources are labelled BUILD-derived. They exercise conditions from the agreed plan and allowed partition rather than treating eventual historical closure as ground truth. Source documents are data, never instructions.
+
+## Four layers
+
+`app.ai` interprets a single source message, retains an exact quote and validates structured proposals. Default interpretation is a labelled literal demonstration, with an optional unverified live model adapter. Source assertions never become permission. `app.domain` evaluates every applicable requirement as PASS, FAIL, UNKNOWN or CONFLICT. `app.service` owns transactional state, role checks, policy publication, review decisions and the simulated external ledger. `app.workflows` supplies actual native SDK orchestration, with registered steps, one persistent typed hook and durable timers.
+
+SQLAlchemy maintains mutable case projections and append-only audit records. Database triggers reject update/delete of audit rows, including evidence, claims, interpretations, policies, decisions, human responses, actions, receipts, incoming events and checkpoints. Original claims persist after a reasoned correction; the new claim records the superseded IDs. Every assessment records its policy ID/version, case/action revision, scope, source links and complete claim-ID snapshot. This is an auditable local application, not tamper-proof custody against the database administrator.
+
+Evidence intake, state updates and event/outbox records commit in one database transaction. SQLite uses `BEGIN IMMEDIATE`; the PostgreSQL path locks a coordination row. This deliberately serialises this lean app's mutations. Native cycles read the committed projection and event ledger, reassess current evidence, and commit consumed event IDs. Accepted hook delivery is recorded separately from processed-event acknowledgement. A recovery heartbeat and startup wake recover pending delivery. This first version prioritises correctness over high-volume throughput; it is not a partitioned production event system.
+
+Actions carry stable business IDs for case, action revision and canonical scope. Identical proposals do not advance their revision. The simulated provider stores a single receipt per ID. Success, uncertain acknowledgement and reconciliation are separate records. An uncertain result blocks retries and scope replacement until receipt reconciliation. The real-adapter boundary must add provider idempotency/read-back and a committed transactional outbox before crossing a network; a local simulator cannot prove exactly-once physical work.
+
+## Authorisation and policy
+
+The server owns actor roles. Demo sessions are random, HttpOnly, SameSite cookies available only on loopback; the visible role selector makes their demonstration status explicit. Reviewer names are never treated as authentication. Production mode disables demo sessions and requires configured bearer identities; complete staff SSO/UI remains unimplemented.
+
+Identity/route verification is a case-manager judgement; permission and keys belong to the access officer; work/financial approval belongs to the approver; completion belongs to the reviewer. This is a demonstration delegation map, not a legal claim about who may consent. A staff access officer records a source person's applicable permission; the software does not grant tenants' consent on their behalf.
+
+Every review has a precise requirement, property/item/action scope, evidence links, policy/action revision, owner, expiry and other remaining blockers. Approval is restricted to authority, financial review or an explicitly configured custom HUMAN REVIEW gate. It cannot fill an absent factual check or bypass refusal/conflict. Grants expire, bind to scope and policy, and bind to material evidence so a changed price requires fresh review. Changed scope does not reuse an earlier approval. An expired, stale or duplicate response records a rejection without granting permission.
+
+Policies are immutable draft/published records. Publication requires a current saved impact preview by that editor. All existing cases are marked for explicit reassessment. Historical decisions/actions retain their version. Custom rules can combine supported facts with ALL/ANY conditions, action/category/property filters, owners and routing; default safety requirements cannot be removed through a routing change. Approving a custom review clears only that rule. STOP rules remain stops. Unknown profile selection stays held rather than choosing a profile silently. This build has one configured demo profile; combining landlord profiles is not implemented.
+
+Reported completion is source evidence. Verified resolution requires completion and outstanding-commitment evidence for the item being closed. Administrative archive is a separate action/status. Sending a simulated instruction, finishing a workflow or reaching a timer is not proof that a physical repair occurred.
+
+## Integration status
+
+Confirmed locally: Python domain/API/UI, append-only SQLite records, genuine SDK registration/execution/hooks/timers/restart, BUILD-prefix isolation and source hashes, simulated external idempotency/reconciliation. Prepared but unverified: Vercel cloud deployment/runtime identity, PostgreSQL, organisational authentication, real model calls, attachment storage/parsing and all real outbound integrations. No private environment from another app was read; dependencies and generated app state stay under this project.

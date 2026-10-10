@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Property Desk — Maintenance workflow</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner"><strong>LOCAL DEMONSTRATION</strong><span>External actions are simulated. Role sessions are for demonstration only.</span></div>
+  <header class="app-header">
+    <a class="brand" href="#cases" aria-label="Property Desk cases"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 26V11l10-6 10 6v15H6Z"/><path d="M12 26V15h8v11M12 11h8"/></svg></span><span>Property Desk<small>Maintenance operations</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation"><button data-view="cases" class="nav-link active">Cases <span id="case-count" class="nav-count">0</span></button><button data-view="reviews" class="nav-link">Human review <span id="review-count" class="nav-count">0</span></button><button data-view="policies" class="nav-link">Policy settings</button></nav>
+    <div class="session-switch"><label for="session-role">Demo role session</label><select id="session-role"><option value="case_manager">Case manager</option><option value="policy_editor">Policy editor</option><option value="access_officer">Access officer</option><option value="approver">Approver</option><option value="reviewer">Reviewer</option></select></div>
+  </header>
+  <main id="app" tabindex="-1"><div class="loading-state"><span class="loading-dot"></span>Loading your workspace…</div></main>
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog>
+  <footer class="app-footer"><span>Evidence first. Every action has a reason.</span><span id="runtime-label">Local demonstration · No real communications or bookings</span></footer>
+</body>
+</html>
