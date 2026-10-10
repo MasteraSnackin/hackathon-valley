@@ -1,12 +1,12 @@
 # Property Management — case 015: Vacant Property Preparation
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-25T08:34:11+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 23 of 23
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `d5cae21c4bb3d30b…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `d5cae21c4bb3d30b…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -40,201 +40,147 @@ The initial report and 22 further sources, submitted one at a time in availabili
 | 21 | 2025-09-25T08:34:11+00:00 | Attachment move-out-inspection-report.pdf (PDF text extraction) |
 | 22 | 2025-09-25T08:34:11+00:00 | Attachment property-preparation-quotation.pdf (PDF text extraction) |
 
-## Final decision — system case `51f093b54cd9`
+## Final decision — system case `c7c7a06b6802`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Rear garden weeding, grass cutting and tidy (category garden)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Rear garden clearance and tidying (category garden)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `9ff856b7475b` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00. Scope includes oven/extractor degreasing, limescale treatment, rubbish removal, carpet shampooing and rear garden tidying; no visit date is given.
+**Latest reading (model, medium confidence, route `clarify`):** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00, covering kitchen/oven/extractor degreasing, limescale, rubbish removal, carpet shampooing and rear garden tidying. It does not address the hold, landlord approval or any date.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Rear garden clearance and tidying
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `4d948ac1bf18`
+## Final decision — system case `5e5b97806fe4`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `request_quote` — Rear garden clearance including bagged dog waste and disturbed soil (category garden)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `9ff856b7475b` as a separate issue.
 
-**Latest reading (model, medium confidence, route `request_quote`):** An extracted move-out inspection report for 18 Thistlevaunt Lane lists the post-tenancy preparation items: kitchen/oven/extractor degreasing, bathroom and en-suite limescale removal and waste removal, matching the current checkout clean item. It also records rear garden clearance (including bagged dog waste) and disturbed soil, which are not part of the current work item.
+**Latest reading (model, high confidence, route `request_quote`):** A move-out inspection report for 18 Thistlevaunt Lane lists the checkout cleaning preparation items (kitchen, oven, extractor degreasing, bathroom and en-suite limescale, kitchen waste removal) and additionally records that the rear garden needs clearance including bagged dog waste and that the soil has been disturbed by digging. It does not say whether the hold is lifted, which quote was approved, or when the separate maintenance work will complete.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `request_quote` → **succeeded** via Demo contractor (simulated adapter) — Rear garden clearance including bagged dog waste and disturbed soil
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 680c8f82e05f: Attachment move-out-inspection-report.pdf (PDF text extraction) |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `2745b724fbe3`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Separate major maintenance works outstanding at property (category other)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
-
-**Latest reading (model, medium confidence, route `clarify`):** Mira Venn tells the contractor the checkout clean remains on hold because separate major maintenance is outstanding. A prospective tenant wants to move in on 28 September, and landlord approval of the separate maintenance quote had not been received.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `4ca85da308ff`
+## Final decision — system case `44e4336942e7`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Rear garden clearance including bagged dog waste (category garden)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `request_quote` — Rear garden clearance (category garden)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `9ff856b7475b` as a separate issue.
 
-**Latest reading (model, high confidence, route `request_quote`):** Mira Venn has asked contractor Brindlewick Turnover Services for a price and earliest availability for the post-tenancy cleaning, waste removal and garden clearance. She states the property is vacant and keys can be collected from the Northbridge Lettings office.
+**Latest reading (model, high confidence, route `request_quote`):** Property manager has asked the contractor for a price and earliest availability for the post-tenancy clean, waste removal and garden clearance. Advises the property is vacant and keys can be collected from the Northbridge Lettings office.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `request_quote` → **succeeded** via Demo contractor (simulated adapter) — Rear garden clearance
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `9f3574a409ac`
+## Final decision — system case `905452c907ec`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Soil disturbed by digging in garden - scope unclear (category inspection)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `request_quote` — Rear garden clearance incl. dog waste and disturbed soil (category garden)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `9ff856b7475b` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Property Manager logs post-move-out works at a vacant property: cleaning of kitchen, oven, extractor, bathroom and en-suite limescale, removal of waste left in the kitchen, and rear garden clearance including bagged dog waste. Inspection notes also mention disturbed soil from digging.
+**Latest reading (model, high confidence, route `request_quote`):** Property manager logs post-move-out works at a vacant property: kitchen/oven/extractor degreasing, bathroom and en-suite limescale removal, waste removal, and rear garden clearance including bagged dog waste. Inspection notes also record disturbed soil from digging.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `request_quote` → **succeeded** via Demo contractor (simulated adapter) — Rear garden clearance incl. dog waste and disturbed soil
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `6db6e1b9fd6f`
+## Final decision — system case `9ff856b7475b`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Rear garden clearance including bagged dog waste (category garden)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (category checkout_cleaning)
+- **Next step:** Clarify before routing: No indication whether the landlord has approved this quote or whether the hold pending the separate maintenance work has been lifted.; Garden clearance (including bagged dog waste) and disturbed soil are only partly covered; unclear if separate instruction/cost applies.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `680c8f82e05f` as a separate issue.
+- **Case state:** open · policy v2
 
-**Latest reading (model, medium confidence, route `request_quote`):** Property Manager logs post-move-out works at a vacant property: cleaning of kitchen, oven, extractor, bathroom and en-suite limescale, removal of waste left in the kitchen, and rear garden clearance including bagged dog waste. Inspection notes also mention disturbed soil from digging.
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00, covering kitchen/oven/extractor degreasing, limescale, rubbish removal, carpet shampooing and rear garden tidying. It does not address the hold, landlord approval or any date.
+
+**Why:** Quotation adds the £665 total but does not resolve the hold, approval or scheduling, so clarification is still required as the router decided.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for logging the post-move-out works at the property. Just one thing to clarify before this goes further: for the disturbed soil from the digging in the rear garden, is that simply part of the general garden clearance, or does the ground need reinstating or re-landscaping as well? Let m …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your help with the property. So we have the details right before anything is arranged, could you confirm the work needed is the "post-tenancy sanitation, waste removal and garden clearance" — that is, the kitchen, oven and extractor degreasing, bathroom and en-suite limescale remov …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elian, Thanks for coming back to us about the report - sorry for the confusion there. So we can get the scope right before you price the work, could you let us know what you'd need from us? In particular, it would help to know whether you'd want to collect keys and look round the property your …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for the updated inspection information. Just one thing to check before we go further: does the corrected information cover the full scope for the checkout clean, and in particular, does the disturbed soil from the digging need reinstatement or landscaping, or is it just clearance and w …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your patience. Before anything is arranged for the checkout clean (kitchen, oven, extractor, bathrooms and waste removal), could you help us with a few details? 1. Could you confirm whether the scope listed still matches what's needed at the property, including whether any disturbe …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your patience regarding the checkout clean (kitchen, oven, extractor, bathrooms and waste removal). Could you let us know which date and time next week would suit you for the work to go ahead? A specific day and a morning or afternoon slot would be really helpful. Many thanks.”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your patience while things are on hold with the checkout clean (kitchen, oven, extractor, bathrooms and waste removal). So we can keep everything moving, could you let us know a little more about the separate major maintenance work that's outstanding — what it involves, and whether …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your update about the approved quote. So that we have it recorded correctly, could you let us know which quote you were approving \u2014 the checkout clean quote, or the separate maintenance quote? If it helps, just reply with the one that applies. Many thanks, Northbridge Letti …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your patience with the post-tenancy work at the property (checkout clean covering the kitchen, oven, extractor, bathrooms and waste removal). So we have everything recorded correctly, could you let us know: 1. Whether the earlier hold on this work has now been lifted, and which quo …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for the update about the approved quote. So we have this right before we take the next step, could you let us know which quote the approval covers - the checkout clean, or the separate maintenance work? Thank you, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your patience while we sort out the preparation work at 18 Thistlevaunt Lane. So that we can take the next step, could you let us know whether you're happy for us to proceed with the quoted property preparation work of "degrease oven, hob and extractor", limescale treatment, rub …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Unclear whether the disturbed soil from digging needs reinstatement/landscaping work or is only part of the clearance; this may require a different trade or work item.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: closed — Clarify before routing: The inspection report supplied may be out of date by about ten years; correct scope needs confirming before pricing.; Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of the cle …
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: The work is on hold with no date; unclear when booking may resume or whether the earlier approval to proceed is withdrawn in the meantime.; Landlord's approval was conditional on bond recovery, but the £650 deposit does not co …
+- Clarification `triage` to tenant: closed — Clarify before routing: No indication of when the hold will be lifted or whether the landlord's conditional approval (bond recovery, £650 deposit vs £665 quote) still stands.; The 'separate major maintenance' is not described; unclear whether it is a …
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: The message does not state whether the earlier hold on the work has been formally lifted, or which quote the landlord approved (the £665 clean or the separate maintenance quote).
+- Clarification `triage` to tenant: open — Clarify before routing: It is still unclear whether the earlier hold has been formally lifted and which quote the landlord approved (the £665 clean or the separate maintenance quote).; No date for the separate maintenance work is recorded, so no date …
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 680c8f82e05f: Intake report |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `680c8f82e05f`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (category checkout_cleaning)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-
-**Latest reading (claude-opus-5, medium confidence, route `confirm_appointment`):** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00. Scope includes oven/extractor degreasing, limescale treatment, rubbish removal, carpet shampooing and rear garden tidying; no visit date is given.
-
-**Why:** Router route retained for the current case item; message is a contractor quotation document adding price information to the known checkout job and does not propose a date.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | no source recorded |
-| `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. A verified route is required before asking externally. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: Is the rear garden clearance and disturbed soil to be handled as a separate work item, or added to the existing checkout scope with the same contractor? A verified route is required before asking … | Attachment move-out-inspection-report.pdf (PDF text extraction) |
-
-### Missing information and conflicting facts
-
-- **issue_details** (blocks the route): Quote adds carpet shampooing and garden tidying beyond the recorded checkout scope, and omits the disturbed soil and bagged dog waste noted in the inspection report. Confirm whether the garden work is part of this item or a separate work item.
-- **issue_details**: The quoted £665.00 does not state whether VAT is included; the full comparable commitment including tax needs confirming.
-- **availability**: No proposed visit date or time is given, so the outstanding scheduling request remains unanswered.
-- 8 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **issue_details** (blocks the route): No indication whether the landlord has approved this quote or whether the hold pending the separate maintenance work has been lifted.
+- **issue_details** (blocks the route): Garden clearance (including bagged dog waste) and disturbed soil are only partly covered; unclear if separate instruction/cost applies.
+- **issue_details**: Quotation does not state whether VAT is included in the £665.00.
+- **availability**: No proposed date or time for the visit is given.
+- 7 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
@@ -242,6 +188,6 @@ The initial report and 22 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

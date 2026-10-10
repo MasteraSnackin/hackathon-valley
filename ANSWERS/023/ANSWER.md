@@ -1,12 +1,12 @@
 # Property Management — case 023: Heating maintenance at 7 Larkspur Fold
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 7 Larkspur Fold, Orvane Heath, ZZ1 1ZZ
 - **Decision cutoff:** 2025-02-12T16:35:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 25 of 25
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `716258e3d16deb28…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `716258e3d16deb28…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -42,36 +42,46 @@ The initial report and 24 further sources, submitted one at a time in availabili
 | 23 | 2025-02-12T16:35:00+00:00 | Attachment invoice-NBL-CFM-250210-A.pdf (PDF text extraction) |
 | 24 | 2025-02-12T16:35:00+00:00 | Attachment invoice-NBL-CFM-250210-B.pdf (PDF text extraction) |
 
-## Final decision — system case `fea0d65b5f72`
+## Final decision — system case `905bdba959da`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Radiator heating cutting out intermittently (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Intermittent heating failure (radiators), hot water unaffected (category other)
+- **Next step:** Clarify before routing: Whether invoice B (£372.00) supersedes or sits alongside invoice A (£138.00) for the same 5 February service date; overlapping attendance and diagnosis charges are unresolved.; No parts record, attendance evidence or confirmation that the actuator replacement was actually carried out or that the heating fault is resolved.; No written landlord authorisation on file for actuator replacement; authority covered diagnosis only.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Second Copper Finch Mechanical invoice (NBL-CFM-250210-B) for the same 5 February service date, totalling £372.00 including VAT, covering actuator supply and replacement plus diagnosis and testing. It does not state whether it supersedes the £138.00 invoice, and no authorisation or completion evidence is provided.
+**Latest reading (claude-opus-5, high confidence, route `clarify`):** Second invoice from Copper Finch Mechanical (NBL-CFM-250210-B) for £372.00 inc VAT covering heating valve actuator supply and replacement, same 5 February service date as the £138.00 invoice A. It is still unstated whether this supersedes or duplicates the other record, and no authorisation or completion evidence is provided.
 
-**Why:** Billing document raising unresolved duplicate-invoice, authority and completion questions; cannot be actioned until the record position is clarified.
+**Why:** Billing document adds a second overlapping invoice without authorisation or completion evidence; clarification needed before any payment or further action.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Tessa, Thanks for letting us know the radiator heating has cut out twice while your hot water is still working. So we can get this looked at properly, could you tell us how things stand at the moment: is the heating currently off, and have you noticed any leaks, unusual smells, or any warning …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks for getting back to us with those details — that's really helpful. Just one more thing: could you let us know whether the radiators are heating up at the moment, and if the boiler shows any symbol or code on its display now (a photo of the screen would be great if anything appears)? …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks again for the details about the radiators not heating properly. We're looking at arranging for an engineer to come and take a look on Thursday 5 February, sometime after 2pm. Could you let us know if someone aged 18 or over would be able to be home then to let them in, and if not, h …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks for your patience while we look into the intermittent heating problem with your radiators. When you have a moment, could you help us with a few things? 1. Which dates and times in the next couple of weeks would suit you for someone to attend? Please give a day and a rough time. 2. W …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks for your patience while the engineer visited on 5 February. So we have an up-to-date picture, could you let us know how the heating has been behaving since then — are the radiators heating up reliably, or is it still cutting out at times? Thanks very much, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks for letting us know the radiators are cold again — sorry you're having to manage with a portable heater in this weather. So we have a clear picture of how you're getting on, could you tell us how the property is keeping at the moment with just the one heater, and whether anyone in t …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Tessa, Thanks for sending over the boiler-label details and for letting us know the radiators are still inconsistent while the hot water is fine. So we have the full picture, could you let us know how the cold radiators are affecting the household at the moment \u2014 in particular, whether anyon …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Awaiting tenant's answers on leaks, smells and boiler warning codes; whether heating is currently off is still unknown.
+- Clarification `triage` to tenant: closed — Clarify before routing: The boiler displayed a brief symbol the previous night that the tenant could not identify; the specific fault/warning code is still unknown, as is whether the heating is currently working.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `evidence` to tenant: closed — Supply usable evidence required for this work item.
+- Clarification `triage` to tenant: closed — Clarify before routing: Landlord authorisation for the £372 inc VAT remedial estimate has been requested but not yet given; work cannot be instructed until a decision is received.
+- Clarification `triage` to tenant: open — Clarify before routing: Landlord asks whether the actuator can be repaired rather than replaced and whether £372 inc VAT covers all parts, labour and testing; contractor response needed before a decision.; Tenant reported cold radiators again and is …
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: Contractor has not confirmed whether a repair alternative to replacement is possible, parts availability, or an itemised estimate breakdown including whether diagnosis is credited. A verified rout … | Event 016 — Email from Petra Quill (Contractor, Copper Finch Mechanical) |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **issue_details** (blocks the route): This invoice covers the same 5 February service date as invoice NBL-CFM-250210-A (£138.00); it is not stated whether it supersedes that record or is separate chargeable work.
-- **completion** (blocks the route): No completion evidence, parts record or attendance proof for the actuator replacement is supplied, and the tenant reports heating still intermittent.
-- **issue_details** (blocks the route): No written landlord authorisation on file for actuator replacement; authority for the £372.00 spend is unconfirmed.
-- 15 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **issue_details** (blocks the route): Whether invoice B (£372.00) supersedes or sits alongside invoice A (£138.00) for the same 5 February service date; overlapping attendance and diagnosis charges are unresolved.
+- **completion** (blocks the route): No parts record, attendance evidence or confirmation that the actuator replacement was actually carried out or that the heating fault is resolved.
+- **issue_details** (blocks the route): No written landlord authorisation on file for actuator replacement; authority covered diagnosis only.
+- 13 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
@@ -79,6 +89,6 @@ The initial report and 24 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

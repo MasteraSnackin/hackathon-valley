@@ -3,66 +3,6 @@
   "dataset_kind": "organiser_release",
   "cases": [
     {
-      "id": "001",
-      "input_file": "001.json"
-    },
-    {
-      "id": "002",
-      "input_file": "002.json"
-    },
-    {
-      "id": "003",
-      "input_file": "003.json"
-    },
-    {
-      "id": "004",
-      "input_file": "004.json"
-    },
-    {
-      "id": "005",
-      "input_file": "005.json"
-    },
-    {
-      "id": "006",
-      "input_file": "006.json"
-    },
-    {
-      "id": "007",
-      "input_file": "007.json"
-    },
-    {
-      "id": "008",
-      "input_file": "008.json"
-    },
-    {
-      "id": "009",
-      "input_file": "009.json"
-    },
-    {
-      "id": "010",
-      "input_file": "010.json"
-    },
-    {
-      "id": "011",
-      "input_file": "011.json"
-    },
-    {
-      "id": "012",
-      "input_file": "012.json"
-    },
-    {
-      "id": "013",
-      "input_file": "013.json"
-    },
-    {
-      "id": "014",
-      "input_file": "014.json"
-    },
-    {
-      "id": "015",
-      "input_file": "015.json"
-    },
-    {
       "id": "016",
       "input_file": "016.json"
     },

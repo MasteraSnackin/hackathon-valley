@@ -1,12 +1,12 @@
 # Property Management — case 028: Move-out maintenance request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 42 Mallowfen Crescent, Ternwick, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-18T14:50:04+00:00
-- **Runner status:** **interrupted** · execution `see_partial_evidence` · sources processed 17 of 27
+- **Runner status:** **settled** · execution `native_local` · sources processed 27 of 27
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `620be9402d7849fe…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `620be9402d7849fe…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -44,100 +44,62 @@ The initial report and 26 further sources, submitted one at a time in availabili
 | 25 | 2025-09-18T14:50:04+00:00 | Attachment checkout-report.pdf (PDF text extraction) |
 | 26 | 2025-09-18T14:50:04+00:00 | Attachment provider-quotation.pdf (PDF text extraction) |
 
-## Final decision — system case `0d3eb95fa947`
+## Final decision — system case `a175fd017cf5`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Remove sticker residue from front door (category checkout_cleaning)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `1c6fcba54ae6` as a separate issue.
+- **Proposed next action:** `instruct_work` — Move-out works: meter cabinet hinges, nail removal and paint touch-up, sticker residue (category checkout_refurbishment)
+- **Next step:** Obtain authority for this work item, provider and action.
+- **Owner:** approver
+- **Case state:** open · policy v2
 
-**Latest reading (model, medium confidence, route `request_quote`):** Property manager opens case NBL-028 for move-out works at a vacant property: electric meter cabinet door hinges, nail removal and paint touch-up in Bedroom 1, and sticker residue on the front door. An internal note states landlord approval was already given for the move-out works.
+**Latest reading (claude-opus-5, medium confidence, route `instruct_work`):** A contractor quotation from Pineglass Property Repairs (ref NBL-028-Q1, dated 10 September 2025) for the move-out works at 42 Mallowfen Crescent has been received, bundling the meter cabinet hinges, nail removal and paint touch-up, and sticker residue at £564.48. It does not state whether tax is included and provides no completion evidence for the works the landlord said were already done.
+
+**Why:** The document is a provider quotation matching the known move-out work bundle, so the next step is instructing the contractor; however completion status and authority remain unresolved.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Move-out works: meter cabinet hinges, nail removal and paint touch-up, sticker residue
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, We're getting the move-out works sorted (the meter cabinet hinges, nail removal and paint touch-up, and sticker residue) and just need a few details from you. 1. Who will be giving access for the visit, and how should the contractor get in (for example, you meeting them at the property or a k …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for your patience while we've been looking into the move-out works at the property - the meter cabinet hinges, the nail removal and paint touch-up, and the sticker residue. Before anything is arranged, could you let us know whether you're happy for us to go ahead with these three areas …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, I hope you're well. I'm following up on the move-out works at the property - the meter cabinet hinges, nail removal and paint touch-up, and the sticker residue. Could you let me know whether you're happy for us to go ahead with this work at the quoted total of £564.48? Once I hear back from y …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Just a quick update request about the move-out works at the property (meter cabinet hinges, nail removal and paint touch-up, and sticker residue). 1. Have those works now been completed? If so, a couple of photos of the finished areas would be really helpful. 2. Is anything still outstanding …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for letting us know you'll be arranging the move-out works (the meter cabinet hinges, nail removal and paint touch-up, and sticker residue) with your own company. So we know how to handle things at our end, could you let us know whether you'd like us to close our job for these works …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for sending through the checkout report for 42 Mallowfen Crescent. The report lists the three move-out items (the electric-meter cabinet door hinges, removing the four wall nails in Bedroom 1 with paint touch-up, and removing the sticker residue from the front door), but it doesn't …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, We're arranging the move-out works at 42 Mallowfen Crescent a" the electric-meter cabinet door hinges, the four wall nails in Bedroom 1 with paint touch-up, and the sticker residue on the front door. Could you help us with three things? 1. Are you happy for someone to enter the property for t …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, We're following up on the move-out works at 42 Mallowfen Crescent - the meter cabinet door hinges, the four wall nails in Bedroom 1 with paint touch-up, and the sticker residue on the front door. Could you let us know whether these works have already been carried out at the property, and if s …”
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `evidence` to tenant: closed — Supply usable evidence required for this work item.
+- Clarification `triage` to tenant: closed — Clarify before routing: No landlord authority to proceed with the quoted spend has been recorded yet.
+- Clarification `triage` to tenant: closed — Clarify before routing: Landlord approval for the £564.48 spend has been requested but not yet given; work cannot be instructed until a reply is recorded.
+- Clarification `completion` to tenant: closed — Verify completion of this work item with usable evidence.
+- Clarification `commitments` to staff: closed — Resolve or explicitly cancel every outstanding commitment for this item.
+- Clarification `triage` to tenant: closed — Clarify before routing: Confirm whether the agency item should be formally closed/cancelled, or kept open to coordinate access for the landlord's own contractor during the cleaning visit.
+- Clarification `commitments` to staff: closed — Resolve or explicitly cancel every outstanding commitment for this item.
+- Clarification `triage` to tenant: closed — Clarify before routing: The checkout report only restates the requested works; it gives no completion date, photographs or invoice, so it does not evidence that the landlord-arranged works were done.
+- Clarification `access` to tenant: open — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: open — Confirm the active appointment with a precise date and time.
+- Clarification `evidence` to tenant: open — Supply usable evidence required for this work item.
+- Clarification `triage` to tenant: open — Clarify before routing: The landlord previously stated the works were completed, but this quotation (dated 10 September 2025) gives no completion date, invoice or photographs; it is unclear whether the work has been carried out or still needs instruc …
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 1c6fcba54ae6: Intake report |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `4c619fd9cebe`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Remove four wall nails in Bedroom 1 and touch up paint (category checkout_refurbishment)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `1c6fcba54ae6` as a separate issue.
-
-**Latest reading (model, medium confidence, route `request_quote`):** Property manager opens case NBL-028 for move-out works at a vacant property: electric meter cabinet door hinges, nail removal and paint touch-up in Bedroom 1, and sticker residue on the front door. An internal note states landlord approval was already given for the move-out works.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 1c6fcba54ae6: Intake report |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `1c6fcba54ae6`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Electric meter cabinet door hinges repair or replacement (category doors_locks)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-
-**Latest reading (claude-opus-5, medium confidence, route `confirm_appointment`):** The landlord declined the agency provider's £564.48 quote and says she will arrange her own company to carry out the work on Wednesday morning, during the cleaning visit.
-
-**Why:** Landlord rejects agency quote and proposes own contractor on Wednesday morning; router chose confirm_appointment and the message is largely about arranging that visit, though authority decline is the key fact.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | no source recorded |
 | `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. A verified route is required before asking externally. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: Unclear whether the landlord's own company covers all three bundled areas or only part, and whether the agency item should now be closed. A verified route is required before asking externally. | Event 017 — Email from Elowen Quill (Landlord, private owner) |
+| `classification` | case manager | `require-classification` | Verify the received source assertion. Confirm that the category and work item match the source request. | Intake report |
+| `total` | case manager | `require-total` | Verify the received source assertion. Establish the full comparable commitment, including tax. | Event 011 — Note from Talia Wren (Property Manager, Northbridge Lettings), Attachment provider-quotation.pdf (PDF text extraction) |
 
 ### Missing information and conflicting facts
 
-- **issue_details** (blocks the route): Unclear whether the landlord's own company covers all three bundled areas or only part, and whether the agency item should now be closed.
-- **availability**: "Wednesday morning" has no date or time window; the appointment with the landlord's own company is not confirmed with the desk.
-- **access**: No explicit consent or access arrangement stated for the landlord's own contractor to enter, and overlap with the cleaning visit needs checking.
-- 5 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **completion** (blocks the route): The landlord previously stated the works were completed, but this quotation (dated 10 September 2025) gives no completion date, invoice or photographs; it is unclear whether the work has been carried out or still needs instructing.
+- **issue_details** (blocks the route): No record that the landlord or agency has approved this quotation or the provider for the bundled works.
+- **issue_details**: The quotation does not state whether the £564.48 includes VAT, so the full comparable commitment is not established.
+- 9 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
-- Runner: Batch runner process was stopped when the operator's agent session ended, after 17 of 27 sources had settled. The runner itself recorded no result for this case; this status was written afterwards by the operator to mark the interruption. Partial evidence up to checkpoint-016 is preserved; nothing after that was processed.
-- The run did not settle cleanly (status `interrupted`); any recorded state is partial.
+- None recorded. (Jev and Claude calls all returned; no workflow step failed.)
 
 ## Result
 

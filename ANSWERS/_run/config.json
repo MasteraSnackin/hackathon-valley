@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "mode": "preparation",
-  "expected_commit": null,
+  "mode": "official",
+  "expected_commit": "281c95a90dc8a3ddd9424b56d5decf0d9c521178",
   "model": "claude-opus-5",
   "jev_model": "jev-1.13.0",
   "jev_timeout_seconds": 30,
@@ -14,6 +14,11 @@
   "workers": 8,
   "poll_seconds": 0.25,
   "require_model_credentials": true,
-  "policy_settings": {},
+  "policy_settings": {
+    "assumed_checks": [
+      "identity",
+      "route"
+    ]
+  },
   "policy_rules": []
 }

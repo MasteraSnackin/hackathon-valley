@@ -1,12 +1,12 @@
 # Property Management — case 020: Kitchen socket maintenance request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 8 Brindlewick Row, Oakhollow, ZZ1 1ZZ
 - **Decision cutoff:** 2025-04-12T16:42:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 25 of 25
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `dd8600fe9d916e8e…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `dd8600fe9d916e8e…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -42,34 +42,34 @@ The initial report and 24 further sources, submitted one at a time in availabili
 | 23 | 2025-04-12T15:02:00+00:00 | Event 024 — Email from Maya Chen (Property Manager, Northbridge Lettings) |
 | 24 | 2025-04-12T16:42:00+00:00 | Event 025 — Portal from Nora Bell (Tenant) |
 
-## Final decision — system case `613532f9953b`
+## Final decision — system case `7b05350c87e7`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Burning smell and warm kitchen socket (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Burning smell and warm kitchen counter socket (category other)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, high confidence, route `urgent_hazard`):** Tenant Nora Bell has returned to the property and reports the faint burning smell is still noticeable near the kitchen counter. The socket has not been used, no breaker has been switched off, and no inspection has taken place; landlord authority is still outstanding.
+**Latest reading (claude-opus-5, high confidence, route `urgent_hazard`):** Tenant has returned to the property and reports the faint burning smell is still noticeable near the kitchen counter socket; she has not used the socket or isolated any breaker. No inspection has taken place and landlord authority remains outstanding.
 
-**Why:** Persistent burning smell near an electrical socket with no inspection or isolation is a possible immediate electrical/fire hazard requiring a case manager.
+**Why:** Persistent burning smell at an electrical socket with no isolation or inspection is a possible immediate hazard requiring a case manager.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Nora, Thanks for coming back to us about the burning smell and the warm kitchen counter socket. Could you let us know: 1. Are you still able to be at the flat for a visit today between 13:00 and 15:00, or would another date and time suit you better? 2. If you've left by 12:30, will your sister …”
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: Tenant leaves at 12:30 but the proposed attendance window is 13:00–15:00; who will provide access is unresolved as the sister's presence is unconfirmed.; Whether a qualified electrician is required remains unresolved, as the p …
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
 | `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Event 014 — Email from Maya Chen (Property Manager, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
-- **access**: Tenant is now back at the property but has not explicitly granted permission for a contractor to attend and enter.
-- **issue_details**: Whether the socket is still warm, and whether the circuit should be isolated at the consumer unit, is not stated.
+- **access**: Tenant is now back at the property but has not explicitly granted permission for a visit; confirm consent and a time.
+- **issue_details**: Whether the socket is still warm and whether the circuit can be safely isolated; tenant reports no breaker switched off and fridge still powered.
 - 27 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures

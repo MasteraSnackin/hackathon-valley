@@ -1,12 +1,12 @@
 # Property Management — case 009: Bedroom Window Maintenance Request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 24 Bramblewick Lane, Alderfen, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-10T18:20:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 21 of 21
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `b3b37b35bb9d1a0b…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `b3b37b35bb9d1a0b…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -38,34 +38,40 @@ The initial report and 20 further sources, submitted one at a time in availabili
 | 19 | 2025-09-10T18:20:00+00:00 | Event 020 — Email from Elena Voss (Tenant) |
 | 20 | 2025-09-10T18:20:00+00:00 | Attachment forwarded-document.pdf (PDF text extraction) |
 
-## Final decision — system case `3ca2e532ad72`
+## Final decision — system case `b87095f6dbbf`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Reported maintenance (category windows)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
+- **Proposed next action:** `close_item` — Reported maintenance (category windows)
+- **Next step:** Verify the received source assertion. Verify completion of this work item with usable evidence.
+- **Owner:** reviewer
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** The new message is an extracted Landlord Gas Safety Record for 8 Thistledown Mews, Vellumby — a different property from the case address — dated 8 September 2025 with a satisfactory outcome. It contains nothing about the window work or its completion.
+**Latest reading (claude-opus-5, high confidence, route `close_item`):** Forwarded PDF is a Landlord Gas Safety Record for 8 Thistledown Mews, Vellumby — a different property from the case property at 24 Bramblewick Lane. It contains no information about the window work and requires no maintenance action on this case.
 
-**Why:** Document relates to a different property and a different subject (gas safety), so it cannot evidence completion of the window work; clarification is needed before closing.
+**Why:** Document is a gas safety certificate for an unrelated property and says nothing about the window work item; no maintenance action arises.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, We're arranging for someone to come and take a look at the bedroom window. Could you let us know: 1. Which days and times over the next week or two would suit you for a visit? 2. Will you be home to let someone in, or is there another way access should be arranged? Thanks very much, Northbrid …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elena, Thanks for letting us know someone will be home each day up to 26 August - that's really helpful. Could you let us know a specific date and time that would suit best for the window to be inspected? It helps to have one slot pinned down. Also, could you confirm you're happy for someone t …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elena, Thanks for letting us know your availability up to 26 August for the window to be looked at. So we have everything recorded correctly, could you let us know: 1. Which date and roughly what time within that period would suit you best? 2. Will you be home to let someone in, or would you p …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elena, Thanks for your message, and sorry you've not had an inspection yet. We've noted that you'd prefer contact in writing first rather than an unexpected call. Could you help us with two things: 1. How would you like access to be arranged - would you be home to let someone in yourself, and …”
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: Whether the window cannot be closed at all and whether it poses a security or weather risk needs checking.
+- Clarification `commitments` to staff: open — Resolve or explicitly cancel every outstanding commitment for this item.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Jev routed this message to close_item, but Claude reads it as clarify: close_item is not appropriate: the only new material is a gas safety record for another property (8 Thistledown Mews), which provides no usable evide … | Attachment forwarded-document.pdf (PDF text extraction) |
+| `completion` | reviewer | `require-completion` | Verify the received source assertion. Verify completion of this work item with usable evidence. | Event 020 — Email from Elena Voss (Tenant) |
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): The forwarded document is a gas safety record, not evidence that the window work is complete; usable completion evidence is still needed from the contractor or landlord.
-- **location** (blocks the route): The document names 8 Thistledown Mews, Vellumby, which does not match the case property at 24 Bramblewick Lane, Alderfen. Confirm whether it was sent to this case in error.
+- **issue_details**: The gas safety record relates to a different property address; confirm whether it was sent to this case in error or belongs to another file.
 - 5 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures

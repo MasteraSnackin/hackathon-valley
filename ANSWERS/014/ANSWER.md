@@ -1,12 +1,12 @@
 # Property Management — case 014: Heating service request at 7 Mallowmere Walk
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ
 - **Decision cutoff:** 2025-01-14T17:08:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 19 of 19
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `d103d0e8d228e4f0…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `d103d0e8d228e4f0…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -36,16 +36,16 @@ The initial report and 18 further sources, submitted one at a time in availabili
 | 17 | 2025-01-14T16:42:00+00:00 | Event 018 — Portal from Leah Venn (Tenant) |
 | 18 | 2025-01-14T17:08:00+00:00 | Event 019 — Call from Daniel Hart (Heating Contractor, Brackenridge Heat Services) |
 
-## Final decision — system case `e35b4a82e105`
+## Final decision — system case `817ba5f476ab`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Tenant's plug-in heater overheating - advised not to be used (category appliance)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Plug-in heater casing becoming unusually hot (category appliance)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `bb1c8adfab87` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `6d4b8896e387` as a separate issue.
 
-**Latest reading (model, medium confidence, route `urgent_hazard`):** Contractor confirms no same-day engineer; a 15 January cancellation slot may arise but cannot be held without a booking. They cannot assess or advise remotely and say the plug-in heater Leah described should not be used.
+**Latest reading (model, high confidence, route `urgent_hazard`):** Tenant reports living-room temperature of 12°C with heating still off, and that her only plug-in heater overheats so she has stopped using it. She may stay with her niece tonight if transport can be arranged but has not confirmed this.
 
 ### Actions taken
 
@@ -55,77 +55,46 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case bb1c8adfab87: Event 012 — Email from Daniel Hart (Heating Contractor, Brackenridge Heat Services) |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 2 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `d826e3f15079`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Plug-in heater casing overheating (category appliance)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `bb1c8adfab87` as a separate issue.
-
-**Latest reading (model, high confidence, route `urgent_hazard`):** Tenant reports living-room temperature of 12
-insufficient heating and a plug-in heater whose casing becomes unusually hot, which she has stopped using. She may stay with her niece tonight if transport can be arranged, but accessibility there is unconfirmed.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case bb1c8adfab87: Event 008 — SMS from Leah Venn (Tenant) |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case 6d4b8896e387: Event 008 — SMS from Leah Venn (Tenant) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `bb1c8adfab87`
+## Final decision — system case `6d4b8896e387`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Cold radiators and unresponsive heating controller (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Cold radiators and unresponsive heating controller (category plumbing)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, high confidence, route `confirm_appointment`):** Contractor Daniel Hart reports a cancellation slot on 15 January 09:00–11:00 available if booked by 17:30, at the same £168 diagnostic call-out with no repair or parts included. The slot is not booked and the tenant's direct access confirmation with call and notice is still needed.
+**Latest reading (claude-opus-5, medium confidence, route `urgent_hazard`):** Contractor Daniel Hart reports a cancellation slot on 15 January 09:00–11:00, holdable only if booked by 17:30, at the same £168 diagnostic call-out with no repair work included. The slot is not booked and the tenant's direct access confirmation is still needed.
 
-**Why:** Message concerns arranging a visit for an already known job; slot not yet booked so no schedule claim.
+**Why:** Router flagged possible urgent no-heating hazard for a vulnerable tenant; message itself is an appointment offer not yet booked and no access confirmed.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Leah, Thanks for letting us know that the radiators are cold and the heating controller is unresponsive, and that you still have hot water. So we can get this looked at properly, could you let us know whether anyone in the household might be particularly affected by being without heating \u201 …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Leah, Thanks for letting us know that your radiators are cold and the heating controller is unresponsive, with hot water still working. So we have the full picture, could you let us know what the boiler display is showing at the moment (any numbers, codes or warning lights), and whether you've …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Leah, Thanks for confirming there's no gas smell or visible leak and that the boiler display is blank. So we can arrange things to suit you, could you let us know: 1. Who would be at the property to let someone in, and how you'd like them to let you know they've arrived (for example, a call fr …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Leah, Thanks for confirming there's no gas smell or visible leak and that the boiler display is blank. So we can get things moving, could you let us know who will be at the property to let an engineer in, and the best number for them to call from outside before coming to the door? It would als …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Confirm whether anyone in the household is vulnerable or at risk from lack of heating, which could make this urgent.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: open — Clarify before routing: No access arrangement is confirmed for the tenant herself; only that the niece may not grant access or approve work. Need confirmation of who will let the contractor in and how.; No date or time has been proposed or agreed for …
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | Event 013 — SMS from Leah Venn (Tenant) |
-| `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. A verified route is required before asking externally. | no source recorded |
-| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Event 003 — SMS from Leah Venn (Tenant) |
 
 ### Missing information and conflicting facts
 
-- **availability**: The slot is offered but not booked; needs booking by 17:30 to hold it.
-- **access**: Tenant's direct confirmation of access, with required call and 30 minutes' notice, is still outstanding.
-- **issue_details**: Whether £168 includes VAT is not stated.
-- 18 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **access** (blocks the route): Tenant's direct confirmation of access, with the required call and 30 minutes' notice, is still outstanding.
+- **availability**: The 15 January 09:00–11:00 slot is offered but not booked and must be confirmed by 17:30.
+- 22 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 

@@ -1,14 +1,14 @@
 {
-  "git_commit": "26542cfa3d481aa925490db741aa4fbab8f70e3c",
+  "git_commit": "281c95a90dc8a3ddd9424b56d5decf0d9c521178",
   "source_dirty": false,
   "source_files_sha256": {
     "app/__init__.py": "8e7a80d4a96d8513db74e677b48fbf494b7d6f9385e26215739e974b756ead6f",
     "app/ai.py": "cefe3498d2bdbb680f4b09027793769cd0b150edd6c6d212f7ddc7bab6e388b6",
-    "app/answer_export.py": "6b6de1a34dd943d57ce454e6179d8f6da6e52df1de0cb54aa564ce35277a4f8e",
+    "app/answer_export.py": "46321b0d1f18dd73912a0083c8ae04eacac4bfa78b4d08552234ce5ca28f550b",
     "app/audit.py": "f7c7ef3efdd5ac2e0d7900008faf7d4b657e5581494016f18b069912484bc42d",
     "app/build_data.py": "d8a84da627e15c1dd840a4d9d0bc3fcf6340b0e400b20613f7597f6b3ca564e1",
     "app/challenge_adapter.py": "e080e838fab494fca35da197ad5dca5cbf03dec8b7bfb7b4230a948a1b6e0ec4",
-    "app/domain.py": "3abeec02dc2c7af377bae9977e94961bb58bebb3bf4fa1097952247d1ee05a4c",
+    "app/domain.py": "7d527a8ad03b37ee767999d6ff3b39ee869fa3ab6869d791621155904b1ac47a",
     "app/insights.py": "bd76ffc95fc3ea5cf32a1d7721725a1beeaf213ab193cf2fcd862f97bcd67489",
     "app/jev.py": "37ffa137b3cc110aa7ee7c6e3c885f86f8cf452a85031fcfa5ed633d2c0d731b",
     "app/localenv.py": "ecb69e97d234b2870a4cb24827795147b06e56630d195f39601cedbb2092e48e",
@@ -29,7 +29,7 @@
     "requirements.lock": "3b3386ef7d78f9b5c3d93fa8e69bd06965bd395a104eabeca313eb46d1b4c808",
     "uv.lock": "b9e659c07eba80eb7891b3361e46a978b9d2c1719decbddddbd746f0c977960b"
   },
-  "source_tree_sha256": "cfbe918a0fe3c923a9b58ff401b264e1b314f18232155f46e53edbaf6fea9434",
+  "source_tree_sha256": "1e09f5149a998e56a9415333f119c2e5be44ff2c798555c2d2d72172914c8d3c",
   "python": "3.12.11 (main, Jul 11 2025, 22:26:01) [Clang 20.1.4 ]",
   "installed_packages": {
     "vercel-workflow": "0.11.1",
@@ -38,9 +38,9 @@
     "fastapi": "0.118.0",
     "pydantic": "2.14.0"
   },
-  "config_sha256": "428180f85f8e6e9e79be5eca6c4e8e8782a31f8e20c730f7d34f95c703a863a8",
-  "manifest_sha256": "fcc5a238f602a2a9ec68544741211583000d55bd9d0a7769dd50a58dda1e18c9",
-  "started_at": "2026-10-10T15:58:47.541001+00:00",
+  "config_sha256": "51b9064768cea126855627f50f58d315a68783581ec730c035202fb67af5ec33",
+  "manifest_sha256": "4d7ec5494124295bd26fe355455b4b22dd97d0a2f4113b36e5df49651672c72a",
+  "started_at": "2026-10-10T16:17:06.567748+00:00",
   "model_environment": {
     "anthropic_credential_present": true,
     "typesafe_credential_present": true,
@@ -53,7 +53,7 @@
     "jev_timeout_seconds": 30.0,
     "claude_timeout_seconds": 60.0
   },
-  "mode": "preparation",
+  "mode": "official",
   "runtime": "native_local",
   "external_operations": "simulated",
   "input_sha256": "cd29af163368b0bb048a2b57b0be05027ae85e3693994d88ac1c22822f1cbc36"

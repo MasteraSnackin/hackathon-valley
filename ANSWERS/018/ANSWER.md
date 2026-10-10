@@ -1,12 +1,12 @@
 # Property Management — case 018: Kitchen maintenance report
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 14 Mosswold Crescent, Brindlewick, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-11T14:30:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 19 of 19
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `5ed7615b8b78b562…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `5ed7615b8b78b562…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -36,36 +36,59 @@ The initial report and 18 further sources, submitted one at a time in availabili
 | 17 | 2025-09-11T14:26:29+00:00 | Event 018 — Update from Northbridge Lettings workflow (System) |
 | 18 | 2025-09-11T14:30:00+00:00 | Event 019 — Note from Tara Wren (Property Manager, Northbridge Lettings) |
 
-## Final decision — system case `e4203c311563`
+## Final decision — system case `73a2e4e0023d`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Reported maintenance (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Blocking openings beneath kitchen sink (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** in_progress · policy v2
+- **Split from system case** `1ce249677b85` as a separate issue.
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Internal note from the property manager to the maintenance coordinator recording that the tenant's latest update about the expected proofing visit has been logged. No new scope, appointment or completion details are provided.
-
-**Why:** Administrative note with no new substantive information; scope and completion remain unresolved, so the item cannot be progressed beyond clarification.
+**Latest reading (model, medium confidence, route `clarify`):** Tenant reports landlord-arranged pest control visits are ongoing with a final visit expected the following Monday, and that openings beneath the kitchen sink the landlord wants blocked have not yet been done.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Blocking openings beneath kitchen sink
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: No contractor, scope of works or target date has been given by the landlord. A verified route is required before asking externally. | Event 007 — Email from Tara Wren (Property Manager, Northbridge Lettings) |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): Still no confirmation or evidence that the proofing/sealing work has been completed.
-- **issue_details** (blocks the route): Scope remains unclear - openings beneath the sink versus wall area work.
-- **availability**: No rearranged appointment date or time for the missed proofing visit.
-- 5 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- None recorded by the latest reading.
+- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+
+## Final decision — system case `1ce249677b85`
+
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Reported maintenance (category other)
+- **Next step:** Clarify before routing: Still unclear who is carrying out the sealing, whether the scope is the under-sink openings or the wall area, and whether any work has been done.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Internal note from the property manager to the maintenance coordinator recording that the tenant's latest update about the expected proofing visit has been logged. No new scope, appointment or completion information is provided.
+
+**Why:** Internal administrative note with no new substantive detail; scope and completion remain unknown, so clarification is still required.
+
+### Actions taken
+
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elise, Thanks for letting us know about the rats near the kitchen and under the sink. So we have the fullest picture while things are being looked into, could you let us know the latest on what you're seeing indoors at the moment, and whereabouts the activity is now (for example under the sink …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for letting us know about the pest problem at the property. So we have an up-to-date picture, could you tell us what you're seeing at the moment - for example where in the property you're noticing the pests, how often, and whether anything has changed since you first reported it? If …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elise, Thanks for the update about the pest control visit this morning and the equipment being removed. Just so we have a clear picture of where things stand: could you let us know what you've been told about the work on the wall area, and whether the openings beneath the kitchen sink have bee …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Landlord has not confirmed whether he approves Northbridge Lettings arranging the pest works or will use his own contractor.
+- Clarification `triage` to tenant: open — Clarify before routing: No contractor, scope or target date given for the landlord-arranged pest works.
+
+### Escalated to a person (handover)
+
+- No open human review.
+
+### Missing information and conflicting facts
+
+- **issue_details** (blocks the route): Still unclear who is carrying out the sealing, whether the scope is the under-sink openings or the wall area, and whether any work has been done.
+- **availability**: No rearranged appointment date or time for the proofing visit is recorded.
+- 4 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
@@ -73,6 +96,6 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

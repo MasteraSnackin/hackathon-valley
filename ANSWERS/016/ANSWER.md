@@ -1,12 +1,12 @@
 # Property Management — case 016: Smoke alarm maintenance request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 26 Tallowmere Close, Fenbarrow, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-22T08:48:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 17 of 17
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `12d8ad65d5297132…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `12d8ad65d5297132…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -34,34 +34,32 @@ The initial report and 16 further sources, submitted one at a time in availabili
 | 15 | 2025-09-20T11:02:00+00:00 | Event 016 — Note from Maya Chen (Property Manager, Northbridge Lettings) |
 | 16 | 2025-09-22T08:48:00+00:00 | Event 017 — Update from Maya Chen (Property Manager, Northbridge Lettings) |
 
-## Final decision — system case `2bfd5a655809`
+## Final decision — system case `98b150b051f6`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Smoke alarm detached from ceiling (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** in_progress · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Internal status update from the property manager stating that NBL-016 is pending review. No new maintenance information about the detached smoke alarm.
+**Latest reading (claude-opus-5, high confidence, route `clarify`):** Internal status note from the property manager stating that NBL-016 is pending review. No new information about the alarm work, the unannounced visitor, or access.
 
-**Why:** Message is a bare internal status note adding no actionable detail, so the case remains awaiting clarification on alarm completion.
+**Why:** Internal placeholder update adds nothing; the visitor identity question remains open so the item stays at clarify.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Smoke alarm detached from ceiling
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elise, Thank you for letting us know about the person who knocked on Saturday morning. You were right to be cautious when you couldn't confirm who they were, and I'm sorry this was unsettling, particularly while you've been recovering. So we can look into it, could you tell us anything you rem …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elise, Thank you for letting us know about the person who knocked at the property on Saturday morning. You were right to be cautious if you couldn't confirm who they were. We're sorry for the worry this caused, especially while you've been unwell. So we can look into it, could you tell us anyt …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Was the unannounced Saturday visitor a contractor instructed for the alarm work? Confirm whether any visit was arranged and notify the tenant in advance.
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Intake report |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): Still no evidence that the smoke alarm has been refitted and tested; confirmation needed.
-- **access**: Identity and purpose of the unannounced visitor remain unverified, and no access arrangement is confirmed.
+- **issue_details**: The update gives no substantive information; it is unclear whether NBL-016 relates to the alarm work or the unverified Saturday visitor, and what review is pending.
 - 19 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
@@ -70,6 +68,6 @@ The initial report and 16 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

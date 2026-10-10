@@ -1,12 +1,12 @@
 # Property Management — case 030: Maintenance report at 8 Brindlefern Walk
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 8 Brindlefern Walk, Oakhollow, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-06T18:42:00+00:00
-- **Runner status:** **interrupted** · execution `see_partial_evidence` · sources processed 13 of 15
+- **Runner status:** **settled** · execution `native_local` · sources processed 15 of 15
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `844a2a09984ae4c0…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `844a2a09984ae4c0…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -32,16 +32,62 @@ The initial report and 14 further sources, submitted one at a time in availabili
 | 13 | 2025-09-06T18:40:11+00:00 | Event 014 — Email from Tavian Rusk (Landlord) |
 | 14 | 2025-09-06T18:42:00+00:00 | Event 015 — Note from Ivo Merrick (Property Manager, Northbridge Lettings) |
 
-## Final decision — system case `24dea22743a9`
+## Final decision — system case `2bd2d4f97237`
+
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Portable dehumidifier supplied for bathroom (possible damp/condensation) (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
+- **Owner:** case manager
+- **Case state:** in_progress · policy v2
+- **Split from system case** `4b9644f485c9` as a separate issue.
+
+**Latest reading (model, medium confidence, route `clarify`):** The landlord reports further self-performed works: tightening screws on a back-bedroom socket, securing a kitchen socket on 5 August that he says had come loose after February 2025 boiler work, and supplying the tenant with a portable dehumidifier for the bathroom on 6 August. The message does not address the outstanding smoke alarm replacement or ceiling making good.
+
+### Actions taken
+
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Portable dehumidifier supplied for bathroom (possible damp/condensation)
+
+### Escalated to a person (handover)
+
+- No open human review.
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+
+## Final decision — system case `f8754837fa0f`
+
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Plug sockets coming away from the wall (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
+- **Owner:** case manager
+- **Case state:** in_progress · policy v2
+- **Split from system case** `4b9644f485c9` as a separate issue.
+
+**Latest reading (model, medium confidence, route `clarify`):** Landlord Tavian Rusk repeats that he will carry out the reported work himself, in response to the query about the loose plug sockets, and says no external action is required. No completion date or details given.
+
+### Actions taken
+
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Plug sockets coming away from the wall
+
+### Escalated to a person (handover)
+
+- No open human review.
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+
+## Final decision — system case `c71851f5288b`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
 - **Proposed next action:** `clarify` — Plug sockets coming away from the wall (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ee907609b59c` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `4b9644f485c9` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Landlord Tavian Rusk reiterates, in response to the sockets follow-up, that he will carry out the work himself and no external action is required. No completion date or evidence provided.
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Property manager emails the landlord adding that the tenant also reported several plug sockets coming away from the wall, asking whether these should be addressed too. No landlord decision yet on the removed smoke alarm and ceiling opening.
 
 ### Actions taken
 
@@ -51,75 +97,46 @@ The initial report and 14 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case 4b9644f485c9: Event 005 — Email from Ivo Merrick (Property Manager, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
+- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `6d76c21f3a80`
+## Final decision — system case `4b9644f485c9`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Plug sockets coming away from the wall (category other)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ee907609b59c` as a separate issue.
+- **Proposed next action:** `archive` — Smoke alarm removed from upstairs landing ceiling (category other)
+- **Next step:** Obtain authority for this work item, provider and action.
+- **Owner:** approver
+- **Case state:** open · policy v2
 
-**Latest reading (model, medium confidence, route `request_quote`):** Property manager emails the landlord adding that the tenant also reported several plug sockets coming away from the wall, and asks whether these should be addressed too. No answer yet on the smoke alarm instruction.
+**Latest reading (claude-opus-5, high confidence, route `archive`):** Internal note from the property manager recording that the landlord's email was filed to the property record. No new maintenance information or decision about the removed smoke alarm.
+
+**Why:** Administrative file note with no new actionable content; the underlying clarification need remains open.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Nessa, Thanks for letting us know about the upstairs landing smoke alarm that kept beeping and that you've taken it down, leaving a small opening in the ceiling. So we have the full picture, could you let us know the current state of things - for example, whether the alarm unit and any wiring are …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thanks for letting us know about the smoke alarm removed from the upstairs landing ceiling, and the plug sockets coming away from the wall. So we have an up-to-date picture, could you let us know how things stand at the moment? In particular: 1. Is the landing smoke alarm still missing, or ha …”
+- Clarification `triage` to tenant: closed — Clarify before routing: No landlord decision yet; next steps for replacing the removed smoke alarm and making good the ceiling opening remain undefined.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | no source recorded |
-| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
+| `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
 
 ### Missing information and conflicting facts
 
-- None recorded by the latest reading.
-
-## Final decision — system case `ee907609b59c`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `close_item` — Smoke alarm removed from upstairs landing ceiling (category other)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-
-**Latest reading (claude-opus-5, medium confidence, route `close_item`):** Internal note by the property manager recording the landlord's claim that the smoke alarm work was completed. No new information beyond the record.
-
-**Why:** Internal note recording a completion claim for the current work item; close_item matches the router decision.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `commitments` | case manager | `require-commitments` | Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally. | no source recorded |
-| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
-| `completion` | reviewer | `require-completion` | Verify completion of this work item with usable evidence. A verified route is required before asking externally. | Event 012 — Email from Tavian Rusk (Landlord), Event 013 — Note from Ivo Merrick (Property Manager, Northbridge Lettings) |
-
-### Missing information and conflicting facts
-
-- **completion**: No usable evidence (photo, certificate or inspection) of the smoke alarm reinstatement has been supplied; only the landlord's statement.
-- 8 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **issue_details** (blocks the route): Still no decision or plan for replacing the removed upstairs landing smoke alarm and making good the ceiling opening.
+- **completion**: No evidence or certification supplied for the landlord's claimed completion of the socket and alarm work.
+- 9 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
-- Runner: Batch runner process was stopped when the operator's agent session ended, after 13 of 15 sources had settled. The runner itself recorded no result for this case; this status was written afterwards by the operator to mark the interruption. Partial evidence up to checkpoint-012 is preserved; nothing after that was processed.
-- The run did not settle cleanly (status `interrupted`); any recorded state is partial.
+- None recorded. (Jev and Claude calls all returned; no workflow step failed.)
 
 ## Result
 

@@ -1,12 +1,12 @@
 # Property Management — case 026: Moisture inspection and repair coordination
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 18 Juniper Fold, Velden Quay, ZZ1 1ZZ
 - **Decision cutoff:** 2025-03-06T16:40:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 20 of 20
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `9bd160a4eb6a5b3a…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `9bd160a4eb6a5b3a…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -37,114 +37,117 @@ The initial report and 19 further sources, submitted one at a time in availabili
 | 18 | 2025-03-06T15:12:00+00:00 | Event 019 — Call from Owen Pike (Contractor, Brindle Survey & Drying) |
 | 19 | 2025-03-06T16:40:00+00:00 | Event 020 — Email from Iris Bell (Tenant, 18 Juniper Fold) |
 
-## Final decision — system case `95d4f247a583`
+## Final decision — system case `49880af0adfb`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Misdirected email containing another tenant's personal data (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `cd25215be075` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `17a21c54dedf` as a separate issue.
 
-**Latest reading (model, medium confidence, route `unsupported`):** Maya Chen recorded the misdirected email incident with the privacy lead, noting the personal data visible, the tenant's confirmation she had not forwarded it, and that the maintenance booking is still in progress. No assessment or notification decision has been made.
+**Latest reading (model, medium confidence, route `unsupported`):** Maya Chen has logged the misdirected email incident with the agency's privacy lead, noting the personal data categories visible, the tenant's confirmation she did not forward it, and that the maintenance booking is still in progress. No assessment or notification decision has been made yet.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Misdirected email containing another tenant's personal data
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `3a9ad7cb2598`
+## Final decision — system case `a912913014a6`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Misdirected email containing another tenant's personal data (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `cd25215be075` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `17a21c54dedf` as a separate issue.
 
-**Latest reading (model, medium confidence, route `unsupported`):** Property manager called the tenant about the misdirected email containing another tenant's personal data, asking her not to share it and saying the agency is investigating; the tenant confirmed the email is still in her inbox. No change to the inspection appointment on 2025-03-06 after 13:00.
+**Latest reading (model, medium confidence, route `unsupported`):** Maya Chen called Iris Bell to ask her not to forward or share the misdirected email containing another tenant's personal data, and said the agency is investigating. Iris confirmed the email is still in her inbox, undeleted. No change to the window inspection arrangements.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Misdirected email containing another tenant's personal data
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `bbd3fc99e94a`
+## Final decision — system case `fd5e2cd8afb7`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Third-party personal data sent to tenant in error (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `cd25215be075` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `17a21c54dedf` as a separate issue.
 
-**Latest reading (model, medium confidence, route `unsupported`):** Tenant Iris Bell replies that the appointment confirmation email also contained personal information about someone she does not know. She says she has not forwarded it and asks the agency what to do with the message.
+**Latest reading (model, medium confidence, route `unsupported`):** Tenant Iris Bell reports that the appointment confirmation email she received contained another person's personal information; she says she has not forwarded it and asks the agency what to do with the message. She does not address the outstanding access question for the 2025-03-06 inspection.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Third-party personal data sent to tenant in error
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `cd25215be075`
+## Final decision — system case `17a21c54dedf`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Damp staining and lifting paint below kitchen window (category inspection)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **STOP ACTION**
+- **Proposed next action:** `confirm_appointment` — Damp staining and lifting paint below kitchen window (category other)
+- **Next step:** Confirm the active appointment with a precise date and time.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
 **Latest reading (claude-opus-5, high confidence, route `confirm_appointment`):** Tenant asks whether the inspection is still going ahead and what to do with the misdirected email containing another tenant's information. She reports the damp stain looked darker, with no dripping or electrical symptoms.
 
-**Why:** Known inspection job awaiting a rescheduled slot; tenant is chasing confirmation of the visit.
+**Why:** Tenant chasing the arranged visit after contractor rescheduled; next step is confirming the appointment.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Damp staining and lifting paint below kitchen window
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Iris, Thanks for letting us know about the damp staining and lifting paint below your kitchen window, and that the patch has grown since last week. So we can work out what's causing it, could you tell us a bit more: does the patch feel wet or damp to the touch after rain, and have you noticed …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Iris, Thanks again for your patience. Just so we have the details right before we take the next step, could you confirm that the problem is the damp staining and lifting paint on the wall below your kitchen window, and let us know roughly how big the patch is now? Many thanks, Northbridge Lett …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Iris, Thanks for your patience with the damp staining and lifting paint below your kitchen window. Could you let us know whether the afternoon of Thursday 6 March, any time after 1pm, works for you? And will you be home to let someone in, or is there another way you'd prefer access to be arran …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Iris, Thanks for confirming you'll be home after 1pm on Thursday 6 March. Just to make sure access is all set, could you confirm you're happy to let someone in yourself on the day, or if you'd prefer access to be arranged another way? Also, thank you for mentioning the mark is nearest the sock …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Iris, Thank you for letting us know about the email you received, and for flagging it rather than passing it on. We're sorry about that, and someone will come back to you shortly about how to handle the message. In the meantime, could you let us know whether the afternoon of Thursday 6 March, …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Iris, Thanks again for letting us know about the email you received, and for not passing it on. So we can follow this up properly, could you confirm whether the email is still in your inbox at the moment? We'll come back to you shortly about what to do with it. Many thanks, Northbridge Letting …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Iris, Thanks for bearing with us about the damp staining and lifting paint below your kitchen window. Unfortunately the earlier slot can't go ahead, and we're now looking at the afternoon of Friday 7 March, any time after 1pm. Could you let us know whether that afternoon would suit you, and wh …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Source of damp unclear - could be window seal failure, condensation, or a plumbing leak; affects which trade attends.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: Needs a case manager to define handling for the misdirected personal data (other tenant's name, address and arrears) and confirm instructions to Iris for deleting the message.
+- Clarification `access` to tenant: open — Record consent for this visit and access method from the authorised person.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | no source recorded |
+| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. | Event 019 — Call from Owen Pike (Contractor, Brindle Survey & Drying) |
 | `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. | Event 009 — Email from Iris Bell (Tenant, 18 Juniper Fold), Event 012 — Update from Maya Chen (Property Manager, Northbridge Lettings), Event 019 — Call from Owen Pike (Contractor, Brindle Survey & Drying) |
+| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
 
 ### Missing information and conflicting facts
 
-- **availability**: Tenant has not confirmed whether the contractor's proposed 2025-03-07 after 13:00 slot works for her.
-- **issue_details**: Stain reported as darker; confirm whether worsening changes urgency at the inspection.
+- **availability**: Tenant has not confirmed the contractor's proposed 2025-03-07 after 13:00 slot; no date/time agreed.
+- **access**: No consent for entry or access method given.
+- **issue_details**: Stain reported as darker; may need reassessment of urgency, though no dripping or electrical symptoms.
 - 4 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures

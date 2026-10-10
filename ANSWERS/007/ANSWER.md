@@ -1,12 +1,12 @@
 # Property Management — case 007: Television, bedroom light and door handle
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 8 Vellum Court, Brindlewick, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-17T09:04:05+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 19 of 19
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `f79f08a35dff9aab…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `f79f08a35dff9aab…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -36,43 +36,40 @@ The initial report and 18 further sources, submitted one at a time in availabili
 | 17 | 2025-09-16T16:10:00+00:00 | Event 018 — Note from Mina Voss (Property Manager, Northbridge Lettings) |
 | 18 | 2025-09-17T09:04:05+00:00 | Event 019 — Email from Rian Sol (Electrician, Bracken Spark Services) |
 
-## Final decision — system case `7ec3757ef5ae`
+## Final decision — system case `fd1acf76d61b`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Rear-door handle come off (category doors_locks)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Rear-door handle reported as come off (category doors_locks)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ab40a5d2b243` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Internal note from the property manager to the coordinator recording that the rear-door handle issue was only mentioned during a phone call, with no separate report received and no handyman assigned. No new information about the TV electrical fault or the pending electrical visit.
+**Latest reading (model, medium confidence, route `clarify`):** Internal note from the property manager confirming that the rear-door handle fault was only mentioned during a call, with no separate report received and no handyman assigned. No new information about the TV fault or the electrical visit appointment.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Rear-door handle reported as come off
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `1c942163ad05`
+## Final decision — system case `016431d2d1ca`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
 - **Proposed next action:** `request_quote` — Rear-door handle come off (category doors_locks)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ab40a5d2b243` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
 
-**Latest reading (model, medium confidence, route `request_quote`):** Call note from cover property manager: tenant will send availability for the electrical visit, believes the TV's main board is damaged and is open to it being removed, and is managing with a lamp instead of the downstairs light. Tenant also reported a rear-door handle coming off, which has no existing record and was asked to be submitted separately.
+**Latest reading (model, medium confidence, route `request_quote`):** Call note from cover property manager: tenant will send availability later, believes the TV's main board is fried after replacing fuses and is open to the TV being removed/discarded, and is using a lamp instead of the downstairs light. Tenant also reported a rear-door handle that has come off, to be submitted separately.
 
 ### Actions taken
 
@@ -82,25 +79,48 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case ab40a5d2b243: Event 015 — Call from Jory Senn (Cover Property Manager, Northbridge Lettings) |
+| `classification` | case manager | `require-classification` | Verify the received source assertion. Confirm that the category and work item match the source request. | Split from case e1ac7b30c5d2: Event 015 — Call from Jory Senn (Cover Property Manager, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `3837532ab017`
+## Final decision — system case `8d86c4f80ce4`
+
+- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Proposed next action:** `request_quote` — Downstairs bedroom light flickering and popping (category other)
+- **Next step:** A case manager must define a supported action for this situation.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
+
+**Latest reading (model, medium confidence, route `request_quote`):** Maintenance coordinator asked the tenant for availability so an electrical contractor can attend for the recorded TV and downstairs light issues, coordinating access around the dog. No date, time or consent has been given yet.
+
+### Actions taken
+
+- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+
+### Escalated to a person (handover)
+
+| Check | Owner | Rule | What the person must resolve | Evidence |
+|---|---|---|---|---|
+| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+
+## Final decision — system case `03adead4cc85`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
 - **Proposed next action:** `clarify` — Downstairs bedroom light flickering and popping (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ab40a5d2b243` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
 
-**Latest reading (model, medium confidence, route `urgent_hazard`):** Maintenance coordinator emailed the tenant asking for availability so an electrical contractor can attend regarding the TV and downstairs light, coordinating access around the dog. No date, time or consent is confirmed yet.
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Maintenance coordinator records that the downstairs bedroom light's flickering and popping symptoms have been added to the maintenance record, noting the landlord's approval covered only the TV. No new instruction on TV ownership, repair, replacement or disposal.
 
 ### Actions taken
 
@@ -110,25 +130,46 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case ab40a5d2b243: Event 006 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings) |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case e1ac7b30c5d2: Event 005 — Update from Oren Pike (Maintenance Coordinator, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `fdf23c51e9a0`
+## Final decision — system case `1a7e6b13e7a8`
+
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Downstairs bedroom light flickering and popping (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
+- **Owner:** case manager
+- **Case state:** in_progress · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
+
+**Latest reading (model, medium confidence, route `clarify`):** Property manager Mina Voss has emailed the landlord requesting approval to arrange appliance repair works for the tenant-reported TV fault (shorting and repeated fuse trips). The downstairs light issue was not included in the approval request.
+
+### Actions taken
+
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Downstairs bedroom light flickering and popping
+
+### Escalated to a person (handover)
+
+- No open human review.
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+
+## Final decision — system case `27fdafb0de90`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
 - **Proposed next action:** `clarify` — Downstairs bedroom light flickering and popping (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ab40a5d2b243` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `e1ac7b30c5d2` as a separate issue.
 
-**Latest reading (model, medium confidence, route `urgent_hazard`):** Maintenance coordinator records that the downstairs bedroom light's flickering and popping symptoms have been added to the maintenance record, noting the landlord's approval covered only the TV.
+**Latest reading (model, high confidence, route `urgent_hazard`):** Tenant reports a Samsung TV in the upstairs bedroom with an internal electrical fault that shorted and repeatedly tripped a fuse (now unplugged), and a downstairs bedroom light that flickers and pops when switched on. Tenant asks that access be arranged in advance because a dog is at the property.
 
 ### Actions taken
 
@@ -138,73 +179,51 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case ab40a5d2b243: Event 005 — Update from Oren Pike (Maintenance Coordinator, Northbridge Lettings) |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case e1ac7b30c5d2: Intake report |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `53ac0854de8d`
+## Final decision — system case `e1ac7b30c5d2`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Downstairs bedroom light flickering and popping (category other)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `ab40a5d2b243` as a separate issue.
+- **Proposed next action:** `confirm_appointment` — Samsung TV shorting and tripping fuse (upstairs bedroom) (category appliance)
+- **Next step:** Obtain authority for this work item, provider and action.
+- **Owner:** approver
+- **Case state:** open · policy v2
 
-**Latest reading (model, high confidence, route `urgent_hazard`):** Tenant reports a Samsung TV in the upstairs bedroom with an internal electrical fault that shorted and repeatedly tripped a fuse (now unplugged), and a downstairs bedroom light that flickers and pops when switched on. Asks that access be arranged in advance due to a dog at the property.
+**Latest reading (claude-opus-5, high confidence, route `confirm_appointment`):** The electrician proposed attending on 29 September after 15:00, but gave no exact arrival time and no appointment has been confirmed.
+
+**Why:** Message is about arranging a visit for a known job; no firm time agreed yet.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hi Ada, thanks for reporting the TV in the upstairs bedroom that shorted out and kept tripping the fuse. Just one thing to check so we can take this forward: was the Samsung TV already at the property when you moved in, or is it your own? If you're ever worried about your immediate safety, please co …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ada, Thanks for letting us know about the Samsung TV in the upstairs bedroom that shorted out and kept tripping a fuse, and for unplugging it. So we can look into this properly, could you let us know whether the TV was already at the property when you moved in, or whether it's your own? Thanks …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ada, Thanks for your patience. So we can get things moving with the electrical visit for the Samsung TV that's shorting and tripping the fuse, and the downstairs bedroom light, could you help us with a few details? 1. Which days and times over the next couple of weeks would suit you for someon …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ada, Thank you for sending through those times, and for letting us know about the dog - that's really helpful. So we can firm things up for the Samsung TV that's shorting and tripping the fuse, could you help with two quick things? 1. Of the slots you listed, which single date and start time w …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ada, Thanks again for your help with this. When you spoke with us, you mentioned that the rear-door handle had come off. Could you let us know a little more about what's happened with it - for example whether it's come away completely or is just loose, and whether the door still opens and lock …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ada, Thanks for your patience with this. For the Samsung TV that's shorting and tripping the fuse, could you confirm whether the afternoon of 29 September, from 15:00 onwards, still works for you? Just reply to this email and we'll take it from there. Best wishes, Northbridge Lettings”
+- Clarification `triage` to tenant: closed — Clarify before routing: Landlord does not recall leaving a TV at the property, so it may be tenant-owned and outside landlord repair responsibility.; No instruction given on whether the TV should be repaired, replaced or disposed of.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: TV ownership and whether to repair, replace or dispose of it remain unresolved; landlord away.
+- Clarification `access` to tenant: open — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: open — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: The rear-door handle issue has only been raised verbally; details of the fault and whether the tenant still wants it logged as a separate job need confirming.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case ab40a5d2b243: Intake report |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `ab40a5d2b243`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Samsung TV electrical fault tripping fuse (category appliance)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-
-**Latest reading (claude-opus-5, high confidence, route `confirm_appointment`):** Electrician Rian Sol proposed attending on 29 September after 15:00 for the electrical visit, but gave no exact arrival time and no confirmation has been issued.
-
-**Why:** Message is about arranging a visit for an already known job; no firm date and time agreed yet, so appointment confirmation is the next step.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | no source recorded |
 | `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. A verified route is required before asking externally. | no source recorded |
 
 ### Missing information and conflicting facts
 
-- **availability**: No exact arrival time given for 29 September; a precise slot is needed to confirm the appointment with the tenant.
-- **access**: Tenant confirmation of the proposed date and the call-on-arrival arrangement has not been obtained.
+- **availability**: Electrician gave a date but no precise arrival time; an exact start time is needed before confirming with the tenant.
+- **access**: Tenant has not yet confirmed 29 September or who will let the contractor in; contractor must call on arrival due to the dog.
 - 5 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures

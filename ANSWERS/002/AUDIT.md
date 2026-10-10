@@ -1,15 +1,15 @@
-# Case 8dd4f30a6be1 audit trail
+# Case 7a19790f7362 audit trail
 
-Gas record and boiler visit · Boiler lockout diagnostic (separate job) · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Gas record and boiler visit · Recurring boiler lockout diagnostic · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
 
-- **Case ID:** `8dd4f30a6be1487d913ebd4e2ca070f6`
-- **Split from:** [483e321f56fd](../483e321f56fd4c489399a9433480fc8d/history.md)
-- **Entries:** 6 (from 11 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `7a19790f73624923968abd4d95fc7cf9`
+- **Split from:** [23a92714cda6](../23a92714cda641218c44ab2590e8f5b1/history.md)
+- **Entries:** 4 (from 9 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:00:53 UTC — 001 · Message received: Split from case 483e321f56fd: Event 019 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
+## 2026-10-10 16:20:15 UTC — 001 · Message received: Split from case 23a92714cda6: Event 019 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -21,7 +21,7 @@ Gas record and boiler visit · Boiler lockout diagnostic (separate job) · 8 Bri
 > The job card lists the boiler and cooker. Our quality desk has paused issuing the signed paperwork while it reconciles an appliance installation detail against the information already held for the address. The engineer's entry remains satisfactory. A lockout diagnostic would be a separate job.
 
 <a id="entry-002"></a>
-## 2026-10-10 16:00:53 UTC — 002 · Claim `classification` = "appliance"
+## 2026-10-10 16:20:15 UTC — 002 · Claim `classification` = "appliance"
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
@@ -29,123 +29,37 @@ Gas record and boiler visit · Boiler lockout diagnostic (separate job) · 8 Bri
 > A lockout diagnostic would be a separate job.
 
 <a id="entry-003"></a>
-## 2026-10-10 16:00:53 UTC — 003 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:00:53 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-004"></a>
-## 2026-10-10 16:00:53 UTC — 004 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:00:53 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-005"></a>
-## 2026-10-10 16:00:53 UTC — 005 · Human review opened: `classification`
+## 2026-10-10 16:20:15 UTC — 003 · Human review opened: `classification`
 
 - **Actor:** Policy engine
 - **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:00:53 UTC
+- **Expires:** 2026-10-12 16:20:15 UTC
 
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
+> Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-006"></a>
-## 2026-10-10 16:00:53 UTC — 006 · Policy gates → HUMAN REVIEW
+<a id="entry-004"></a>
+## 2026-10-10 16:20:15 UTC — 004 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
 
 ---
 
-# Case a1bdd487bbff audit trail
+# Case 4df3e25b5325 audit trail
 
-Gas record and boiler visit · Intermittent boiler lockouts · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Gas record and boiler visit · Annual gas safety visit on 9 October · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
 
-- **Case ID:** `a1bdd487bbff4a7d99c94a0f83594538`
-- **Split from:** [483e321f56fd](../483e321f56fd4c489399a9433480fc8d/history.md)
-- **Entries:** 6 (from 11 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `4df3e25b53254237aa6cbe8b66e771bc`
+- **Split from:** [23a92714cda6](../23a92714cda641218c44ab2590e8f5b1/history.md)
+- **Entries:** 8 (from 12 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 15:59:38 UTC — 001 · Message received: Split from case 483e321f56fd: Event 010 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
-
-- **Recorded by:** Claude
-- **Reading:** not required
-
-> Event 010 — Email
-> From: Riva Morn (Service Coordinator, Flintmere Gas Services)
-> To: Nessa Wold (Landlord)
->
-> The engineer has closed the visit as satisfactory in the job app. The office paperwork is still being processed.
-
-<a id="entry-002"></a>
-## 2026-10-10 15:59:38 UTC — 002 · Claim `classification` = "appliance"
-
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
-
-> The office paperwork is still being processed.
-
-<a id="entry-003"></a>
-## 2026-10-10 15:59:38 UTC — 003 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:59:38 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-004"></a>
-## 2026-10-10 15:59:38 UTC — 004 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 15:59:38 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-005"></a>
-## 2026-10-10 15:59:38 UTC — 005 · Human review opened: `classification`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 15:59:38 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
-
-<a id="entry-006"></a>
-## 2026-10-10 15:59:38 UTC — 006 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-
----
-
-# Case a45eb2fb8f93 audit trail
-
-Gas record and boiler visit · Intermittent boiler lockouts not covered by gas visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
-
-- **Case ID:** `a45eb2fb8f9340d9a077f77ef9802d60`
-- **Split from:** [483e321f56fd](../483e321f56fd4c489399a9433480fc8d/history.md)
-- **Entries:** 7 (from 12 immutable records; bookkeeping and unchanged assessments omitted)
-- **Raw records:** [records.jsonl](records.jsonl)
-- All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
-
-<a id="entry-001"></a>
-## 2026-10-10 15:59:32 UTC — 001 · Message received: Split from case 483e321f56fd: Event 009 — Note from Tavin Rell (Gas Engineer, Flintmere Gas Services)
+## 2026-10-10 16:18:26 UTC — 001 · Message received: Split from case 23a92714cda6: Event 009 — Note from Tavin Rell (Gas Engineer, Flintmere Gas Services)
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -157,70 +71,74 @@ Gas record and boiler visit · Intermittent boiler lockouts not covered by gas v
 > Visit completed. The job app entry records the check as satisfactory. I noted the tenant's intermittent boiler lockout separately; no repair was included in this instruction.
 
 <a id="entry-002"></a>
-## 2026-10-10 15:59:32 UTC — 002 · Claim `completion` = false
+## 2026-10-10 16:18:26 UTC — 002 · Claim `completion` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
-> no repair was included in this instruction
+> Visit completed. The job app entry records the check as satisfactory.
 
 <a id="entry-003"></a>
-## 2026-10-10 15:59:32 UTC — 003 · Claim `classification` = "appliance"
+## 2026-10-10 16:18:26 UTC — 003 · Claim `classification` = "inspection"
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
-> I noted the tenant's intermittent boiler lockout separately; no repair was included in this instruction.
+> Visit completed. The job app entry records the check as satisfactory.
 
 <a id="entry-004"></a>
-## 2026-10-10 15:59:32 UTC — 004 · Human review opened: `identity`
+## 2026-10-10 16:18:26 UTC — 004 · Human review opened: `completion`
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:59:32 UTC
+- **Owner:** reviewer · rule `require-completion`
+- **Expires:** 2026-10-12 16:18:26 UTC
 
-> Verify the person, property and work item mapping.
+> Verify the received source assertion. Verify completion of this work item with usable evidence.
 
 <a id="entry-005"></a>
-## 2026-10-10 15:59:32 UTC — 005 · Human review opened: `route`
+## 2026-10-10 16:18:26 UTC — 005 · Clarification opened: `commitments` → staff
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 15:59:32 UTC
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Verify the recipient and permitted communication route.
+> Resolve or explicitly cancel every outstanding commitment for this item.
 
 <a id="entry-006"></a>
-## 2026-10-10 15:59:32 UTC — 006 · Human review opened: `classification`
+## 2026-10-10 16:18:26 UTC — 006 · Clarification sent to staff (simulated)
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 15:59:32 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
+- **Tool:** simulated staff channel — no real contact
 
 <a id="entry-007"></a>
-## 2026-10-10 15:59:32 UTC — 007 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:18:26 UTC — 007 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner reviewer
+- **Blockers:** `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → CLARIFY
+- **Next step:** Verify the received source assertion. Verify completion of this work item with usable evidence.
+
+<a id="entry-008"></a>
+## 2026-10-10 16:18:26 UTC — 008 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner reviewer
+- **Blockers:** `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Verify completion of this work item with usable evidence.
 
 
 ---
 
-# Case 483e321f56fd audit trail
+# Case 23a92714cda6 audit trail
 
-Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status open · stage WAIT
 
-- **Case ID:** `483e321f56fd4c489399a9433480fc8d`
-- **Entries:** 206 (from 572 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `23a92714cda641218c44ab2590e8f5b1`
+- **Entries:** 186 (from 619 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 15:58:48 UTC — 001 · Message received: Intake report
+## 2026-10-10 16:17:07 UTC — 001 · Message received: Intake report
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -232,103 +150,67 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 > Please send me the current gas safety paperwork for the flat. The boiler has also started locking out occasionally; could you check whether that is being looked at?
 
 <a id="entry-002"></a>
-## 2026-10-10 15:58:48 UTC — 002 · Human review opened: `identity`
+## 2026-10-10 16:17:07 UTC — 002 · Policy gates → WAIT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:58:48 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** The latest message is being routed and read. Actions wait for the reading.
 
 <a id="entry-003"></a>
-## 2026-10-10 15:58:48 UTC — 003 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 15:58:48 UTC
-
-> Verify the recipient and permitted communication route.
+## 2026-10-10 16:17:07 UTC — 003 · Workflow receipt
 
 <a id="entry-004"></a>
-## 2026-10-10 15:58:48 UTC — 004 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:17:07 UTC — 004 · Jev routed the message
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Jev (jev-1.13.0 · 1293 in / 284 out tokens · 367 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_only → `request_quote` (confidence 0.80)
+- **Signals:** hazard 0.22 · multiple_issues 0.25 · sensitive 0.03 · states_facts 0.03 · system_instructions 0.01
+- **Why:** Jev routed with confidence 0.80; nothing in the message needs Claude.
 
 <a id="entry-005"></a>
-## 2026-10-10 15:58:48 UTC — 005 · Workflow receipt
+## 2026-10-10 16:17:07 UTC — 005 · Jev-only reading applied
 
-<a id="entry-006"></a>
-## 2026-10-10 15:58:48 UTC — 006 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1293 in / 284 out tokens · 314 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_only → `request_quote` (confidence 0.83)
-- **Signals:** hazard 0.23 · multiple_issues 0.27 · sensitive 0.03 · states_facts 0.03 · system_instructions 0.01
-- **Why:** Jev routed with confidence 0.83; nothing in the message needs Claude.
-
-<a id="entry-007"></a>
-## 2026-10-10 15:58:48 UTC — 007 · Jev-only reading applied
-
-- **Actor:** Jev (jev-1.13.0 · 1293 in / 284 out tokens · 314 ms)
+- **Actor:** Jev (jev-1.13.0 · 1293 in / 284 out tokens · 367 ms)
 - **Tool:** Jev decision applied, no generated text
 - **Reading:** new request · route `request_quote` · medium confidence
 - **Work item:** Reported maintenance (appliance)
 - **Summary:** Routed by Jev to request_quote. Claude did not read this message.
 - **Extracted:** 0 claims · 0 ambiguities · 1 issue
 
-<a id="entry-008"></a>
-## 2026-10-10 15:58:48 UTC — 008 · Proposed action → `request_quote`
+<a id="entry-006"></a>
+## 2026-10-10 16:17:07 UTC — 006 · Proposed action → `request_quote`
 
 - **Actor:** Triage reading (route `request_quote`)
 - **Work item:** Reported maintenance
 - **Action revision:** 2
 
-<a id="entry-009"></a>
-## 2026-10-10 15:58:48 UTC — 009 · Claim `classification` = "appliance"
+<a id="entry-007"></a>
+## 2026-10-10 16:17:07 UTC — 007 · Claim `classification` = "appliance"
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
-<a id="entry-010"></a>
-## 2026-10-10 15:58:48 UTC — 010 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:58:48 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-011"></a>
-## 2026-10-10 15:58:48 UTC — 011 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 15:58:48 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-012"></a>
-## 2026-10-10 15:58:48 UTC — 012 · Human review opened: `classification`
+<a id="entry-008"></a>
+## 2026-10-10 16:17:07 UTC — 008 · Human review opened: `classification`
 
 - **Actor:** Policy engine
 - **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 15:58:48 UTC
+- **Expires:** 2026-10-12 16:17:07 UTC
 
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
+> Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-013"></a>
-## 2026-10-10 15:58:48 UTC — 013 · Policy gates → HUMAN REVIEW
+<a id="entry-009"></a>
+## 2026-10-10 16:17:07 UTC — 009 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-014"></a>
-## 2026-10-10 15:58:48 UTC — 014 · Message received: Event 002 — Note from Oren Vale (Property Manager, Northbridge Lettings)
+<a id="entry-010"></a>
+## 2026-10-10 16:17:07 UTC — 010 · Message received: Event 002 — Note from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -339,58 +221,86 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Tenancy file contains a gas record dated 16 October 2024. No later record is present in the file.
 
-<a id="entry-015"></a>
-## 2026-10-10 15:58:48 UTC — 015 · Policy gates → HUMAN REVIEW
+<a id="entry-011"></a>
+## 2026-10-10 16:17:07 UTC — 011 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-016"></a>
-## 2026-10-10 15:58:48 UTC — 016 · Workflow receipt
+<a id="entry-012"></a>
+## 2026-10-10 16:17:07 UTC — 012 · Workflow receipt
 
-<a id="entry-017"></a>
-## 2026-10-10 15:58:49 UTC — 017 · Jev routed the message
+<a id="entry-013"></a>
+## 2026-10-10 16:17:08 UTC — 013 · Jev routed the message
 
-- **Actor:** Jev (jev-1.13.0 · 1442 in / 284 out tokens · 257 ms)
+- **Actor:** Jev (jev-1.13.0 · 1442 in / 284 out tokens · 297 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `request_quote` (confidence 0.67)
-- **Signals:** hazard 0.12 · multiple_issues 0.04 · sensitive 0.04 · states_facts 0.03 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.67 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `request_quote` (confidence 0.60)
+- **Signals:** hazard 0.12 · multiple_issues 0.04 · sensitive 0.04 · states_facts 0.02 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.60 is below the Jev-only bar 0.8.
 
-<a id="entry-018"></a>
-## 2026-10-10 15:58:56 UTC — 018 · Claude read the message
+<a id="entry-014"></a>
+## 2026-10-10 16:17:14 UTC — 014 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 600 in / 390 out tokens)
+- **Actor:** Claude (claude-opus-5 · 600 in / 397 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler locking out intermittently; gas safety record possibly out of date (appliance)
-- **Summary:** Property manager's internal note records that the tenancy file holds a gas safety record dated 16 October 2024 with no later record. Relates to the tenant's request for current gas safety paperwork and reported boiler lockouts.
-- **Rationale:** Internal note updating the current case; boiler fault still needs contractor assessment, so request_quote per router decision.
+- **Work item:** Boiler locking out / gas safety record possibly out of date (appliance)
+- **Summary:** Property manager's internal note recording that the tenancy file holds a gas safety record dated 16 October 2024 with no later record. Relates to the tenant's request for current gas safety paperwork and reported boiler lockouts.
+- **Rationale:** Internal note updating the open appliance case; next step remains arranging a contractor assessment/gas inspection, consistent with router decision.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Is a current gas safety certificate in date, or is a new gas safety inspection required alongside investigating the boiler lockouts?
-- **Unknown:** No detail on frequency or circumstances of the boiler lockouts, or whether heating/hot water is affected.
+- **Unknown (affects route):** Whether a new gas safety inspection has been booked or is needed, and whether the boiler lockout fault requires a separate engineer assessment.
+- **Unknown:** No evidence supplied of a current gas safety certificate; only an older record dated 16 October 2024 is noted.
 
-<a id="entry-019"></a>
-## 2026-10-10 15:58:56 UTC — 019 · Human review opened: `triage`
+<a id="entry-015"></a>
+## 2026-10-10 16:17:14 UTC — 015 · Clarification opened: `triage` → tenant
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 15:58:56 UTC
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Clarify before routing: Is a current gas safety certificate in date, or is a new gas safety inspection required alongside investigating the boiler lockouts? A verified route is required before asking externally.
+> Clarify before routing: Whether a new gas safety inspection has been booked or is needed, and whether the boiler lockout fault requires a separate engineer assessment.
 
-<a id="entry-020"></a>
-## 2026-10-10 15:58:56 UTC — 020 · Policy gates → HUMAN REVIEW
+<a id="entry-016"></a>
+## 2026-10-10 16:17:14 UTC — 016 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → CLARIFY
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-021"></a>
-## 2026-10-10 15:58:56 UTC — 021 · Message received: Event 003 — Portal from Iona Pell (Tenant)
+<a id="entry-017"></a>
+## 2026-10-10 16:17:14 UTC — 017 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner case manager
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
+
+<a id="entry-018"></a>
+## 2026-10-10 16:17:20 UTC — 018 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 809 in / 426 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — Gas safety record on file is dated 16 October 2024 with no later record, so the certificate may be out of date - a staff member should confirm the inspection position and the landlord's gas safety obligation before anything is sent to the tenant, as the reply also touches on boiler lockouts with a gas appliance.
+- **Send gate:** held for staff — Claude asked for staff review: Gas safety record on file is dated 16 October 2024 with no later record, so the certificate may be out of date - a staff member should confirm the inspection position and the landlord's gas safety obligation before anything is sent to the tenant, as the reply also touches on boiler lockouts with a gas appliance. Risk flags: safety.
+- **Topics:** issue_details
+
+> Hello Iona,
+>
+> Thanks for getting in touch about the gas safety paperwork and the boiler.
+>
+> So we can look into the boiler side properly, could you tell us a bit more about the lockouts - how often the boiler locks out, when it started, whether any error code or light shows on the display, and whether you still have heating and hot water in between?
+>
+> We'll come back to you on the gas safety record separately.
+>
+> Many thanks,
+> Northbridge Lettings
+
+<a id="entry-019"></a>
+## 2026-10-10 16:17:20 UTC — 019 · Message received: Event 003 — Portal from Iona Pell (Tenant)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -401,51 +311,53 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The boiler has stopped during heating twice since the weekend and restarted after I reset it. It is working at the moment. I have not noticed a gas smell.
 
-<a id="entry-022"></a>
-## 2026-10-10 15:58:56 UTC — 022 · Policy gates → HUMAN REVIEW
+<a id="entry-020"></a>
+## 2026-10-10 16:17:20 UTC — 020 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-021"></a>
+## 2026-10-10 16:17:21 UTC — 021 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1571 in / 284 out tokens · 314 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_route → `request_quote` (confidence 0.94)
+- **Signals:** hazard 0.15 · multiple_issues 0.18 · sensitive 0.04 · states_facts 0.03 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. Open tenant questions may be answered.
+
+<a id="entry-022"></a>
+## 2026-10-10 16:17:26 UTC — 022 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 935 in / 416 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** answer to question · route `request_quote` · high confidence
+- **Work item:** Boiler locking out intermittently (appliance)
+- **Summary:** Tenant reports the boiler has stopped twice during heating since the weekend, restarting after a manual reset, and is currently working. No gas smell noticed.
+- **Rationale:** Intermittent boiler fault with no reported hazard; needs engineer assessment/quote.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown:** Whether a current gas safety record exists or a new inspection needs booking alongside the engineer assessment.
+- **Unknown:** Tenant's availability for an engineer visit is not stated.
 
 <a id="entry-023"></a>
-## 2026-10-10 15:58:57 UTC — 023 · Workflow receipt
+## 2026-10-10 16:17:26 UTC — 023 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> The boiler has stopped during heating twice since the weekend and restarted after I reset it. It is working at the moment. I have not noticed a gas smell.
 
 <a id="entry-024"></a>
-## 2026-10-10 15:58:57 UTC — 024 · Jev routed the message
+## 2026-10-10 16:17:26 UTC — 024 · Question closed
 
-- **Actor:** Jev (jev-1.13.0 · 1538 in / 284 out tokens · 361 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_only → `request_quote` (confidence 0.99)
-- **Signals:** hazard 0.16 · multiple_issues 0.10 · sensitive 0.04 · states_facts 0.03 · system_instructions 0.01
-- **Why:** Jev routed with confidence 0.99; nothing in the message needs Claude.
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
 
 <a id="entry-025"></a>
-## 2026-10-10 15:58:57 UTC — 025 · Jev-only reading applied
+## 2026-10-10 16:17:26 UTC — 025 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Jev (jev-1.13.0 · 1538 in / 284 out tokens · 361 ms)
-- **Tool:** Jev decision applied, no generated text
-- **Reading:** update · route `request_quote` · high confidence
-- **Work item:** Reported maintenance (appliance)
-- **Summary:** Routed by Jev to request_quote. Claude did not read this message.
-- **Extracted:** 0 claims · 0 ambiguities · 1 issue
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner case manager
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
 <a id="entry-026"></a>
-## 2026-10-10 15:58:57 UTC — 026 · Review superseded
-
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
-
-<a id="entry-027"></a>
-## 2026-10-10 15:58:57 UTC — 027 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-028"></a>
-## 2026-10-10 15:58:57 UTC — 028 · Message received: Event 004 — Email from Oren Vale (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:17:26 UTC — 026 · Message received: Event 004 — Email from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -456,46 +368,46 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The tenant has requested the current gas paperwork and reported intermittent boiler lockouts. Please confirm whether a visit has been arranged and what work was authorized.
 
-<a id="entry-029"></a>
-## 2026-10-10 15:58:57 UTC — 029 · Policy gates → HUMAN REVIEW
+<a id="entry-027"></a>
+## 2026-10-10 16:17:26 UTC — 027 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
+
+<a id="entry-028"></a>
+## 2026-10-10 16:17:26 UTC — 028 · Workflow receipt
+
+<a id="entry-029"></a>
+## 2026-10-10 16:17:26 UTC — 029 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 348 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_only → `request_quote` (confidence 0.93)
+- **Signals:** hazard 0.15 · multiple_issues 0.30 · sensitive 0.04 · states_facts 0.04 · system_instructions 0.02
+- **Why:** Jev routed with confidence 0.93; nothing in the message needs Claude.
 
 <a id="entry-030"></a>
-## 2026-10-10 15:58:57 UTC — 030 · Workflow receipt
+## 2026-10-10 16:17:26 UTC — 030 · Jev-only reading applied
 
-<a id="entry-031"></a>
-## 2026-10-10 15:58:57 UTC — 031 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 308 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_only → `request_quote` (confidence 0.94)
-- **Signals:** hazard 0.14 · multiple_issues 0.30 · sensitive 0.04 · states_facts 0.04 · system_instructions 0.02
-- **Why:** Jev routed with confidence 0.94; nothing in the message needs Claude.
-
-<a id="entry-032"></a>
-## 2026-10-10 15:58:57 UTC — 032 · Jev-only reading applied
-
-- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 308 ms)
+- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 348 ms)
 - **Tool:** Jev decision applied, no generated text
 - **Reading:** update · route `request_quote` · high confidence
 - **Work item:** Reported maintenance (appliance)
 - **Summary:** Routed by Jev to request_quote. Claude did not read this message.
 - **Extracted:** 0 claims · 0 ambiguities · 1 issue
 
-<a id="entry-033"></a>
-## 2026-10-10 15:58:57 UTC — 033 · Policy gates → HUMAN REVIEW
+<a id="entry-031"></a>
+## 2026-10-10 16:17:26 UTC — 031 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-034"></a>
-## 2026-10-10 15:58:58 UTC — 034 · Message received: Event 005 — Email from Nessa Wold (Landlord)
+<a id="entry-032"></a>
+## 2026-10-10 16:17:26 UTC — 032 · Message received: Event 005 — Email from Nessa Wold (Landlord)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -506,111 +418,120 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I arranged the annual gas visit with Flintmere Gas Services for 9 October. The instruction was to carry out the check; please do not authorize additional repair costs without asking me.
 
-<a id="entry-035"></a>
-## 2026-10-10 15:58:58 UTC — 035 · Policy gates → HUMAN REVIEW
+<a id="entry-033"></a>
+## 2026-10-10 16:17:26 UTC — 033 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
+
+<a id="entry-034"></a>
+## 2026-10-10 16:17:26 UTC — 034 · Workflow receipt
+
+<a id="entry-035"></a>
+## 2026-10-10 16:17:27 UTC — 035 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1666 in / 286 out tokens · 254 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** claude → no route
+- **Signals:** hazard 0.07 · multiple_issues 0.06 · sensitive 0.03 · states_facts 0.55 · system_instructions 0.02
+- **Why:** Jev route confidence 0.49 is below 0.5.
 
 <a id="entry-036"></a>
-## 2026-10-10 15:58:58 UTC — 036 · Workflow receipt
+## 2026-10-10 16:17:42 UTC — 036 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 1117 in / 1168 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** access or appointment · route `confirm_appointment` · medium confidence
+- **Work item:** Boiler lockouts / annual gas safety check (appliance)
+- **Summary:** The landlord states she arranged the annual gas safety visit with Flintmere Gas Services for 9 October and instructed only the check to be carried out, asking that no additional repair costs be authorised without her approval.
+- **Rationale:** Landlord update about an already known job confirming a contractor visit has been arranged, so the next step is confirming the appointment details; spend beyond the check is not authorised.
+- **Extracted:** 3 claims · 3 ambiguities · 1 issue
+- **Unknown:** Only a date (9 October) is given; no appointment time or year is stated, and it is unclear whether the visit has already taken place.
+- **Unknown:** No confirmation of how the contractor will gain entry or whether the tenant has been told about the 9 October visit.
+- **Unknown:** Unclear whether the contractor was told about the intermittent boiler lockouts and whether a copy of the gas safety record will be provided to the tenant.
 
 <a id="entry-037"></a>
-## 2026-10-10 15:58:58 UTC — 037 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1666 in / 286 out tokens · 273 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.52)
-- **Signals:** hazard 0.07 · multiple_issues 0.06 · sensitive 0.03 · states_facts 0.58 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.52 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. A route change on an existing case.
-
-<a id="entry-038"></a>
-## 2026-10-10 15:59:04 UTC — 038 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 1238 in / 502 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Boiler lockouts / annual gas safety check (appliance)
-- **Summary:** Landlord Nessa Wold states she arranged an annual gas safety visit with Flintmere Gas Services for 9 October, instructed to carry out the check only, and asks that no additional repair costs be authorised without her approval.
-- **Rationale:** Landlord update about an arranged visit for the known job; next step is confirming the appointment details and access.
-- **Extracted:** 2 claims · 3 ambiguities · 1 issue
-- **Unknown:** No time of day given for the 9 October visit; confirm precise appointment time.
-- **Unknown:** No confirmation of how the engineer will gain access or whether the tenant has been told.
-- **Unknown (affects route):** Unclear whether the intermittent boiler lockouts will be investigated during the safety check or need a separate quote.
-
-<a id="entry-039"></a>
-## 2026-10-10 15:59:04 UTC — 039 · Proposed action → `confirm_appointment`
+## 2026-10-10 16:17:42 UTC — 037 · Proposed action → `confirm_appointment`
 
 - **Actor:** Triage reading (route `confirm_appointment`)
 - **Work item:** Reported maintenance
 - **Action revision:** 3
 
-<a id="entry-040"></a>
-## 2026-10-10 15:59:04 UTC — 040 · Human review opened: `identity`
+<a id="entry-038"></a>
+## 2026-10-10 16:17:42 UTC — 038 · Claim `schedule` = true
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:59:04 UTC
+- **Actor:** Claude (extracted)
+- **Status:** unverified assertion — a person or policy must accept it
 
-> Verify the person, property and work item mapping.
+> I arranged the annual gas visit with Flintmere Gas Services for 9 October.
 
-<a id="entry-041"></a>
-## 2026-10-10 15:59:04 UTC — 041 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 15:59:04 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-042"></a>
-## 2026-10-10 15:59:04 UTC — 042 · Human review opened: `access`
-
-- **Actor:** Policy engine
-- **Owner:** access officer · rule `require-access`
-- **Expires:** 2026-10-12 15:59:04 UTC
-
-> Record consent for this visit and access method from the authorised person. A verified route is required before asking externally.
-
-<a id="entry-043"></a>
-## 2026-10-10 15:59:04 UTC — 043 · Human review opened: `authority`
+<a id="entry-039"></a>
+## 2026-10-10 16:17:42 UTC — 039 · Human review opened: `authority`
 
 - **Actor:** Policy engine
 - **Owner:** approver · rule `require-authority`
-- **Expires:** 2026-10-12 15:59:04 UTC
+- **Expires:** 2026-10-12 16:17:42 UTC
 
 > Obtain authority for this work item, provider and action.
 
-<a id="entry-044"></a>
-## 2026-10-10 15:59:04 UTC — 044 · Human review opened: `schedule`
+<a id="entry-040"></a>
+## 2026-10-10 16:17:42 UTC — 040 · Clarification opened: `access` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** access officer
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Record consent for this visit and access method from the authorised person.
+
+<a id="entry-041"></a>
+## 2026-10-10 16:17:42 UTC — 041 · Human review opened: `schedule`
 
 - **Actor:** Policy engine
 - **Owner:** case manager · rule `require-schedule`
-- **Expires:** 2026-10-12 15:59:04 UTC
+- **Expires:** 2026-10-12 16:17:42 UTC
 
-> Confirm the active appointment with a precise date and time. A verified route is required before asking externally.
+> Verify the received source assertion. Confirm the active appointment with a precise date and time.
+
+<a id="entry-042"></a>
+## 2026-10-10 16:17:42 UTC — 042 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → CLARIFY
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-043"></a>
+## 2026-10-10 16:17:42 UTC — 043 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-044"></a>
+## 2026-10-10 16:17:53 UTC — 044 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1077 in / 514 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — Tenant reports intermittent boiler lockouts and the file shows no gas record since 16 October 2024, so a staff member should check the gas safety position and the proposed visit arrangements before contacting the tenant.
+- **Send gate:** held for staff — Claude asked for staff review: Tenant reports intermittent boiler lockouts and the file shows no gas record since 16 October 2024, so a staff member should check the gas safety position and the proposed visit arrangements before contacting the tenant. Risk flags: safety.
+- **Topics:** access
+
+> Hello Iona,
+>
+> Thanks for letting us know the boiler has stopped twice during heating and restarted after a reset, and that you haven't noticed any gas smell.
+>
+> So we can arrange access for an engineer to attend for the gas safety check, could you let us know how you'd prefer access to be arranged - you being home to let them in, or another arrangement that suits you?
+>
+> If you ever smell gas or feel unsafe, please call the National Gas Emergency Service on 0800 111 999 or the emergency services straight away.
+>
+> Many thanks,
+> Northbridge Lettings
 
 <a id="entry-045"></a>
-## 2026-10-10 15:59:04 UTC — 045 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 15:59:04 UTC
-
-> Clarify before routing: Unclear whether the intermittent boiler lockouts will be investigated during the safety check or need a separate quote. A verified route is required before asking externally.
-
-<a id="entry-046"></a>
-## 2026-10-10 15:59:04 UTC — 046 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-047"></a>
-## 2026-10-10 15:59:04 UTC — 047 · Message received: Event 006 — SMS from Riva Morn (Service Coordinator, Flintmere Gas Services)
+## 2026-10-10 16:17:53 UTC — 045 · Message received: Event 006 — SMS from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -621,49 +542,49 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Flintmere has the 9 October appointment booked for the annual gas visit. Please confirm an access window.
 
+<a id="entry-046"></a>
+## 2026-10-10 16:17:53 UTC — 046 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-047"></a>
+## 2026-10-10 16:17:53 UTC — 047 · Workflow receipt
+
 <a id="entry-048"></a>
-## 2026-10-10 15:59:04 UTC — 048 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:17:53 UTC — 048 · Jev routed the message
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-049"></a>
-## 2026-10-10 15:59:04 UTC — 049 · Workflow receipt
-
-<a id="entry-050"></a>
-## 2026-10-10 15:59:05 UTC — 050 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1652 in / 286 out tokens · 310 ms)
+- **Actor:** Jev (jev-1.13.0 · 1667 in / 286 out tokens · 273 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** jev_route → `confirm_appointment` (confidence 1.00)
-- **Signals:** hazard 0.04 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.54 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.
+- **Signals:** hazard 0.05 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.54 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-051"></a>
-## 2026-10-10 15:59:09 UTC — 051 · Claude read the message
+<a id="entry-049"></a>
+## 2026-10-10 16:17:58 UTC — 049 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1443 in / 322 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1480 in / 370 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** access or appointment · route `confirm_appointment` · high confidence
-- **Work item:** Annual gas safety visit / boiler lockouts (appliance)
-- **Summary:** Flintmere Gas Services confirms the 9 October annual gas visit is booked and asks the tenant to confirm an access window.
-- **Rationale:** Message concerns arranging access for an already known appointment.
+- **Work item:** Annual gas safety visit / intermittent boiler lockouts (appliance)
+- **Summary:** Flintmere Gas Services confirms the annual gas visit is booked for 9 October and asks the tenant to confirm an access window. No access consent or time window has yet been given.
+- **Rationale:** Message concerns arranging access for an already known booked appointment.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** No access window or time has been confirmed by the tenant; only a date is stated.
-- **Unknown (affects route):** Unclear whether the intermittent boiler lockouts will be investigated during the safety check or need a separate quote.
+- **Unknown:** No time window given for 9 October; tenant needs to confirm an access window.
+- **Unknown:** Tenant has not yet granted access or stated an entry method for the 9 October visit.
 
-<a id="entry-052"></a>
-## 2026-10-10 15:59:09 UTC — 052 · Policy gates → HUMAN REVIEW
+<a id="entry-050"></a>
+## 2026-10-10 16:17:58 UTC — 050 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
 
-<a id="entry-053"></a>
-## 2026-10-10 15:59:09 UTC — 053 · Message received: Event 007 — Portal from Iona Pell (Tenant)
+<a id="entry-051"></a>
+## 2026-10-10 16:17:58 UTC — 051 · Message received: Event 007 — Portal from Iona Pell (Tenant)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -674,71 +595,78 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I can provide access between 09:00 and 11:00 on 9 October. Please ask the engineer to let me know if the visit time changes.
 
+<a id="entry-052"></a>
+## 2026-10-10 16:17:58 UTC — 052 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-053"></a>
+## 2026-10-10 16:17:58 UTC — 053 · Workflow receipt
+
 <a id="entry-054"></a>
-## 2026-10-10 15:59:09 UTC — 054 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:17:59 UTC — 054 · Jev routed the message
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-055"></a>
-## 2026-10-10 15:59:09 UTC — 055 · Workflow receipt
-
-<a id="entry-056"></a>
-## 2026-10-10 15:59:09 UTC — 056 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1657 in / 286 out tokens · 484 ms)
+- **Actor:** Jev (jev-1.13.0 · 1672 in / 286 out tokens · 228 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** jev_route → `confirm_appointment` (confidence 1.00)
-- **Signals:** hazard 0.03 · multiple_issues 0.05 · sensitive 0.02 · states_facts 0.95 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.
+- **Signals:** hazard 0.03 · multiple_issues 0.05 · sensitive 0.02 · states_facts 0.93 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-057"></a>
-## 2026-10-10 15:59:15 UTC — 057 · Claude read the message
+<a id="entry-055"></a>
+## 2026-10-10 16:18:04 UTC — 055 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1628 in / 400 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1665 in / 467 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** access or appointment · route `confirm_appointment` · high confidence
 - **Work item:** Annual gas visit / intermittent boiler lockouts (appliance)
-- **Summary:** Tenant offers an access window of 09:00–11:00 on 9 October for the booked annual gas visit and asks to be told if the time changes.
-- **Rationale:** Message is about arranging access for an already booked visit.
+- **Summary:** Tenant offers an access window of 09:00–11:00 on 9 October for the booked gas visit and asks to be told if the time changes.
+- **Rationale:** Message concerns arranging access for a known booked visit; router's confirm_appointment fits.
 - **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown:** Tenant offers a 09:00–11:00 window on 9 October; the contractor has not confirmed a precise appointment time within it.
-- **Unknown (affects route):** Still unclear whether the intermittent boiler lockouts will be investigated during the safety check or need a separate quote.
+- **Unknown:** Tenant offers a 09:00-11:00 window on 9 October; a precise appointment time still needs confirming with Flintmere.
+- **Unknown:** Access method unclear - tenant appears to be present, but confirm whether anyone else will admit the engineer.
 
-<a id="entry-058"></a>
-## 2026-10-10 15:59:15 UTC — 058 · Claim `access` = true
+<a id="entry-056"></a>
+## 2026-10-10 16:18:04 UTC — 056 · Claim `access` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > I can provide access between 09:00 and 11:00 on 9 October.
 
+<a id="entry-057"></a>
+## 2026-10-10 16:18:04 UTC — 057 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> I can provide access between 09:00 and 11:00 on 9 October.
+
+<a id="entry-058"></a>
+## 2026-10-10 16:18:04 UTC — 058 · Question closed (answered)
+
+- **Why:** A source asserting this fact was received; it now awaits verification.
+
 <a id="entry-059"></a>
-## 2026-10-10 15:59:15 UTC — 059 · Human review opened: `access`
+## 2026-10-10 16:18:04 UTC — 059 · Human review opened: `access`
 
 - **Actor:** Policy engine
 - **Owner:** access officer · rule `require-access`
-- **Expires:** 2026-10-12 15:59:15 UTC
+- **Expires:** 2026-10-12 16:18:04 UTC
 
-> Record consent for this visit and access method from the authorised person. A verified route is required before asking externally.
+> Verify the received source assertion. Record consent for this visit and access method from the authorised person.
 
 <a id="entry-060"></a>
-## 2026-10-10 15:59:15 UTC — 060 · Review superseded
+## 2026-10-10 16:18:04 UTC — 060 · Policy gates → HUMAN REVIEW
 
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW
+- **Next step:** Obtain authority for this work item, provider and action.
 
 <a id="entry-061"></a>
-## 2026-10-10 15:59:15 UTC — 061 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-062"></a>
-## 2026-10-10 15:59:15 UTC — 062 · Message received: Event 008 — SMS from Tavin Rell (Gas Engineer, Flintmere Gas Services)
+## 2026-10-10 16:18:05 UTC — 061 · Message received: Event 008 — SMS from Tavin Rell (Gas Engineer, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -749,49 +677,48 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I am on my way for the booked gas visit and expect to arrive within the agreed access window.
 
-<a id="entry-063"></a>
-## 2026-10-10 15:59:15 UTC — 063 · Policy gates → HUMAN REVIEW
+<a id="entry-062"></a>
+## 2026-10-10 16:18:05 UTC — 062 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-063"></a>
+## 2026-10-10 16:18:05 UTC — 063 · Workflow receipt
 
 <a id="entry-064"></a>
-## 2026-10-10 15:59:15 UTC — 064 · Workflow receipt
+## 2026-10-10 16:18:05 UTC — 064 · Jev routed the message
 
-<a id="entry-065"></a>
-## 2026-10-10 15:59:15 UTC — 065 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 296 ms)
+- **Actor:** Jev (jev-1.13.0 · 1643 in / 284 out tokens · 306 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.96)
-- **Signals:** hazard 0.02 · multiple_issues 0.02 · sensitive 0.02 · states_facts 0.51 · system_instructions 0.01
+- **Decision:** jev_route → `confirm_appointment` (confidence 0.94)
+- **Signals:** hazard 0.02 · multiple_issues 0.02 · sensitive 0.02 · states_facts 0.48 · system_instructions 0.01
 - **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.
 
-<a id="entry-066"></a>
-## 2026-10-10 15:59:20 UTC — 066 · Claude read the message
+<a id="entry-065"></a>
+## 2026-10-10 16:18:09 UTC — 065 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1648 in / 356 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1604 in / 296 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** access or appointment · route `confirm_appointment` · high confidence
 - **Work item:** Annual gas visit / intermittent boiler lockouts (appliance)
-- **Summary:** Gas engineer from Flintmere texts the tenant that he is on his way for the booked 9 October gas visit and expects to arrive within the agreed access window. No new defect information.
-- **Rationale:** Message concerns attendance for an already booked visit, so appointment confirmation is the correct handling.
-- **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Still unclear whether the intermittent boiler lockouts will be investigated during the safety check or need a separate quote.
-- **Unknown:** Engineer does not state a precise arrival time, only that it is within the window.
+- **Summary:** Gas engineer from Flintmere confirms he is en route for the booked 9 October gas visit and expects to arrive within the agreed access window.
+- **Rationale:** Message concerns an existing booked appointment for a known job, so confirm_appointment applies.
+- **Extracted:** 0 claims · 1 ambiguity · 1 issue
+- **Unknown:** Engineer does not state an exact arrival time; only that it is within the agreed 09:00-11:00 window.
+
+<a id="entry-066"></a>
+## 2026-10-10 16:18:09 UTC — 066 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW
+- **Next step:** Obtain authority for this work item, provider and action.
 
 <a id="entry-067"></a>
-## 2026-10-10 15:59:20 UTC — 067 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-068"></a>
-## 2026-10-10 15:59:20 UTC — 068 · Message received: Event 009 — Note from Tavin Rell (Gas Engineer, Flintmere Gas Services)
+## 2026-10-10 16:18:09 UTC — 067 · Message received: Event 009 — Note from Tavin Rell (Gas Engineer, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -802,106 +729,116 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Visit completed. The job app entry records the check as satisfactory. I noted the tenant's intermittent boiler lockout separately; no repair was included in this instruction.
 
-<a id="entry-069"></a>
-## 2026-10-10 15:59:20 UTC — 069 · Policy gates → HUMAN REVIEW
+<a id="entry-068"></a>
+## 2026-10-10 16:18:09 UTC — 068 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-069"></a>
+## 2026-10-10 16:18:09 UTC — 069 · Workflow receipt
 
 <a id="entry-070"></a>
-## 2026-10-10 15:59:20 UTC — 070 · Workflow receipt
+## 2026-10-10 16:18:10 UTC — 070 · Jev routed the message
 
-<a id="entry-071"></a>
-## 2026-10-10 15:59:21 UTC — 071 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1647 in / 284 out tokens · 259 ms)
+- **Actor:** Jev (jev-1.13.0 · 1647 in / 284 out tokens · 527 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.11 · multiple_issues 0.08 · sensitive 0.03 · states_facts 0.64 · system_instructions 0.03
-- **Why:** Jev route confidence 0.34 is below 0.5.
+- **Signals:** hazard 0.11 · multiple_issues 0.09 · sensitive 0.03 · states_facts 0.68 · system_instructions 0.03
+- **Why:** Jev route confidence 0.39 is below 0.5.
+
+<a id="entry-071"></a>
+## 2026-10-10 16:18:26 UTC — 071 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 1551 in / 1276 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** completion report · route `request_quote` · medium confidence
+- **Work item:** Intermittent boiler lockouts still unresolved (appliance)
+- **Summary:** Flintmere's gas engineer reports the 9 October annual gas visit is completed and recorded as satisfactory in the job app. He notes the tenant's intermittent boiler lockout was logged separately and no repair was carried out under this instruction.
+- **Rationale:** The booked gas check is reported finished and can be closed on receipt of evidence, but the originally reported boiler lockout was explicitly excluded from this instruction, so it still needs assessment or a quote before any repair can be authorised (landlord asked to approve extra costs).
+- **Extracted:** 2 claims · 2 ambiguities · 2 issues · risk flags: possible_wrong_recipient
+- **Unknown:** No gas safety certificate or report has been supplied to the desk; the only stated evidence is an entry in the contractor's own job app.
+- **Unknown (affects route):** No diagnosis or findings given for the intermittent boiler lockouts; unclear whether a further assessment or quote is needed and whether the landlord wants it instructed.
 
 <a id="entry-072"></a>
-## 2026-10-10 15:59:32 UTC — 072 · Claude read the message
+## 2026-10-10 16:18:26 UTC — 072 · Proposed action → `request_quote`
 
-- **Actor:** Claude (claude-opus-5 · 1595 in / 843 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** completion report · route `close_item` · medium confidence
-- **Work item:** Annual gas safety visit 9 October (appliance)
-- **Summary:** Gas engineer reports to his own coordinator that the 9 October annual gas visit at the property is complete and the check recorded as satisfactory. He notes the tenant's intermittent boiler lockout was logged separately and no repair formed part of this instruction.
-- **Rationale:** Engineer states the booked visit is finished and the check satisfactory, so the appointment item can be closed pending evidence; the unresolved boiler lockout is a separate item requiring a quote.
-- **Extracted:** 2 claims · 2 ambiguities · 2 issues
-- **Unknown:** No gas safety certificate or report has been supplied to the desk; only an internal job app entry is referenced.
-- **Unknown (affects route):** The intermittent boiler lockouts remain uninvestigated; confirm whether a diagnostic quote should be requested and landlord authority sought.
-
-<a id="entry-073"></a>
-## 2026-10-10 15:59:32 UTC — 073 · Proposed action → `close_item`
-
-- **Actor:** Triage reading (route `close_item`)
+- **Actor:** Triage reading (route `request_quote`)
 - **Work item:** Reported maintenance
 - **Action revision:** 4
 
-<a id="entry-074"></a>
-## 2026-10-10 15:59:32 UTC — 074 · Claim `completion` = true
+<a id="entry-073"></a>
+## 2026-10-10 16:18:26 UTC — 073 · Claim `completion` = false
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
-> Visit completed. The job app entry records the check as satisfactory.
+> no repair was included in this instruction
 
-<a id="entry-075"></a>
-## 2026-10-10 15:59:32 UTC — 075 · Separate issue split into a new case
+<a id="entry-074"></a>
+## 2026-10-10 16:18:26 UTC — 074 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
-<a id="entry-076"></a>
-## 2026-10-10 15:59:32 UTC — 076 · Human review opened: `identity`
+<a id="entry-075"></a>
+## 2026-10-10 16:18:26 UTC — 075 · Human review opened: `classification`
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 15:59:32 UTC
+- **Owner:** case manager · rule `require-classification`
+- **Expires:** 2026-10-12 16:18:26 UTC
 
-> Verify the person, property and work item mapping.
+> Verify the received source assertion. Confirm that the category and work item match the source request.
+
+<a id="entry-076"></a>
+## 2026-10-10 16:18:26 UTC — 076 · Clarification opened: `triage` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: No diagnosis or findings given for the intermittent boiler lockouts; unclear whether a further assessment or quote is needed and whether the landlord wants it instructed.
 
 <a id="entry-077"></a>
-## 2026-10-10 15:59:32 UTC — 077 · Human review opened: `completion`
+## 2026-10-10 16:18:26 UTC — 077 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine
-- **Owner:** reviewer · rule `require-completion`
-- **Expires:** 2026-10-12 15:59:32 UTC
-
-> Verify completion of this work item with usable evidence. A verified route is required before asking externally.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner case manager
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → CLARIFY
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
 <a id="entry-078"></a>
-## 2026-10-10 15:59:32 UTC — 078 · Human review opened: `commitments`
+## 2026-10-10 16:18:26 UTC — 078 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-commitments`
-- **Expires:** 2026-10-12 15:59:32 UTC
-
-> Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner case manager
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
 <a id="entry-079"></a>
-## 2026-10-10 15:59:32 UTC — 079 · Human review opened: `triage`
+## 2026-10-10 16:18:37 UTC — 079 · Claude drafted a message to the tenant
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 15:59:32 UTC
+- **Actor:** Claude (claude-opus-5 · 1221 in / 420 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — Triage flagged possible_wrong_recipient (contractor-to-tenant messages mixed with manager thread) and the case involves a gas appliance fault pending a quote decision; a staff member should confirm the recipient and that no repair commitment is implied.
+- **Send gate:** held for staff — Claude asked for staff review: Triage flagged possible_wrong_recipient (contractor-to-tenant messages mixed with manager thread) and the case involves a gas appliance fault pending a quote decision; a staff member should confirm the recipient and that no repair commitment is implied. Risk flags: possible_wrong_recipient, safety.
+- **Topics:** issue_details
 
-> Clarify before routing: The intermittent boiler lockouts remain uninvestigated; confirm whether a diagnostic quote should be requested and landlord authority sought. A verified route is required before asking externally.
+> Hello Iona,
+>
+> Thanks for providing access for the gas visit on 9 October.
+>
+> So we can look into the intermittent boiler lockout you mentioned, could you tell us a bit more about what's been happening? For example, how often the boiler locks out, when it last happened, and whether it affects your heating, hot water or both.
+>
+> If you ever smell gas or feel unsafe, please contact the emergency services or the National Gas Emergency Service straight away.
+>
+> Many thanks,
+> Northbridge Lettings
 
 <a id="entry-080"></a>
-## 2026-10-10 15:59:32 UTC — 080 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-081"></a>
-## 2026-10-10 15:59:32 UTC — 081 · Message received: Event 010 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
+## 2026-10-10 16:18:37 UTC — 080 · Message received: Event 010 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -912,77 +849,125 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The engineer has closed the visit as satisfactory in the job app. The office paperwork is still being processed.
 
-<a id="entry-082"></a>
-## 2026-10-10 15:59:32 UTC — 082 · Policy gates → HUMAN REVIEW
+<a id="entry-081"></a>
+## 2026-10-10 16:18:37 UTC — 081 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-082"></a>
+## 2026-10-10 16:18:38 UTC — 082 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1683 in / 284 out tokens · 327 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** claude → no route
+- **Signals:** hazard 0.04 · multiple_issues 0.06 · sensitive 0.02 · states_facts 0.40 · system_instructions 0.03
+- **Why:** Jev route confidence 0.46 is below 0.5.
 
 <a id="entry-083"></a>
-## 2026-10-10 15:59:32 UTC — 083 · Workflow receipt
+## 2026-10-10 16:18:48 UTC — 083 · Claude read the message
 
-<a id="entry-084"></a>
-## 2026-10-10 15:59:33 UTC — 084 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1647 in / 284 out tokens · 387 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.98)
-- **Signals:** hazard 0.04 · multiple_issues 0.06 · sensitive 0.02 · states_facts 0.42 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. The message may state facts that need exact quotes.
-
-<a id="entry-085"></a>
-## 2026-10-10 15:59:38 UTC — 085 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 1680 in / 490 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1729 in / 780 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** completion report · route `close_item` · medium confidence
-- **Work item:** Annual gas visit / boiler check (appliance)
-- **Summary:** Flintmere's service coordinator reports the gas engineer closed the 9 October visit as satisfactory, with office paperwork still being processed. The tenant's intermittent boiler lockouts remain unaddressed.
-- **Rationale:** Contractor reports the booked visit complete; follows router's close_item, pending paperwork evidence.
-- **Extracted:** 1 claim · 2 ambiguities · 2 issues
-- **Unknown:** Certificate/paperwork not yet supplied; confirm when the gas safety record will be issued as evidence.
-- **Unknown (affects route):** The intermittent boiler lockouts remain uninvestigated; confirm whether a diagnostic quote should be requested and landlord authority sought.
+- **Work item:** Annual gas visit / intermittent boiler lockouts (appliance)
+- **Summary:** Flintmere's service coordinator tells the landlord that the engineer has closed the 9 October gas visit as satisfactory, with office paperwork still being processed. No findings or next steps are given for the reported intermittent boiler lockouts.
+- **Rationale:** Message reports the booked visit as completed satisfactorily, so the visit item can be closed once paperwork arrives; the separate lockout question remains unanswered.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown (affects route):** No diagnosis or findings are given for the intermittent boiler lockouts; unclear whether a further assessment or quote is needed and whether the landlord wants it instructed.
+- **Unknown:** The gas paperwork/certificate has not been supplied yet, so completion evidence is outstanding.
 
-<a id="entry-086"></a>
-## 2026-10-10 15:59:38 UTC — 086 · Claim `completion` = true
+<a id="entry-084"></a>
+## 2026-10-10 16:18:48 UTC — 084 · Proposed action → `close_item`
+
+- **Actor:** Triage reading (route `close_item`)
+- **Work item:** Reported maintenance
+- **Action revision:** 5
+
+<a id="entry-085"></a>
+## 2026-10-10 16:18:48 UTC — 085 · Claim `completion` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > The engineer has closed the visit as satisfactory in the job app.
 
+<a id="entry-086"></a>
+## 2026-10-10 16:18:48 UTC — 086 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
 <a id="entry-087"></a>
-## 2026-10-10 15:59:38 UTC — 087 · Separate issue split into a new case
-
-- **Actor:** Claude
-- **Issue:** #2 of the message
-
-<a id="entry-088"></a>
-## 2026-10-10 15:59:38 UTC — 088 · Human review opened: `completion`
+## 2026-10-10 16:18:48 UTC — 087 · Human review opened: `completion`
 
 - **Actor:** Policy engine
 - **Owner:** reviewer · rule `require-completion`
-- **Expires:** 2026-10-12 15:59:38 UTC
+- **Expires:** 2026-10-12 16:18:48 UTC
 
-> Verify completion of this work item with usable evidence. A verified route is required before asking externally.
+> Verify the received source assertion. Verify completion of this work item with usable evidence.
+
+<a id="entry-088"></a>
+## 2026-10-10 16:18:48 UTC — 088 · Clarification opened: `commitments` → staff
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Resolve or explicitly cancel every outstanding commitment for this item.
 
 <a id="entry-089"></a>
-## 2026-10-10 15:59:38 UTC — 089 · Review superseded
+## 2026-10-10 16:18:48 UTC — 089 · Clarification sent to staff (simulated)
 
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
+- **Tool:** simulated staff channel — no real contact
 
 <a id="entry-090"></a>
-## 2026-10-10 15:59:38 UTC — 090 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:18:48 UTC — 090 · Clarification opened: `triage` → tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: No diagnosis or findings are given for the intermittent boiler lockouts; unclear whether a further assessment or quote is needed and whether the landlord wants it instructed.
 
 <a id="entry-091"></a>
-## 2026-10-10 15:59:39 UTC — 091 · Message received: Event 011 — Document from Riva Morn (Service Coordinator, Flintmere Gas Services)
+## 2026-10-10 16:18:48 UTC — 091 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner reviewer
+- **Blockers:** `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → CLARIFY; `triage` UNKNOWN → CLARIFY
+- **Next step:** Verify the received source assertion. Verify completion of this work item with usable evidence.
+
+<a id="entry-092"></a>
+## 2026-10-10 16:18:48 UTC — 092 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner reviewer
+- **Blockers:** `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Verify completion of this work item with usable evidence.
+
+<a id="entry-093"></a>
+## 2026-10-10 16:18:52 UTC — 093 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1199 in / 304 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** auto_send — Identity and contact route verified, single information-gathering question on an auto-send topic (issue_details), no distress, complaint or safety concerns in the conversation, and the message makes no promises.
+- **Send gate:** auto-send allowed
+- **Topics:** issue_details
+
+> Hello Iona,
+>
+> Thanks for providing access for the gas visit on 9 October.
+>
+> So we have an up-to-date picture, could you let us know whether the boiler has locked out again since that visit, and if so, roughly how often it has happened and what you see on the display when it does?
+>
+> Thanks very much,
+> Northbridge Lettings
+
+<a id="entry-094"></a>
+## 2026-10-10 16:18:52 UTC — 094 · Message sent to tenant
+
+- **Actor:** Claude
+- **Tool:** `simulated_in_app_thread` adapter — SIMULATED — no real message was sent
+
+<a id="entry-095"></a>
+## 2026-10-10 16:18:52 UTC — 095 · Message received: Event 011 — Document from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -993,49 +978,40 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I have sent the job-app details from the visit. The tenant contact number is omitted from the maintenance-thread copy.
 
-<a id="entry-092"></a>
-## 2026-10-10 15:59:39 UTC — 092 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-093"></a>
-## 2026-10-10 15:59:39 UTC — 093 · Workflow receipt
-
-<a id="entry-094"></a>
-## 2026-10-10 15:59:39 UTC — 094 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1649 in / 284 out tokens · 289 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.77)
-- **Signals:** hazard 0.04 · multiple_issues 0.05 · sensitive 0.02 · states_facts 0.29 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.77 is below the Jev-only bar 0.8.
-
-<a id="entry-095"></a>
-## 2026-10-10 15:59:46 UTC — 095 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 1691 in / 479 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `close_item` · medium confidence
-- **Work item:** Annual gas visit - completion evidence (appliance)
-- **Summary:** Flintmere's coordinator confirms job-app details from the 9 October gas visit have been sent to the property manager, with the tenant contact number omitted from the maintenance-thread copy. No new completion statement or paperwork reference is given in this message.
-- **Rationale:** Contractor is supplying visit documentation for the already-completed gas check, consistent with closing the item once evidence is verified.
-- **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Unclear whether the job-app details amount to the formal gas safety record; the office paperwork was previously said to be still processing.
-- **Unknown:** The tenant's intermittent boiler lockout remains uninvestigated; confirm whether a diagnostic quote and landlord authority are needed.
-
 <a id="entry-096"></a>
-## 2026-10-10 15:59:46 UTC — 096 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+## 2026-10-10 16:18:52 UTC — 096 · Workflow receipt
 
 <a id="entry-097"></a>
-## 2026-10-10 15:59:46 UTC — 097 · Message received: Event 012 — Email from Nessa Wold (Landlord)
+## 2026-10-10 16:18:53 UTC — 097 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1691 in / 284 out tokens · 315 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_route → `close_item` (confidence 0.70)
+- **Signals:** hazard 0.04 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.23 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.70 is below the Jev-only bar 0.8. Open tenant questions may be answered.
+
+<a id="entry-098"></a>
+## 2026-10-10 16:18:59 UTC — 098 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 1871 in / 492 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** update · route `close_item` · medium confidence
+- **Work item:** Annual gas visit "Reported maintenance" closure (appliance)
+- **Summary:** Flintmere's coordinator says the job-app details from the 9 October gas visit have been sent, with the tenant contact number omitted from the maintenance-thread copy. No new completion statement or findings on the boiler lockouts are given.
+- **Rationale:** Administrative follow-up on a completed gas visit; router's close_item is reasonable, though boiler lockout follow-up remains open.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown:** The message refers to job-app details being sent but does not itself confirm the certificate/paperwork or state the outcome; confirm usable completion evidence has been received.
+- **Unknown (affects route):** Still no diagnosis or recommendation for the intermittent boiler lockouts; unclear if a further assessment or quote is needed.
+
+<a id="entry-099"></a>
+## 2026-10-10 16:18:59 UTC — 099 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> I have sent the job-app details from the visit.
+
+<a id="entry-100"></a>
+## 2026-10-10 16:19:00 UTC — 100 · Message received: Event 012 — Email from Nessa Wold (Landlord)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1046,48 +1022,33 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I found this gas portal record in my account and have attached it. It may be the paperwork the tenant requested.
 
-<a id="entry-098"></a>
-## 2026-10-10 15:59:46 UTC — 098 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-099"></a>
-## 2026-10-10 15:59:46 UTC — 099 · Workflow receipt
-
-<a id="entry-100"></a>
-## 2026-10-10 15:59:47 UTC — 100 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1651 in / 284 out tokens · 310 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.69)
-- **Signals:** hazard 0.04 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.07 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.69 is below the Jev-only bar 0.8.
-
 <a id="entry-101"></a>
-## 2026-10-10 15:59:52 UTC — 101 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 1658 in / 404 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `close_item` · medium confidence
-- **Work item:** Annual gas visit - completion paperwork (appliance)
-- **Summary:** Landlord forwards a gas portal record from her account, suggesting it may be the paperwork requested in relation to the completed annual gas visit. She is not certain it is the correct document.
-- **Rationale:** Landlord supplying possible completion evidence for the already-completed gas visit; follows router decision to close_item, subject to verifying the document.
-- **Extracted:** 0 claims · 1 ambiguity · 1 issue
-- **Unknown (affects route):** Unclear whether the forwarded portal record is the formal gas safety record for the 9 October visit; the sender herself is unsure and office paperwork was previously still being processed.
+## 2026-10-10 16:19:00 UTC — 101 · Workflow receipt
 
 <a id="entry-102"></a>
-## 2026-10-10 15:59:52 UTC — 102 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:19:00 UTC — 102 · Jev routed the message
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Jev (jev-1.13.0 · 1693 in / 284 out tokens · 309 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_route → `close_item` (confidence 0.60)
+- **Signals:** hazard 0.03 · multiple_issues 0.05 · sensitive 0.03 · states_facts 0.07 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.60 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
 <a id="entry-103"></a>
-## 2026-10-10 15:59:53 UTC — 103 · Message received: Event 013 — Document from Oren Vale (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:19:06 UTC — 103 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 1834 in / 440 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** update · route `close_item` · medium confidence
+- **Work item:** Annual gas visit paperwork / boiler lockout follow-up (appliance)
+- **Summary:** Landlord forwards a gas portal record from her account, suggesting it may be the paperwork the tenant requested. No new defect information provided.
+- **Rationale:** Landlord supplying possible completion paperwork for the gas visit; follows router's close_item, though document suitability is unconfirmed.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Landlord is unsure whether the attached record is the required certificate; staff must verify it is the correct document for this visit.
+- **Unknown (affects route):** No information on whether the intermittent boiler lockouts have recurred or need a quote.
+
+<a id="entry-104"></a>
+## 2026-10-10 16:19:06 UTC — 104 · Message received: Event 013 — Document from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1098,48 +1059,33 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Saved the landlord's portal screenshot to the case file as gas-portal-record.pdf.
 
-<a id="entry-104"></a>
-## 2026-10-10 15:59:53 UTC — 104 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
 <a id="entry-105"></a>
-## 2026-10-10 15:59:53 UTC — 105 · Workflow receipt
+## 2026-10-10 16:19:06 UTC — 105 · Workflow receipt
 
 <a id="entry-106"></a>
-## 2026-10-10 15:59:53 UTC — 106 · Jev routed the message
+## 2026-10-10 16:19:07 UTC — 106 · Jev routed the message
 
-- **Actor:** Jev (jev-1.13.0 · 1640 in / 284 out tokens · 281 ms)
+- **Actor:** Jev (jev-1.13.0 · 1682 in / 284 out tokens · 309 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.92)
-- **Signals:** hazard 0.02 · multiple_issues 0.02 · sensitive 0.02 · states_facts 0.07 · system_instructions 0.04
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route.
+- **Decision:** jev_route → `close_item` (confidence 0.87)
+- **Signals:** hazard 0.03 · multiple_issues 0.03 · sensitive 0.03 · states_facts 0.06 · system_instructions 0.04
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Open tenant questions may be answered.
 
 <a id="entry-107"></a>
-## 2026-10-10 15:59:59 UTC — 107 · Claude read the message
+## 2026-10-10 16:19:12 UTC — 107 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1649 in / 393 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1834 in / 433 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `close_item` · medium confidence
 - **Work item:** Reported maintenance — gas visit paperwork (appliance)
-- **Summary:** Property manager's internal file note recording that the landlord's portal screenshot has been saved to the case file as gas-portal-record.pdf. No new maintenance information or confirmation that this is the formal gas safety record.
-- **Rationale:** Internal administrative note filing evidence on an already completed visit; router selected close_item and nothing contradicts it, though evidence validity remains unverified.
-- **Extracted:** 0 claims · 1 ambiguity · 1 issue
-- **Unknown (affects route):** Still unclear whether the saved portal screenshot is the formal gas safety record for the 9 October visit, or whether the contractor's office paperwork is still outstanding.
+- **Summary:** Property manager filed the landlord's gas portal screenshot to the case file as gas-portal-record.pdf. No new information about the boiler lockouts or outstanding commitments.
+- **Rationale:** Internal filing note on the existing case; router's close_item retained, though evidence validity and boiler lockouts remain open.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown (affects route):** It is not stated whether the saved screenshot is the correct certificate/evidence for the 9 October visit.
+- **Unknown (affects route):** No update on whether the intermittent boiler lockouts have recurred.
 
 <a id="entry-108"></a>
-## 2026-10-10 15:59:59 UTC — 108 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-109"></a>
-## 2026-10-10 15:59:59 UTC — 109 · Message received: Event 014 — Portal from Iona Pell (Tenant)
+## 2026-10-10 16:19:12 UTC — 108 · Message received: Event 014 — Portal from Iona Pell (Tenant)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1150,48 +1096,40 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I saw the engineer at the boiler during the visit but did not receive a paper record. Can you confirm whether the attached item is the paperwork for the property?
 
-<a id="entry-110"></a>
-## 2026-10-10 15:59:59 UTC — 110 · Policy gates → HUMAN REVIEW
+<a id="entry-109"></a>
+## 2026-10-10 16:19:12 UTC — 109 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-110"></a>
+## 2026-10-10 16:19:13 UTC — 110 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1683 in / 284 out tokens · 393 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_route → `close_item` (confidence 0.52)
+- **Signals:** hazard 0.04 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.19 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.52 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
 <a id="entry-111"></a>
-## 2026-10-10 15:59:59 UTC — 111 · Workflow receipt
+## 2026-10-10 16:19:20 UTC — 111 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 1856 in / 503 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** answer to question · route `close_item` · medium confidence
+- **Work item:** Gas visit paperwork / certificate confirmation for boiler (appliance)
+- **Summary:** Tenant confirms the engineer attended the boiler on the visit day but says she received no paper record, and asks whether the attached item is the correct paperwork for the property. No update given on whether the boiler lockouts have recurred.
+- **Rationale:** Message is about confirming evidence/paperwork for a completed gas visit; router's close_item is reasonable, though the outstanding boiler lockout question remains open.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown:** Tenant asks whether the attached/saved document is the correct certificate for the 9 October visit; this is unverified.
+- **Unknown (affects route):** No information on whether the intermittent boiler lockouts have recurred since 9 October.
 
 <a id="entry-112"></a>
-## 2026-10-10 15:59:59 UTC — 112 · Jev routed the message
+## 2026-10-10 16:19:20 UTC — 112 · Partial answer → narrower follow-up due
 
-- **Actor:** Jev (jev-1.13.0 · 1641 in / 284 out tokens · 343 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.64)
-- **Signals:** hazard 0.03 · multiple_issues 0.03 · sensitive 0.03 · states_facts 0.20 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.64 is below the Jev-only bar 0.8.
+- **Actor:** Claude (reading)
+
+> did not receive a paper record
 
 <a id="entry-113"></a>
-## 2026-10-10 16:00:05 UTC — 113 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 1678 in / 338 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** chase · route `close_item` · medium confidence
-- **Work item:** Reported maintenance — gas visit paperwork (appliance)
-- **Summary:** Tenant confirms she saw the engineer at the boiler on the visit day but received no paper record, and asks whether the saved attachment is the gas paperwork for the property. No completion assertion or new defect is made.
-- **Rationale:** Router chose close_item; message is a chase for completion evidence on the existing gas visit item, with evidence still unverified.
-- **Extracted:** 0 claims · 1 ambiguity · 1 issue
-- **Unknown (affects route):** Unclear whether the saved portal screenshot is the formal gas safety record for the 9 October visit; the contractor's office paperwork may still be outstanding, and the tenant received nothing on the day.
-
-<a id="entry-114"></a>
-## 2026-10-10 16:00:05 UTC — 114 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-115"></a>
-## 2026-10-10 16:00:05 UTC — 115 · Message received: Event 015 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
+## 2026-10-10 16:19:20 UTC — 113 · Message received: Event 015 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1202,76 +1140,62 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The portal job card is marked complete and satisfactory. The office is still processing the paperwork from the visit.
 
-<a id="entry-116"></a>
-## 2026-10-10 16:00:05 UTC — 116 · Policy gates → HUMAN REVIEW
+<a id="entry-114"></a>
+## 2026-10-10 16:19:20 UTC — 114 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-115"></a>
+## 2026-10-10 16:19:20 UTC — 115 · Jev routed the message
 
-<a id="entry-117"></a>
-## 2026-10-10 16:00:05 UTC — 117 · Workflow receipt
-
-<a id="entry-118"></a>
-## 2026-10-10 16:00:06 UTC — 118 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1639 in / 284 out tokens · 423 ms)
+- **Actor:** Jev (jev-1.13.0 · 1681 in / 284 out tokens · 304 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** jev_route → `close_item` (confidence 0.99)
-- **Signals:** hazard 0.02 · multiple_issues 0.03 · sensitive 0.02 · states_facts 0.91 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. The message may state facts that need exact quotes.
+- **Signals:** hazard 0.02 · multiple_issues 0.03 · sensitive 0.03 · states_facts 0.91 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-119"></a>
-## 2026-10-10 16:00:12 UTC — 119 · Claude read the message
+<a id="entry-116"></a>
+## 2026-10-10 16:19:26 UTC — 116 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1689 in / 455 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1824 in / 511 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `close_item` · medium confidence
-- **Work item:** Gas safety visit \u2014 record/paperwork outstanding (appliance)
-- **Summary:** Flintmere Gas Services confirm the portal job card is marked complete and satisfactory, but the formal paperwork from the 9 October visit is still being processed in their office.
-- **Rationale:** Contractor reports the visit is complete and satisfactory; evidence paperwork still pending, so the item can be progressed towards closure once the record arrives.
+- **Work item:** Reported maintenance — gas/boiler visit completion and paperwork (appliance)
+- **Summary:** Flintmere Gas Services confirm the portal job card is marked complete and satisfactory for the 9 October visit, but the office paperwork from the visit is still being processed.
+- **Rationale:** Contractor reports the job as complete and satisfactory, matching the router's close_item route, though paperwork evidence is still outstanding.
 - **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown:** The formal gas safety record has not yet been issued; confirm when the office paperwork will be supplied to the tenant and whether the saved portal screenshot is the formal record.
-- **Unknown:** The tenant's reported intermittent boiler lockout was noted but not repaired; confirm whether a separate job is needed.
+- **Unknown:** Formal certificate/paperwork for the visit has not yet been issued; only the job card status is given.
+- **Unknown (affects route):** No information on whether the intermittent boiler lockouts have recurred since 9 October.
 
-<a id="entry-120"></a>
-## 2026-10-10 16:00:12 UTC — 120 · Claim `completion` = true
+<a id="entry-117"></a>
+## 2026-10-10 16:19:26 UTC — 117 · Claim `completion` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > The portal job card is marked complete and satisfactory.
 
-<a id="entry-121"></a>
-## 2026-10-10 16:00:12 UTC — 121 · Human review opened: `completion`
+<a id="entry-118"></a>
+## 2026-10-10 16:19:26 UTC — 118 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> The office is still processing the paperwork from the visit.
+
+<a id="entry-119"></a>
+## 2026-10-10 16:19:26 UTC — 119 · Human review opened: `completion`
 
 - **Actor:** Policy engine
 - **Owner:** reviewer · rule `require-completion`
-- **Expires:** 2026-10-12 16:00:12 UTC
+- **Expires:** 2026-10-12 16:19:26 UTC
 
-> Verify completion of this work item with usable evidence. A verified route is required before asking externally.
+> Verify the received source assertion. Verify completion of this work item with usable evidence.
 
-<a id="entry-122"></a>
-## 2026-10-10 16:00:12 UTC — 122 · Review superseded
-
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
-
-<a id="entry-123"></a>
-## 2026-10-10 16:00:12 UTC — 123 · Review superseded
+<a id="entry-120"></a>
+## 2026-10-10 16:19:26 UTC — 120 · Review superseded
 
 - **Why:** Relevant evidence or current blockers changed; assess the current review.
 
-<a id="entry-124"></a>
-## 2026-10-10 16:00:12 UTC — 124 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-125"></a>
-## 2026-10-10 16:00:13 UTC — 125 · Message received: Event 016 — Email from Nessa Wold (Landlord)
+<a id="entry-121"></a>
+## 2026-10-10 16:19:27 UTC — 121 · Message received: Event 016 — Email from Nessa Wold (Landlord)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1282,57 +1206,40 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I have paid Flintmere for the visit. I would prefer not to commission another visit unless they identify a specific reason it is needed. Do not approve extra charges without my agreement.
 
-<a id="entry-126"></a>
-## 2026-10-10 16:00:13 UTC — 126 · Policy gates → HUMAN REVIEW
+<a id="entry-122"></a>
+## 2026-10-10 16:19:27 UTC — 122 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-123"></a>
+## 2026-10-10 16:19:27 UTC — 123 · Jev routed the message
 
-<a id="entry-127"></a>
-## 2026-10-10 16:00:13 UTC — 127 · Workflow receipt
-
-<a id="entry-128"></a>
-## 2026-10-10 16:00:13 UTC — 128 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1653 in / 284 out tokens · 249 ms)
+- **Actor:** Jev (jev-1.13.0 · 1695 in / 284 out tokens · 232 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `close_item` (confidence 0.50)
-- **Signals:** hazard 0.02 · multiple_issues 0.03 · sensitive 0.04 · states_facts 0.21 · system_instructions 0.06
-- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.50 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `close_item` (confidence 0.52)
+- **Signals:** hazard 0.03 · multiple_issues 0.03 · sensitive 0.04 · states_facts 0.19 · system_instructions 0.06
+- **Why:** Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.52 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-129"></a>
-## 2026-10-10 16:00:18 UTC — 129 · Claude read the message
+<a id="entry-124"></a>
+## 2026-10-10 16:19:34 UTC — 124 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1602 in / 375 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1808 in / 547 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `close_item` · medium confidence
-- **Work item:** Reported maintenance - boiler/gas visit paperwork (appliance)
-- **Summary:** Landlord confirms she has paid Flintmere for the visit and does not want further visits or extra charges approved without her agreement. No new defect reported.
-- **Rationale:** Landlord update on payment and spend limits for an already completed visit; router's close_item accepted, though outstanding paperwork may block closure.
-- **Extracted:** 1 claim · 1 ambiguity · 1 issue
-- **Unknown (affects route):** Landlord says she paid, but the gas safety paperwork from the visit is still outstanding; confirm whether the item can be closed without the record.
+- **Work item:** Boiler visit paperwork / intermittent lockouts (appliance)
+- **Summary:** Landlord states she has paid Flintmere for the 9 October visit and does not want a further visit commissioned unless a specific reason is identified, and no extra charges approved without her agreement.
+- **Rationale:** Landlord update signalling no further spend or visits; follows router's close_item while paperwork commitment remains outstanding.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown:** Outstanding paperwork/certificate from Flintmere has still not been issued to the tenant; landlord's message does not resolve this commitment.
+- **Unknown (affects route):** Still unknown whether the boiler has locked out again since 9 October.
 
-<a id="entry-130"></a>
-## 2026-10-10 16:00:18 UTC — 130 · Human review opened: `triage`
+<a id="entry-125"></a>
+## 2026-10-10 16:19:34 UTC — 125 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:00:18 UTC
+- **Actor:** Claude (reading)
 
-> Clarify before routing: Landlord says she paid, but the gas safety paperwork from the visit is still outstanding; confirm whether the item can be closed without the record. A verified route is required before asking externally.
+> I have paid Flintmere for the visit. I would prefer not to commission another visit unless they identify a specific reason it is needed.
 
-<a id="entry-131"></a>
-## 2026-10-10 16:00:18 UTC — 131 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-132"></a>
-## 2026-10-10 16:00:18 UTC — 132 · Message received: Event 017 — Portal from Iona Pell (Tenant)
+<a id="entry-126"></a>
+## 2026-10-10 16:19:34 UTC — 126 · Message received: Event 017 — Portal from Iona Pell (Tenant)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1343,102 +1250,83 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The boiler locked out again overnight and restarted after I reset it. It is currently heating. There is no gas smell that I can detect.
 
-<a id="entry-133"></a>
-## 2026-10-10 16:00:18 UTC — 133 · Policy gates → HUMAN REVIEW
+<a id="entry-127"></a>
+## 2026-10-10 16:19:35 UTC — 127 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `completion` UNKNOWN → HUMAN REVIEW; `commitments` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-128"></a>
+## 2026-10-10 16:19:35 UTC — 128 · Jev routed the message
 
-<a id="entry-134"></a>
-## 2026-10-10 16:00:18 UTC — 134 · Workflow receipt
-
-<a id="entry-135"></a>
-## 2026-10-10 16:00:18 UTC — 135 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1645 in / 284 out tokens · 255 ms)
+- **Actor:** Jev (jev-1.13.0 · 1687 in / 284 out tokens · 310 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.15 · multiple_issues 0.05 · sensitive 0.04 · states_facts 0.34 · system_instructions 0.02
-- **Why:** Jev route confidence 0.47 is below 0.5.
+- **Signals:** hazard 0.14 · multiple_issues 0.06 · sensitive 0.04 · states_facts 0.42 · system_instructions 0.02
+- **Why:** Jev route confidence 0.39 is below 0.5.
 
-<a id="entry-136"></a>
-## 2026-10-10 16:00:31 UTC — 136 · Claude read the message
+<a id="entry-129"></a>
+## 2026-10-10 16:19:46 UTC — 129 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1555 in / 912 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1692 in / 827 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler locking out intermittently after service visit (appliance)
-- **Summary:** Tenant reports the boiler locked out again overnight and restarted after a manual reset; it is currently heating and she detects no gas smell. This suggests the appliance remains faulty after the recent Flintmere visit.
-- **Rationale:** Recurring boiler lockout after the completed service visit means the appliance is not confirmed working; contractor assessment is the next step rather than closing the item. No gas smell or immediate hazard is described, so urgent_hazard does not apply.
-- **Extracted:** 1 claim · 3 ambiguities · 1 issue
-- **Unknown (affects route):** How often has the boiler locked out, and is any fault code shown? Needed to judge whether a return engineer visit is warranted.
-- **Unknown (affects route):** The gas safety record from the earlier visit is still outstanding and the appliance has faulted again; confirm whether the item can be closed or must stay open pending a recall visit.
-- **Unknown:** No availability or access arrangements given for any follow-up engineer visit.
-- **Objected to Jev's route:** Case action is close_item, but the tenant reports the boiler has faulted again since the visit, so the item should not be closed without an assessment.
+- **Work item:** Boiler locking out again after 9 October visit (appliance)
+- **Summary:** Tenant reports the boiler locked out again overnight and restarted after a manual reset; it is currently heating and she detects no gas smell. This indicates the fault from the 9 October visit has recurred and the item is not resolved.
+- **Rationale:** The reported fault has recurred after the completed visit, so the item cannot be closed; a contractor assessment of the recurring lockout is the next step. No immediate hazard asserted: tenant reports heating is working and no gas smell detected.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown:** Tenant does not state any fault or error code shown on the boiler display, or whether this has happened more than once since 9 October.
+- **Unknown:** No availability or access arrangement given for a possible re-attendance by the engineer.
+- **Objected to Jev's route:** Current action is close_item, but the tenant reports the fault has recurred, so the item should not be closed yet.
 
-<a id="entry-137"></a>
-## 2026-10-10 16:00:31 UTC — 137 · Proposed action → `request_quote`
+<a id="entry-130"></a>
+## 2026-10-10 16:19:46 UTC — 130 · Proposed action → `request_quote`
 
 - **Actor:** Triage reading (route `request_quote`)
 - **Work item:** Reported maintenance
-- **Action revision:** 5
+- **Action revision:** 6
 
-<a id="entry-138"></a>
-## 2026-10-10 16:00:31 UTC — 138 · Claim `completion` = false
+<a id="entry-131"></a>
+## 2026-10-10 16:19:46 UTC — 131 · Claim `completion` = false
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > The boiler locked out again overnight and restarted after I reset it.
 
-<a id="entry-139"></a>
-## 2026-10-10 16:00:31 UTC — 139 · Human review opened: `identity`
+<a id="entry-132"></a>
+## 2026-10-10 16:19:46 UTC — 132 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:00:31 UTC
+- **Actor:** Claude (reading)
 
-> Verify the person, property and work item mapping.
+> The boiler locked out again overnight and restarted after I reset it. It is currently heating.
 
-<a id="entry-140"></a>
-## 2026-10-10 16:00:31 UTC — 140 · Human review opened: `route`
+<a id="entry-133"></a>
+## 2026-10-10 16:19:46 UTC — 133 · Question closed
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:00:31 UTC
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
 
-> Verify the recipient and permitted communication route.
+<a id="entry-134"></a>
+## 2026-10-10 16:19:46 UTC — 134 · Question closed
 
-<a id="entry-141"></a>
-## 2026-10-10 16:00:31 UTC — 141 · Human review opened: `classification`
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-135"></a>
+## 2026-10-10 16:19:46 UTC — 135 · Human review opened: `classification`
 
 - **Actor:** Policy engine
 - **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:00:31 UTC
+- **Expires:** 2026-10-12 16:19:46 UTC
 
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
+> Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-142"></a>
-## 2026-10-10 16:00:31 UTC — 142 · Human review opened: `triage`
+<a id="entry-136"></a>
+## 2026-10-10 16:19:46 UTC — 136 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:00:31 UTC
-
-> Clarify before routing: How often has the boiler locked out, and is any fault code shown? Needed to judge whether a return engineer visit is warranted.; The gas safety record from the earlier visit is still outstanding and the appliance has faulted again; confirm whether the item can be closed or must stay open pending a recall visit. A verified route is required before asking externally.
-
-<a id="entry-143"></a>
-## 2026-10-10 16:00:31 UTC — 143 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-144"></a>
-## 2026-10-10 16:00:32 UTC — 144 · Message received: Event 018 — Email from Oren Vale (Property Manager, Northbridge Lettings)
+<a id="entry-137"></a>
+## 2026-10-10 16:19:46 UTC — 137 · Message received: Event 018 — Email from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1449,49 +1337,85 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Please clarify what the portal entry represents, whether the completed check covers the property's gas appliances, and when the paperwork from the visit will be available. Please also confirm how the reported boiler lockout should be handled under the original instruction.
 
-<a id="entry-145"></a>
-## 2026-10-10 16:00:32 UTC — 145 · Policy gates → HUMAN REVIEW
+<a id="entry-138"></a>
+## 2026-10-10 16:19:46 UTC — 138 · Policy gates → HUMAN REVIEW
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-146"></a>
-## 2026-10-10 16:00:32 UTC — 146 · Workflow receipt
+<a id="entry-139"></a>
+## 2026-10-10 16:19:46 UTC — 139 · Workflow receipt
 
-<a id="entry-147"></a>
-## 2026-10-10 16:00:32 UTC — 147 · Jev routed the message
+<a id="entry-140"></a>
+## 2026-10-10 16:19:47 UTC — 140 · Jev routed the message
 
-- **Actor:** Jev (jev-1.13.0 · 1677 in / 284 out tokens · 300 ms)
+- **Actor:** Jev (jev-1.13.0 · 1677 in / 284 out tokens · 278 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** jev_route → `request_quote` (confidence 0.51)
-- **Signals:** hazard 0.12 · multiple_issues 0.13 · sensitive 0.05 · states_facts 0.36 · system_instructions 0.02
+- **Signals:** hazard 0.12 · multiple_issues 0.14 · sensitive 0.05 · states_facts 0.38 · system_instructions 0.02
 - **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.51 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
 
-<a id="entry-148"></a>
-## 2026-10-10 16:00:39 UTC — 148 · Claude read the message
+<a id="entry-141"></a>
+## 2026-10-10 16:19:52 UTC — 141 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1735 in / 407 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1630 in / 340 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler lockout and outstanding gas safety paperwork (appliance)
-- **Summary:** Property manager has emailed the gas contractor asking what the portal entry represents, whether the completed check covers the property's gas appliances, when the paperwork will be issued, and how the reported boiler lockout should be handled under the original instruction. No new claims or decisions are made.
-- **Rationale:** Staff-to-contractor chase for clarification on an open appliance item; router's request_quote retained pending the contractor's assessment of the lockout.
-- **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Awaiting contractor's answer on whether the completed check covers all the property's gas appliances and whether the lockout needs a recall visit.
-- **Unknown:** Gas safety paperwork from the earlier visit is still outstanding; no date given for issue.
+- **Work item:** Boiler lockout and gas check paperwork clarification (appliance)
+- **Summary:** Property manager asks the gas contractor to clarify what the portal entry covers, when the visit paperwork will be available, and how the reported boiler lockout should be handled under the original instruction.
+- **Rationale:** Outbound staff chase/clarification on an open appliance case; router route retained pending contractor assessment of the recurring lockout.
+- **Extracted:** 0 claims · 1 ambiguity · 1 issue
+- **Unknown (affects route):** Awaiting contractor confirmation of what the portal entry covers, whether the gas appliance check is complete, and when paperwork will issue; also whether the recurring lockout needs a further visit.
 
-<a id="entry-149"></a>
-## 2026-10-10 16:00:39 UTC — 149 · Policy gates → HUMAN REVIEW
+<a id="entry-142"></a>
+## 2026-10-10 16:19:52 UTC — 142 · Clarification opened: `triage` → tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: Awaiting contractor confirmation of what the portal entry covers, whether the gas appliance check is complete, and when paperwork will issue; also whether the recurring lockout needs a further visit.
+
+<a id="entry-143"></a>
+## 2026-10-10 16:19:52 UTC — 143 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
 - **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → CLARIFY
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 
-<a id="entry-150"></a>
-## 2026-10-10 16:00:39 UTC — 150 · Message received: Event 019 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
+<a id="entry-144"></a>
+## 2026-10-10 16:19:52 UTC — 144 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner case manager
+- **Blockers:** `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
+
+<a id="entry-145"></a>
+## 2026-10-10 16:20:00 UTC — 145 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1349 in / 593 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — Recurring gas boiler lockout is a potential gas safety issue and the contractor's paperwork and whether a further visit is needed are still unresolved, with the landlord restricting further spend - staff should check the wording before it goes to the tenant.
+- **Send gate:** held for staff — Claude asked for staff review: Recurring gas boiler lockout is a potential gas safety issue and the contractor's paperwork and whether a further visit is needed are still unresolved, with the landlord restricting further spend - staff should check the wording before it goes to the tenant. Risk flags: safety.
+- **Topics:** issue_details
+
+> Hello Iona,
+>
+> Thanks for letting us know the boiler locked out again overnight and that it's heating at the moment.
+>
+> So we have a clear picture to pass on, could you tell us how many times it has locked out since the visit on 9 October, and whether any code or message shows on the display when it happens? It would also help to know whether you still have hot water and heating throughout the property at the moment.
+>
+> If you ever smell gas or feel unsafe, please call the National Gas Emergency Service on 0800 111 999 straight away.
+>
+> Thanks very much,
+> Northbridge Lettings
+
+<a id="entry-146"></a>
+## 2026-10-10 16:20:00 UTC — 146 · Message received: Event 019 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1502,98 +1426,104 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The job card lists the boiler and cooker. Our quality desk has paused issuing the signed paperwork while it reconciles an appliance installation detail against the information already held for the address. The engineer's entry remains satisfactory. A lockout diagnostic would be a separate job.
 
-<a id="entry-151"></a>
-## 2026-10-10 16:00:39 UTC — 151 · Policy gates → HUMAN REVIEW
+<a id="entry-147"></a>
+## 2026-10-10 16:20:00 UTC — 147 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-148"></a>
+## 2026-10-10 16:20:01 UTC — 148 · Jev routed the message
 
-<a id="entry-152"></a>
-## 2026-10-10 16:00:39 UTC — 152 · Workflow receipt
-
-<a id="entry-153"></a>
-## 2026-10-10 16:00:39 UTC — 153 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1709 in / 284 out tokens · 248 ms)
+- **Actor:** Jev (jev-1.13.0 · 1753 in / 284 out tokens · 315 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.06 · multiple_issues 0.32 · sensitive 0.04 · states_facts 0.32 · system_instructions 0.03
-- **Why:** Jev route confidence 0.42 is below 0.5.
+- **Signals:** hazard 0.05 · multiple_issues 0.38 · sensitive 0.03 · states_facts 0.31 · system_instructions 0.03
+- **Why:** Possibly several issues: splitting cases needs Claude.
 
-<a id="entry-154"></a>
-## 2026-10-10 16:00:53 UTC — 154 · Claude read the message
+<a id="entry-149"></a>
+## 2026-10-10 16:20:15 UTC — 149 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1671 in / 1114 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1815 in / 1192 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Gas safety check paperwork for boiler and cooker outstanding (appliance)
-- **Summary:** Flintmere's service coordinator reports the job card covers the boiler and cooker, that signed paperwork is paused while their quality desk reconciles an appliance installation detail against records for the address, and that the engineer's entry remains satisfactory. They state a lockout diagnostic would be a separate job.
-- **Rationale:** Contractor update leaves the completion evidence (signed paperwork) outstanding with no timescale and no confirmation of appliance coverage, so the current item cannot progress until clarified; the lockout diagnostic is flagged as a separate job needing a quote and landlord authority.
-- **Extracted:** 1 claim · 3 ambiguities · 2 issues
-- **Unknown (affects route):** No date given for when the signed paperwork will be issued, and the reason for the paused reconciliation of an appliance installation detail is unexplained.
-- **Unknown:** Contractor confirms the job card lists boiler and cooker but does not confirm this covers all gas appliances at the property.
-- **Unknown (affects route):** Lockout diagnostic is said to be a separate job; no cost, scope or urgency given, and the landlord has asked not to approve extra charges without agreement.
+- **Reading:** answer to question · route `clarify` · medium confidence
+- **Work item:** Gas appliance check paperwork for boiler and cooker outstanding (appliance)
+- **Summary:** Flintmere's coordinator states the job card covers the boiler and cooker, that the signed paperwork is paused by their quality desk while an appliance installation detail is reconciled against records held for the address, and that the engineer's entry remains satisfactory. They add that a lockout diagnostic would be a separate job.
+- **Rationale:** Contractor answered only part of the open query: scope of the job card is given, but paperwork timing and the reason for the hold are unknown, so the item cannot yet be closed or instructed. The recurring lockout is flagged by the contractor as separate work, which needs a quote and landlord authority.
+- **Extracted:** 0 claims · 3 ambiguities · 2 issues
+- **Unknown (affects route):** No date given for when the signed paperwork will be issued, and no explanation of the appliance installation discrepancy being reconciled.
+- **Unknown (affects route):** Contractor says a lockout diagnostic is a separate job but gives no cost, scope or whether they consider it necessary; the landlord has asked that no extra charges be approved without agreement.
+- **Unknown (affects route):** Whether the gas appliance check can be treated as complete for both boiler and cooker while the signed record is withheld.
 
-<a id="entry-155"></a>
-## 2026-10-10 16:00:53 UTC — 155 · Proposed action → `clarify`
+<a id="entry-150"></a>
+## 2026-10-10 16:20:15 UTC — 150 · Proposed action → `clarify`
 
 - **Actor:** Triage reading (route `clarify`)
 - **Work item:** Reported maintenance
-- **Action revision:** 6
+- **Action revision:** 7
 
-<a id="entry-156"></a>
-## 2026-10-10 16:00:53 UTC — 156 · Claim `completion` = true
+<a id="entry-151"></a>
+## 2026-10-10 16:20:15 UTC — 151 · Partial answer → narrower follow-up due
 
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
+- **Actor:** Claude (reading)
 
-> The engineer's entry remains satisfactory.
+> The job card lists the boiler and cooker. Our quality desk has paused issuing the signed paperwork while it reconciles an appliance installation detail against the information already held for the address. The engineer's entry remains satisfactory. A lockout diagnostic would be a separate job.
 
-<a id="entry-157"></a>
-## 2026-10-10 16:00:53 UTC — 157 · Separate issue split into a new case
+<a id="entry-152"></a>
+## 2026-10-10 16:20:15 UTC — 152 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
+<a id="entry-153"></a>
+## 2026-10-10 16:20:15 UTC — 153 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-154"></a>
+## 2026-10-10 16:20:15 UTC — 154 · Clarification opened: `triage` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: No date given for when the signed paperwork will be issued, and no explanation of the appliance installation discrepancy being reconciled.; Contractor says a lockout diagnostic is a separate job but gives no cost, scope or whether they consider it necessary; the landlord has asked that no extra charges be approved without agreement.; Whether the gas appliance check can be treated as complete for both boiler and cooker while the signed record is withheld.
+
+<a id="entry-155"></a>
+## 2026-10-10 16:20:15 UTC — 155 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `triage` UNKNOWN → CLARIFY
+- **Next step:** Clarify before routing: No date given for when the signed paperwork will be issued, and no explanation of the appliance installation discrepancy being reconciled.; Contractor says a lockout diagnostic is a separate job but gives no cost, scope or whether they consider it necessary; the landlord has asked that no extra charges be approved without agreement.; Whether the gas appliance check can be treated as complete for both boiler and cooker while the signed record is withheld.
+
+<a id="entry-156"></a>
+## 2026-10-10 16:20:16 UTC — 156 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** Clarify before routing: No date given for when the signed paperwork will be issued, and no explanation of the appliance installation discrepancy being reconciled.; Contractor says a lockout diagnostic is a separate job but gives no cost, scope or whether they consider it necessary; the landlord has asked that no extra charges be approved without agreement.; Whether the gas appliance check can be treated as complete for both boiler and cooker while the signed record is withheld.
+
+<a id="entry-157"></a>
+## 2026-10-10 16:20:23 UTC — 157 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1599 in / 525 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — Ongoing gas appliance fault (repeat boiler lockouts) with the signed gas safety record withheld by the contractor and a landlord instruction limiting further visits - a staff member should check the wording and the safety position before this goes out.
+- **Send gate:** held for staff — Claude asked for staff review: Ongoing gas appliance fault (repeat boiler lockouts) with the signed gas safety record withheld by the contractor and a landlord instruction limiting further visits - a staff member should check the wording and the safety position before this goes out. Risk flags: safety.
+- **Topics:** issue_details
+
+> Hello Iona,
+>
+> Thanks for letting us know the boiler locked out again overnight and restarted after you reset it.
+>
+> So we have a clear picture, could you tell us how many times it has locked out since the visit on 9 October, and whether anything shows on the display when it happens? It would also help to know whether the cooker has been working normally over the same period.
+>
+> If you ever smell gas, please call the National Gas Emergency Service on 0800 111 999 straight away.
+>
+> Thanks very much,
+> Northbridge Lettings
+
 <a id="entry-158"></a>
-## 2026-10-10 16:00:53 UTC — 158 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:00:53 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-159"></a>
-## 2026-10-10 16:00:53 UTC — 159 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:00:53 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-160"></a>
-## 2026-10-10 16:00:53 UTC — 160 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:00:53 UTC
-
-> Clarify before routing: No date given for when the signed paperwork will be issued, and the reason for the paused reconciliation of an appliance installation detail is unexplained.; Lockout diagnostic is said to be a separate job; no cost, scope or urgency given, and the landlord has asked not to approve extra charges without agreement. A verified route is required before asking externally.
-
-<a id="entry-161"></a>
-## 2026-10-10 16:00:53 UTC — 161 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-162"></a>
-## 2026-10-10 16:00:54 UTC — 162 · Message received: Event 020 — Email from Oren Vale (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:20:23 UTC — 158 · Message received: Event 020 — Email from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1604,49 +1534,33 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > Flintmere says its signed paperwork is paused pending an information check and says a lockout diagnostic would be separate. No diagnostic has been booked. Please confirm what additional work, if any, you authorize.
 
-<a id="entry-163"></a>
-## 2026-10-10 16:00:54 UTC — 163 · Policy gates → HUMAN REVIEW
+<a id="entry-159"></a>
+## 2026-10-10 16:20:23 UTC — 159 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-160"></a>
+## 2026-10-10 16:20:24 UTC — 160 · Jev routed the message
 
-<a id="entry-164"></a>
-## 2026-10-10 16:00:54 UTC — 164 · Workflow receipt
-
-<a id="entry-165"></a>
-## 2026-10-10 16:00:54 UTC — 165 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1719 in / 284 out tokens · 251 ms)
+- **Actor:** Jev (jev-1.13.0 · 1809 in / 284 out tokens · 289 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.77)
-- **Signals:** hazard 0.08 · multiple_issues 0.23 · sensitive 0.03 · states_facts 0.08 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.77 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `clarify` (confidence 0.87)
+- **Signals:** hazard 0.09 · multiple_issues 0.18 · sensitive 0.03 · states_facts 0.08 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-166"></a>
-## 2026-10-10 16:01:00 UTC — 166 · Claude read the message
+<a id="entry-161"></a>
+## 2026-10-10 16:20:30 UTC — 161 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1842 in / 394 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2074 in / 446 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Boiler lockout / outstanding gas paperwork (appliance)
-- **Summary:** Property manager updates the landlord that Flintmere's signed paperwork is paused pending an information check and that a lockout diagnostic would be a separate job, with none booked. He asks the landlord to confirm what additional work, if any, is authorised.
-- **Rationale:** Message seeks landlord authorisation and awaits paperwork; next step cannot be set until the landlord replies.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Gas appliance check paperwork and boiler lockout diagnostic (appliance)
+- **Summary:** Property manager updates the landlord that Flintmere's signed paperwork is paused and that a lockout diagnostic would be a separate job, none booked, and asks the landlord to confirm what further work is authorised.
+- **Rationale:** Message seeks landlord authority; essential details (paperwork date, diagnostic scope/cost, authorisation) still missing, so clarify, matching router.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Landlord has not yet confirmed whether a lockout diagnostic is authorised; scope and cost unknown.
-- **Unknown:** No date given for issue of the signed paperwork or the reason for the paused information check.
+- **Unknown (affects route):** Landlord has not yet stated whether a lockout diagnostic is authorised; no cost or scope available.
+- **Unknown:** No date for the signed gas paperwork and no explanation of the appliance installation discrepancy.
 
-<a id="entry-167"></a>
-## 2026-10-10 16:01:00 UTC — 167 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-168"></a>
-## 2026-10-10 16:01:01 UTC — 168 · Message received: Event 021 — Email from Tavin Rell (Gas Engineer, Flintmere Gas Services)
+<a id="entry-162"></a>
+## 2026-10-10 16:20:30 UTC — 162 · Message received: Event 021 — Email from Tavin Rell (Gas Engineer, Flintmere Gas Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1657,49 +1571,58 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > My visit entry records the check as satisfactory. I cannot see the office's paperwork queue or resolve the installation-detail query from my job app.
 
-<a id="entry-169"></a>
-## 2026-10-10 16:01:01 UTC — 169 · Policy gates → HUMAN REVIEW
+<a id="entry-163"></a>
+## 2026-10-10 16:20:30 UTC — 163 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-164"></a>
+## 2026-10-10 16:20:30 UTC — 164 · Jev routed the message
 
-<a id="entry-170"></a>
-## 2026-10-10 16:01:01 UTC — 170 · Workflow receipt
-
-<a id="entry-171"></a>
-## 2026-10-10 16:01:02 UTC — 171 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1735 in / 284 out tokens · 268 ms)
+- **Actor:** Jev (jev-1.13.0 · 1825 in / 284 out tokens · 256 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.80)
-- **Signals:** hazard 0.06 · multiple_issues 0.10 · sensitive 0.03 · states_facts 0.33 · system_instructions 0.04
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route.
+- **Decision:** jev_route → `clarify` (confidence 0.92)
+- **Signals:** hazard 0.06 · multiple_issues 0.12 · sensitive 0.04 · states_facts 0.23 · system_instructions 0.04
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-172"></a>
-## 2026-10-10 16:01:08 UTC — 172 · Claude read the message
+<a id="entry-165"></a>
+## 2026-10-10 16:20:37 UTC — 165 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1779 in / 404 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1989 in / 486 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · high confidence
-- **Work item:** Gas safety check paperwork outstanding / boiler lockout (appliance)
-- **Summary:** Flintmere's engineer confirms his visit entry records the check as satisfactory but says he cannot access the office paperwork queue or resolve the installation-detail query. No new information on the paused certificate or the boiler lockout diagnostic.
-- **Rationale:** Engineer cannot supply the outstanding evidence; essential information still missing, so clarify as per router decision.
+- **Work item:** Gas appliance check paperwork and boiler lockout (appliance)
+- **Summary:** Gas engineer confirms his visit entry records the check as satisfactory but says he cannot access the office paperwork queue or resolve the installation-detail query. The signed paperwork and lockout diagnostic questions remain unresolved.
+- **Rationale:** Engineer adds no new facts resolving paperwork timing, diagnostic scope or authority; still blocked pending office response.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** Engineer states his entry is satisfactory but signed paperwork remains unavailable; who can release it and when is unclear.
-- **Unknown (affects route):** Landlord authorisation and scope/cost for a boiler lockout diagnostic remain unconfirmed.
+- **Unknown (affects route):** No date for issue of the signed gas safety record, and the installation-detail discrepancy remains unexplained; engineer cannot resolve it.
+- **Unknown (affects route):** No cost, scope or necessity stated for the boiler lockout diagnostic, and landlord authority is still outstanding.
 
-<a id="entry-173"></a>
-## 2026-10-10 16:01:08 UTC — 173 · Policy gates → HUMAN REVIEW
+<a id="entry-166"></a>
+## 2026-10-10 16:20:37 UTC — 166 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (reading)
 
-<a id="entry-174"></a>
-## 2026-10-10 16:01:09 UTC — 174 · Message received: Event 022 — Portal from Iona Pell (Tenant)
+> I cannot see the office's paperwork queue or resolve the installation-detail query from my job app.
+
+<a id="entry-167"></a>
+## 2026-10-10 16:20:45 UTC — 167 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1607 in / 482 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The open question is really about the withheld signed gas safety record, the appliance installation discrepancy and authorisation for a separate lockout diagnostic - none of which the tenant can answer. A similar lockout question has already been sent to her, so staff should check whether to chase the contractor and landlord instead of messaging the tenant again.
+- **Send gate:** held for staff — Claude asked for staff review: The open question is really about the withheld signed gas safety record, the appliance installation discrepancy and authorisation for a separate lockout diagnostic - none of which the tenant can answer. A similar lockout question has already been sent to her, so staff should check whether to chase the contractor and landlord instead of messaging the tenant again. Risk flags: safety.
+- **Topics:** issue_details
+
+> Hello Iona,
+>
+> Thanks again for your patience since the gas visit on 9 October.
+>
+> So we have a clear picture of what's happening with the boiler, could you let us know whether it has locked out again since that visit, and if so, what you see on the display and what you were doing at the time (for example, heating or hot water running)?
+>
+> Thanks very much,
+> Northbridge Lettings
+
+<a id="entry-168"></a>
+## 2026-10-10 16:20:45 UTC — 168 · Message received: Event 022 — Portal from Iona Pell (Tenant)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1710,100 +1633,34 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The boiler locked out once more this morning and came back on after a reset. I can provide access after 21 October if a further visit is arranged. No gas smell noticed.
 
-<a id="entry-175"></a>
-## 2026-10-10 16:01:09 UTC — 175 · Policy gates → HUMAN REVIEW
+<a id="entry-169"></a>
+## 2026-10-10 16:20:45 UTC — 169 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-170"></a>
+## 2026-10-10 16:20:45 UTC — 170 · Jev routed the message
 
-<a id="entry-176"></a>
-## 2026-10-10 16:01:09 UTC — 176 · Workflow receipt
-
-<a id="entry-177"></a>
-## 2026-10-10 16:01:09 UTC — 177 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1708 in / 284 out tokens · 328 ms)
+- **Actor:** Jev (jev-1.13.0 · 1798 in / 284 out tokens · 247 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.11 · multiple_issues 0.08 · sensitive 0.04 · states_facts 0.91 · system_instructions 0.02
-- **Why:** Jev route confidence 0.48 is below 0.5.
+- **Signals:** hazard 0.12 · multiple_issues 0.08 · sensitive 0.04 · states_facts 0.89 · system_instructions 0.02
+- **Why:** Jev route confidence 0.49 is below 0.5.
 
-<a id="entry-178"></a>
-## 2026-10-10 16:01:22 UTC — 178 · Claude read the message
+<a id="entry-171"></a>
+## 2026-10-10 16:20:56 UTC — 171 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1704 in / 937 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1957 in / 794 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Recurring boiler lockout requiring diagnostic (appliance)
-- **Summary:** Tenant reports a further boiler lockout this morning, resolved after a reset, and offers access for any further visit after 21 October. No gas smell reported.
-- **Rationale:** Repeat boiler lockout is an ongoing defect with no diagnostic booked or priced; a quote/assessment for the separate lockout diagnostic is the next step. Tenant explicitly reports no gas smell and the boiler is working, so no urgent hazard route.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown:** Tenant gives general availability (after 21 October) but no specific date or time; an appointment still needs agreeing if a diagnostic is authorised.
-- **Unknown (affects route):** Landlord authorisation and the scope/cost of a boiler lockout diagnostic remain unconfirmed, and Flintmere's signed paperwork is still paused.
+- **Reading:** update · route `clarify` · medium confidence
+- **Work item:** Recurring boiler lockout (appliance)
+- **Summary:** Tenant reports the boiler locked out again on the morning of the message and restarted after a reset, with no gas smell noticed. She offers access after 21 October if a further visit is arranged.
+- **Rationale:** Tenant update on the known boiler lockout; no new authority, price or appointment, and the outstanding questions on paperwork, diagnostic scope and landlord authority remain open, so the item still cannot be routed to a quote or instruction.
+- **Extracted:** 0 claims · 3 ambiguities · 1 issue
+- **Unknown:** Tenant offers access after 21 October but no specific date or time is agreed, and no visit has been arranged.
+- **Unknown (affects route):** Scope, cost and necessity of a lockout diagnostic remain unknown, and landlord authority for any extra charge is still outstanding.
+- **Unknown (affects route):** Frequency and pattern of the repeated lockouts (now at least three) is not quantified; may affect urgency of a diagnostic.
 
-<a id="entry-179"></a>
-## 2026-10-10 16:01:22 UTC — 179 · Proposed action → `request_quote`
-
-- **Actor:** Triage reading (route `request_quote`)
-- **Work item:** Reported maintenance
-- **Action revision:** 7
-
-<a id="entry-180"></a>
-## 2026-10-10 16:01:22 UTC — 180 · Claim `access` = true
-
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
-
-> I can provide access after 21 October if a further visit is arranged.
-
-<a id="entry-181"></a>
-## 2026-10-10 16:01:22 UTC — 181 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:01:22 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-182"></a>
-## 2026-10-10 16:01:22 UTC — 182 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:01:22 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-183"></a>
-## 2026-10-10 16:01:22 UTC — 183 · Human review opened: `classification`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:01:22 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
-
-<a id="entry-184"></a>
-## 2026-10-10 16:01:22 UTC — 184 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:01:22 UTC
-
-> Clarify before routing: Landlord authorisation and the scope/cost of a boiler lockout diagnostic remain unconfirmed, and Flintmere's signed paperwork is still paused. A verified route is required before asking externally.
-
-<a id="entry-185"></a>
-## 2026-10-10 16:01:22 UTC — 185 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-186"></a>
-## 2026-10-10 16:01:22 UTC — 186 · Message received: Event 023 — Email from Nessa Wold (Landlord)
+<a id="entry-172"></a>
+## 2026-10-10 16:20:56 UTC — 172 · Message received: Event 023 — Email from Nessa Wold (Landlord)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1814,53 +1671,39 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > I have not approved a separate diagnostic or further charge. Please let me know what is still outstanding from Flintmere before any additional spend is committed.
 
-<a id="entry-187"></a>
-## 2026-10-10 16:01:22 UTC — 187 · Policy gates → HUMAN REVIEW
+<a id="entry-173"></a>
+## 2026-10-10 16:20:56 UTC — 173 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-174"></a>
+## 2026-10-10 16:20:57 UTC — 174 · Jev routed the message
 
-<a id="entry-188"></a>
-## 2026-10-10 16:01:22 UTC — 188 · Workflow receipt
-
-<a id="entry-189"></a>
-## 2026-10-10 16:01:23 UTC — 189 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1675 in / 284 out tokens · 324 ms)
+- **Actor:** Jev (jev-1.13.0 · 1765 in / 284 out tokens · 346 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `request_quote` (confidence 0.71)
-- **Signals:** hazard 0.05 · multiple_issues 0.05 · sensitive 0.04 · states_facts 0.07 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.71 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `clarify` (confidence 0.86)
+- **Signals:** hazard 0.05 · multiple_issues 0.07 · sensitive 0.04 · states_facts 0.08 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-190"></a>
-## 2026-10-10 16:01:28 UTC — 190 · Claude read the message
+<a id="entry-175"></a>
+## 2026-10-10 16:21:03 UTC — 175 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1793 in / 383 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2029 in / 474 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler repeatedly locking out - diagnostic (appliance)
-- **Summary:** Landlord Nessa Wold states she has not approved a separate boiler lockout diagnostic or any further charge, and asks what remains outstanding from Flintmere before further spend is committed.
-- **Rationale:** Landlord declines authority for now and asks for outstanding details; a quote/scope for the lockout diagnostic is still the next step before spend.
+- **Reading:** answer to question · route `clarify` · high confidence
+- **Work item:** Boiler repeated lockouts / gas check paperwork outstanding (appliance)
+- **Summary:** Landlord Nessa Wold states she has not approved a separate lockout diagnostic or any further charge, and asks what remains outstanding from Flintmere before any additional spend is committed.
+- **Rationale:** Landlord withholds authority for extra work; outstanding contractor information still blocks routing, so clarify is appropriate.
 - **Extracted:** 1 claim · 1 ambiguity · 1 issue
-- **Unknown:** Landlord wants a summary of what is outstanding from Flintmere (paused signed paperwork, installation-detail query) and likely the cost of a diagnostic before deciding.
+- **Unknown (affects route):** Scope, cost and necessity of the lockout diagnostic from Flintmere are still unknown, as is the date for the signed gas paperwork and the appliance installation discrepancy.
 
-<a id="entry-191"></a>
-## 2026-10-10 16:01:28 UTC — 191 · Review superseded
+<a id="entry-176"></a>
+## 2026-10-10 16:21:03 UTC — 176 · Partial answer → narrower follow-up due
 
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
+- **Actor:** Claude (reading)
 
-<a id="entry-192"></a>
-## 2026-10-10 16:01:28 UTC — 192 · Policy gates → HUMAN REVIEW
+> I have not approved a separate diagnostic or further charge. Please let me know what is still outstanding from Flintmere before any additional spend is committed.
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-193"></a>
-## 2026-10-10 16:01:28 UTC — 193 · Message received: Event 024 — Note from Oren Vale (Property Manager, Northbridge Lettings)
+<a id="entry-177"></a>
+## 2026-10-10 16:21:03 UTC — 177 · Message received: Event 024 — Note from Oren Vale (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1871,59 +1714,41 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 >
 > The tenancy file still contains the landlord's portal screenshot, but no signed paperwork from Flintmere has arrived. Flintmere has given no date for resolving its information query. The landlord has not authorized a separate diagnostic; the tenant reports another lockout and can offer access after 21 October. The file review is due today.
 
-<a id="entry-194"></a>
-## 2026-10-10 16:01:28 UTC — 194 · Policy gates → HUMAN REVIEW
+<a id="entry-178"></a>
+## 2026-10-10 16:21:03 UTC — 178 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-179"></a>
+## 2026-10-10 16:21:04 UTC — 179 · Jev routed the message
 
-<a id="entry-195"></a>
-## 2026-10-10 16:01:28 UTC — 195 · Workflow receipt
-
-<a id="entry-196"></a>
-## 2026-10-10 16:01:29 UTC — 196 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1708 in / 284 out tokens · 319 ms)
+- **Actor:** Jev (jev-1.13.0 · 1798 in / 284 out tokens · 270 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `request_quote` (confidence 0.69)
-- **Signals:** hazard 0.15 · multiple_issues 0.11 · sensitive 0.06 · states_facts 0.54 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.69 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.81)
+- **Signals:** hazard 0.14 · multiple_issues 0.14 · sensitive 0.07 · states_facts 0.51 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-197"></a>
-## 2026-10-10 16:01:35 UTC — 197 · Claude read the message
+<a id="entry-180"></a>
+## 2026-10-10 16:21:11 UTC — 180 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1826 in / 523 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2091 in / 618 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler lockout / outstanding gas paperwork (appliance)
-- **Summary:** Internal file-review note from the property manager recording that Flintmere's signed paperwork is still outstanding with no date given, the landlord has not authorised a separate diagnostic, and the tenant reports another boiler lockout with access available after 21 October.
-- **Rationale:** Internal update on an open appliance case; diagnostic work remains unauthorised and unquoted, so the quote/assessment route stands.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Boiler lockout and outstanding gas safety paperwork (appliance)
+- **Summary:** Internal file note from the property manager recording that Flintmere's signed gas paperwork is still outstanding with no date, the landlord has not authorised a separate lockout diagnostic, and the tenant reports a further boiler lockout with access available after 21 October.
+- **Rationale:** Key facts (paperwork date, diagnostic scope/cost, authority) are still missing, so the item cannot progress beyond clarification; router's clarify route is appropriate.
 - **Extracted:** 1 claim · 3 ambiguities · 1 issue
-- **Unknown:** Tenant offers access after 21 October but no specific date and time is agreed.
-- **Unknown:** No signed gas paperwork received and no date for Flintmere's information query to be resolved; completion evidence outstanding.
-- **Unknown (affects route):** Whether a lockout diagnostic is to be instructed given the landlord has declined to authorise additional spend.
+- **Unknown (affects route):** No date from Flintmere for issuing the signed gas paperwork or resolving the appliance installation query.
+- **Unknown (affects route):** Scope, cost and necessity of a lockout diagnostic remain undefined, and the landlord has not authorised spend.
+- **Unknown:** Tenant offers access after 21 October but no appointment date or time is agreed.
 
-<a id="entry-198"></a>
-## 2026-10-10 16:01:35 UTC — 198 · Human review opened: `triage`
+<a id="entry-181"></a>
+## 2026-10-10 16:21:11 UTC — 181 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:01:35 UTC
+- **Actor:** Claude (reading)
 
-> Clarify before routing: Whether a lockout diagnostic is to be instructed given the landlord has declined to authorise additional spend. A verified route is required before asking externally.
+> Flintmere has given no date for resolving its information query. The landlord has not authorized a separate diagnostic
 
-<a id="entry-199"></a>
-## 2026-10-10 16:01:35 UTC — 199 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-200"></a>
-## 2026-10-10 16:01:36 UTC — 200 · Message received: Attachment gas-portal-record.pdf (PDF text extraction)
+<a id="entry-182"></a>
+## 2026-10-10 16:21:11 UTC — 182 · Message received: Attachment gas-portal-record.pdf (PDF text extraction)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1948,51 +1773,34 @@ Gas record and boiler visit · 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ · status
 > Customer document Processing
 > *Portal view captured 10 October 2025, 09:56*
 
-<a id="entry-201"></a>
-## 2026-10-10 16:01:36 UTC — 201 · Policy gates → HUMAN REVIEW
+<a id="entry-183"></a>
+## 2026-10-10 16:21:11 UTC — 183 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-184"></a>
+## 2026-10-10 16:21:12 UTC — 184 · Jev routed the message
 
-<a id="entry-202"></a>
-## 2026-10-10 16:01:36 UTC — 202 · Workflow receipt
-
-<a id="entry-203"></a>
-## 2026-10-10 16:01:37 UTC — 203 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1817 in / 284 out tokens · 372 ms)
+- **Actor:** Jev (jev-1.13.0 · 1907 in / 284 out tokens · 357 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `request_quote` (confidence 0.51)
-- **Signals:** hazard 0.05 · multiple_issues 0.08 · sensitive 0.08 · states_facts 0.81 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.51 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.77)
+- **Signals:** hazard 0.05 · multiple_issues 0.09 · sensitive 0.08 · states_facts 0.68 · system_instructions 0.04
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.77 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-204"></a>
-## 2026-10-10 16:01:46 UTC — 204 · Claude read the message
+<a id="entry-185"></a>
+## 2026-10-10 16:21:19 UTC — 185 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1987 in / 600 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2252 in / 499 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `request_quote` · medium confidence
-- **Work item:** Boiler/cooker gas safety job and recurring boiler lockout (appliance)
-- **Summary:** A portal record export from Flintmere Gas Services shows the 9 October gas safety visit as Complete with a Satisfactory outcome for boiler and cooker, but the customer document is still listed as Processing. It does not address the repeated boiler lockouts or any diagnostic.
-- **Rationale:** Router route retained; the document is evidence of the completed safety visit but the signed paperwork is still pending and the lockout fault remains unassessed.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown (affects route):** The portal export shows the visit complete and satisfactory, but the customer document is still "Processing" - no signed gas safety record has been issued. Confirm whether this export is acceptable evidence.
-- **Unknown (affects route):** The record does not cover the recurring boiler lockout reported by the tenant; it is unclear whether a diagnostic is still needed and who authorises it.
+- **Reading:** update · route `clarify` · medium confidence
+- **Work item:** Gas safety check - signed record outstanding; boiler lockouts (appliance)
+- **Summary:** Portal record export for job NBL-48217 shows a 9 October gas safety visit by Tavin Rell recorded as Complete/Satisfactory for boiler and cooker, but the customer document is still shown as 'Processing'. No date for the signed record, and no information on the lockout diagnostic.
+- **Rationale:** Document export confirms visit details but leaves the signed record, installation query and diagnostic scope unresolved, so clarification is still needed before routing.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Portal shows job status Complete and Satisfactory, but the customer document is 'Processing' - unclear whether the check can be treated as complete without the signed record.
+- **Unknown (affects route):** No date for issuing the signed paperwork and no explanation of the appliance installation query; no scope or cost for a lockout diagnostic.
 
-<a id="entry-205"></a>
-## 2026-10-10 16:01:46 UTC — 205 · Claim `completion` = true
+<a id="entry-186"></a>
+## 2026-10-10 16:21:19 UTC — 186 · Partial answer → narrower follow-up due
 
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
+- **Actor:** Claude (reading)
 
-> Job status Complete
-
-<a id="entry-206"></a>
-## 2026-10-10 16:01:46 UTC — 206 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+> Customer document Processing

@@ -1,12 +1,12 @@
 # Property Management — case 022: Washer-dryer maintenance and replacement update
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 8 Brackenmere Walk, Vellumford, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-25T09:08:19+00:00
-- **Runner status:** **settled** · execution `native_local` · sources processed 31 of 31
+- **Runner status:** **worker_failed** · execution `native_local_partial` · sources processed 30 settled before the failure, of 31
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `5382a6293793e5f4…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `5382a6293793e5f4…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -48,42 +48,67 @@ The initial report and 30 further sources, submitted one at a time in availabili
 | 29 | 2025-09-24T15:57:39+00:00 | Event 030 — Call from Mara Venn (Property Manager, Northbridge Lettings) |
 | 30 | 2025-09-25T09:08:19+00:00 | Event 031 — Email from Ari Dalen (Tenant) |
 
-## Final decision — system case `b6df5319cba5`
+## Final decision — system case `eed6f0580e96`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **WAIT**
 - **Proposed next action:** `clarify` — Reported maintenance (category appliance)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** The latest message is being routed and read. Actions wait for the reading.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Tenant replied that "the job is completed" but in the same message asked whether the planned washing-machine replacement is still going ahead, which conflicts with the earlier report that no replacement had arrived.
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Property manager reports that, on a call, the tenant said no replacement washing machine had arrived and there was no packaging at the property. This conflicts with the landlord's statement that delivery and installation were sorted.
 
-**Why:** Contradictory completion statement and open question from tenant; cannot act until clarified.
+**Why:** Conflicting accounts between landlord and tenant about whether the replacement has been delivered; cannot close or instruct until clarified.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Reported maintenance
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Reported maintenance
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for getting in touch about the maintenance issue you reported. So we have the full picture on file, could you let us know a little more about the problem - what's happening, and whereabouts in the property it is? If it's easier, a quick photo is welcome too. Many thanks, Northbridg …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks again for your patience. So we have the full details on file, could you let us know which appliance is affected, what's happening when you use it, and whereabouts in the property it is? If you're able to send the brand, model and serial number from the appliance's identification la …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for letting us know the machine is unusable when you try to run it. So we can get things moving, could you let us know which days and times generally suit you best for someone to attend? Also, when a visit is arranged, would you be happy to be at home to let the engineer in, or wou …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for confirming the machine is unusable when you try to run it. Two quick things so we have everything on file: 1. Which day, and would a morning or afternoon window suit you best? 2. When a visit is arranged, would you be happy to be at home to let the engineer in, or would you pre …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for bearing with us, and sorry for the frustration this is causing. One more thing would really help us move things along: if you have any paperwork or details for the machine itself - such as the model and serial number from the identification label, or any order reference or purc …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for your patience with this. We're looking at an afternoon window of around 12:00 to 17:00 on 9 September for someone to come and look at the machine. Would you be happy to be at home during that window to let the engineer in, or would you prefer a different access arrangement? Jus …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Hope you're well. Just following up on the visit - could you let us know whether the engineer attended, and whether the machine is now working when you try to run it? Many thanks, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Hope you're well. Just one quick thing so we have the full picture: could you let us know whether the engineer attended, and what they said about the machine when they looked at it? Many thanks, Northbridge Lettings”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for taking the measurements and for letting us know the machine is integrated and fixed to the cabinet door - that's really helpful. Just one thing so we have the full picture: could you let us know whether an engineer attended, and if so, what they said about the machine when you …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Ari, Thanks again for the measurements and for explaining that the machine is integrated and fixed to the cabinet door. So we have everything ready, could you help with three quick things? 1. Which days and times generally suit you best for a delivery and fitting slot? 2. Would you be happy to …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Thanks again for all your help with the measurements and details so far. Just one quick thing: has anyone been in touch with you about delivering or fitting a new washing machine, and has anything arrived at the property yet? Many thanks, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Hope you're well. We understand arrangements have been made directly for a new washing machine to be delivered and fitted, with the old one taken away. Could you let us know whether anything has happened at the property yet, and whether you've been given any information about when the del …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Ari, Thanks for your time on the phone earlier. Just so we have the latest picture: has a replacement washing machine been delivered or fitted since we spoke, or have you heard anything about a delivery date? Many thanks, Northbridge Lettings”
+- Clarification `triage` to tenant: closed — Clarify before routing: The message does not say what the reported maintenance problem is (no location, symptom or category). Need the original report details before the item can be classified or quoted.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: The repair provider cannot locate an account or order under the landlord's name; the purchase name, email or order reference is still needed before the repair can be booked.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `triage` to tenant: closed — Clarify before routing: Unknown whether the engineer attended and whether the appliance now works; awaiting tenant reply.
+- Clarification `triage` to tenant: closed — Clarify before routing: Unclear whether the engineer attended on 9 September and what the outcome was, and why the machine is now deemed beyond repair.; Unclear whether the desk is being asked to source, supply and install a replacement machine, or o …
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `evidence` to tenant: closed — Supply usable evidence required for this work item.
+- Clarification `total` to staff: closed — Establish the full comparable commitment, including tax.
+- Clarification `triage` to tenant: closed — Clarify before routing: The landlord previously said a new machine had been ordered and that installers would fit it and remove the old unit. It is unclear whether that order still stands and the quote is only for labour, or whether a full supply-and …
+- Clarification `triage` to tenant: open — Clarify before routing: Landlord says it is sorted; confirm whether the quote request is withdrawn and the case can be closed.
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: Landlord stated delivery, setup and disposal were arranged, but the tenant reports nothing has arrived; confirm with the landlord whether an order exists and what the delivery date is.; Confirm wh … | Event 030 — Call from Mara Venn (Property Manager, Northbridge Lettings) |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): Tenant says the job is completed but also asks whether the washing-machine change is still happening, and previously said nothing had arrived; confirm what, if anything, was completed.
-- **issue_details** (blocks the route): Confirm with landlord whether the replacement order and installation are still going ahead and on what date.
-- 3 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **issue_details** (blocks the route): Landlord said delivery and disposal were arranged, but tenant reports nothing has arrived; confirm whether the landlord's order is still progressing or whether the quote request should be reinstated.
+- **completion**: No delivery or installation date is known for the replacement appliance.
+- 2 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
-- None recorded. (Jev and Claude calls all returned; no workflow step failed.)
+- Runner: RuntimeError: Native workflow or step failed; see evidence.json
+- Native Vercel Workflow step `step//app.workflows//run_case_cycle` failed in run `wrun_01M4KA5H3QSTCPWYVR4F69EFGH`: [["FatalError",1],{"message":2},"Step 'step//app.workflows//run_case_cycle' exceeded max retries (4 retries)"] (raw events: `evidence.json`; trace: `worker.log`)
+- The run did not settle cleanly (status `worker_failed`); any recorded state is partial.
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

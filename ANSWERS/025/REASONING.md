@@ -2,14 +2,13 @@
 
 Exported from the system's recorded policy assessments, claims and concise model rationales. It is not reconstructed after the fact and does not contain hidden chain-of-thought.
 
-## System case `e66c7d372a8b` — HUMAN REVIEW
+## System case `62745fc84f4c` — NO FURTHER ACTION
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
+- No blockers recorded.
 
 ### Claims extracted from the sources
 
@@ -19,16 +18,30 @@ Every claim is a source assertion with an exact quote; unverified claims were ne
 
 ### Reading of each source (Jev route → Claude reading)
 
-## System case `bb642aa7ce68` — HUMAN REVIEW
+## System case `8b6a524fc47a` — NO FURTHER ACTION
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
-- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Confirm that the category and work item match the source request. A verified route is required before asking externally. — evidence: no source recorded
+- No blockers recorded.
+
+### Claims extracted from the sources
+
+Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
+
+- None.
+
+### Reading of each source (Jev route → Claude reading)
+
+## System case `71a954267a8e` — HUMAN REVIEW
+
+### Why this decision (policy gates)
+
+The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
+
 - `supported` is **UNKNOWN** → HUMAN REVIEW (rule `require-supported`, owner case manager): A case manager must define a supported action for this situation. — evidence: no source recorded
+- `classification` is **UNKNOWN** → WAIT (rule `require-classification`, owner case manager): Settled by the open routing clarification or the supported-process review. Confirm that the category and work item match the source request. — evidence: no source recorded
 
 ### Claims extracted from the sources
 
@@ -38,137 +51,135 @@ Every claim is a source assertion with an exact quote; unverified claims were ne
 
 ### Reading of each source (Jev route → Claude reading)
 
-## System case `3cace1ca9243` — HUMAN REVIEW
+## System case `03b80531e1ed` — HUMAN REVIEW
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `completion` is **UNKNOWN** → HUMAN REVIEW (rule `require-completion`, owner reviewer): Verify completion of this work item with usable evidence. A verified route is required before asking externally. — evidence: Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)
-- `commitments` is **UNKNOWN** → HUMAN REVIEW (rule `require-commitments`, owner case manager): Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally. — evidence: no source recorded
-- `triage` is **UNKNOWN** → HUMAN REVIEW (rule `require-triage`, owner case manager): Clarify before routing: Invoice covers the tap replacement only; it is still unconfirmed whether the reported cloudy water was investigated or resolved. A verified route is required before asking externally. — evidence: Attachment corrected-plumbing-invoice.pdf (PDF text extraction)
+- `triage` is **UNKNOWN** → HUMAN REVIEW (rule `require-triage`, owner case manager): The tenant replied, but the reply did not settle this. Review it and record the fact. Clarify before routing: The corrected invoice shows no price or total including VAT; the full comparable commitment is not established. — evidence: Attachment corrected-plumbing-invoice.pdf (PDF text extraction)
 
 ### Claims extracted from the sources
 
 Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
 
-- `classification` = true — unverified assertion; from Event 002 — Email from Tessa Wren (Property Manager, Northbridge Lettings): “Event 002 — Email From: Tessa Wren (Property Manager, Northbridge Lettings) To: Orin Bell (Landlord) Requests approval to arrange plumbing work for the dripping tap and passes on the tenant's cloudy-water concern. Notes …”
+- `classification` = true — unverified assertion; from Intake report: “Event 001 — Portal From: Nia Calder (Tenant) To: Tessa Wren (Property Manager, Northbridge Lettings) Reports a constantly dripping kitchen mixer tap and cloudy-looking water when filling a glass. Says limescale may be in …”
 - `access` = true — unverified assertion; from Event 015 — Email from Nia Calder (Tenant): “authorizes the plumber to attend using the agency's spare key”
 - `keys` = true — unverified assertion; from Event 015 — Email from Nia Calder (Tenant): “using the agency's spare key”
 - `schedule` = true — unverified assertion; from Event 016 — Email from Tessa Wren (Property Manager, Northbridge Lettings): “Confirms a visit for 10 September”
 - `keys` = true — unverified assertion; from Event 016 — Email from Tessa Wren (Property Manager, Northbridge Lettings): “the contractor needs to collect keys from the office”
 - `keys` = true — unverified assertion; from Event 018 — Email from Tessa Wren (Property Manager, Northbridge Lettings): “can collect keys from the agency office”
-- `completion` = true — unverified assertion; from Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing): “describes a new mono kitchen sink tap supplied and installed”
+- `completion` = true — unverified assertion; from Event 019 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing): “An invoice describes a new mono kitchen sink tap supplied and installed.”
 
 ### Reading of each source (Jev route → Claude reading)
 
-**Intake report** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: new_request, route `request_quote`, high confidence.
-Tenant Nia Calder reports a constantly dripping kitchen mixer tap and cloudy water when filling a glass at 18 Thistlewick Row, suggesting limescale may be involved. She asks whether a replacement tap could be considered; no urgency or access constraints stated. *Why:* Newly reported plumbing defect with no prior assessment; a contractor quote or assessment is the usual first step, and the tenant's replacement request needs costing.
-- Unknown (affects route): Is the cloudy water limited to the kitchen tap or present at other outlets, and does it clear after standing? This may indicate a separate supply issue rather than a tap fault.
-- Unknown: No consent to enter or access method has been given for a contractor visit.
-- Unknown: No availability or preferred appointment times provided.
-- Unknown: No evidence of the tap or water condition has been confirmed as supplied.
-
-**Event 002 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.97; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
+**Intake report** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.96; nothing in the message needs Claude.. Jev only: new_request, route `request_quote`, high confidence.
 Routed by Jev to request_quote. Claude did not read this message.
 
-**Event 003 — Email from Orin Bell (Landlord)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.97; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
+**Event 002 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.98; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
 Routed by Jev to request_quote. Claude did not read this message.
 
-**Event 004 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.99; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
+**Event 003 — Email from Orin Bell (Landlord)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.98; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
 Routed by Jev to request_quote. Claude did not read this message.
+
+**Event 004 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: update, route `request_quote`, high confidence.
+Property manager has emailed the plumbing contractor asking for a quote or advice on whether a site visit is needed for the dripping kitchen mixer tap and the cloudy-water report. No water sample or test result is available. *Why:* Message continues the current plumbing case by seeking a contractor quote or assessment before work is instructed.
+- Unknown: No water sample or test result is available, so the cause of the cloudy water is unconfirmed; a site visit may be needed to assess.
+- Unknown: No access arrangement or tenant availability has been recorded for a possible contractor visit.
 
 **Event 005 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.98; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
 Routed by Jev to request_quote. Claude did not read this message.
 
-**Event 006 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.76 is below the Jev-only bar 0.8. A route change on an existing case.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager tells the tenant the contractor needs to attend to assess the plumbing work and asks for the tenant's availability. No date, time or access arrangement is agreed yet. *Why:* Message is about arranging a contractor visit for the known job, so appointment arrangement applies.
-- Unknown: Tenant's available dates and times for the assessment visit are not yet known.
-- Unknown: No access arrangement or consent for contractor entry has been confirmed.
+**Event 006 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.69 is below the Jev-only bar 0.8. A route change on an existing case.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager tells the tenant the contractor needs to attend to assess the plumbing work and asks for the tenant's availability. No date or time agreed yet. *Why:* Message is about arranging a contractor assessment visit for the known plumbing job.
+- Unknown: No date or time has been proposed or agreed; awaiting tenant's availability.
+- Unknown: Access arrangements for the contractor's visit are not yet confirmed.
 
-**Event 007 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Tenant offers availability on 11, 13 and 14 August, all day, for the plumbing visit. No specific appointment confirmed yet. *Why:* Message is about arranging a visit for a known job.
-- Unknown: Tenant gives general availability (11, 13, 14 August, all day) but no agreed date and time with the contractor.
-- Unknown: No explicit permission to enter or access arrangement stated.
+**Event 007 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: answer_to_question, route `confirm_appointment`, high confidence.
+Tenant offers 11, 13 and 14 August, all day, as availability for the plumbing visit. No access arrangement or confirmed appointment time is stated. *Why:* Message is about arranging a visit for a known job; availability given but no agreed slot, so confirm_appointment stands.
+- Unknown: Tenant has not said whether they will be home to let the contractor in or whether another access method is needed.
+- Unknown: Availability offered as 11, 13 and 14 August all day; a specific date and time still needs to be agreed with the contractor.
 
-**Event 008 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager forwards the tenant's offered dates to the plumbing contractor and asks him to pick a slot or propose an alternative. No date is yet agreed. *Why:* Message is about arranging a visit for a known job.
-- Unknown: No specific date and time agreed yet; awaiting contractor's selection or alternative.
-- Unknown: Access arrangement for the visit (tenant present or keys) not confirmed.
+**Event 008 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager forwards the tenant's offered dates to the plumbing contractor and asks them to pick a slot or propose an alternative. No date has been agreed yet. *Why:* Message is about arranging a visit for a known job; no firm appointment agreed yet.
+- Unknown: No specific date and time confirmed; awaiting contractor's selection of a slot.
+- Unknown: Access arrangement for the visit is still unconfirmed.
 
-**Event 009 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager asks the tenant for further availability because the contractor has not picked a date for the plumbing assessment visit. *Why:* Message is about arranging the visit for a known job.
-- Unknown: No date or time agreed; contractor has not selected a slot and new tenant availability is awaited.
+**Event 009 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager asks the tenant for further availability because the contractor has not selected any of the offered dates. *Why:* Message is about arranging a visit for a known job.
+- Unknown: No new dates or times are given; tenant's further availability is still needed.
 
-**Event 010 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Tenant replies with further general availability, stating they are home every day the following week except Monday. No specific appointment date or time is agreed yet. *Why:* Message is about arranging a visit for an already known plumbing job; matches router's confirm_appointment.
-- Unknown: Tenant gives general availability (every day next week except Monday) but no specific date and time is agreed; contractor still needs to select a slot.
-- Unknown: Being home is not explicit permission to enter; confirm access consent and method.
+**Event 010 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Tenant provides further availability, stating they are home every day the following week except Monday. No specific date and time agreed yet. *Why:* Message concerns arranging a visit for an already known job.
+- Unknown: Tenant gives general availability (every day next week except Monday) but no agreed date or time; contractor slot still needs confirming.
+- Unknown: Being home is not explicit permission to enter; confirm consent and access method.
 
-**Event 011 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager forwards the tenant's updated availability to the plumbing contractor and asks him to pick a visit slot. No date has yet been agreed. *Why:* Message is about arranging a visit for a known job, so confirm_appointment.
-- Unknown: No specific date and time agreed; contractor still needs to select a slot from the tenant's general availability.
+**Event 011 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager forwards the tenant's updated availability to the plumbing contractor and asks him to pick a visit slot. No date has yet been agreed. *Why:* Message is about arranging a visit for a known plumbing job.
+- Unknown: No specific date and time has been agreed; contractor still needs to select a slot.
+- Unknown: Access arrangements for the visit are not confirmed by the tenant.
 
 **Event 012 — Email from Nia Calder (Tenant)** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: chase, route `confirm_appointment`, high confidence.
-Tenant chases the outstanding plumbing appointment for the leaking kitchen tap, saying no contact has been made despite availability being given. They also report a loose top kitchen drawer with apparently snapped metal front brackets and ask whether it can be repaired during the same visit. *Why:* Tenant is chasing scheduling of the known plumbing visit, so the current case remains at confirm_appointment; the drawer damage is an unrelated new defect needing assessment or quote.
-- Unknown: No appointment date and time has been agreed; contractor has not selected a slot from the tenant's offered availability.
-- Unknown (affects route): Whether the loose kitchen drawer should be handled as part of the same visit or raised as a separate work item, and whether brackets need replacement parts.
+Tenant chases the outstanding plumbing appointment for the leaking tap, saying no contact has been made despite availability already given. She also reports a loose top kitchen drawer with apparently snapped metal front brackets and asks whether it can be repaired at the same visit. *Why:* Current case is an already known plumbing job awaiting a visit slot, so it stays with confirm_appointment; the drawer damage is a separate defect needing contractor assessment or quote.
+- Unknown: No appointment date or time has been fixed; the contractor has still not selected a slot from the tenant's offered availability.
+- Unknown: Tenant has not confirmed whether she will be present to let the contractor in or how access should otherwise be arranged.
+- Unknown (affects route): Whether the drawer repair should be added to the plumbing visit or handled as a separate job with its own quote.
 
-**Event 013 — Call from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager called the contractor about booking the plumbing visit; the contractor could not give a firm date but expects to book a slot during the week. The property address was clarified and no appointment was agreed. *Why:* Message concerns arranging a visit for a known job; no date agreed yet.
-- Unknown: No firm date or time agreed; contractor to confirm a slot later.
-- Unknown: Confusion over the property address was raised on the call; confirm the correct address with the contractor.
-- Unknown: Whether the loose kitchen drawer is included in this visit or raised separately remains unresolved.
+**Event 013 — Call from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager called the plumbing contractor, who could not commit to a firm date but expects to book a visit later in the week. Address confusion was clarified; no appointment agreed. *Why:* Message concerns arranging a visit for a known job; no firm slot agreed.
+- Unknown: No date or time agreed; contractor to confirm later in the week.
+- Unknown: Confusion about the property address was raised on the call; confirm the correct address with the contractor.
+- Unknown (affects route): Still unclear whether the loose kitchen drawer repair is added to this visit or handled as a separate job.
 
-**Event 014 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Contractor offers the following afternoon for the tap visit and asks whether the tenant is available. No firm date and time confirmed yet. *Why:* Message is about arranging a visit for a known job.
-- Unknown: The exact date and time of the offered afternoon slot is not stated, and tenant confirmation is still needed.
+**Event 014 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Contractor offers the following afternoon for the plumbing visit and asks whether the tenant is available. No specific date and time confirmed yet. *Why:* Message is about arranging a visit for a known job; no firm date agreed, so appointment confirmation is the next step.
+- Unknown: The exact date and time of the proposed afternoon slot is not stated, and the tenant has not confirmed.
+- Unknown (affects route): Still unclear whether the loose kitchen drawer repair is included in this visit or handled separately.
 
-**Event 015 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Tenant says they will be at work from 11:00 the next day and authorises the plumber to attend using the agency's spare key. No comment on the drawer or cloudy water. *Why:* Message concerns arranging the known plumbing visit and entry; router's confirm_appointment fits.
-- Unknown: Tenant will be out from 11:00; it is unclear whether the contractor's offered afternoon slot is accepted and at what precise time.
-- Unknown: Confirm the agency holds a usable spare key and arrange custody/return with the contractor.
+**Event 015 — Email from Nia Calder (Tenant)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Tenant says they will be at work from 11:00 the next day and authorises the plumber to enter using the agency's spare key. No response about the drawer repair. *Why:* Message concerns access and entry arrangements for a known plumbing visit.
+- Unknown (affects route): Tenant has not said whether the drawer repair should be included in this visit or handled separately.
+- Unknown: No explicit confirmation that the contractor's offered afternoon slot is accepted; tenant only states they are at work from 11:00.
 
-**Event 016 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager confirms a visit to the property on 10 September with the contractor, noting timing may vary as the contractor must collect keys from the office. *Why:* Message arranges an appointment for the known plumbing job; keys mentioned only as a timing caveat.
+**Event 016 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager confirms a visit to the property on 10 September with the contractor, noting timing may vary as the contractor must collect keys from the office. *Why:* Message arranges and confirms a visit for the known plumbing job and mentions key collection; appointment confirmation is the main point.
 - Unknown: No precise time is given for the 10 September visit; timing may vary.
-- Unknown: Key collection arrangements and return not specified (time, who hands over).
+- Unknown: Key collection and return arrangements at the office are not detailed.
+- Unknown (affects route): Still unclear whether the drawer repair is included in this visit or handled separately.
 
-**Event 017 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Contractor says the confirmation sent after 18:00 the previous evening was too late for scheduling, but will try to accommodate the visit, and asks for earlier confirmation in future. *Why:* Message concerns timing of an already known visit; appointment still needs firm confirmation.
-- Unknown: Contractor has not confirmed whether the 10 September visit will actually go ahead or at what time.
-- Unknown: Unclear whether the contractor will collect the office spare key in time for the visit.
+**Event 017 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Contractor says the 18:00 confirmation was too late for scheduling but will try to accommodate the visit, and asks for earlier confirmation of future bookings. No firm appointment time is confirmed. *Why:* Message concerns timing of an already known visit, so appointment confirmation is the next step.
+- Unknown: Contractor has not confirmed whether the 10 September visit will go ahead or at what time.
+- Unknown (affects route): Still unclear whether the loose kitchen drawer repair is part of this visit or a separate job.
 
-**Event 018 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager apologises for late notice, tells the contractor the 10 September visit may be moved if needed and that keys can be collected from the agency office, and asks which date is chosen. *Why:* Message is about rearranging an already known visit and key collection; appointment confirmation is the next step.
-- Unknown: No firm date or time is now agreed; the contractor may move the 10 September visit and must confirm a new date.
+**Event 018 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager apologises for late notice, says the contractor may rearrange the visit and can collect keys from the agency office, and asks which date is chosen. *Why:* Message concerns arranging/moving an existing visit and key collection.
+- Unknown: No confirmed date or time; contractor may move the 10 September visit.
+- Unknown (affects route): Still unclear whether the loose kitchen drawer repair is part of this visit or a separate job.
 
-**Event 019 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.51 is below the Jev-only bar 0.8. A route change on an existing case.. claude-opus-5: update, route `clarify`, medium confidence.
-Contractor submitted an invoice for a new mono kitchen sink tap supplied and installed at the property, but the invoice postcode does not match the recorded property postcode. No amount or completion details are confirmed in readable text. *Why:* Invoice for work on this case but address mismatch and no confirmed completion or total, so clarification is needed before closing or authorising payment.
-- Unknown (affects route): The invoice postcode differs from the recorded property postcode; confirm the invoice relates to 18 Thistlewick Row.
-- Unknown (affects route): Confirm whether the tap replacement work was actually completed and when, and whether cloudy water was addressed.
-- Unknown: No invoice total including tax is stated in the message text; obtain the full amount.
+**Event 019 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `claude` — Jev route confidence 0.49 is below 0.5.. claude-opus-5: completion_report, route `clarify`, medium confidence.
+Contractor has sent an invoice for a new mono kitchen sink tap supplied and installed. The postcode on the invoice does not match the property's recorded postcode, so the invoice is queried before it can be accepted. *Why:* The invoice implies the tap work is done, but the postcode discrepancy means the property and work item mapping cannot be confirmed, so the item cannot be closed yet.
+- Unknown (affects route): The postcode on the invoice does not match the recorded property postcode; confirm the invoice relates to 18 Thistlewick Row before accepting it.
+- Unknown: No invoice total including VAT is stated, and no confirmation of the visit date or that the work at this property is finished.
+- Unknown: Still unclear whether the loose kitchen drawer repair was included in this visit or remains a separate job.
+- Risk flags: possible_wrong_recipient
 
-**Event 020 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `unsupported` — Jev routes; Claude extracts quotes and claims. unsupported is not a Jev-only route. Route confidence 0.53 is below the Jev-only bar 0.8. A route change on an existing case.. claude-opus-5: update, route `clarify`, medium confidence.
-The property manager asks the contractor for a corrected invoice showing the recorded postcode and to check other invoice details. No new defect reported. *Why:* Invoice details are disputed and completion unverified, so the item cannot proceed until the contractor clarifies.
-- Unknown: Whether the invoice relates to 18 Thistlewick Row; corrected invoice awaited.
-- Unknown (affects route): Still unconfirmed whether the tap replacement was completed and whether the cloudy water was addressed.
-- Objected to Jev's route: The router chose unsupported, but this is an ordinary plumbing case with an invoice discrepancy; it needs clarification from the contractor, not a case manager defining new handling.
+**Event 020 — Email from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.61 is below the Jev-only bar 0.8. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, high confidence.
+Property manager asks the contractor for a corrected invoice showing the property's recorded postcode and to check whether any other invoice details need correction. The postcode discrepancy remains unresolved. *Why:* Invoice discrepancy is queried but not yet resolved, so the item cannot be routed onward.
+- Unknown (affects route): Invoice postcode still does not match the recorded property address; awaiting corrected invoice confirming it relates to 18 Thistlewick Row.
 
-**Event 021 — Call from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.51 is below the Jev-only bar 0.8.. claude-opus-5: update, route `clarify`, medium confidence.
-Contractor agrees to amend the invoice postcode and resend it. A separate boiler matter was mentioned; the manager will check with the relevant engineer what work was done. *Why:* Administrative invoice correction pending; completion of tap work and cloudy water still unverified, so clarification is needed.
-- Unknown (affects route): Still unconfirmed whether the tap replacement was completed and whether the cloudy water was resolved.
-- Unknown: Corrected invoice not yet received; total amount and any other detail corrections unknown.
-- Unknown (affects route): Scope of the separate boiler matter is undefined and not documented on this job.
+**Event 021 — Call from Tessa Wren (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.67 is below the Jev-only bar 0.8. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, medium confidence.
+Call note: contractor agrees to amend the invoice postcode and resend. A separate boiler matter was mentioned; the manager will check with the relevant engineer what work was done, and no boiler work is documented on this tap job. *Why:* Contractor has only promised a corrected invoice; the postcode discrepancy is not yet resolved, so the item cannot progress. Router's clarify route is appropriate.
+- Unknown (affects route): Corrected invoice has not yet been received; postcode match to 18 Thistlewick Row still unconfirmed.
+- Unknown (affects route): Unclear what the separate boiler matter involves, which engineer attended and whether any work was done or chargeable.
 
-**Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `claude` — Jev route confidence 0.46 is below 0.5.. claude-opus-5: completion_report, route `close_item`, medium confidence.
-Contractor has resent the invoice with the property's recorded postcode, describing a new mono kitchen sink tap supplied and installed. No invoice total is stated in the message, and the cloudy water complaint is not addressed. *Why:* Contractor supplied a corrected invoice asserting the tap was supplied and installed, so the next step is completion verification and closing the item, subject to the outstanding cloudy water question.
-- Unknown (affects route): The invoice covers the tap replacement only; it is still unconfirmed whether the reported cloudy water was investigated or resolved.
-- Unknown: No invoice total including VAT is stated in this message, so the full commitment cannot be established.
-- Unknown: No dated completion evidence (e.g. work date or photos) is stated beyond the invoice description.
+**Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.72 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, medium confidence.
+Contractor resubmitted a corrected invoice for a new mono kitchen sink tap supplied and installed, now showing the recorded property postcode. Invoice awaiting operator review; no total visible. *Why:* Corrected invoice addresses the postcode query but total and completion evidence are still unconfirmed, so clarification remains the next step.
+- Unknown: Invoice total including VAT is not stated; confirm the full amount before approving payment.
+- Unknown (affects route): Confirm the tap installation was completed and verified at 18 Thistlewick Row, with evidence.
+- Unknown: The separate boiler matter remains unclarified - which engineer attended and whether work was chargeable.
 
-**Attachment corrected-plumbing-invoice.pdf (PDF text extraction)** — Jev `jev_route` → `close_item` — Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: completion_report, route `close_item`, medium confidence.
-Corrected invoice from Bracken & Vale Plumbing for 18 Thistlewick Row showing supply and install of one new mono kitchen sink tap, with the postcode amended. No total amount is stated in the extracted text and the cloudy water complaint is not addressed. *Why:* Corrected invoice for completed tap installation; router decision close_item accepted, though cloudy water remains unverified.
-- Unknown (affects route): Invoice covers the tap replacement only; it is still unconfirmed whether the reported cloudy water was investigated or resolved.
-- Unknown: No invoice total including VAT appears in the extracted text, so the full commitment is not established.
+**Attachment corrected-plumbing-invoice.pdf (PDF text extraction)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, medium confidence.
+Corrected invoice from Bracken & Vale Plumbing for supply and install of a new mono kitchen sink tap at 18 Thistlewick Row, with the postcode amended to the recorded property address. No total amount is shown in the extracted text. *Why:* Corrected invoice resolves the postcode query but gives no total or completion evidence, so further clarification is needed before accepting.
+- Unknown (affects route): The corrected invoice shows no price or total including VAT; the full comparable commitment is not established.
+- Unknown: No evidence confirming the tap installation was completed and verified at the property.

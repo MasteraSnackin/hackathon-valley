@@ -2,16 +2,14 @@
 
 Exported from the system's recorded policy assessments, claims and concise model rationales. It is not reconstructed after the fact and does not contain hidden chain-of-thought.
 
-## System case `cbe9f303f698` — HUMAN REVIEW
+## System case `e6659b8ac7c2` — HUMAN REVIEW
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
-- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Confirm that the category and work item match the source request. A verified route is required before asking externally. — evidence: no source recorded
 - `supported` is **UNKNOWN** → HUMAN REVIEW (rule `require-supported`, owner case manager): A case manager must define a supported action for this situation. — evidence: no source recorded
+- `classification` is **UNKNOWN** → WAIT (rule `require-classification`, owner case manager): Settled by the open routing clarification or the supported-process review. Confirm that the category and work item match the source request. — evidence: no source recorded
 
 ### Claims extracted from the sources
 
@@ -21,97 +19,54 @@ Every claim is a source assertion with an exact quote; unverified claims were ne
 
 ### Reading of each source (Jev route → Claude reading)
 
-## System case `1c3916e6e294` — HUMAN REVIEW
+## System case `a20e67bf627d` — NO FURTHER ACTION
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
-- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Confirm that the category and work item match the source request. A verified route is required before asking externally. — evidence: Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)
+- No blockers recorded.
 
 ### Claims extracted from the sources
 
 Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
 
-- `classification` = true — unverified assertion; from Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings): “the kitchen sash works but has no key”
+- `classification` = true — unverified assertion; from Split from case 74913d80417d: Intake report: “keys are missing”
 
 ### Reading of each source (Jev route → Claude reading)
 
-## System case `395cb087080c` — HUMAN REVIEW
+## System case `25bc7c82b79e` — HUMAN REVIEW
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
-- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Confirm that the category and work item match the source request. A verified route is required before asking externally. — evidence: Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)
+- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Verify the received source assertion. Confirm that the category and work item match the source request. — evidence: Split from case 74913d80417d: Intake report
 
 ### Claims extracted from the sources
 
 Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
 
-- `classification` = true — unverified assertion; from Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings): “the bedroom sash opens but will not lock”
+- `classification` = true — unverified assertion; from Split from case 74913d80417d: Intake report: “the bedroom window opens but will not secure”
 
 ### Reading of each source (Jev route → Claude reading)
 
-## System case `073084709ae9` — HUMAN REVIEW
+## System case `74913d80417d` — WAIT
 
 ### Why this decision (policy gates)
 
 The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
 
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
+- `triage` is **UNKNOWN** → WAIT (rule `require-triage`, owner case manager): Clarify before routing: Completion is asserted again with no invoice, appointment, visit notes or attendance evidence; confirm with the tenant whether access occurred and the window now opens. — evidence: Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)
 
 ### Claims extracted from the sources
 
 Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
 
-- `classification` = true — unverified assertion; from Split from case 8f694f83c9f0: Intake report: “keys are missing”
-
-### Reading of each source (Jev route → Claude reading)
-
-## System case `fda327516e30` — HUMAN REVIEW
-
-### Why this decision (policy gates)
-
-The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
-
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `route` is **UNKNOWN** → HUMAN REVIEW (rule `require-route`, owner case manager): Verify the recipient and permitted communication route. — evidence: no source recorded
-- `classification` is **UNKNOWN** → HUMAN REVIEW (rule `require-classification`, owner case manager): Confirm that the category and work item match the source request. A verified route is required before asking externally. — evidence: Split from case 8f694f83c9f0: Intake report
-
-### Claims extracted from the sources
-
-Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
-
-- `classification` = true — unverified assertion; from Split from case 8f694f83c9f0: Intake report: “the bedroom window opens but will not secure”
-
-### Reading of each source (Jev route → Claude reading)
-
-## System case `8f694f83c9f0` — HUMAN REVIEW
-
-### Why this decision (policy gates)
-
-The model cannot create authority: the policy engine decides from recorded checks. Each blocker below kept the action from running.
-
-- `identity` is **UNKNOWN** → HUMAN REVIEW (rule `require-identity`, owner case manager): Verify the person, property and work item mapping. — evidence: no source recorded
-- `completion` is **UNKNOWN** → HUMAN REVIEW (rule `require-completion`, owner reviewer): Verify completion of this work item with usable evidence. A verified route is required before asking externally. — evidence: Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings), Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings), Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)
-- `commitments` is **UNKNOWN** → HUMAN REVIEW (rule `require-commitments`, owner case manager): Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally. — evidence: no source recorded
-
-### Claims extracted from the sources
-
-Every claim is a source assertion with an exact quote; unverified claims were never used as authority.
-
-- `classification` = true — unverified assertion; from Event 003 — Email from Sella Marr (Landlord, Northbridge Lettings): “Event 003 — Email From: Sella Marr (Landlord, Northbridge Lettings) To: Ilyra Venn (Property Manager, Northbridge Lettings) Authorises Northbridge Lettings to proceed with its own service provider for the lock work. No s …”
 - `access` = true — unverified assertion; from Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings): “Perrin says tradespeople can access the property”
+- `classification` = true — verified; from Event 007 — Email from Ilyra Venn (Property Manager, Northbridge Lettings): “Follows up for availability so a provider visit can be arranged.”
 - `access` = true — unverified assertion; from Event 008 — Email from Perrin Dall (Tenant, Northbridge Lettings): “Says the provider may attend at any time and asks that management keys be used because Perrin will likely be at work.”
 - `keys` = true — unverified assertion; from Event 008 — Email from Perrin Dall (Tenant, Northbridge Lettings): “asks that management keys be used because Perrin will likely be at work”
-- `keys` = true — unverified assertion; from Event 009 — Email from Ilyra Venn (Property Manager, Northbridge Lettings): “request for management-key access”
-- `access` = true — unverified assertion; from Event 009 — Email from Ilyra Venn (Property Manager, Northbridge Lettings): “Passes on the reported lock issues and Perrin’s broad availability and request for management-key access.”
 - `keys` = false — unverified assertion; from Event 022 — Call from Ilyra Venn (Property Manager, Northbridge Lettings): “Edrin says they have not collected management keys and cannot give a definite date for doing so.”
 - `completion` = true — unverified assertion; from Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings): “Edrin says the work was completed on Friday, 19 September”
 - `completion` = true — unverified assertion; from Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings): “Records Edrin’s verbal statement that the work was completed”
@@ -120,130 +75,129 @@ Every claim is a source assertion with an exact quote; unverified claims were ne
 ### Reading of each source (Jev route → Claude reading)
 
 **Intake report** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: new_request, route `request_quote`, medium confidence.
-Tenant at Unit 2, 18 Brindlewick Mews reports the bathroom window will not open and the bedroom window opens but will not secure, and also reports that keys are missing. *Why:* Newly reported window defects need contractor assessment or quote; the key report lacks detail on which keys and what action is wanted, so it needs clarification.
-- Unknown (affects route): Which keys are missing (property door keys, window keys, communal), when they were lost and whether a lock change or replacement is wanted.
-- Unknown (affects route): Whether the bedroom window not securing leaves the property insecure, which may raise urgency.
-- Unknown: No consent or access method given for a contractor visit.
+Tenant reports the bathroom window will not open and the bedroom window opens but cannot be secured, and also says keys are missing. No access, appointment or cost details provided. *Why:* Newly reported window defects with no prior assessment, so a contractor quote or inspection is the normal first step; the missing keys element lacks the detail needed to route and needs clarification.
+- Unknown (affects route): Unclear which keys are missing (property, window or communal), whether they are lost or never supplied, and whether replacement or a lock change is needed.
+- Unknown: No detail on the window types, age or whether the bedroom window fault leaves the flat insecure overnight.
+- Unknown: No consent or access method given for a contractor to inspect the windows.
 - Unknown: No availability or preferred appointment times provided by the tenant.
 
 **Event 002 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: update, route `request_quote`, medium confidence.
-The property manager has written to the landlord summarising the reported lock problems and asking for permission to arrange work through a Northbridge Lettings service provider. No price or spending limit is given and no approval has yet been received. *Why:* Internal update seeking landlord permission; no authority, price or appointment has been given, so the current case still needs a quote/assessment before work can be instructed.
-- Unknown (affects route): The message refers to "lock problems" while the open case is about windows (bathroom window not opening, bedroom window not securing) plus missing keys; confirm which work items the permission request covers.
-- Unknown: No cost estimate or spending limit is stated, so the full comparable commitment including tax is unknown.
-- Unknown: The named service provider and the scope of work to be instructed are not identified.
+The property manager has written to the landlord summarising the reported lock/window problems and asking for permission to arrange work via a Northbridge Lettings service provider. No cost estimate, spending limit or landlord approval is included yet. *Why:* Internal update seeking landlord permission; the bathroom window defect still needs a contractor quote/assessment with a full total before work can be instructed.
+- Unknown: No cost estimate, spending limit or full comparable total including tax is given for the proposed work.
+- Unknown (affects route): The message refers generally to 'lock problems'; it is unclear whether it covers the bathroom window, the bedroom window that will not secure, and the missing keys, or only some of these.
+- Unknown: Landlord permission is requested but not yet given; no authority is recorded.
 
-**Event 003 — Email from Sella Marr (Landlord, Northbridge Lettings)** — Jev `jev_only` → `request_quote` — Jev routed with confidence 0.82; nothing in the message needs Claude.. Jev only: update, route `request_quote`, high confidence.
-Routed by Jev to request_quote. Claude did not read this message.
+**Event 003 — Email from Sella Marr (Landlord, Northbridge Lettings)** — Jev `jev_route` → `request_quote` — Jev routes; Claude extracts quotes and claims. Open tenant questions may be answered.. claude-opus-5: update, route `request_quote`, medium confidence.
+Landlord Sella Marr authorises Northbridge Lettings to proceed with its own service provider for the lock work. No spending limit or detailed scope is given. *Why:* Authority given but no quote or scope; a quote is still needed before instructing work.
+- Unknown (affects route): Scope of the authorised 'lock work' is unclear - whether it covers the bathroom window, bedroom window and missing keys.
+- Unknown: No spending limit or cost estimate stated; full cost including tax is unknown.
 
-**Event 004 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.53 is below the Jev-only bar 0.8. A route change on an existing case.. claude-opus-5: update, route `clarify`, medium confidence.
-Property manager has written to the tenant asking whether the reported lock problem concerns locks on opening window sashes rather than internal room doors. No new facts or decisions are provided. *Why:* Message is a clarification request to the tenant; essential scope information is still missing, so the item stays in clarify.
-- Unknown (affects route): Unclear whether the reported lock fault relates to window sash locks or internal room door locks; tenant response needed.
+**Event 004 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.54 is below the Jev-only bar 0.8. Open tenant questions may be answered. A route change on an existing case.. claude-opus-5: update, route `clarify`, high confidence.
+Property manager Ilyra Venn emails the tenant asking for clarification on whether the lock issue concerns opening sashes rather than internal room doors. No new information about the defects is provided. *Why:* Message is itself a request for clarification from the manager to the tenant; essential scope information is still missing.
+- Unknown (affects route): Whether the reported lock problems relate to window sashes or internal room doors is still unresolved; scope of authorised work remains unclear.
 
-**Event 005 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Jev route confidence 0.39 is below 0.5.. claude-opus-5: access_or_appointment, route `confirm_appointment`, medium confidence.
-Property manager Ilyra Venn emails the tenant asking for availability so a provider can visit and inspect the reported lock/window problems. No date, time or access arrangement is confirmed yet. *Why:* The message is about arranging a visit for the already known job, so it is an appointment-arrangement step rather than a new report; the underlying lock/window ambiguity remains open.
-- Unknown: No date or time proposed or agreed; tenant's availability still awaited.
-- Unknown (affects route): Still unclear whether the lock fault concerns window sash locks or internal door locks; the clarification question appears unanswered.
-- Unknown: No access method or entry permission recorded for the proposed visit.
+**Event 005 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Jev route confidence 0.43 is below 0.5.. claude-opus-5: access_or_appointment, route `confirm_appointment`, medium confidence.
+The property manager has emailed the tenant asking for availability for a provider visit to inspect the reported lock problems. No date, time or access arrangement has been agreed yet, and the window-versus-door lock question remains unanswered. *Why:* Message is from the managing agent to the tenant purely to arrange a visit for the already known job, so it is appointment coordination; no date, consent or scope detail is asserted.
+- Unknown: No date or time proposed or agreed; the tenant's availability for the inspection visit is still needed.
+- Unknown (affects route): Still unclear whether the lock problems are on the window sashes or on internal room doors, which affects the work item and scope of authorised work.
+- Unknown: No explicit consent or access method recorded for the provider visit.
 
-**Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: answer_to_question, route `confirm_appointment`, medium confidence.
-Tenant clarifies via call that the faults concern opening-sash window locks, not internal door locks: bedroom sash will not lock, bathroom sash is stuck with sticking locking buttons, and the kitchen sash has no key. Tenant grants access for tradespeople but no key handover arrangement or appointment date is given, and newly mentions mould in the bathroom. *Why:* Clarification confirms the faults are window sash locks, matching the windows category; authority to proceed already given, so the outstanding step is arranging the provider visit, though a precise date and time is still missing.
-- Unknown: No appointment date or time offered; tenant availability for the provider visit is still unknown.
-- Unknown: Tenant grants access but no key handover or entry arrangement is specified.
-- Unknown (affects route): Extent of bathroom mould (cause, area affected) is unclear and may need a separate inspection or damp assessment.
+**Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Jev route confidence 0.49 is below 0.5. Possibly several issues: splitting cases needs Claude.. claude-opus-5: answer_to_question, route `confirm_appointment`, medium confidence.
+The property manager records a call with the tenant clarifying that the lock problems are on the opening window sashes (bedroom sash will not lock, bathroom sash stuck with sticking locking buttons, kitchen sash has no key). The tenant grants access for tradespeople but no key handover or appointment time is set, and mould in the bathroom is newly mentioned. *Why:* The outstanding scope ambiguity is resolved (window sash locks, not internal doors) and access is granted, so the remaining step for the authorised work is arranging and confirming the visit; the mould report is a separate new issue needing assessment.
+- Unknown: No appointment date or time has been given; tenant availability for a provider visit is still needed.
+- Unknown: Access is granted but no key handover arrangement is specified; also a replacement key is needed for the kitchen sash.
+- Unknown (affects route): Extent of the mould in the bathroom and whether it relates to the stuck window is unclear.
 
-**Event 007 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager chases the tenant for availability so a provider visit to the window/sash lock issues can be arranged. No date or time agreed yet. *Why:* Message is purely about arranging a visit for an already known job.
-- Unknown: No availability or appointment date and time has been provided by the tenant yet.
+**Event 007 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager chases the tenant for availability so a provider visit can be arranged for the window/sash lock issues. No date or time given yet. *Why:* Message is purely about arranging a visit for a known job.
+- Unknown: No date or time proposed or agreed; tenant availability still outstanding.
 
-**Event 008 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.69 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Tenant says the provider may attend at any time and asks that management keys be used as they will likely be at work. No specific date or time agreed. *Why:* Tenant grants open access and requests key-based entry for a known job; next step is confirming a visit.
-- Unknown: No specific date or time agreed; 'any time' is general availability only.
-- Unknown: Confirm management keys for this unit exist and the collection/return arrangement.
+**Event 008 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.61 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Tenant says the provider may attend at any time and asks that management keys be used as they will likely be at work. No specific date and time is agreed. *Why:* Message concerns arranging access for a known job; open-ended availability plus key request, so appointment confirmation is next step.
+- Unknown: No precise date and time proposed; tenant says any time, so a slot still needs fixing with the provider.
+- Unknown: Whether management keys for this property are held and how they will be issued and returned.
 
 **Event 009 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Possibly several issues: splitting cases needs Claude.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-The property manager has forwarded the reported sash lock issues, the tenant's broad availability and request for management-key access to contractor Hearthline Access, and asked them to propose a specific visit time. *Why:* Message is about arranging a visit for the already known sash lock job, so it belongs on the appointment route.
-- Unknown: No specific visit date and time has been agreed yet; the contractor has only been asked to propose one.
-- Unknown: Key custody and return arrangements for the management keys are not stated.
+The property manager has forwarded the reported window-sash lock issues, the tenant's broad availability and the request for management-key access to contractor Tarin Vale, and asked the contractor to propose a specific visit time. No date and time has been agreed yet. *Why:* Message is about arranging a visit for the already known window-lock job; the contractor has been asked to propose a time, so the next step remains confirming the appointment.
+- Unknown: No proposed or agreed date and time yet; awaiting the contractor's suggested slot.
+- Unknown: Management-key access has been requested by the tenant but no key handover or custody arrangement with the contractor is confirmed.
 
-**Event 010 — Call from Tarin Vale (Contractor, Hearthline Access)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Contractor Tarin Vale left a voicemail for the tenant asking for a call back to arrange a visit. No date or time has been agreed. *Why:* Message concerns arranging a visit for a known job, so confirm_appointment applies.
-- Unknown: No specific visit date or time proposed or agreed; contractor awaits tenant call back.
-- Unknown: Tenant previously asked for management-key access; the contractor's message does not confirm a key arrangement.
+**Event 010 — Call from Tarin Vale (Contractor, Hearthline Access)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Contractor Tarin Vale left a voicemail for the tenant asking for a call back to arrange a visit. No date or time agreed. *Why:* Message concerns arranging a visit for a known job; no appointment yet agreed.
+- Unknown: No date or time proposed; contractor and tenant still need to agree a visit slot.
 
-**Event 011 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager asks the contractor to propose a date and time for the visit and for collecting management keys, noting the tenant has broad scheduling flexibility. No specific appointment or key handover is yet agreed. *Why:* Message is about arranging a visit and key collection for an already known job.
-- Unknown: No specific date and time has been proposed or agreed; contractor still to confirm.
-- Unknown: Management key collection arrangement not yet confirmed (time, place, return).
+**Event 011 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager asks the contractor to propose a date and time for the visit and for collecting management keys, noting the tenant has broad scheduling flexibility. No specific appointment is agreed yet. *Why:* Message is about arranging the visit for a known job; no firm appointment stated.
+- Unknown: No specific date and time proposed yet; contractor still to confirm.
+- Unknown: Management key collection arrangement requested but not yet confirmed.
 
-**Event 012 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: update, route `confirm_appointment`, medium confidence.
-Property manager tells the contractor the job has been reassigned and asks them not to attend. No appointment was previously agreed; the visit arrangement with this contractor is cancelled. *Why:* Message concerns cancelling/standing down a visit for a known job, so appointment handling applies.
-- Unknown: Who the job has been reassigned to and whether management-key access arrangements transfer to the new provider.
-- Unknown: No visit date has been agreed; a new appointment still needs arranging with the new provider.
+**Event 012 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: update, route `confirm_appointment`, medium confidence.
+Northbridge Lettings advises the contractor that the job has been reassigned and asks them not to attend. No new appointment details given. *Why:* Message concerns cancelling the planned visit for a known job; appointment arrangements still outstanding.
+- Unknown: No replacement contractor or new visit date/time is given; who will now attend and when?
+- Unknown: Management key collection arrangement with the previous contractor needs cancelling or transferring.
 
-**Event 013 — Update from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: update, route `confirm_appointment`, medium confidence.
-Internal note from the property manager recording that the service provider for the bathroom window job was changed. No new appointment, access or key details given. *Why:* Known job with provider change; next step remains arranging/confirming the visit with the new provider, consistent with the router decision.
-- Unknown: No date or time proposed for the new provider's visit; appointment still needs arranging.
-- Unknown: Unclear whether the management-key access arrangement carries over to the new provider.
+**Event 013 — Update from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: update, route `confirm_appointment`, medium confidence.
+Internal note from the property manager recording that the service provider for this job was changed. No appointment, access or key details are given. *Why:* Administrative update on a known job; next step remains arranging and confirming the visit with the new provider.
+- Unknown: No visit date or time is given; the new provider still needs to propose and confirm an appointment.
+- Unknown: Unclear whether the new provider will use management keys as previously requested.
 
-**Event 014 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Property manager asks the tenant for availability again following the change of provider, and notes management keys may be used if the tenant is out. No specific date or time is agreed. *Why:* Message is about arranging a visit for a known job; no firm appointment agreed yet.
-- Unknown: No date or time has been proposed or agreed for the new provider's visit; tenant's availability still needed.
-- Unknown: Whether management keys will actually be collected by the new provider, and by whom, is not confirmed.
+**Event 014 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager asks the tenant for availability again following the provider change, and notes management keys may be used if the tenant is out. No specific date or time is agreed. *Why:* Message is about arranging a visit for a known job; no appointment agreed yet.
+- Unknown: No date or time has been proposed or agreed for the new provider's visit; tenant availability still needed.
+- Unknown: Whether the new provider will collect management keys, and when, is not confirmed.
 
-**Event 015 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: update, route `confirm_appointment`, high confidence.
-Property manager informs the landlord that the service provider for the bathroom window job has changed and that visit arrangements are in progress. No date, time or access arrangement is stated. *Why:* Status update about arranging a visit for the known job; appointment still to be confirmed.
-- Unknown: No specific visit date or time has been given by the new provider.
-- Unknown: Unclear whether tenant access or management keys will be used for the new provider's visit.
+**Event 015 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: update, route `confirm_appointment`, medium confidence.
+Ilyra Venn informs the landlord that the service provider has changed and that visit arrangements are in progress. No date or time is given. *Why:* Informational update to landlord about an in-progress visit arrangement for the known job; appointment still to be confirmed.
+- Unknown: No specific date or time for the new provider's visit is given.
 
-**Event 016 — Email from Tarin Vale (Contractor, Hearthline Access)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Former contractor Tarin Vale says he spoke with the tenant and a date and time were discussed and agreed verbally, but provides no specifics or written confirmation, and queries why the job was removed from him. *Why:* Message concerns arranging/confirming a visit for a known job; no specific date or time stated, so no schedule claim.
-- Unknown: Tarin references a date and time agreed with the tenant but gives none; the precise appointment details are unknown.
-- Unknown: Tarin appears unaware the job was reassigned and asks why; staff should confirm he is not to attend.
+**Event 016 — Email from Tarin Vale (Contractor, Hearthline Access)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: update, route `confirm_appointment`, high confidence.
+Contractor Tarin Vale says he spoke with the tenant and a date and time were discussed and agreed verbally, but provides no specific date or time. He also queries why the job was reassigned. *Why:* Message concerns arranging a visit for a known job; no precise date given, so appointment remains unconfirmed.
+- Unknown: Contractor says a date and time were agreed with the tenant but does not state them; the precise appointment is still unknown.
+- Unknown: Contractor appears unaware the job was reassigned to another provider; needs a reply clarifying.
 
-**Event 017 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Tenant Perrin Dall offers Thursday 18 September between 08:30 and 10:30 as a possible visit time for the bathroom window job. No appointment is confirmed yet. *Why:* Message is about arranging a visit for a known job; offered slot is not yet a confirmed appointment.
-- Unknown: Tenant proposes a window of 08:30-10:30 on Thursday 18 September but no appointment has been confirmed with the new provider.
-- Unknown: No explicit permission to enter or arrangement for management keys if the tenant is out.
+**Event 017 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Tenant Perrin Dall offers Thursday 18 September 08:30–10:30 as a possible visit slot for the bathroom window job. No appointment is confirmed yet. *Why:* Message is about arranging a visit for a known job; offered slot not yet confirmed.
+- Unknown: Tenant offers Thursday 18 September 08:30–10:30 but no appointment is confirmed; needs contractor confirmation of a precise date and time.
+- Unknown: No explicit permission to enter or arrangement if tenant is out; confirm access method and whether management keys are to be used.
 
-**Event 018 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
-Ilyra Venn passes Perrin's Thursday 08:30–10:30 availability to the new contractor Edrin Moss and asks him to confirm a visit time. No appointment is yet confirmed. *Why:* Message is about arranging a visit for a known job.
-- Unknown: Only a window of availability is offered; no confirmed date and time from the contractor yet.
-- Unknown: No explicit consent or access method recorded for the new provider's visit.
+**Event 018 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `confirm_appointment` — Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `confirm_appointment`, high confidence.
+Property manager passes the tenant's Thursday 08:30–10:30 availability to the new contractor, Keypath Repairs, and asks them to confirm a visit time. No appointment is confirmed yet. *Why:* Message is about arranging a visit for a known job; no confirmed slot yet.
+- Unknown: Only a time window is offered; the contractor has not yet confirmed a precise appointment date and time.
+- Unknown: No explicit consent or access method recorded for the visit (whether management keys will be used).
 
-**Event 019 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.57 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. A route change on an existing case.. claude-opus-5: access_or_appointment, route `supply_keys`, high confidence.
-Tenant Perrin Dall asks whether management keys can be supplied for the window visit because they will be at work. No key arrangement is confirmed and no appointment time is agreed. *Why:* Message is about key supply for contractor entry on a known job.
-- Unknown: Tenant asks about management keys but no key custody or return arrangement is confirmed; confirm whether management keys exist and may be used.
-- Unknown: Tenant has not explicitly granted permission for entry in their absence; confirm consent.
-- Unknown: No confirmed appointment date and time from the contractor for the Thursday 08:30-10:30 slot.
+**Event 019 — Email from Perrin Dall (Tenant, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.57 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered. A route change on an existing case.. claude-opus-5: access_or_appointment, route `supply_keys`, medium confidence.
+Tenant Perrin Dall asks whether management keys can be supplied for the window repair visit as they will be at work. No precise appointment date and time is confirmed. *Why:* Message is about contractor entry via management keys for a known job, so supply_keys as routed.
+- Unknown: Tenant asks about management keys but does not confirm an arrangement; confirm whether keys may be issued and custody/return terms.
+- Unknown: Tenant has not explicitly granted permission to enter in their absence, only asked about keys.
+- Unknown: No confirmed date and time for the visit; previously only Thursday 18 September 08:30-10:30 was offered.
 
-**Event 020 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.77 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.. claude-opus-5: access_or_appointment, route `supply_keys`, high confidence.
-Property manager forwards the tenant's management-keys request to the contractor and asks him to confirm a visit time for the bathroom window job. *Why:* Message is about key supply for contractor entry plus appointment confirmation; keys are the main ask.
-- Unknown: No confirmation that management keys will actually be released, or custody/return arrangements.
+**Event 020 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.74 is below the Jev-only bar 0.8. Open tenant questions may be answered.. claude-opus-5: access_or_appointment, route `supply_keys`, high confidence.
+Property manager forwards the tenant's management-keys request to the contractor and asks him to confirm a visit time. No date, time or key arrangement is confirmed yet. *Why:* Message concerns key access arrangements for an already known job; follows router decision.
+- Unknown: Whether management keys will actually be released to Keypath Repairs, and the collection/return arrangement, is not stated.
 - Unknown: No confirmed visit date and time from the contractor yet.
 
-**Event 021 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.73 is below the Jev-only bar 0.8.. claude-opus-5: chase, route `supply_keys`, medium confidence.
-Property manager follows up with the contractor because no firm visit time has been recorded, restating the tenant's availability and request for key access. No appointment or key arrangement is confirmed. *Why:* Chase about key access and scheduling on a known job; key access is the outstanding step, matching the router's supply_keys route.
-- Unknown: No firm date and time is agreed with the contractor; only the tenant's general availability is restated.
-- Unknown (affects route): Whether management keys exist and can be released to Keypath Repairs, and the return arrangement, is not confirmed.
+**Event 021 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Route confidence 0.63 is below the Jev-only bar 0.8. Open tenant questions may be answered.. claude-opus-5: chase, route `supply_keys`, medium confidence.
+Property manager follows up with the contractor as no firm visit time is recorded, repeating the tenant's availability and request for key access. *Why:* Chase about key access and visit time for the known window job; supply_keys per router decision.
+- Unknown: No precise appointment date and time confirmed by the contractor.
+- Unknown: Key custody and return arrangements for contractor entry are not confirmed.
+- Unknown: No explicit consent for entry from the authorised person recorded.
 
-**Event 022 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route.. claude-opus-5: update, route `supply_keys`, high confidence.
-Property manager's call note records that contractor Edrin Moss has attempted the property three times without finding the tenant in, has not collected management keys, and cannot give a definite date for doing so. Key release and return arrangements remain unresolved. *Why:* Message is about contractor entry and management-key collection for a known job, so supply_keys applies as per router decision.
-- Unknown: Whether management keys exist, can be released to Keypath Repairs, and the return arrangement, is still unconfirmed; contractor gives no collection date.
-- Unknown: No dates or times for the three attempted visits are given, and no firm appointment slot is agreed with the tenant.
-- Unknown: No explicit written consent from the tenant for entry using management keys is recorded.
+**Event 022 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `supply_keys` — Jev routes; Claude extracts quotes and claims. supply_keys is not a Jev-only route. Open tenant questions may be answered.. claude-opus-5: update, route `supply_keys`, high confidence.
+Contractor Edrin Moss reports three unsuccessful attempts to attend (no dates given), has not collected management keys and cannot commit to when they will. Tenant's request for management-key access remains outstanding. *Why:* Message is about key custody blocking contractor entry; supply_keys matches router decision.
+- Unknown: No arrangement or date for the contractor to collect management keys; needs to be fixed.
+- Unknown: No dates or times given for the three attempted visits, and no confirmed appointment slot.
+- Unknown: Tenant consent for entry using management keys while absent has not been explicitly recorded.
 
-**Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Jev route confidence 0.33 is below 0.5.. claude-opus-5: completion_report, route `close_item`, medium confidence.
-On a call, contractor Edrin Moss states the bathroom window work was completed on Friday 19 September and that an invoice will be sent on Friday 26 September. No visit details, work description or completion evidence were provided, and this conflicts with the earlier report that keys were never collected and access was not achieved. *Why:* Contractor reports the work item as finished, so the next step is completion verification/closure, though evidence is missing and the access history conflicts.
-- Unknown (affects route): Contractor asserts completion on 19 September but gives no work description, visit details or completion evidence; verification is needed before closing.
-- Unknown (affects route): Earlier the contractor said they had not collected management keys and had not gained entry; how access was obtained on 19 September is unexplained.
-- Unknown: If management keys were used, key custody and return arrangements are unconfirmed.
+**Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `claude` — Jev route confidence 0.39 is below 0.5.. claude-opus-5: completion_report, route `clarify`, medium confidence.
+On a call, contractor Edrin Moss states the bathroom window work was completed on Friday 19 September and that an invoice will follow on Friday 26 September. No visit details, work description, completion evidence or invoice are provided, and this conflicts with the earlier record of failed access attempts and uncollected management keys. *Why:* A completion is asserted without any evidence and it contradicts the earlier access failures, so the item cannot be closed until the visit and outcome are verified.
+- Unknown (affects route): Contractor asserts the work was completed on 19 September but provides no visit details, work description or completion evidence; this conflicts with earlier reports of three failed access attempts and no management keys collected. Confirm with the tenant whether access occurred and the window now opens.
+- Unknown: No record of how the contractor gained entry, given keys were never confirmed as collected.
+- Unknown: No invoice is visible; contractor says it will be sent on 26 September. Amount and scope of work remain unknown.
 
-**Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `close_item` — Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.57 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.. claude-opus-5: update, route `close_item`, medium confidence.
-Internal note by the property manager recording the contractor's verbal claim that the bathroom window work was completed and an invoice is due Friday. No appointment, attendance record or invoice is on file. *Why:* Follows router decision close_item; the note concerns the asserted completion of the current work item, though evidence is still outstanding.
-- Unknown (affects route): Completion is asserted verbally only; no attendance record, work description or invoice is on file to verify it.
-- Unknown: How entry was obtained is still unexplained, as no appointment or key collection is recorded.
+**Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, high confidence.
+Internal note from the property manager recording the contractor's verbal claim that the bathroom window work was completed and that an invoice is expected Friday. No confirmed appointment, attendance record or invoice is on file. *Why:* Completion asserted second-hand with no evidence; tenant confirmation still outstanding, so clarify stands.
+- Unknown (affects route): No attendance record, appointment or invoice evidences the claimed completion; confirm with the tenant whether access occurred and the window now opens.
 
-**Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `close_item` — Jev routes; Claude extracts quotes and claims. close_item is not a Jev-only route. Route confidence 0.78 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.. claude-opus-5: completion_report, route `close_item`, medium confidence.
-Contractor Edrin Moss again states the bathroom window work is complete and promises to send the invoice later today. No invoice, appointment record or attendance evidence is on file. *Why:* Contractor reports the work item finished, matching the close_item route, though supporting evidence remains outstanding.
-- Unknown: Completion is still asserted verbally only; no invoice, attendance record or work description has been supplied to verify it.
-- Unknown: No record of how entry was obtained; keys were previously said not to have been collected and three attempts failed.
+**Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)** — Jev `jev_route` → `clarify` — Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.. claude-opus-5: update, route `clarify`, high confidence.
+Contractor again states the bathroom window work is complete and promises an invoice later today. No invoice, appointment, visit notes or attendance evidence is on file. *Why:* Repeated unevidenced completion claim conflicting with failed access history; needs clarification before closing.
+- Unknown (affects route): Completion is asserted again with no invoice, appointment, visit notes or attendance evidence; confirm with the tenant whether access occurred and the window now opens.

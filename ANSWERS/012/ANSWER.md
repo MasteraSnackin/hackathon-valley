@@ -1,12 +1,12 @@
 # Property Management — case 012: Lock Maintenance Request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** Unit 2, 18 Brindlewick Mews, Orellin ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-25T12:06:33+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 25 of 25
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `9f2327bea788a66b…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `9f2327bea788a66b…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -42,16 +42,16 @@ The initial report and 24 further sources, submitted one at a time in availabili
 | 23 | 2025-09-24T09:42:09+00:00 | Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings) |
 | 24 | 2025-09-25T12:06:33+00:00 | Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings) |
 
-## Final decision — system case `cbe9f303f698`
+## Final decision — system case `e6659b8ac7c2`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
 - **Proposed next action:** `request_quote` — Mould appearing in bathroom (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** A case manager must define a supported action for this situation.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `8f694f83c9f0` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `74913d80417d` as a separate issue.
 
-**Latest reading (model, medium confidence, route `request_quote`):** Tenant clarifies via call that the faults concern opening-sash window locks, not internal door locks: bedroom sash will not lock, bathroom sash is stuck with sticking locking buttons, and the kitchen sash has no key. Tenant grants access for tradespeople but no key handover arrangement or appointment date is given, and newly mentions mould in the bathroom.
+**Latest reading (model, medium confidence, route `request_quote`):** The property manager records a call with the tenant clarifying that the lock problems are on the opening window sashes (bedroom sash will not lock, bathroom sash stuck with sticking locking buttons, kitchen sash has no key). The tenant grants access for tradespeople but no key handover or appointment time is set, and mould in the bathroom is newly mentioned.
 
 ### Actions taken
 
@@ -61,108 +61,46 @@ The initial report and 24 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | no source recorded |
 | `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `1c3916e6e294`
+## Final decision — system case `a20e67bf627d`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Kitchen sash has no key (category windows)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `8f694f83c9f0` as a separate issue.
-
-**Latest reading (model, medium confidence, route `request_quote`):** Tenant clarifies via call that the faults concern opening-sash window locks, not internal door locks: bedroom sash will not lock, bathroom sash is stuck with sticking locking buttons, and the kitchen sash has no key. Tenant grants access for tradespeople but no key handover arrangement or appointment date is given, and newly mentions mould in the bathroom.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings) |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `395cb087080c`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Bedroom sash opens but will not lock (category windows)
-- **Next step:** Verify the person, property and work item mapping.
-- **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `8f694f83c9f0` as a separate issue.
-
-**Latest reading (model, medium confidence, route `request_quote`):** Tenant clarifies via call that the faults concern opening-sash window locks, not internal door locks: bedroom sash will not lock, bathroom sash is stuck with sticking locking buttons, and the kitchen sash has no key. Tenant grants access for tradespeople but no key handover arrangement or appointment date is given, and newly mentions mould in the bathroom.
-
-### Actions taken
-
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
-
-### Escalated to a person (handover)
-
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 8f694f83c9f0: Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings) |
-
-### Missing information and conflicting facts
-
-- None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
-
-## Final decision — system case `073084709ae9`
-
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Missing keys (category doors_locks)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `8f694f83c9f0` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `74913d80417d` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Tenant at Unit 2, 18 Brindlewick Mews reports the bathroom window will not open and the bedroom window opens but will not secure, and also reports that keys are missing.
+**Latest reading (model, medium confidence, route `clarify`):** Tenant reports the bathroom window will not open and the bedroom window opens but cannot be secured, and also says keys are missing. No access, appointment or cost details provided.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Missing keys
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `fda327516e30`
+## Final decision — system case `25bc7c82b79e`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Bedroom window opens but will not secure (category windows)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `request_quote` — Bedroom window will not secure when closed (category windows)
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `8f694f83c9f0` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `74913d80417d` as a separate issue.
 
-**Latest reading (model, medium confidence, route `request_quote`):** Tenant at Unit 2, 18 Brindlewick Mews reports the bathroom window will not open and the bedroom window opens but will not secure, and also reports that keys are missing.
+**Latest reading (model, medium confidence, route `request_quote`):** Tenant reports the bathroom window will not open and the bedroom window opens but cannot be secured, and also says keys are missing. No access, appointment or cost details provided.
 
 ### Actions taken
 
@@ -172,44 +110,54 @@ The initial report and 24 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 8f694f83c9f0: Intake report |
+| `classification` | case manager | `require-classification` | Verify the received source assertion. Confirm that the category and work item match the source request. | Split from case 74913d80417d: Intake report |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `8f694f83c9f0`
+## Final decision — system case `74913d80417d`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `close_item` — Bathroom window will not open (category windows)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Bathroom window will not open (category windows)
+- **Next step:** Clarify before routing: Completion is asserted again with no invoice, appointment, visit notes or attendance evidence; confirm with the tenant whether access occurred and the window now opens.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `close_item`):** Contractor Edrin Moss again states the bathroom window work is complete and promises to send the invoice later today. No invoice, appointment record or attendance evidence is on file.
+**Latest reading (claude-opus-5, high confidence, route `clarify`):** Contractor again states the bathroom window work is complete and promises an invoice later today. No invoice, appointment, visit notes or attendance evidence is on file.
 
-**Why:** Contractor reports the work item finished, matching the close_item route, though supporting evidence remains outstanding.
+**Why:** Repeated unevidenced completion claim conflicting with failed access history; needs clarification before closing.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for letting us know about the bathroom window that will not open and the bedroom window that opens but will not secure. So we can get this moving, could you tell us a bit more about the missing keys? In particular, which keys they are (for example property, window or communal do …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks again for your report. Just so we have the details right, could you confirm what happens when you try to open the bathroom window - for example, whether the handle moves but the window stays shut, or whether the handle or lock itself is stuck? Many thanks, Northbridge Lettings”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for bearing with us on this. Just one more thing so we have the details right: when you mentioned the locks, are these the locks on the opening windows themselves (the bathroom and bedroom windows), or locks on internal room doors? Many thanks, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for your patience while we sort out the bathroom window that will not open and the bedroom window that opens but will not secure. So we can arrange for someone to come and take a look, could you let us know: 1. Which days and times suit you best over the next couple of weeks? 2. …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for getting back to us about the windows. So we can firm things up, could you let us know which days and rough times over the next couple of weeks would suit best for someone to attend? Even though you're happy for access at any time, it helps to have a preferred date and time s …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for coming back to us about the bathroom window that will not open. So we can get everything lined up, could you help with three things? 1. If you are at work, are you happy for someone to enter the property without you there, and is there anyone else aged 18 or over who would b …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for your message about access while you're at work. So we can sort out the arrangements, could you let us know who currently holds a set of keys for the flat, and whether you'd be happy for keys to be used for entry while you're out and then returned to you afterwards? Many than …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Perrin, Thanks for your patience with this one. Could you let us know whether anyone has been into the flat recently to look at the bathroom window, and whether the window now opens as it should? Many thanks, Northbridge Lettings”
+- Clarification `triage` to tenant: closed — Clarify before routing: Unclear which keys are missing (property, window or communal), whether they are lost or never supplied, and whether replacement or a lock change is needed.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: closed — Clarify before routing: Whether the reported lock problems relate to window sashes or internal room doors is still unresolved; scope of authorised work remains unclear.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: Still unclear whether the lock problems are on the window sashes or on internal room doors, which affects the work item and scope of authorised work.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `keys` to tenant: closed — Establish key custody and return arrangements.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: open — Clarify before routing: Contractor asserts the work was completed on 19 September but provides no visit details, work description or completion evidence; this conflicts with earlier reports of three failed access attempts and no management keys colle …
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `commitments` | case manager | `require-commitments` | Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally. | no source recorded |
-| `completion` | reviewer | `require-completion` | Verify completion of this work item with usable evidence. A verified route is required before asking externally. | Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings), Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings), Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettin … |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **completion**: Completion is still asserted verbally only; no invoice, attendance record or work description has been supplied to verify it.
-- **access**: No record of how entry was obtained; keys were previously said not to have been collected and three attempts failed.
-- 10 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **completion** (blocks the route): Completion is asserted again with no invoice, appointment, visit notes or attendance evidence; confirm with the tenant whether access occurred and the window now opens.
+- 7 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 

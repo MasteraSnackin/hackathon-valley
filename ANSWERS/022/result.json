@@ -1,11 +1,6 @@
 {
-  "status": "settled",
-  "system_case_id": "b6df5319cba546939719ef7eff8c421c",
-  "execution": "native_local",
-  "external_operations": "simulated",
-  "sources_processed": 31,
-  "finished_at": "2026-10-10T16:07:34.466320+00:00",
-  "model_failure_count": 0,
-  "routing_fallback_count": 0,
-  "routing_fallback_errors": []
+  "status": "worker_failed",
+  "error": "RuntimeError: Native workflow or step failed; see evidence.json",
+  "execution": "native_local_partial",
+  "finished_at": "2026-10-10T16:31:24.288281+00:00"
 }

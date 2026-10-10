@@ -1,12 +1,12 @@
 # Property Management — case 027: Move-out maintenance at 46 Fernwick Lane
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 46 Fernwick Lane, Aldermead, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-15T16:25:18+00:00
-- **Runner status:** **interrupted** · execution `see_partial_evidence` · sources processed 18 of 19
+- **Runner status:** **settled** · execution `native_local` · sources processed 19 of 19
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `b19592d3a8ee5d53…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `b19592d3a8ee5d53…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -36,16 +36,16 @@ The initial report and 18 further sources, submitted one at a time in availabili
 | 17 | 2025-09-15T16:25:18+00:00 | Attachment checkout-report.pdf (PDF text extraction) |
 | 18 | 2025-09-15T16:25:18+00:00 | Attachment move-out-works-quotation.pdf (PDF text extraction) |
 
-## Final decision — system case `d61f9da8a2bf`
+## Final decision — system case `b9a856082df5`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Boiler casing taped, inspection required; non-working smoke detector (category appliance)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `request_quote` — Stained and faded carpets - replacement quote (category other)
+- **Next step:** A case manager must define a supported action for this situation.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `018889c7a1bf` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
 
-**Latest reading (model, medium confidence, route `urgent_hazard`):** Checkout report attachment listing move-out damage and defects at 46 Fernwick Lane, covering joinery, flooring, fittings, water damage, carpets and services. It also records a taped boiler casing requiring inspection and a non-working smoke detector.
+**Latest reading (model, medium confidence, route `request_quote`):** Checkout report PDF for 46 Fernwick Lane listing move-out defects, largely matching the quoted schedule of works. It additionally records a boiler casing apparently held with tape requiring inspection, kitchen flooring/worktop damage, missing curtain pole/curtains/bulbs and stained carpets with a replacement quotation requested.
 
 ### Actions taken
 
@@ -55,25 +55,22 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case 018889c7a1bf: Attachment checkout-report.pdf (PDF text extraction) |
+| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
-- 3 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `addab47b8335`
+## Final decision — system case `9ce726ac61cb`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Carpet replacement quote (stained, faded carpets) (category checkout_refurbishment)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Boiler casing taped, inspection required (category appliance)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `018889c7a1bf` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
 
-**Latest reading (model, medium confidence, route `request_quote`):** Property manager logs a move-out damage and defect list for 46 Fernwick Lane covering joinery, window frame, flooring, fittings, water/ceiling damage, radiators, extractor fans, decoration and carpets, with a carpet replacement quote requested. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Checkout report PDF for 46 Fernwick Lane listing move-out defects, largely matching the quoted schedule of works. It additionally records a boiler casing apparently held with tape requiring inspection, kitchen flooring/worktop damage, missing curtain pole/curtains/bulbs and stained carpets with a replacement quotation requested.
 
 ### Actions taken
 
@@ -83,25 +80,23 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | Split from case 018889c7a1bf: Intake report |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case a4791baab609: Attachment checkout-report.pdf (PDF text extraction) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
-- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- 2 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `43442048c443`
+## Final decision — system case `9b8bef445795`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Non-working top-floor smoke detector and taped boiler casing (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `request_quote` — Carpet replacement quote (category checkout_refurbishment)
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `018889c7a1bf` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
 
-**Latest reading (model, medium confidence, route `urgent_hazard`):** Property manager logs a move-out damage and defect list for 46 Fernwick Lane covering joinery, window frame, flooring, fittings, water/ceiling damage, radiators, extractor fans, decoration and carpets, with a carpet replacement quote requested. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
+**Latest reading (model, medium confidence, route `request_quote`):** Property manager logs a move-out schedule of damages and defects at 46 Fernwick Lane, covering joinery, window frame, decoration, flooring, missing items, carpets, radiators, extractor fans and water-damage/ceiling defects. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
 
 ### Actions taken
 
@@ -111,26 +106,23 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case 018889c7a1bf: Intake report |
+| `classification` | case manager | `require-classification` | Verify the received source assertion. Confirm that the category and work item match the source request. | Split from case a4791baab609: Intake report |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `018889c7a1bf`
+## Final decision — system case `cff6dcbe178d`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Move-out damage and defect list (joinery, flooring, fittings, water damage, carpets) (category checkout_refurbishment)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `request_quote` — Water damage / ceiling defects in several rooms and warped kitchen worktop (category other)
+- **Next step:** A case manager must define a supported action for this situation.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
 
-**Latest reading (claude-opus-5, medium confidence, route `urgent_hazard`):** Checkout report attachment listing move-out damage and defects at 46 Fernwick Lane, covering joinery, flooring, fittings, water damage, carpets and services. It also records a taped boiler casing requiring inspection and a non-working smoke detector.
-
-**Why:** Document evidence supporting the existing checkout defect list; taped boiler casing and non-working smoke detector are possible safety hazards needing a person to review, consistent with the router decision.
+**Latest reading (model, medium confidence, route `request_quote`):** Property manager logs a move-out schedule of damages and defects at 46 Fernwick Lane, covering joinery, window frame, decoration, flooring, missing items, carpets, radiators, extractor fans and water-damage/ceiling defects. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
 
 ### Actions taken
 
@@ -140,21 +132,130 @@ The initial report and 18 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: The quotation gives only a single "Labour & Materials" heading with no total figure, no task-by-task prices and no stated exclusions, so the full comparable commitment including VAT cannot be esta … | Event 013 — Email from Iris Bell (Contractor, Alderwick Property Works) |
+| `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
 
 ### Missing information and conflicting facts
 
-- **issue_details** (blocks the route): Whether the carpet replacement quotation is included in the contractor's £3,865.68 quote or needs a separate quote.
-- **issue_details** (blocks the route): Boiler and smoke detector safety items are not in the current quoted task list; confirm who inspects these.
-- **completion**: Landlord approval of the quoted total of £3,865.68 remains outstanding.
-- 8 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- None recorded by the latest reading.
+
+## Final decision — system case `b599635e332e`
+
+- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Proposed next action:** `request_quote` — Kitchen radiator pulled away from wall and rusting radiators (category plumbing)
+- **Next step:** Verify the received source assertion. Confirm that the category and work item match the source request.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
+
+**Latest reading (model, medium confidence, route `request_quote`):** Property manager logs a move-out schedule of damages and defects at 46 Fernwick Lane, covering joinery, window frame, decoration, flooring, missing items, carpets, radiators, extractor fans and water-damage/ceiling defects. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
+
+### Actions taken
+
+- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+
+### Escalated to a person (handover)
+
+| Check | Owner | Rule | What the person must resolve | Evidence |
+|---|---|---|---|---|
+| `classification` | case manager | `require-classification` | Verify the received source assertion. Confirm that the category and work item match the source request. | Split from case a4791baab609: Intake report |
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+
+## Final decision — system case `518597ee00a8`
+
+- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Proposed next action:** `clarify` — Boiler casing taped, inspection required (category appliance)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
+
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Property manager logs a move-out schedule of damages and defects at 46 Fernwick Lane, covering joinery, window frame, decoration, flooring, missing items, carpets, radiators, extractor fans and water-damage/ceiling defects. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
+
+### Actions taken
+
+- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+
+### Escalated to a person (handover)
+
+| Check | Owner | Rule | What the person must resolve | Evidence |
+|---|---|---|---|---|
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case a4791baab609: Intake report |
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+- 2 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+
+## Final decision — system case `a1a4140a85bc`
+
+- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Proposed next action:** `clarify` — Non-working top-floor smoke detector (category other)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+- **Split from system case** `a4791baab609` as a separate issue.
+
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Property manager logs a move-out schedule of damages and defects at 46 Fernwick Lane, covering joinery, window frame, decoration, flooring, missing items, carpets, radiators, extractor fans and water-damage/ceiling defects. The list also includes a non-working top-floor smoke detector and a boiler casing apparently held with tape needing inspection.
+
+### Actions taken
+
+- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+
+### Escalated to a person (handover)
+
+| Check | Owner | Rule | What the person must resolve | Evidence |
+|---|---|---|---|---|
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case a4791baab609: Intake report |
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+- 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+
+## Final decision — system case `a4791baab609`
+
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Move-out schedule of damages and defects (category checkout_refurbishment)
+- **Next step:** Clarify before routing: Checkout report items (kitchen flooring, warped worktop, boiler casing, curtain pole/curtains/bulbs, carpets) are not in the quoted scope; confirm whether the scope should be extended or separately quoted.
+- **Owner:** case manager
+- **Case state:** open · policy v2
+
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Contractor quotation NBL-027-Q1 from Alderwick Property Works for the move-out works at 46 Fernwick Lane, listing twelve tasks under a single "Labour & Materials" heading with a total of £3,865.68. No task-by-task pricing, exclusions or attendance date are given, and several checkout report items are not covered.
+
+**Why:** Quotation document for the existing checkout refurbishment case; it cannot be instructed yet as the total exceeds the approval threshold with landlord approval outstanding, and the scope and pricing breakdown are unclear.
+
+### Actions taken
+
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your patience following the move-out at the property. We're currently going through the list of items noted at the end of the tenancy, which includes things like the staircase newel posts and bedroom door frame, marks and holes to walls, the kitchen flooring and living room lami …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your patience while we work through the move-out list for the property. So that we can take the next steps correctly, could you let us know which of the listed items you consider to be your responsibility, and whether there are any you'd like to query or discuss further? A singl …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, We're reviewing the works listed following the move-out schedule of damages and defects, which includes items such as the damaged newel post, wall damage, ceiling stain-blocking and redecoration. So that we have a clear record, could you let us know which of the listed items you consider to b …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your patience while we work through the move-out schedule of damages and defects at the property. So that we have everything recorded correctly, could you please help with two quick things: 1. Could you confirm which of the items noted at the end of the tenancy you consider to b …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello, Thank you for your patience regarding the move-out works at 46 Fernwick Lane. Comparing the checkout report with the quotation received, a few items from the report don't appear in the quoted scope: the kitchen flooring damage, the warped kitchen worktop, the boiler casing, the missing curtai …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Whether landlord approval is actually in place for these specific move-out works, or still outstanding.; Which listed items are tenant-chargeable damage versus landlord repair, and which need quotes first.
+- Clarification `triage` to tenant: closed — Clarify before routing: Landlord approval is requested but not yet given; which items are tenant-chargeable versus landlord repair remains unresolved.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: open — Clarify before routing: Checkout report items (kitchen flooring, warped worktop, boiler casing, curtain pole/curtains/bulbs, carpets) are not in the quoted scope; confirm whether the scope should be extended or separately quoted.
+
+### Escalated to a person (handover)
+
+| Check | Owner | Rule | What the person must resolve | Evidence |
+|---|---|---|---|---|
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Attachment checkout-report.pdf (PDF text extraction) |
+
+### Missing information and conflicting facts
+
+- **issue_details** (blocks the route): Checkout report items (kitchen flooring, warped worktop, boiler casing, curtain pole/curtains/bulbs, carpets) are not in the quoted scope; confirm whether the scope should be extended or separately quoted.
+- **issue_details**: The quotation gives a single "Labour & Materials" figure with no task-by-task prices, exclusions or VAT statement; confirm whether the £3,865.68 is the full comparable total including tax.
+- **availability**: No attendance date is offered in the quotation; scheduling would need to be agreed after any approval.
+- 7 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
-- Runner: Batch runner process was stopped when the operator's agent session ended, after 18 of 19 sources had settled. The runner itself recorded no result for this case; this status was written afterwards by the operator to mark the interruption. Partial evidence up to checkpoint-017 is preserved; nothing after that was processed.
-- The run did not settle cleanly (status `interrupted`); any recorded state is partial.
+- None recorded. (Jev and Claude calls all returned; no workflow step failed.)
 
 ## Result
 

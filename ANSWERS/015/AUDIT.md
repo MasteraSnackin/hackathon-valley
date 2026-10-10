@@ -1,15 +1,15 @@
-# Case 51f093b54cd9 audit trail
+# Case c7c7a06b6802 audit trail
 
-Vacant Property Preparation · Rear garden weeding, grass cutting and tidy · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Vacant Property Preparation · Rear garden clearance and tidying · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status in progress · stage NO FURTHER ACTION
 
-- **Case ID:** `51f093b54cd940bea5611798c9ea1eb8`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 5 (from 10 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `c7c7a06b6802427cbac64e199cb4f984`
+- **Split from:** [9ff856b7475b](../9ff856b7475b4a59b13f97e1cc4aaa91/history.md)
+- **Entries:** 5 (from 15 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:05:12 UTC — 001 · Message received: Split from case 680c8f82e05f: Attachment property-preparation-quotation.pdf (PDF text extraction)
+## 2026-10-10 16:25:53 UTC — 001 · Message received: Split from case 9ff856b7475b: Attachment property-preparation-quotation.pdf (PDF text extraction)
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -34,7 +34,7 @@ Vacant Property Preparation · Rear garden weeding, grass cutting and tidy · 18
 > Property preparation service £665.00
 
 <a id="entry-002"></a>
-## 2026-10-10 16:05:12 UTC — 002 · Claim `classification` = "garden"
+## 2026-10-10 16:25:53 UTC — 002 · Claim `classification` = "garden"
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
@@ -42,46 +42,41 @@ Vacant Property Preparation · Rear garden weeding, grass cutting and tidy · 18
 > Weed, cut grass and tidy the rear garden.
 
 <a id="entry-003"></a>
-## 2026-10-10 16:05:12 UTC — 003 · Human review opened: `identity`
+## 2026-10-10 16:25:53 UTC — 003 · Policy gates → ACT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:05:12 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** ACT · owner case manager
+- **Next step:** Ready to clarify through the simulated adapter.
 
 <a id="entry-004"></a>
-## 2026-10-10 16:05:12 UTC — 004 · Human review opened: `route`
+## 2026-10-10 16:25:53 UTC — 004 · Action `clarify` succeeded
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:05:12 UTC
-
-> Verify the recipient and permitted communication route.
+- **Actor:** Case coordinator (workflow)
+- **Tool:** simulated provider adapter → Demo contractor · SIMULATED — no external contact or charge
+- **Work item:** Rear garden clearance and tidying
 
 <a id="entry-005"></a>
-## 2026-10-10 16:05:12 UTC — 005 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:25:53 UTC — 005 · Policy gates → NO FURTHER ACTION
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** NO FURTHER ACTION · owner case manager
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 
 
 ---
 
-# Case 4d948ac1bf18 audit trail
+# Case 5e5b97806fe4 audit trail
 
-Vacant Property Preparation · Rear garden clearance including bagged dog waste and disturbed soil · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Vacant Property Preparation · Rear garden clearance including bagged dog waste and disturbed soil · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status in progress · stage NO FURTHER ACTION
 
-- **Case ID:** `4d948ac1bf184a2d8d6a8c71c7043edb`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 6 (from 11 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `5e5b97806fe4440d8ccee5639f71f212`
+- **Split from:** [9ff856b7475b](../9ff856b7475b4a59b13f97e1cc4aaa91/history.md)
+- **Entries:** 5 (from 15 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:04:57 UTC — 001 · Message received: Split from case 680c8f82e05f: Attachment move-out-inspection-report.pdf (PDF text extraction)
+## 2026-10-10 16:25:43 UTC — 001 · Message received: Split from case 9ff856b7475b: Attachment move-out-inspection-report.pdf (PDF text extraction)
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -103,115 +98,50 @@ Vacant Property Preparation · Rear garden clearance including bagged dog waste 
 > Soil in the rear garden has been disturbed by digging.
 
 <a id="entry-002"></a>
-## 2026-10-10 16:04:57 UTC — 002 · Claim `classification` = "garden"
+## 2026-10-10 16:25:43 UTC — 002 · Claim `classification` = "garden"
 
 - **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
+- **Status:** verified — Claude's derived category, auto-accepted by policy v2 at high confidence
 
 > Rear garden requires clearance, including bagged dog waste.
 > Soil in the rear garden has been disturbed by digging.
 
 <a id="entry-003"></a>
-## 2026-10-10 16:04:57 UTC — 003 · Human review opened: `identity`
+## 2026-10-10 16:25:43 UTC — 003 · Policy gates → ACT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:04:57 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** ACT · owner case manager
+- **Next step:** Ready to request quote through the simulated adapter.
 
 <a id="entry-004"></a>
-## 2026-10-10 16:04:57 UTC — 004 · Human review opened: `route`
+## 2026-10-10 16:25:43 UTC — 004 · Action `request_quote` succeeded
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:04:57 UTC
-
-> Verify the recipient and permitted communication route.
+- **Actor:** Case coordinator (workflow)
+- **Tool:** simulated provider adapter → Demo contractor · SIMULATED — no external contact or charge
+- **Work item:** Rear garden clearance including bagged dog waste and disturbed soil
 
 <a id="entry-005"></a>
-## 2026-10-10 16:04:57 UTC — 005 · Human review opened: `classification`
+## 2026-10-10 16:25:43 UTC — 005 · Policy gates → NO FURTHER ACTION
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:04:57 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
-
-<a id="entry-006"></a>
-## 2026-10-10 16:04:57 UTC — 006 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** NO FURTHER ACTION · owner case manager
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 
 
 ---
 
-# Case 2745b724fbe3 audit trail
+# Case 44e4336942e7 audit trail
 
-Vacant Property Preparation · Separate major maintenance works outstanding at property · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Vacant Property Preparation · Rear garden clearance · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status in progress · stage NO FURTHER ACTION
 
-- **Case ID:** `2745b724fbe34bdb85fe55d84adb876e`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 4 (from 9 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `44e4336942e74d128592dadb36aaec29`
+- **Split from:** [9ff856b7475b](../9ff856b7475b4a59b13f97e1cc4aaa91/history.md)
+- **Entries:** 5 (from 15 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:04:01 UTC — 001 · Message received: Split from case 680c8f82e05f: Event 015 — Email from Mira Venn (Property Manager, Northbridge Lettings)
-
-- **Recorded by:** Claude
-- **Reading:** not required
-
-> Event 015 — Email
-> From: Mira Venn (Property Manager, Northbridge Lettings)
-> To: Elian Wren (Contractor, Brindlewick Turnover Services)
->
-> Confirmed the work should remain on hold because separate major maintenance was outstanding. A prospective tenant wanted to move in on 28 September; at that point, landlord approval of the separate maintenance quote had not been received.
-
-<a id="entry-002"></a>
-## 2026-10-10 16:04:01 UTC — 002 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:04:01 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-003"></a>
-## 2026-10-10 16:04:01 UTC — 003 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:04:01 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-004"></a>
-## 2026-10-10 16:04:01 UTC — 004 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-
----
-
-# Case 4ca85da308ff audit trail
-
-Vacant Property Preparation · Rear garden clearance including bagged dog waste · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
-
-- **Case ID:** `4ca85da308ff4ce6a8cc7547d31291ec`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 5 (from 10 immutable records; bookkeeping and unchanged assessments omitted)
-- **Raw records:** [records.jsonl](records.jsonl)
-- All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
-
-<a id="entry-001"></a>
-## 2026-10-10 16:02:25 UTC — 001 · Message received: Split from case 680c8f82e05f: Event 002 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:21:53 UTC — 001 · Message received: Split from case 9ff856b7475b: Event 002 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -223,54 +153,49 @@ Vacant Property Preparation · Rear garden clearance including bagged dog waste 
 > Requested a price and earliest availability for the post-tenancy sanitation, waste removal and garden clearance. Advised that the property is vacant and keys can be collected from the Northbridge Lettings office.
 
 <a id="entry-002"></a>
-## 2026-10-10 16:02:25 UTC — 002 · Claim `classification` = "garden"
+## 2026-10-10 16:21:53 UTC — 002 · Claim `classification` = "garden"
 
 - **Actor:** Claude (extracted)
-- **Status:** verified — Claude's derived category, auto-accepted by policy v1 at high confidence
+- **Status:** verified — Claude's derived category, auto-accepted by policy v2 at high confidence
 
-> post-tenancy sanitation, waste removal and garden clearance
+> garden clearance
 
 <a id="entry-003"></a>
-## 2026-10-10 16:02:25 UTC — 003 · Human review opened: `identity`
+## 2026-10-10 16:21:53 UTC — 003 · Policy gates → ACT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:25 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** ACT · owner case manager
+- **Next step:** Ready to request quote through the simulated adapter.
 
 <a id="entry-004"></a>
-## 2026-10-10 16:02:25 UTC — 004 · Human review opened: `route`
+## 2026-10-10 16:21:53 UTC — 004 · Action `request_quote` succeeded
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:25 UTC
-
-> Verify the recipient and permitted communication route.
+- **Actor:** Case coordinator (workflow)
+- **Tool:** simulated provider adapter → Demo contractor · SIMULATED — no external contact or charge
+- **Work item:** Rear garden clearance
 
 <a id="entry-005"></a>
-## 2026-10-10 16:02:25 UTC — 005 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:21:53 UTC — 005 · Policy gates → NO FURTHER ACTION
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** NO FURTHER ACTION · owner case manager
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 
 
 ---
 
-# Case 9f3574a409ac audit trail
+# Case 905452c907ec audit trail
 
-Vacant Property Preparation · Soil disturbed by digging in garden - scope unclear · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Vacant Property Preparation · Rear garden clearance incl. dog waste and disturbed soil · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status in progress · stage NO FURTHER ACTION
 
-- **Case ID:** `9f3574a409ac459cb66b3d3a4d9e04f6`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 5 (from 10 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `905452c907ec45edbb684929ffb0b6c4`
+- **Split from:** [9ff856b7475b](../9ff856b7475b4a59b13f97e1cc4aaa91/history.md)
+- **Entries:** 5 (from 15 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:02:17 UTC — 001 · Message received: Split from case 680c8f82e05f: Intake report
+## 2026-10-10 16:21:39 UTC — 001 · Message received: Split from case 9ff856b7475b: Intake report
 
 - **Recorded by:** Claude
 - **Reading:** not required
@@ -282,121 +207,48 @@ Vacant Property Preparation · Soil disturbed by digging in garden - scope uncle
 > Logged work requested after the move-out inspection: kitchen, oven and extractor degreasing; bathroom and en-suite limescale removal; removal of waste left in the kitchen; and rear garden clearance, including bagged dog waste. Inspection notes also mention soil disturbed by digging. The property is vacant.
 
 <a id="entry-002"></a>
-## 2026-10-10 16:02:17 UTC — 002 · Claim `classification` = "inspection"
+## 2026-10-10 16:21:39 UTC — 002 · Claim `classification` = "garden"
 
 - **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
+- **Status:** verified — Claude's derived category, auto-accepted by policy v2 at high confidence
 
-> Inspection notes also mention soil disturbed by digging.
+> rear garden clearance, including bagged dog waste. Inspection notes also mention soil disturbed by digging
 
 <a id="entry-003"></a>
-## 2026-10-10 16:02:17 UTC — 003 · Human review opened: `identity`
+## 2026-10-10 16:21:39 UTC — 003 · Policy gates → ACT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** ACT · owner case manager
+- **Next step:** Ready to request quote through the simulated adapter.
 
 <a id="entry-004"></a>
-## 2026-10-10 16:02:17 UTC — 004 · Human review opened: `route`
+## 2026-10-10 16:21:39 UTC — 004 · Action `request_quote` succeeded
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Verify the recipient and permitted communication route.
+- **Actor:** Case coordinator (workflow)
+- **Tool:** simulated provider adapter → Demo contractor · SIMULATED — no external contact or charge
+- **Work item:** Rear garden clearance incl. dog waste and disturbed soil
 
 <a id="entry-005"></a>
-## 2026-10-10 16:02:17 UTC — 005 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:21:39 UTC — 005 · Policy gates → NO FURTHER ACTION
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** NO FURTHER ACTION · owner case manager
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 
 
 ---
 
-# Case 6db6e1b9fd6f audit trail
+# Case 9ff856b7475b audit trail
 
-Vacant Property Preparation · Rear garden clearance including bagged dog waste · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
+Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage WAIT
 
-- **Case ID:** `6db6e1b9fd6f40a581c1f70e156c4216`
-- **Split from:** [680c8f82e05f](../680c8f82e05f4014b78c912cc292964b/history.md)
-- **Entries:** 6 (from 11 immutable records; bookkeeping and unchanged assessments omitted)
+- **Case ID:** `9ff856b7475b4a59b13f97e1cc4aaa91`
+- **Entries:** 168 (from 610 immutable records; bookkeeping and unchanged assessments omitted)
 - **Raw records:** [records.jsonl](records.jsonl)
 - All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
 
 <a id="entry-001"></a>
-## 2026-10-10 16:02:17 UTC — 001 · Message received: Split from case 680c8f82e05f: Intake report
-
-- **Recorded by:** Claude
-- **Reading:** not required
-
-> Event 001 — Note
-> From: Mira Venn (Property Manager, Northbridge Lettings)
-> To: Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)
->
-> Logged work requested after the move-out inspection: kitchen, oven and extractor degreasing; bathroom and en-suite limescale removal; removal of waste left in the kitchen; and rear garden clearance, including bagged dog waste. Inspection notes also mention soil disturbed by digging. The property is vacant.
-
-<a id="entry-002"></a>
-## 2026-10-10 16:02:17 UTC — 002 · Claim `classification` = "garden"
-
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
-
-> rear garden clearance, including bagged dog waste
-
-<a id="entry-003"></a>
-## 2026-10-10 16:02:17 UTC — 003 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-004"></a>
-## 2026-10-10 16:02:17 UTC — 004 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-005"></a>
-## 2026-10-10 16:02:17 UTC — 005 · Human review opened: `classification`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
-
-<a id="entry-006"></a>
-## 2026-10-10 16:02:17 UTC — 006 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-
----
-
-# Case 680c8f82e05f audit trail
-
-Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status open · stage HUMAN REVIEW
-
-- **Case ID:** `680c8f82e05f4014b78c912cc292964b`
-- **Entries:** 186 (from 528 immutable records; bookkeeping and unchanged assessments omitted)
-- **Raw records:** [records.jsonl](records.jsonl)
-- All outbound tools are simulated adapters; no real tenant, landlord or contractor was contacted.
-
-<a id="entry-001"></a>
-## 2026-10-10 16:02:05 UTC — 001 · Message received: Intake report
+## 2026-10-10 16:21:28 UTC — 001 · Message received: Intake report
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -408,123 +260,97 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 > Logged work requested after the move-out inspection: kitchen, oven and extractor degreasing; bathroom and en-suite limescale removal; removal of waste left in the kitchen; and rear garden clearance, including bagged dog waste. Inspection notes also mention soil disturbed by digging. The property is vacant.
 
 <a id="entry-002"></a>
-## 2026-10-10 16:02:05 UTC — 002 · Human review opened: `identity`
+## 2026-10-10 16:21:28 UTC — 002 · Policy gates → WAIT
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:05 UTC
-
-> Verify the person, property and work item mapping.
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** The latest message is being routed and read. Actions wait for the reading.
 
 <a id="entry-003"></a>
-## 2026-10-10 16:02:05 UTC — 003 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:05 UTC
-
-> Verify the recipient and permitted communication route.
+## 2026-10-10 16:21:28 UTC — 003 · Workflow receipt
 
 <a id="entry-004"></a>
-## 2026-10-10 16:02:05 UTC — 004 · Policy gates → HUMAN REVIEW
+## 2026-10-10 16:21:28 UTC — 004 · Jev routed the message
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-005"></a>
-## 2026-10-10 16:02:05 UTC — 005 · Workflow receipt
-
-<a id="entry-006"></a>
-## 2026-10-10 16:02:05 UTC — 006 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1332 in / 285 out tokens · 373 ms)
+- **Actor:** Jev (jev-1.13.0 · 1332 in / 285 out tokens · 255 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.06 · multiple_issues 0.87 · sensitive 0.02 · states_facts 0.04 · system_instructions 0.02
+- **Signals:** hazard 0.07 · multiple_issues 0.88 · sensitive 0.02 · states_facts 0.04 · system_instructions 0.02
 - **Why:** Possibly several issues: splitting cases needs Claude.
 
-<a id="entry-007"></a>
-## 2026-10-10 16:02:17 UTC — 007 · Claude read the message
+<a id="entry-005"></a>
+## 2026-10-10 16:21:39 UTC — 005 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 394 in / 837 out tokens)
+- **Actor:** Claude (claude-opus-5 · 394 in / 756 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** new request · route `request_quote` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Property Manager logs post-move-out works at a vacant property: cleaning of kitchen, oven, extractor, bathroom and en-suite limescale, removal of waste left in the kitchen, and rear garden clearance including bagged dog waste. Inspection notes also mention disturbed soil from digging.
-- **Rationale:** Newly logged post-checkout works with no quote or authority yet, so contractor quotes are the next step; the digging note lacks enough detail to scope.
-- **Extracted:** 0 claims · 4 ambiguities · 3 issues
-- **Unknown (affects route):** Unclear whether the disturbed soil from digging requires any remedial work (reinstatement, turfing) or is noted for information only.
-- **Unknown:** Property is stated as vacant but no access method or consent for contractor entry is recorded.
-- **Unknown:** No key custody or collection arrangement stated for contractors attending the vacant property.
-- **Unknown:** No target dates or deadline given for the works.
+- **Reading:** new request · route `request_quote` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Property manager logs post-move-out works at a vacant property: kitchen/oven/extractor degreasing, bathroom and en-suite limescale removal, waste removal, and rear garden clearance including bagged dog waste. Inspection notes also record disturbed soil from digging.
+- **Rationale:** Newly logged post-checkout works with no quote or authority yet, so contractor quotes are the next step; garden clearance is a separate category and tracked as its own item.
+- **Extracted:** 0 claims · 4 ambiguities · 2 issues
+- **Unknown (affects route):** Unclear whether the disturbed soil from digging needs reinstatement/landscaping work or is only part of the clearance; this may require a different trade or work item.
+- **Unknown:** No access method stated for the vacant property; confirm how contractors will get in.
+- **Unknown:** No key custody or collection arrangement stated for contractor entry.
+- **Unknown:** No target date or deadline given for the works ahead of re-letting.
 
-<a id="entry-008"></a>
-## 2026-10-10 16:02:17 UTC — 008 · Proposed action → `request_quote`
+<a id="entry-006"></a>
+## 2026-10-10 16:21:39 UTC — 006 · Proposed action → `request_quote`
 
 - **Actor:** Triage reading (route `request_quote`)
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
 - **Action revision:** 2
 
-<a id="entry-009"></a>
-## 2026-10-10 16:02:17 UTC — 009 · Separate issue split into a new case
+<a id="entry-007"></a>
+## 2026-10-10 16:21:39 UTC — 007 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
-<a id="entry-010"></a>
-## 2026-10-10 16:02:17 UTC — 010 · Separate issue split into a new case
+<a id="entry-008"></a>
+## 2026-10-10 16:21:39 UTC — 008 · Clarification opened: `triage` → tenant
 
-- **Actor:** Claude
-- **Issue:** #3 of the message
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: Unclear whether the disturbed soil from digging needs reinstatement/landscaping work or is only part of the clearance; this may require a different trade or work item.
+
+<a id="entry-009"></a>
+## 2026-10-10 16:21:39 UTC — 009 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `triage` UNKNOWN → CLARIFY; `classification` UNKNOWN → WAIT
+- **Next step:** Clarify before routing: Unclear whether the disturbed soil from digging needs reinstatement/landscaping work or is only part of the clearance; this may require a different trade or work item.
+
+<a id="entry-010"></a>
+## 2026-10-10 16:21:39 UTC — 010 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `classification` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Settled by the open routing clarification or the supported-process review. Confirm that the category and work item match the source request.
 
 <a id="entry-011"></a>
-## 2026-10-10 16:02:17 UTC — 011 · Human review opened: `identity`
+## 2026-10-10 16:21:46 UTC — 011 · Claude drafted a message to the tenant
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:17 UTC
+- **Actor:** Claude (claude-opus-5 · 780 in / 379 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The only contact on file is an internal colleague (property manager) at a vacant property, not a tenant, so the message is not addressed to a verified tenant recipient and should be checked before sending.
+- **Send gate:** held for staff — Claude asked for staff review: The only contact on file is an internal colleague (property manager) at a vacant property, not a tenant, so the message is not addressed to a verified tenant recipient and should be checked before sending. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
 
-> Verify the person, property and work item mapping.
+> Hello,
+>
+> Thanks for logging the post-move-out works at the property. Just one thing to clarify before this goes further: for the disturbed soil from the digging in the rear garden, is that simply part of the general garden clearance, or does the ground need reinstating or re-landscaping as well?
+>
+> Let me know and I'll take it from there.
+>
+> Many thanks
 
 <a id="entry-012"></a>
-## 2026-10-10 16:02:17 UTC — 012 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-013"></a>
-## 2026-10-10 16:02:17 UTC — 013 · Human review opened: `classification`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-classification`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Confirm that the category and work item match the source request. A verified route is required before asking externally.
-
-<a id="entry-014"></a>
-## 2026-10-10 16:02:17 UTC — 014 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:02:17 UTC
-
-> Clarify before routing: Unclear whether the disturbed soil from digging requires any remedial work (reinstatement, turfing) or is noted for information only. A verified route is required before asking externally.
-
-<a id="entry-015"></a>
-## 2026-10-10 16:02:17 UTC — 015 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-016"></a>
-## 2026-10-10 16:02:17 UTC — 016 · Message received: Event 002 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:21:46 UTC — 012 · Message received: Event 002 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -535,81 +361,97 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Requested a price and earliest availability for the post-tenancy sanitation, waste removal and garden clearance. Advised that the property is vacant and keys can be collected from the Northbridge Lettings office.
 
-<a id="entry-017"></a>
-## 2026-10-10 16:02:17 UTC — 017 · Policy gates → HUMAN REVIEW
+<a id="entry-013"></a>
+## 2026-10-10 16:21:46 UTC — 013 · Clarification opened: `classification` → tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `classification` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Confirm that the category and work item match the source request.
+
+<a id="entry-014"></a>
+## 2026-10-10 16:21:46 UTC — 014 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `classification` UNKNOWN → CLARIFY; `triage` UNKNOWN → WAIT
+- **Next step:** Confirm that the category and work item match the source request.
+
+<a id="entry-015"></a>
+## 2026-10-10 16:21:46 UTC — 015 · Workflow receipt
+
+<a id="entry-016"></a>
+## 2026-10-10 16:21:46 UTC — 016 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `classification` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Confirm that the category and work item match the source request.
+
+<a id="entry-017"></a>
+## 2026-10-10 16:21:46 UTC — 017 · Jev routed the message
+
+- **Actor:** Jev (jev-1.13.0 · 1568 in / 285 out tokens · 280 ms)
+- **Tool:** TypeSafe `system_one` · step `route_case_messages`
+- **Decision:** jev_route → `request_quote` (confidence 0.96)
+- **Signals:** hazard 0.02 · multiple_issues 0.22 · sensitive 0.02 · states_facts 0.94 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
 <a id="entry-018"></a>
-## 2026-10-10 16:02:17 UTC — 018 · Workflow receipt
+## 2026-10-10 16:21:53 UTC — 018 · Claude read the message
+
+- **Actor:** Claude (claude-opus-5 · 979 in / 594 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
+- **Reading:** update · route `request_quote` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Property manager has asked the contractor for a price and earliest availability for the post-tenancy clean, waste removal and garden clearance. Advises the property is vacant and keys can be collected from the Northbridge Lettings office.
+- **Rationale:** Quote and availability requested from contractor for the known checkout clean; no price or appointment yet.
+- **Extracted:** 1 claim · 2 ambiguities · 2 issues
+- **Unknown (affects route):** Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of clearance.
+- **Unknown:** No date or time proposed; contractor's earliest availability still awaited.
 
 <a id="entry-019"></a>
-## 2026-10-10 16:02:17 UTC — 019 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1513 in / 285 out tokens · 317 ms)
-- **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `request_quote` (confidence 1.00)
-- **Signals:** hazard 0.03 · multiple_issues 0.19 · sensitive 0.02 · states_facts 0.94 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. The message may state facts that need exact quotes.
-
-<a id="entry-020"></a>
-## 2026-10-10 16:02:25 UTC — 020 · Claude read the message
-
-- **Actor:** Claude (claude-opus-5 · 782 in / 539 out tokens)
-- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** new request · route `request_quote` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn has asked contractor Brindlewick Turnover Services for a price and earliest availability for the post-tenancy cleaning, waste removal and garden clearance. She states the property is vacant and keys can be collected from the Northbridge Lettings office.
-- **Rationale:** Agency is seeking a price and availability from the contractor; no quote figure yet, so request_quote stands.
-- **Extracted:** 1 claim · 2 ambiguities · 2 issues
-- **Unknown:** Unclear whether the disturbed soil from digging requires remedial work (reinstatement, turfing) or is noted for information only.
-- **Unknown:** No date or time proposed; only earliest availability requested from the contractor.
-
-<a id="entry-021"></a>
-## 2026-10-10 16:02:25 UTC — 021 · Claim `keys` = true
+## 2026-10-10 16:21:53 UTC — 019 · Claim `keys` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > keys can be collected from the Northbridge Lettings office
 
-<a id="entry-022"></a>
-## 2026-10-10 16:02:25 UTC — 022 · Claim `classification` = "checkout_cleaning"
+<a id="entry-020"></a>
+## 2026-10-10 16:21:53 UTC — 020 · Partial answer → narrower follow-up due
 
-- **Actor:** Claude (extracted)
-- **Status:** verified — Claude's derived category, auto-accepted by policy v1 at high confidence
+- **Actor:** Claude (reading)
 
-> Requested a price and earliest availability for the post-tenancy sanitation, waste removal and garden clearance.
+> post-tenancy sanitation, waste removal and garden clearance
 
-<a id="entry-023"></a>
-## 2026-10-10 16:02:25 UTC — 023 · Separate issue split into a new case
+<a id="entry-021"></a>
+## 2026-10-10 16:21:53 UTC — 021 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
-<a id="entry-024"></a>
-## 2026-10-10 16:02:25 UTC — 024 · Review superseded
+<a id="entry-022"></a>
+## 2026-10-10 16:22:00 UTC — 022 · Claude drafted a message to the tenant
 
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
+- **Actor:** Claude (claude-opus-5 · 889 in / 476 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The correspondence is between staff and a contractor about a vacant property, so there is no tenant recipient here — staff should confirm who this message should actually go to before it is sent.
+- **Send gate:** held for staff — Claude asked for staff review: The correspondence is between staff and a contractor about a vacant property, so there is no tenant recipient here — staff should confirm who this message should actually go to before it is sent. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
 
-<a id="entry-025"></a>
-## 2026-10-10 16:02:25 UTC — 025 · Review superseded
+> Hello,
+>
+> Thanks for your help with the property. So we have the details right before anything is arranged, could you confirm the work needed is the "post-tenancy sanitation, waste removal and garden clearance" — that is, the kitchen, oven and extractor degreasing, bathroom and en-suite limescale removal, removal of waste left in the kitchen, and the rear garden clearance?
+>
+> If anything there looks different to what you were expecting, just let us know in your reply.
+>
+> Many thanks,
+> Northbridge Lettings
 
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
-
-<a id="entry-026"></a>
-## 2026-10-10 16:02:25 UTC — 026 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-027"></a>
-## 2026-10-10 16:02:25 UTC — 027 · Message received: Event 003 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-023"></a>
+## 2026-10-10 16:22:00 UTC — 023 · Message received: Event 003 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -620,46 +462,32 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Sent an inspection report to assist with pricing.
 
-<a id="entry-028"></a>
-## 2026-10-10 16:02:25 UTC — 028 · Policy gates → HUMAN REVIEW
+<a id="entry-024"></a>
+## 2026-10-10 16:22:00 UTC — 024 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-025"></a>
+## 2026-10-10 16:22:00 UTC — 025 · Jev routed the message
 
-<a id="entry-029"></a>
-## 2026-10-10 16:02:25 UTC — 029 · Workflow receipt
-
-<a id="entry-030"></a>
-## 2026-10-10 16:02:25 UTC — 030 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1605 in / 285 out tokens · 220 ms)
+- **Actor:** Jev (jev-1.13.0 · 1660 in / 285 out tokens · 228 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_only → `request_quote` (confidence 0.88)
-- **Signals:** hazard 0.02 · multiple_issues 0.13 · sensitive 0.02 · states_facts 0.06 · system_instructions 0.02
-- **Why:** Jev routed with confidence 0.88; nothing in the message needs Claude.
+- **Decision:** jev_route → `request_quote` (confidence 0.67)
+- **Signals:** hazard 0.02 · multiple_issues 0.10 · sensitive 0.02 · states_facts 0.07 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. Route confidence 0.67 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-031"></a>
-## 2026-10-10 16:02:25 UTC — 031 · Jev-only reading applied
+<a id="entry-026"></a>
+## 2026-10-10 16:22:05 UTC — 026 · Claude read the message
 
-- **Actor:** Jev (jev-1.13.0 · 1605 in / 285 out tokens · 220 ms)
-- **Tool:** Jev decision applied, no generated text
+- **Actor:** Claude (claude-opus-5 · 1157 in / 387 out tokens)
+- **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `request_quote` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Routed by Jev to request_quote. Claude did not read this message.
-- **Extracted:** 0 claims · 0 ambiguities · 1 issue
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Mira Venn confirms she has sent an inspection report to the contractor to assist with pricing for the checkout clean and garden clearance. No price, schedule or access details given.
+- **Rationale:** Quote still outstanding; message only supports the pricing request.
+- **Extracted:** 0 claims · 1 ambiguity · 1 issue
+- **Unknown (affects route):** Still unclear whether the disturbed soil from digging requires reinstatement/landscaping or is only part of the garden clearance.
 
-<a id="entry-032"></a>
-## 2026-10-10 16:02:25 UTC — 032 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-033"></a>
-## 2026-10-10 16:02:25 UTC — 033 · Message received: Event 004 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
+<a id="entry-027"></a>
+## 2026-10-10 16:22:06 UTC — 027 · Message received: Event 004 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -670,83 +498,101 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Said the report appeared to describe the property as it had been about ten years earlier. Asked whether to collect keys and inspect before preparing a price.
 
-<a id="entry-034"></a>
-## 2026-10-10 16:02:25 UTC — 034 · Policy gates → HUMAN REVIEW
+<a id="entry-028"></a>
+## 2026-10-10 16:22:06 UTC — 028 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-029"></a>
+## 2026-10-10 16:22:06 UTC — 029 · Jev routed the message
 
-<a id="entry-035"></a>
-## 2026-10-10 16:02:25 UTC — 035 · Workflow receipt
-
-<a id="entry-036"></a>
-## 2026-10-10 16:02:26 UTC — 036 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1719 in / 285 out tokens · 314 ms)
+- **Actor:** Jev (jev-1.13.0 · 1774 in / 285 out tokens · 301 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** claude → no route
-- **Signals:** hazard 0.02 · multiple_issues 0.08 · sensitive 0.03 · states_facts 0.25 · system_instructions 0.02
-- **Why:** Jev route confidence 0.42 is below 0.5.
+- **Decision:** jev_route → `clarify` (confidence 0.53)
+- **Signals:** hazard 0.02 · multiple_issues 0.08 · sensitive 0.03 · states_facts 0.23 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.53 is below the Jev-only bar 0.8. Open tenant questions may be answered. A route change on an existing case.
 
-<a id="entry-037"></a>
-## 2026-10-10 16:02:32 UTC — 037 · Claude read the message
+<a id="entry-030"></a>
+## 2026-10-10 16:22:13 UTC — 030 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1056 in / 462 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1392 in / 567 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** answer to question · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Contractor Elian Wren says the inspection report sent for pricing appears to describe the property as it was about ten years ago, and asks whether to collect keys and inspect the property before quoting.
-- **Rationale:** The contractor cannot price the job because the supporting report appears to be the wrong/outdated document and is asking for a decision on a pre-quote inspection, so essential information must be resolved before the quote can proceed.
-- **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Contractor reports the inspection report supplied for pricing appears out of date (approximately ten years old); correct current inspection documentation may be needed before pricing.
-- **Unknown (affects route):** Contractor asks whether he should collect keys from the office to inspect the property before quoting; no key collection arrangement has been confirmed.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Contractor says the inspection report sent appears to describe the property as it was around ten years ago, and asks whether to collect keys and inspect before quoting.
+- **Rationale:** Scope evidence is disputed as outdated and contractor awaits instruction on a pre-quote inspection; clarification needed before routing to quote.
+- **Extracted:** 0 claims · 3 ambiguities · 1 issue
+- **Unknown (affects route):** The inspection report supplied may be out of date by about ten years; correct scope needs confirming before pricing.
+- **Unknown:** Contractor asks whether to collect keys from the office and inspect before quoting; no key arrangement agreed yet.
+- **Unknown (affects route):** Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of the clearance.
 
-<a id="entry-038"></a>
-## 2026-10-10 16:02:32 UTC — 038 · Proposed action → `clarify`
+<a id="entry-031"></a>
+## 2026-10-10 16:22:13 UTC — 031 · Proposed action → `clarify`
 
 - **Actor:** Triage reading (route `clarify`)
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
 - **Action revision:** 3
 
+<a id="entry-032"></a>
+## 2026-10-10 16:22:13 UTC — 032 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> Said the report appeared to describe the property as it had been about ten years earlier.
+
+<a id="entry-033"></a>
+## 2026-10-10 16:22:13 UTC — 033 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-034"></a>
+## 2026-10-10 16:22:13 UTC — 034 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-035"></a>
+## 2026-10-10 16:22:13 UTC — 035 · Clarification opened: `triage` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: The inspection report supplied may be out of date by about ten years; correct scope needs confirming before pricing.; Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of the clearance.
+
+<a id="entry-036"></a>
+## 2026-10-10 16:22:13 UTC — 036 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `triage` UNKNOWN → CLARIFY
+- **Next step:** Clarify before routing: The inspection report supplied may be out of date by about ten years; correct scope needs confirming before pricing.; Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of the clearance.
+
+<a id="entry-037"></a>
+## 2026-10-10 16:22:13 UTC — 037 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** Clarify before routing: The inspection report supplied may be out of date by about ten years; correct scope needs confirming before pricing.; Still unclear whether disturbed soil from digging needs reinstatement/landscaping or is only part of the clearance.
+
+<a id="entry-038"></a>
+## 2026-10-10 16:22:22 UTC — 038 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1300 in / 541 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The inspection report already sent to the contractor appears to relate to the property as it was roughly ten years ago, so an incorrect or outdated document may have gone to a third party; staff should confirm the correct scope and current report before any further reply goes out.
+- **Send gate:** held for staff — Claude asked for staff review: The inspection report already sent to the contractor appears to relate to the property as it was roughly ten years ago, so an incorrect or outdated document may have gone to a third party; staff should confirm the correct scope and current report before any further reply goes out. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
+
+> Hello Elian,
+>
+> Thanks for coming back to us about the report - sorry for the confusion there.
+>
+> So we can get the scope right before you price the work, could you let us know what you'd need from us? In particular, it would help to know whether you'd want to collect keys and look round the property yourself before quoting, and what detail you'd need on the rear garden - specifically whether the disturbed soil from the digging would be part of a general clearance for you, or whether you'd treat reinstatement or landscaping as separate.
+>
+> Many thanks,
+> Northbridge Lettings
+
 <a id="entry-039"></a>
-## 2026-10-10 16:02:32 UTC — 039 · Human review opened: `identity`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:02:32 UTC
-
-> Verify the person, property and work item mapping.
-
-<a id="entry-040"></a>
-## 2026-10-10 16:02:32 UTC — 040 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:02:32 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-041"></a>
-## 2026-10-10 16:02:32 UTC — 041 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:02:32 UTC
-
-> Clarify before routing: Contractor reports the inspection report supplied for pricing appears out of date (approximately ten years old); correct current inspection documentation may be needed before pricing.; Contractor asks whether he should collect keys from the office to inspect the property before quoting; no key collection arrangement has been confirmed. A verified route is required before asking externally.
-
-<a id="entry-042"></a>
-## 2026-10-10 16:02:32 UTC — 042 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-043"></a>
-## 2026-10-10 16:02:32 UTC — 043 · Message received: Event 005 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+## 2026-10-10 16:22:22 UTC — 039 · Message received: Event 005 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -757,57 +603,57 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Apologised for sending the wrong report and supplied the current inspection information. Said an office key set should be available if an inspection was needed.
 
-<a id="entry-044"></a>
-## 2026-10-10 16:02:32 UTC — 044 · Policy gates → HUMAN REVIEW
+<a id="entry-040"></a>
+## 2026-10-10 16:22:22 UTC — 040 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-041"></a>
+## 2026-10-10 16:22:22 UTC — 041 · Jev routed the message
 
-<a id="entry-045"></a>
-## 2026-10-10 16:02:32 UTC — 045 · Workflow receipt
-
-<a id="entry-046"></a>
-## 2026-10-10 16:02:33 UTC — 046 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1708 in / 285 out tokens · 464 ms)
+- **Actor:** Jev (jev-1.13.0 · 1756 in / 285 out tokens · 256 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.54)
-- **Signals:** hazard 0.02 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.91 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.54 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.70)
+- **Signals:** hazard 0.02 · multiple_issues 0.04 · sensitive 0.02 · states_facts 0.91 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.70 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-047"></a>
-## 2026-10-10 16:02:39 UTC — 047 · Claude read the message
+<a id="entry-042"></a>
+## 2026-10-10 16:22:30 UTC — 042 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1469 in / 430 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1585 in / 591 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn apologised for sending the wrong inspection report, supplied the current inspection information, and indicated an office key set should be available if the contractor needs to inspect before pricing.
-- **Rationale:** Corrected documentation supplied, but key collection and inspection arrangements remain unconfirmed, so the item cannot yet move to quoting or key supply.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Key availability is stated conditionally ('should be available'); no collection time or custody/return arrangement is confirmed.
-- **Unknown:** No date or time proposed for a pre-quote inspection visit.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** The property manager apologised for sending an outdated inspection report and supplied current inspection information to the contractor, and indicated an office key set should be available if an inspection is needed.
+- **Rationale:** Scope correction supplied but soil/landscaping scope and key arrangements remain unconfirmed; clarify matches the router decision.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Whether the corrected inspection information resolves the scope, including whether disturbed soil from digging needs reinstatement/landscaping or only clearance.
+- **Unknown:** Key availability is stated only conditionally ('should be available'); confirm whether a key set is actually held and can be collected from the office.
 
-<a id="entry-048"></a>
-## 2026-10-10 16:02:39 UTC — 048 · Claim `keys` = true
+<a id="entry-043"></a>
+## 2026-10-10 16:22:30 UTC — 043 · Partial answer → narrower follow-up due
 
-- **Actor:** Claude (extracted)
-- **Status:** unverified assertion — a person or policy must accept it
+- **Actor:** Claude (reading)
 
-> Said an office key set should be available if an inspection was needed.
+> Apologised for sending the wrong report and supplied the current inspection information.
 
-<a id="entry-049"></a>
-## 2026-10-10 16:02:39 UTC — 049 · Policy gates → HUMAN REVIEW
+<a id="entry-044"></a>
+## 2026-10-10 16:22:36 UTC — 044 · Claude drafted a message to the tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (claude-opus-5 · 1271 in / 401 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The property is vacant and the correspondence is between the property manager and a contractor, not a tenant, so the recipient of this message needs confirming before it goes out; the scope query also affects pricing.
+- **Send gate:** held for staff — Claude asked for staff review: The property is vacant and the correspondence is between the property manager and a contractor, not a tenant, so the recipient of this message needs confirming before it goes out; the scope query also affects pricing. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
 
-<a id="entry-050"></a>
-## 2026-10-10 16:02:39 UTC — 050 · Message received: Event 006 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
+> Hello,
+>
+> Thanks for the updated inspection information. Just one thing to check before we go further: does the corrected information cover the full scope for the checkout clean, and in particular, does the disturbed soil from the digging need reinstatement or landscaping, or is it just clearance and waste removal?
+>
+> If you could let us know, that would be a great help.
+>
+> Many thanks
+
+<a id="entry-045"></a>
+## 2026-10-10 16:22:36 UTC — 045 · Message received: Event 006 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -818,60 +664,48 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Sent a £665 quote covering oven, hob and extractor degreasing; carpet shampooing in bedroom one, stairs and landings; rubbish removal; kitchen grease and bathroom limescale work; general sanitation elsewhere; and garden weeding, grass cutting and tidying. The quoted scope does not expressly mention making good the disturbed soil noted in the inspection.
 
-<a id="entry-051"></a>
-## 2026-10-10 16:02:39 UTC — 051 · Policy gates → HUMAN REVIEW
+<a id="entry-046"></a>
+## 2026-10-10 16:22:36 UTC — 046 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-047"></a>
+## 2026-10-10 16:22:37 UTC — 047 · Jev routed the message
 
-<a id="entry-052"></a>
-## 2026-10-10 16:02:39 UTC — 052 · Workflow receipt
-
-<a id="entry-053"></a>
-## 2026-10-10 16:02:40 UTC — 053 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1741 in / 285 out tokens · 279 ms)
+- **Actor:** Jev (jev-1.13.0 · 1789 in / 285 out tokens · 284 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.90)
-- **Signals:** hazard 0.02 · multiple_issues 0.18 · sensitive 0.03 · states_facts 0.98 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.93)
+- **Signals:** hazard 0.03 · multiple_issues 0.21 · sensitive 0.02 · states_facts 0.98 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-054"></a>
-## 2026-10-10 16:02:53 UTC — 054 · Claude read the message
+<a id="entry-048"></a>
+## 2026-10-10 16:22:44 UTC — 048 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1676 in / 882 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1825 in / 636 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Contractor Elian Wren has sent a £665 quote covering oven/hob/extractor degreasing, carpet shampooing, rubbish removal, kitchen grease and bathroom limescale, general sanitation and garden tidying. The quote does not expressly cover making good the disturbed soil noted in the inspection.
-- **Rationale:** A quote has arrived but scope gaps (disturbed soil, added carpet work) and VAT status must be resolved before instructing; matches router's clarify.
-- **Extracted:** 1 claim · 5 ambiguities · 2 issues
-- **Unknown:** Whether the £665 figure includes VAT is not stated.
-- **Unknown (affects route):** Quoted scope omits making good the disturbed soil in the rear garden; confirm whether this is included or needs a separate price.
-- **Unknown:** Quote adds carpet shampooing and general sanitation not in the original logged scope; confirm scope match.
-- **Unknown:** No key collection time, custody or return arrangement confirmed.
-- **Unknown:** Earliest availability requested but not given in this message.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Contractor Elian Wren has sent a £665 quote covering oven/hob/extractor degreasing, carpet shampooing, rubbish removal, kitchen grease and bathroom limescale, general sanitation and garden weeding/cutting/tidying. The quote does not expressly cover making good the disturbed soil noted in the inspection.
+- **Rationale:** Quote received but scope for disturbed soil and tax-inclusive total remain unclear, so clarification is needed before instructing.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Whether the disturbed soil from digging needs reinstatement/landscaping; the quote does not expressly cover it.
+- **Unknown:** Whether the £665 is inclusive of VAT, and whether carpet shampooing was within the requested scope.
 
-<a id="entry-055"></a>
-## 2026-10-10 16:02:53 UTC — 055 · Claim `total` = 665.0
+<a id="entry-049"></a>
+## 2026-10-10 16:22:44 UTC — 049 · Claim `total` = 665.0
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
-> Sent a £665 quote
+> Sent a £665 quote covering oven, hob and extractor degreasing
 
-<a id="entry-056"></a>
-## 2026-10-10 16:02:53 UTC — 056 · Policy gates → HUMAN REVIEW
+<a id="entry-050"></a>
+## 2026-10-10 16:22:44 UTC — 050 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (reading)
 
-<a id="entry-057"></a>
-## 2026-10-10 16:02:53 UTC — 057 · Message received: Event 007 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+> The quoted scope does not expressly mention making good the disturbed soil noted in the inspection.
+
+<a id="entry-051"></a>
+## 2026-10-10 16:22:45 UTC — 051 · Message received: Event 007 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -882,58 +716,41 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Asked whether the £665 quote could proceed. The approval request described the work generally as post-tenancy work according to the inspection instructions, without listing the quoted carpet and garden tasks.
 
-<a id="entry-058"></a>
-## 2026-10-10 16:02:53 UTC — 058 · Policy gates → HUMAN REVIEW
+<a id="entry-052"></a>
+## 2026-10-10 16:22:45 UTC — 052 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-053"></a>
+## 2026-10-10 16:22:45 UTC — 053 · Jev routed the message
 
-<a id="entry-059"></a>
-## 2026-10-10 16:02:53 UTC — 059 · Workflow receipt
-
-<a id="entry-060"></a>
-## 2026-10-10 16:02:54 UTC — 060 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1766 in / 285 out tokens · 354 ms)
+- **Actor:** Jev (jev-1.13.0 · 1814 in / 285 out tokens · 256 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** jev_route → `clarify` (confidence 0.97)
-- **Signals:** hazard 0.02 · multiple_issues 0.21 · sensitive 0.02 · states_facts 0.84 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes.
+- **Signals:** hazard 0.02 · multiple_issues 0.27 · sensitive 0.03 · states_facts 0.86 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-061"></a>
-## 2026-10-10 16:03:00 UTC — 061 · Claude read the message
+<a id="entry-054"></a>
+## 2026-10-10 16:22:52 UTC — 054 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1900 in / 493 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2036 in / 490 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn asked the landlord, Nessa Quill, whether the £665 quote could proceed. The approval request described the work only generally as post-tenancy work and did not list the quoted carpet and garden tasks.
-- **Rationale:** Approval is only requested, not given, and the described scope does not match the quote, so the item cannot progress to instruction yet.
-- **Extracted:** 1 claim · 3 ambiguities · 1 issue
-- **Unknown (affects route):** The approval request to the landlord did not list the quoted carpet shampooing and garden tasks; confirm the landlord is approving the full quoted scope.
-- **Unknown:** Quoted scope still omits making good the disturbed soil in the rear garden; confirm whether included or needs a separate price.
-- **Unknown (affects route):** No landlord response yet, so no authority decision is recorded.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Mira Venn asked the landlord whether the £665 quote can proceed, describing the work only generally as post-tenancy work without itemising the quoted carpet and garden tasks. No landlord decision yet and the disturbed soil scope remains unresolved.
+- **Rationale:** Scope mismatch between quote and approval request, and soil reinstatement still unclear; no authority decision stated yet.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown (affects route):** The approval request did not list the quoted carpet shampooing and garden tasks, so the landlord may be approving a different scope than quoted.
+- **Unknown (affects route):** Whether the disturbed soil from digging needs reinstatement/landscaping remains unaddressed.
 
-<a id="entry-062"></a>
-## 2026-10-10 16:03:00 UTC — 062 · Claim `total` = 665.0
+<a id="entry-055"></a>
+## 2026-10-10 16:22:52 UTC — 055 · Claim `total` = 665.0
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > Asked whether the £665 quote could proceed.
 
-<a id="entry-063"></a>
-## 2026-10-10 16:03:00 UTC — 063 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-064"></a>
-## 2026-10-10 16:03:00 UTC — 064 · Message received: Event 008 — Email from Nessa Quill (Landlord, Property Owner)
+<a id="entry-056"></a>
+## 2026-10-10 16:22:53 UTC — 056 · Message received: Event 008 — Email from Nessa Quill (Landlord, Property Owner)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -944,49 +761,34 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Replied: “Happy to approve if they are recovered from the bond as there is no way it was in that state when they moved in.”
 
-<a id="entry-065"></a>
-## 2026-10-10 16:03:00 UTC — 065 · Policy gates → HUMAN REVIEW
+<a id="entry-057"></a>
+## 2026-10-10 16:22:53 UTC — 057 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-058"></a>
+## 2026-10-10 16:22:53 UTC — 058 · Jev routed the message
 
-<a id="entry-066"></a>
-## 2026-10-10 16:03:00 UTC — 066 · Workflow receipt
-
-<a id="entry-067"></a>
-## 2026-10-10 16:03:00 UTC — 067 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1758 in / 285 out tokens · 389 ms)
+- **Actor:** Jev (jev-1.13.0 · 1806 in / 285 out tokens · 239 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.52)
-- **Signals:** hazard 0.02 · multiple_issues 0.13 · sensitive 0.04 · states_facts 0.11 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.52 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `clarify` (confidence 0.50)
+- **Signals:** hazard 0.02 · multiple_issues 0.13 · sensitive 0.04 · states_facts 0.10 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.50 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-068"></a>
-## 2026-10-10 16:03:07 UTC — 068 · Claude read the message
+<a id="entry-059"></a>
+## 2026-10-10 16:23:00 UTC — 059 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1895 in / 501 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2042 in / 621 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** answer to question · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Landlord Nessa Quill replies to the £665 quote approval request, saying she is happy to approve provided the costs are recovered from the tenant's bond. The approval is conditional and the request did not list the quoted carpet and garden tasks.
-- **Rationale:** Landlord approval is conditional and the scope put to her was incomplete, so the authority position must be clarified before instructing.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Approval is conditional on recovering costs from the tenant's deposit; confirm whether work can be instructed if bond recovery is not possible.
-- **Unknown (affects route):** The approval request did not list the quoted carpet shampooing and garden tasks; confirm the landlord is approving the full £665 scope.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Landlord Nessa Quill replies to the £665 approval request saying she is happy to approve provided the cost is recovered from the tenant's bond. The conditional nature of the approval and the scope discrepancies (carpets, garden, disturbed soil) remain unresolved.
+- **Rationale:** Conditional approval tied to deposit recovery and unresolved scope questions mean the item cannot be instructed yet; clarify as per router.
+- **Extracted:** 1 claim · 3 ambiguities · 1 issue
+- **Unknown (affects route):** Approval is conditional on recovering costs from the tenancy deposit; it is unclear whether the landlord still approves if the deposit cannot cover it.
+- **Unknown:** The approval request did not list the quoted carpet shampooing and garden tasks, so the landlord may be approving a different scope than quoted.
+- **Unknown:** Whether the disturbed soil from digging needs reinstatement/landscaping or is only part of the clearance is still unaddressed.
 
-<a id="entry-069"></a>
-## 2026-10-10 16:03:07 UTC — 069 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-070"></a>
-## 2026-10-10 16:03:07 UTC — 070 · Message received: Event 009 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-060"></a>
+## 2026-10-10 16:23:01 UTC — 060 · Message received: Event 009 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -997,58 +799,42 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Told the contractor the quote was approved and asked for the earliest visit date, noting the property was vacant and keys could be collected from the office. The message did not mention the landlord’s bond-recovery condition.
 
-<a id="entry-071"></a>
-## 2026-10-10 16:03:07 UTC — 071 · Policy gates → HUMAN REVIEW
+<a id="entry-061"></a>
+## 2026-10-10 16:23:01 UTC — 061 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-062"></a>
+## 2026-10-10 16:23:01 UTC — 062 · Jev routed the message
 
-<a id="entry-072"></a>
-## 2026-10-10 16:03:07 UTC — 072 · Workflow receipt
-
-<a id="entry-073"></a>
-## 2026-10-10 16:03:08 UTC — 073 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1773 in / 285 out tokens · 391 ms)
+- **Actor:** Jev (jev-1.13.0 · 1821 in / 285 out tokens · 286 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.71)
-- **Signals:** hazard 0.02 · multiple_issues 0.06 · sensitive 0.02 · states_facts 0.93 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.71 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.72)
+- **Signals:** hazard 0.02 · multiple_issues 0.09 · sensitive 0.02 · states_facts 0.93 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.72 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-074"></a>
-## 2026-10-10 16:03:17 UTC — 074 · Claude read the message
+<a id="entry-063"></a>
+## 2026-10-10 16:23:13 UTC — 063 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1939 in / 731 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2030 in / 848 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Northbridge Lettings told the contractor the £665 quote is approved, asked for the earliest visit date and said the vacant property's keys can be collected from the office. The landlord's condition that costs be recovered from the bond was not passed on.
-- **Rationale:** Agency states approval and offers keys, but the landlord's bond-recovery condition was omitted, so authority to instruct is not clean; following router's clarify.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** The property manager told the contractor the quote was approved, asked for the earliest visit date and said keys could be collected from the office as the property is vacant. The landlord's bond-recovery condition was not passed on, and the scope questions (out-of-date inspection report, disturbed soil) remain unresolved.
+- **Rationale:** Approval relayed is conditional upstream and scope questions remain open, so clarification is needed before instructing work; router route retained.
 - **Extracted:** 2 claims · 3 ambiguities · 1 issue
-- **Unknown (affects route):** The landlord's approval was conditional on recovering costs from the bond; this condition was not relayed. Confirm the work may be instructed unconditionally.
-- **Unknown:** Confirm the approved scope covers the carpet shampooing and garden tasks in the £665 quote, which were not listed in the approval request.
-- **Unknown:** No visit date is yet agreed; the earliest date has only been requested.
+- **Unknown (affects route):** Landlord approval was conditional on recovering costs from the bond; this condition was not relayed to the contractor and it is unclear whether approval stands if the deposit cannot cover it.
+- **Unknown (affects route):** Scope still unconfirmed: whether disturbed soil needs reinstatement, and whether the quote reflects the current (not ten-year-old) inspection.
+- **Unknown:** No visit date or time agreed yet; contractor has been asked for the earliest date.
 
-<a id="entry-075"></a>
-## 2026-10-10 16:03:17 UTC — 075 · Claim `keys` = true
+<a id="entry-064"></a>
+## 2026-10-10 16:23:13 UTC — 064 · Claim `keys` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > keys could be collected from the office
 
-<a id="entry-076"></a>
-## 2026-10-10 16:03:17 UTC — 076 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-077"></a>
-## 2026-10-10 16:03:17 UTC — 077 · Message received: Event 010 — Email from Nessa Quill (Landlord, Property Owner)
+<a id="entry-065"></a>
+## 2026-10-10 16:23:14 UTC — 065 · Message received: Event 010 — Email from Nessa Quill (Landlord, Property Owner)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1059,48 +845,33 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Reiterated that approval depended on recovering the cost from the former tenants’ bond.
 
-<a id="entry-078"></a>
-## 2026-10-10 16:03:17 UTC — 078 · Policy gates → HUMAN REVIEW
+<a id="entry-066"></a>
+## 2026-10-10 16:23:14 UTC — 066 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-067"></a>
+## 2026-10-10 16:23:14 UTC — 067 · Jev routed the message
 
-<a id="entry-079"></a>
-## 2026-10-10 16:03:17 UTC — 079 · Workflow receipt
-
-<a id="entry-080"></a>
-## 2026-10-10 16:03:18 UTC — 080 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1707 in / 285 out tokens · 460 ms)
+- **Actor:** Jev (jev-1.13.0 · 1755 in / 285 out tokens · 298 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.57)
-- **Signals:** hazard 0.01 · multiple_issues 0.10 · sensitive 0.03 · states_facts 0.11 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.57 is below the Jev-only bar 0.8.
+- **Decision:** jev_route → `clarify` (confidence 0.58)
+- **Signals:** hazard 0.02 · multiple_issues 0.10 · sensitive 0.03 · states_facts 0.08 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.58 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-081"></a>
-## 2026-10-10 16:03:24 UTC — 081 · Claude read the message
+<a id="entry-068"></a>
+## 2026-10-10 16:23:20 UTC — 068 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1883 in / 436 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2086 in / 544 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Landlord Nessa Quill reiterates that her approval of the £665 checkout clean quote is conditional on recovering the cost from the former tenants' bond. The condition has not been relayed to the contractor, who has already been told the quote is approved.
-- **Rationale:** Conditional approval conflicts with the unconditional instruction already sent; clarification needed before the job proceeds.
-- **Extracted:** 1 claim · 1 ambiguity · 1 issue
-- **Unknown (affects route):** Landlord's approval is conditional on bond recovery, but the contractor has already been instructed unconditionally. Confirm whether the work may proceed and whether bond recovery is achievable.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Landlord Nessa Quill restated that her approval of the £665 checkout clean quote is conditional on recovering the cost from the former tenants' bond. This condition has not been relayed to the contractor, who has already been told the quote is approved.
+- **Rationale:** Conditional approval repeated but condition unresolved and not relayed to contractor; scope questions outstanding, so clarification is needed before instructing.
+- **Extracted:** 1 claim · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Approval is conditional on bond recovery; unclear whether it stands if the deposit does not cover the £665, and the contractor has already been instructed without this condition.
+- **Unknown (affects route):** Scope still unconfirmed: whether disturbed soil needs reinstatement and whether the quote reflects the current inspection rather than a ten-year-old report.
 
-<a id="entry-082"></a>
-## 2026-10-10 16:03:24 UTC — 082 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-083"></a>
-## 2026-10-10 16:03:24 UTC — 083 · Message received: Event 011 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-069"></a>
+## 2026-10-10 16:23:21 UTC — 069 · Message received: Event 011 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1111,57 +882,41 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Reported that post-tenancy costs and tenant-attributed damage together exceed the £650 deposit held, and that a claim for the full deposit amount was being prepared through the deposit process. Said final itemised figures for the claim were still awaited, although the £665 quote was already on file. Asked whether the work could proceed meanwhile.
 
-<a id="entry-084"></a>
-## 2026-10-10 16:03:24 UTC — 084 · Policy gates → HUMAN REVIEW
+<a id="entry-070"></a>
+## 2026-10-10 16:23:21 UTC — 070 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-071"></a>
+## 2026-10-10 16:23:21 UTC — 071 · Jev routed the message
 
-<a id="entry-085"></a>
-## 2026-10-10 16:03:24 UTC — 085 · Workflow receipt
-
-<a id="entry-086"></a>
-## 2026-10-10 16:03:24 UTC — 086 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1743 in / 285 out tokens · 254 ms)
+- **Actor:** Jev (jev-1.13.0 · 1791 in / 285 out tokens · 234 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.69)
-- **Signals:** hazard 0.03 · multiple_issues 0.26 · sensitive 0.03 · states_facts 0.95 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.69 is below the Jev-only bar 0.8. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.53)
+- **Signals:** hazard 0.02 · multiple_issues 0.24 · sensitive 0.03 · states_facts 0.95 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.53 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-087"></a>
-## 2026-10-10 16:03:31 UTC — 087 · Claude read the message
+<a id="entry-072"></a>
+## 2026-10-10 16:23:28 UTC — 072 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1964 in / 463 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2153 in / 504 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn tells the landlord that post-tenancy costs and tenant-attributed damage exceed the £650 deposit, a full deposit claim is being prepared, and asks whether the work can proceed while itemised figures are awaited. The landlord's approval remains conditional on bond recovery.
-- **Rationale:** Authority remains conditional and the deposit may not cover the quote; cannot instruct until the landlord confirms.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Mira Venn tells the landlord that post-tenancy and damage costs exceed the £650 deposit held and a full deposit claim is being prepared, with itemised figures still awaited. She asks whether the £665 work can proceed meanwhile.
+- **Rationale:** Conditional approval cannot be satisfied as deposit is less than the quote, and scope questions remain open; clarification needed before instructing.
 - **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Landlord approval is conditional on bond recovery, but the deposit held (£650) is less than the £665 quote and other damage costs; confirm whether work may proceed unconditionally.
-- **Unknown:** Final itemised figures for the deposit claim are still awaited.
+- **Unknown (affects route):** Landlord's approval was conditional on bond recovery, but the deposit (£650) does not cover the £665 quote; unclear whether approval still stands.
+- **Unknown (affects route):** Scope still unconfirmed: whether the quote reflects the current inspection and whether disturbed soil needs reinstatement.
 
-<a id="entry-088"></a>
-## 2026-10-10 16:03:31 UTC — 088 · Claim `total` = 665.0
+<a id="entry-073"></a>
+## 2026-10-10 16:23:28 UTC — 073 · Claim `total` = 665.0
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > the £665 quote was already on file
 
-<a id="entry-089"></a>
-## 2026-10-10 16:03:31 UTC — 089 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-090"></a>
-## 2026-10-10 16:03:31 UTC — 090 · Message received: Event 012 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-074"></a>
+## 2026-10-10 16:23:28 UTC — 074 · Message received: Event 012 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1172,110 +927,119 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Asked the contractor not to book the work until further notice while the deposit dispute was being handled.
 
-<a id="entry-091"></a>
-## 2026-10-10 16:03:31 UTC — 091 · Policy gates → HUMAN REVIEW
+<a id="entry-075"></a>
+## 2026-10-10 16:23:28 UTC — 075 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-076"></a>
+## 2026-10-10 16:23:29 UTC — 076 · Jev routed the message
 
-<a id="entry-092"></a>
-## 2026-10-10 16:03:31 UTC — 092 · Workflow receipt
-
-<a id="entry-093"></a>
-## 2026-10-10 16:03:31 UTC — 093 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1739 in / 287 out tokens · 238 ms)
+- **Actor:** Jev (jev-1.13.0 · 1787 in / 287 out tokens · 332 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.02 · multiple_issues 0.05 · sensitive 0.03 · states_facts 0.05 · system_instructions 0.02
-- **Why:** Jev route confidence 0.48 is below 0.5.
+- **Signals:** hazard 0.02 · multiple_issues 0.04 · sensitive 0.03 · states_facts 0.05 · system_instructions 0.02
+- **Why:** Jev route confidence 0.47 is below 0.5.
 
-<a id="entry-094"></a>
-## 2026-10-10 16:03:41 UTC — 094 · Claude read the message
+<a id="entry-077"></a>
+## 2026-10-10 16:23:40 UTC — 077 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1863 in / 635 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2024 in / 813 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn told the contractor to hold off booking the checkout clean until further notice while the deposit dispute is resolved. No new appointment is agreed and the landlord's conditional approval remains unresolved.
-- **Rationale:** The message concerns scheduling of an already known job, instructing the contractor not to book a visit yet; no appointment is agreed or cancelled, so it is treated as an appointment/scheduling update.
-- **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Work is on hold with no indication of when booking may resume; confirm whether the previously approved instruction is suspended or withdrawn.
-- **Unknown (affects route):** Landlord approval remains conditional on bond recovery and the deposit held (£650) is less than the £665 quote; confirm whether the work is authorised to proceed at all.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** The property manager told the contractor to hold off booking the checkout clean until further notice while the deposit dispute is resolved. No date was agreed and the scope/approval questions remain unresolved.
+- **Rationale:** The message is solely an instruction to postpone booking a known job, so it concerns scheduling of the existing work item; no new date or cancellation of a confirmed appointment is stated.
+- **Extracted:** 0 claims · 3 ambiguities · 1 issue
+- **Unknown (affects route):** The work is on hold with no date; unclear when booking may resume or whether the earlier approval to proceed is withdrawn in the meantime.
+- **Unknown (affects route):** Landlord's approval was conditional on bond recovery, but the £650 deposit does not cover the £665 quote; unclear whether authority still stands.
+- **Unknown (affects route):** Scope still unconfirmed: whether the quote reflects the current inspection and whether disturbed soil needs reinstatement.
 
-<a id="entry-095"></a>
-## 2026-10-10 16:03:41 UTC — 095 · Proposed action → `confirm_appointment`
+<a id="entry-078"></a>
+## 2026-10-10 16:23:40 UTC — 078 · Proposed action → `confirm_appointment`
 
 - **Actor:** Triage reading (route `confirm_appointment`)
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
 - **Action revision:** 4
 
-<a id="entry-096"></a>
-## 2026-10-10 16:03:41 UTC — 096 · Human review opened: `identity`
+<a id="entry-079"></a>
+## 2026-10-10 16:23:40 UTC — 079 · Question closed
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:03:41 UTC
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
 
-> Verify the person, property and work item mapping.
-
-<a id="entry-097"></a>
-## 2026-10-10 16:03:41 UTC — 097 · Human review opened: `route`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:03:41 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-098"></a>
-## 2026-10-10 16:03:41 UTC — 098 · Human review opened: `access`
-
-- **Actor:** Policy engine
-- **Owner:** access officer · rule `require-access`
-- **Expires:** 2026-10-12 16:03:41 UTC
-
-> Record consent for this visit and access method from the authorised person. A verified route is required before asking externally.
-
-<a id="entry-099"></a>
-## 2026-10-10 16:03:41 UTC — 099 · Human review opened: `authority`
+<a id="entry-080"></a>
+## 2026-10-10 16:23:40 UTC — 080 · Human review opened: `authority`
 
 - **Actor:** Policy engine
 - **Owner:** approver · rule `require-authority`
-- **Expires:** 2026-10-12 16:03:41 UTC
+- **Expires:** 2026-10-12 16:23:40 UTC
 
 > Obtain authority for this work item, provider and action.
 
-<a id="entry-100"></a>
-## 2026-10-10 16:03:41 UTC — 100 · Human review opened: `schedule`
+<a id="entry-081"></a>
+## 2026-10-10 16:23:40 UTC — 081 · Clarification opened: `access` → tenant
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-schedule`
-- **Expires:** 2026-10-12 16:03:41 UTC
+- **Owner:** access officer
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Confirm the active appointment with a precise date and time. A verified route is required before asking externally.
+> Record consent for this visit and access method from the authorised person.
 
-<a id="entry-101"></a>
-## 2026-10-10 16:03:41 UTC — 101 · Human review opened: `triage`
+<a id="entry-082"></a>
+## 2026-10-10 16:23:40 UTC — 082 · Clarification opened: `schedule` → tenant
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:03:41 UTC
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Clarify before routing: Work is on hold with no indication of when booking may resume; confirm whether the previously approved instruction is suspended or withdrawn.; Landlord approval remains conditional on bond recovery and the deposit held (£650) is less than the £665 quote; confirm whether the work is authorised to proceed at all. A verified route is required before asking externally.
+> Confirm the active appointment with a precise date and time.
 
-<a id="entry-102"></a>
-## 2026-10-10 16:03:41 UTC — 102 · Policy gates → HUMAN REVIEW
+<a id="entry-083"></a>
+## 2026-10-10 16:23:40 UTC — 083 · Clarification opened: `triage` → tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-<a id="entry-103"></a>
-## 2026-10-10 16:03:41 UTC — 103 · Message received: Event 013 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
+> Clarify before routing: The work is on hold with no date; unclear when booking may resume or whether the earlier approval to proceed is withdrawn in the meantime.; Landlord's approval was conditional on bond recovery, but the £650 deposit does not cover the £665 quote; unclear whether authority still stands.; Scope still unconfirmed: whether the quote reflects the current inspection and whether disturbed soil needs reinstatement.
+
+<a id="entry-084"></a>
+## 2026-10-10 16:23:40 UTC — 084 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → CLARIFY; `schedule` UNKNOWN → CLARIFY; `triage` UNKNOWN → CLARIFY
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-085"></a>
+## 2026-10-10 16:23:40 UTC — 085 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT; `schedule` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-086"></a>
+## 2026-10-10 16:23:50 UTC — 086 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1663 in / 712 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The job is on hold pending a deposit dispute and the landlord's approval was conditional on bond recovery (£650 held vs £665 quote), so authority to proceed is unclear. Asking about dates/access could imply the work is going ahead and may cross into the disputed deposit claim. Also the recipient here appears to be the contractor/property manager rather than the tenant, so staff should confirm who this goes to before sending.
+- **Send gate:** held for staff — Claude asked for staff review: The job is on hold pending a deposit dispute and the landlord's approval was conditional on bond recovery (£650 held vs £665 quote), so authority to proceed is unclear. Asking about dates/access could imply the work is going ahead and may cross into the disputed deposit claim. Also the recipient here appears to be the contractor/property manager rather than the tenant, so staff should confirm who this goes to before sending. Risk flags: complaint, possible_wrong_recipient, sensitive_personal_data.
+- **Topics:** access, availability, issue_details
+
+> Hello,
+>
+> Thanks for your patience. Before anything is arranged for the checkout clean (kitchen, oven, extractor, bathrooms and waste removal), could you help us with a few details?
+>
+> 1. Could you confirm whether the scope listed still matches what's needed at the property, including whether any disturbed ground outside needs putting back?
+> 2. Is there a date and time that would suit for the work to be carried out?
+> 3. How would access be arranged on the day, and who can confirm that arrangement?
+>
+> If you could reply with these, we'll be able to take things forward.
+>
+> Many thanks
+
+<a id="entry-087"></a>
+## 2026-10-10 16:23:50 UTC — 087 · Message received: Event 013 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1286,49 +1050,57 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Said the next availability would be the following week and agreed to wait for further instructions.
 
-<a id="entry-104"></a>
-## 2026-10-10 16:03:41 UTC — 104 · Policy gates → HUMAN REVIEW
+<a id="entry-088"></a>
+## 2026-10-10 16:23:50 UTC — 088 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-089"></a>
+## 2026-10-10 16:23:51 UTC — 089 · Jev routed the message
 
-<a id="entry-105"></a>
-## 2026-10-10 16:03:41 UTC — 105 · Workflow receipt
-
-<a id="entry-106"></a>
-## 2026-10-10 16:03:41 UTC — 106 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1716 in / 287 out tokens · 421 ms)
+- **Actor:** Jev (jev-1.13.0 · 1833 in / 287 out tokens · 274 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.94)
-- **Signals:** hazard 0.02 · multiple_issues 0.05 · sensitive 0.02 · states_facts 0.09 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.
+- **Decision:** jev_route → `confirm_appointment` (confidence 0.78)
+- **Signals:** hazard 0.02 · multiple_issues 0.04 · sensitive 0.02 · states_facts 0.11 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.78 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-107"></a>
-## 2026-10-10 16:03:46 UTC — 107 · Claude read the message
+<a id="entry-090"></a>
+## 2026-10-10 16:23:57 UTC — 090 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1876 in / 356 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2288 in / 521 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Contractor Elian Wren states next availability is the following week and will wait for further instructions while the job is on hold.
-- **Rationale:** Message concerns timing of an already known job and holds pending instruction, so appointment handling applies; no firm slot agreed.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Contractor says the next availability is the following week and will wait for further instructions. No specific date or time agreed and the job remains on hold.
+- **Rationale:** Message concerns scheduling of an already known job; contractor indicates availability but awaits instructions.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** Contractor gives only general availability ("following week"); no specific date or time agreed.
-- **Unknown (affects route):** Work remains on hold pending deposit/authority resolution; confirm whether to instruct or cancel.
+- **Unknown:** "The following week" gives no precise date or time; a booking slot still needs to be agreed.
+- **Unknown (affects route):** Work remains on hold pending the deposit dispute; unclear whether the landlord's conditional approval still stands given the £650 deposit is below the £665 quote.
 
-<a id="entry-108"></a>
-## 2026-10-10 16:03:46 UTC — 108 · Policy gates → HUMAN REVIEW
+<a id="entry-091"></a>
+## 2026-10-10 16:23:57 UTC — 091 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (reading)
 
-<a id="entry-109"></a>
-## 2026-10-10 16:03:47 UTC — 109 · Message received: Event 014 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
+> Said the next availability would be the following week and agreed to wait for further instructions.
+
+<a id="entry-092"></a>
+## 2026-10-10 16:24:04 UTC — 092 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1164 in / 432 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The conversation involves the landlord, property manager and contractor discussing a deposit claim against former tenants, not a tenant enquiry - the availability question is really for the contractor, so the recipient needs confirming before anything is sent. There is also an unresolved instruction not to book the work until further notice, so confirming a date could conflict with that.
+- **Send gate:** held for staff — Claude asked for staff review: The conversation involves the landlord, property manager and contractor discussing a deposit claim against former tenants, not a tenant enquiry - the availability question is really for the contractor, so the recipient needs confirming before anything is sent. There is also an unresolved instruction not to book the work until further notice, so confirming a date could conflict with that. Risk flags: complaint, possible_wrong_recipient.
+- **Topics:** availability
+
+> Hello,
+>
+> Thanks for your patience regarding the checkout clean (kitchen, oven, extractor, bathrooms and waste removal).
+>
+> Could you let us know which date and time next week would suit you for the work to go ahead? A specific day and a morning or afternoon slot would be really helpful.
+>
+> Many thanks.
+
+<a id="entry-093"></a>
+## 2026-10-10 16:24:04 UTC — 093 · Message received: Event 014 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1339,49 +1111,33 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Asked whether the instruction to hold the work was still in force and whether the property could be attended yet.
 
-<a id="entry-110"></a>
-## 2026-10-10 16:03:47 UTC — 110 · Policy gates → HUMAN REVIEW
+<a id="entry-094"></a>
+## 2026-10-10 16:24:04 UTC — 094 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-095"></a>
+## 2026-10-10 16:24:05 UTC — 095 · Jev routed the message
 
-<a id="entry-111"></a>
-## 2026-10-10 16:03:47 UTC — 111 · Workflow receipt
-
-<a id="entry-112"></a>
-## 2026-10-10 16:03:47 UTC — 112 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1728 in / 287 out tokens · 371 ms)
+- **Actor:** Jev (jev-1.13.0 · 1845 in / 287 out tokens · 330 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.89)
-- **Signals:** hazard 0.02 · multiple_issues 0.04 · sensitive 0.02 · states_facts 0.05 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.
+- **Decision:** jev_route → `confirm_appointment` (confidence 0.74)
+- **Signals:** hazard 0.02 · multiple_issues 0.03 · sensitive 0.02 · states_facts 0.05 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.74 is below the Jev-only bar 0.8. Open tenant questions may be answered.
 
-<a id="entry-113"></a>
-## 2026-10-10 16:03:52 UTC — 113 · Claude read the message
+<a id="entry-096"></a>
+## 2026-10-10 16:24:11 UTC — 096 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1775 in / 399 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2174 in / 514 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** chase · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Contractor Elian Wren asks whether the hold on the checkout clean is still in force and whether the property can be attended yet. No date proposed and no new claims.
-- **Rationale:** Contractor chasing status of a known job and possible attendance; handled as appointment coordination per router decision, though authority/hold status is unresolved.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Contractor asks whether the hold on the checkout clean is still in force and whether the property can be attended yet. No date, access or authority confirmation provided.
+- **Rationale:** Contractor chasing scheduling/hold status on a known job; router's confirm_appointment is reasonable though authority remains unresolved.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** Contractor has not proposed a specific date or time; a visit date still needs agreeing once the hold is lifted.
-- **Unknown (affects route):** Work remains on hold pending deposit/authority resolution; confirm whether to instruct, cancel or keep holding.
+- **Unknown (affects route):** Whether the hold pending the deposit dispute is lifted and the landlord's conditional approval still stands (£650 deposit vs £665 quote).
+- **Unknown:** No proposed date or time; contractor previously said next availability was the following week.
 
-<a id="entry-114"></a>
-## 2026-10-10 16:03:52 UTC — 114 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-115"></a>
-## 2026-10-10 16:03:52 UTC — 115 · Message received: Event 015 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-097"></a>
+## 2026-10-10 16:24:11 UTC — 097 · Message received: Event 015 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1392,55 +1148,105 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Confirmed the work should remain on hold because separate major maintenance was outstanding. A prospective tenant wanted to move in on 28 September; at that point, landlord approval of the separate maintenance quote had not been received.
 
-<a id="entry-116"></a>
-## 2026-10-10 16:03:52 UTC — 116 · Policy gates → HUMAN REVIEW
+<a id="entry-098"></a>
+## 2026-10-10 16:24:11 UTC — 098 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-099"></a>
+## 2026-10-10 16:24:12 UTC — 099 · Jev routed the message
 
-<a id="entry-117"></a>
-## 2026-10-10 16:03:52 UTC — 117 · Workflow receipt
-
-<a id="entry-118"></a>
-## 2026-10-10 16:03:53 UTC — 118 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1701 in / 287 out tokens · 370 ms)
+- **Actor:** Jev (jev-1.13.0 · 1818 in / 287 out tokens · 626 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.67)
-- **Signals:** hazard 0.04 · multiple_issues 0.12 · sensitive 0.02 · states_facts 0.23 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.67 is below the Jev-only bar 0.8.
+- **Decision:** claude → no route
+- **Signals:** hazard 0.04 · multiple_issues 0.12 · sensitive 0.02 · states_facts 0.36 · system_instructions 0.02
+- **Why:** Jev route confidence 0.41 is below 0.5.
 
-<a id="entry-119"></a>
-## 2026-10-10 16:04:01 UTC — 119 · Claude read the message
+<a id="entry-100"></a>
+## 2026-10-10 16:24:20 UTC — 100 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1841 in / 461 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2097 in / 652 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Mira Venn tells the contractor the checkout clean remains on hold because separate major maintenance is outstanding. A prospective tenant wants to move in on 28 September, and landlord approval of the separate maintenance quote had not been received.
-- **Rationale:** Message is an instruction about timing of an already known job, keeping it on hold; router's confirm_appointment is acceptable as scheduling-related.
-- **Extracted:** 0 claims · 2 ambiguities · 2 issues
-- **Unknown (affects route):** No date given for when the hold might lift; prospective tenant move-in is 28 September.
-- **Unknown (affects route):** What is the separate major maintenance work, and has a quote/authority been sought?
+- **Reading:** update · route `clarify` · medium confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Mira Venn (agent) tells the contractor the checkout clean remains on hold, citing outstanding separate major maintenance. A prospective tenant hoped to move in on 28 September, but landlord approval of the separate maintenance quote had not been received.
+- **Rationale:** The message only extends the hold without a date, authority confirmation or access arrangement, so the item cannot be booked or instructed; essential information remains missing.
+- **Extracted:** 0 claims · 3 ambiguities · 1 issue
+- **Unknown (affects route):** No indication of when the hold will be lifted or whether the landlord's conditional approval (bond recovery, £650 deposit vs £665 quote) still stands.
+- **Unknown (affects route):** The 'separate major maintenance' is not described; unclear whether it is a known case, what it involves, or whether it must precede the clean.
+- **Unknown:** No appointment date or time proposed; the 28 September move-in is only a prospective tenant's wish, not a booked visit.
 
-<a id="entry-120"></a>
-## 2026-10-10 16:04:01 UTC — 120 · Separate issue split into a new case
+<a id="entry-101"></a>
+## 2026-10-10 16:24:20 UTC — 101 · Proposed action → `clarify`
 
-- **Actor:** Claude
-- **Issue:** #2 of the message
+- **Actor:** Triage reading (route `clarify`)
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
+- **Action revision:** 5
 
-<a id="entry-121"></a>
-## 2026-10-10 16:04:01 UTC — 121 · Policy gates → HUMAN REVIEW
+<a id="entry-102"></a>
+## 2026-10-10 16:24:20 UTC — 102 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (reading)
 
-<a id="entry-122"></a>
-## 2026-10-10 16:04:02 UTC — 122 · Message received: Event 016 — Update from Nessa Quill (Landlord, Property Owner)
+> Confirmed the work should remain on hold because separate major maintenance was outstanding.
+
+<a id="entry-103"></a>
+## 2026-10-10 16:24:20 UTC — 103 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-104"></a>
+## 2026-10-10 16:24:20 UTC — 104 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-105"></a>
+## 2026-10-10 16:24:20 UTC — 105 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-106"></a>
+## 2026-10-10 16:24:20 UTC — 106 · Clarification opened: `triage` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: No indication of when the hold will be lifted or whether the landlord's conditional approval (bond recovery, £650 deposit vs £665 quote) still stands.; The 'separate major maintenance' is not described; unclear whether it is a known case, what it involves, or whether it must precede the clean.
+
+<a id="entry-107"></a>
+## 2026-10-10 16:24:20 UTC — 107 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `triage` UNKNOWN → CLARIFY
+- **Next step:** Clarify before routing: No indication of when the hold will be lifted or whether the landlord's conditional approval (bond recovery, £650 deposit vs £665 quote) still stands.; The 'separate major maintenance' is not described; unclear whether it is a known case, what it involves, or whether it must precede the clean.
+
+<a id="entry-108"></a>
+## 2026-10-10 16:24:20 UTC — 108 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** Clarify before routing: No indication of when the hold will be lifted or whether the landlord's conditional approval (bond recovery, £650 deposit vs £665 quote) still stands.; The 'separate major maintenance' is not described; unclear whether it is a known case, what it involves, or whether it must precede the clean.
+
+<a id="entry-109"></a>
+## 2026-10-10 16:24:26 UTC — 109 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1351 in / 431 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The correspondence is between the property manager and the contractor, not a tenant, and it touches on a deposit dispute, landlord approval of a quote and third-party financial figures (£650 deposit vs £665 quote). The recipient and appropriate wording need a staff member to confirm before anything goes out.
+- **Send gate:** held for staff — Claude asked for staff review: The correspondence is between the property manager and the contractor, not a tenant, and it touches on a deposit dispute, landlord approval of a quote and third-party financial figures (£650 deposit vs £665 quote). The recipient and appropriate wording need a staff member to confirm before anything goes out. Risk flags: complaint, possible_wrong_recipient, sensitive_personal_data.
+- **Topics:** issue_details
+
+> Hello,
+>
+> Thanks for your patience while things are on hold with the checkout clean (kitchen, oven, extractor, bathrooms and waste removal).
+>
+> So we can keep everything moving, could you let us know a little more about the separate major maintenance work that's outstanding — what it involves, and whether it needs to be finished before the clean can go ahead?
+>
+> Many thanks
+
+<a id="entry-110"></a>
+## 2026-10-10 16:24:26 UTC — 110 · Message received: Event 016 — Update from Nessa Quill (Landlord, Property Owner)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1451,83 +1257,58 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Sent the brief update “approved quote” without identifying which quote it referred to.
 
-<a id="entry-123"></a>
-## 2026-10-10 16:04:02 UTC — 123 · Policy gates → HUMAN REVIEW
+<a id="entry-111"></a>
+## 2026-10-10 16:24:26 UTC — 111 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-112"></a>
+## 2026-10-10 16:24:27 UTC — 112 · Jev routed the message
 
-<a id="entry-124"></a>
-## 2026-10-10 16:04:02 UTC — 124 · Workflow receipt
-
-<a id="entry-125"></a>
-## 2026-10-10 16:04:02 UTC — 125 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1691 in / 285 out tokens · 291 ms)
+- **Actor:** Jev (jev-1.13.0 · 1759 in / 285 out tokens · 279 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `clarify` (confidence 0.58)
-- **Signals:** hazard 0.02 · multiple_issues 0.09 · sensitive 0.02 · states_facts 0.34 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Route confidence 0.58 is below the Jev-only bar 0.8. A route change on an existing case.
+- **Decision:** jev_route → `clarify` (confidence 0.98)
+- **Signals:** hazard 0.02 · multiple_issues 0.09 · sensitive 0.02 · states_facts 0.45 · system_instructions 0.03
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-126"></a>
-## 2026-10-10 16:04:09 UTC — 126 · Claude read the message
+<a id="entry-113"></a>
+## 2026-10-10 16:24:34 UTC — 113 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1808 in / 415 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2004 in / 458 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `clarify` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Landlord Nessa Quill sent a two-word update, "approved quote", without stating which quote is approved (the £665 checkout clean quote or the separate major maintenance quote).
-- **Rationale:** Approval is asserted but the quote is unidentified, so the hold cannot be lifted or work instructed until clarified.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown (affects route):** Which quote is approved — the £665 checkout clean or the separate major maintenance quote?
-- **Unknown (affects route):** Does approval still depend on recovering costs from the deposit, and is the hold on booking lifted?
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Landlord Nessa Quill sent a brief update saying "approved quote" without specifying which quote. It is unclear whether this refers to the £665 checkout clean quote or the separate major maintenance quote.
+- **Rationale:** Ambiguous approval reference; cannot attribute authority to this work item without confirmation.
+- **Extracted:** 0 claims · 2 ambiguities · 1 issue
+- **Unknown (affects route):** Which quote the landlord approved is not identified — the £665 checkout clean quote or the separate major maintenance quote.
+- **Unknown (affects route):** Unclear whether the earlier condition (recovery from the tenants' bond) still applies and whether the hold on the clean is lifted.
 
-<a id="entry-127"></a>
-## 2026-10-10 16:04:09 UTC — 127 · Proposed action → `clarify`
+<a id="entry-114"></a>
+## 2026-10-10 16:24:34 UTC — 114 · Partial answer → narrower follow-up due
 
-- **Actor:** Triage reading (route `clarify`)
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal
-- **Action revision:** 5
+- **Actor:** Claude (reading)
 
-<a id="entry-128"></a>
-## 2026-10-10 16:04:09 UTC — 128 · Human review opened: `identity`
+> Sent the brief update “approved quote” without identifying which quote it referred to.
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:04:09 UTC
+<a id="entry-115"></a>
+## 2026-10-10 16:24:39 UTC — 115 · Claude drafted a message to the tenant
 
-> Verify the person, property and work item mapping.
+- **Actor:** Claude (claude-opus-5 · 1358 in / 345 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The recipient is the landlord, not the tenant, and the thread involves commercial matters (quote values, deposit/bond recovery and a hold on works). Staff should confirm the wording and recipient before it goes out.
+- **Send gate:** held for staff — Claude asked for staff review: The recipient is the landlord, not the tenant, and the thread involves commercial matters (quote values, deposit/bond recovery and a hold on works). Staff should confirm the wording and recipient before it goes out. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
 
-<a id="entry-129"></a>
-## 2026-10-10 16:04:09 UTC — 129 · Human review opened: `route`
+> Hello,
+>
+> Thank you for your update about the approved quote.
+>
+> So that we have it recorded correctly, could you let us know which quote you were approving \u2014 the checkout clean quote, or the separate maintenance quote? If it helps, just reply with the one that applies.
+>
+> Many thanks,
+> Northbridge Lettings
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:04:09 UTC
-
-> Verify the recipient and permitted communication route.
-
-<a id="entry-130"></a>
-## 2026-10-10 16:04:09 UTC — 130 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:04:09 UTC
-
-> Clarify before routing: Which quote is approved — the £665 checkout clean or the separate major maintenance quote?; Does approval still depend on recovering costs from the deposit, and is the hold on booking lifted? A verified route is required before asking externally.
-
-<a id="entry-131"></a>
-## 2026-10-10 16:04:09 UTC — 131 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-132"></a>
-## 2026-10-10 16:04:09 UTC — 132 · Message received: Event 017 — Email from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-116"></a>
+## 2026-10-10 16:24:39 UTC — 116 · Message received: Event 017 — Email from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1538,118 +1319,136 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Asked the contractor to propose a date and time for the post-tenancy work, noting that the property was vacant and keys were held at the office. No visit was booked or confirmed.
 
-<a id="entry-133"></a>
-## 2026-10-10 16:04:09 UTC — 133 · Policy gates → HUMAN REVIEW
+<a id="entry-117"></a>
+## 2026-10-10 16:24:39 UTC — 117 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-118"></a>
+## 2026-10-10 16:24:39 UTC — 118 · Jev routed the message
 
-<a id="entry-134"></a>
-## 2026-10-10 16:04:09 UTC — 134 · Workflow receipt
-
-<a id="entry-135"></a>
-## 2026-10-10 16:04:09 UTC — 135 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1707 in / 287 out tokens · 252 ms)
+- **Actor:** Jev (jev-1.13.0 · 1777 in / 287 out tokens · 341 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.63)
-- **Signals:** hazard 0.02 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.53 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.63 is below the Jev-only bar 0.8. The message may state facts that need exact quotes. A route change on an existing case.
+- **Decision:** claude → no route
+- **Signals:** hazard 0.02 · multiple_issues 0.05 · sensitive 0.02 · states_facts 0.57 · system_instructions 0.02
+- **Why:** Jev route confidence 0.48 is below 0.5.
 
-<a id="entry-136"></a>
-## 2026-10-10 16:04:16 UTC — 136 · Claude read the message
+<a id="entry-119"></a>
+## 2026-10-10 16:24:50 UTC — 119 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1882 in / 443 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1940 in / 868 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
 - **Reading:** access or appointment · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** The property manager asked the contractor to propose a date and time for the post-tenancy work, stating the property is vacant and keys are held at the office. No appointment has been booked or confirmed.
-- **Rationale:** Message concerns arranging a visit for a known job; follows router decision.
-- **Extracted:** 1 claim · 2 ambiguities · 1 issue
-- **Unknown:** No date or time has been proposed or agreed yet; the contractor must respond.
-- **Unknown (affects route):** Which quote the landlord approved (the £665 checkout clean or the separate maintenance quote) remains unclear, as does whether the hold on booking is formally lifted.
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Northbridge Lettings asked the contractor to propose a date and time for the post-tenancy work at the vacant property, noting keys are held at the office. No appointment has been agreed yet.
+- **Rationale:** The message is about arranging a visit for the already known checkout clean; no date agreed, so it sits at appointment arrangement, though the earlier hold and quote approval remain unconfirmed.
+- **Extracted:** 1 claim · 3 ambiguities · 1 issue
+- **Unknown (affects route):** The message does not state whether the earlier hold on the work has been formally lifted, or which quote the landlord approved (the £665 clean or the separate maintenance quote).
+- **Unknown:** Key handover arrangements for the contractor (collection and return) are not specified beyond keys being at the office.
+- **Unknown:** No date or time proposed or agreed yet; contractor is to propose one.
 
-<a id="entry-137"></a>
-## 2026-10-10 16:04:16 UTC — 137 · Proposed action → `confirm_appointment`
+<a id="entry-120"></a>
+## 2026-10-10 16:24:50 UTC — 120 · Proposed action → `confirm_appointment`
 
 - **Actor:** Triage reading (route `confirm_appointment`)
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
 - **Action revision:** 6
 
-<a id="entry-138"></a>
-## 2026-10-10 16:04:16 UTC — 138 · Claim `keys` = true
+<a id="entry-121"></a>
+## 2026-10-10 16:24:50 UTC — 121 · Claim `keys` = true
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > keys were held at the office
 
-<a id="entry-139"></a>
-## 2026-10-10 16:04:16 UTC — 139 · Human review opened: `identity`
+<a id="entry-122"></a>
+## 2026-10-10 16:24:50 UTC — 122 · Partial answer → narrower follow-up due
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-identity`
-- **Expires:** 2026-10-12 16:04:16 UTC
+- **Actor:** Claude (reading)
 
-> Verify the person, property and work item mapping.
+> Asked the contractor to propose a date and time for the post-tenancy work, noting that the property was vacant and keys were held at the office.
 
-<a id="entry-140"></a>
-## 2026-10-10 16:04:16 UTC — 140 · Human review opened: `route`
+<a id="entry-123"></a>
+## 2026-10-10 16:24:50 UTC — 123 · Question closed
 
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-route`
-- **Expires:** 2026-10-12 16:04:16 UTC
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
 
-> Verify the recipient and permitted communication route.
-
-<a id="entry-141"></a>
-## 2026-10-10 16:04:16 UTC — 141 · Human review opened: `access`
-
-- **Actor:** Policy engine
-- **Owner:** access officer · rule `require-access`
-- **Expires:** 2026-10-12 16:04:16 UTC
-
-> Record consent for this visit and access method from the authorised person. A verified route is required before asking externally.
-
-<a id="entry-142"></a>
-## 2026-10-10 16:04:16 UTC — 142 · Human review opened: `authority`
+<a id="entry-124"></a>
+## 2026-10-10 16:24:50 UTC — 124 · Human review opened: `authority`
 
 - **Actor:** Policy engine
 - **Owner:** approver · rule `require-authority`
-- **Expires:** 2026-10-12 16:04:16 UTC
+- **Expires:** 2026-10-12 16:24:50 UTC
 
 > Obtain authority for this work item, provider and action.
 
-<a id="entry-143"></a>
-## 2026-10-10 16:04:16 UTC — 143 · Human review opened: `schedule`
+<a id="entry-125"></a>
+## 2026-10-10 16:24:50 UTC — 125 · Clarification opened: `access` → tenant
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-schedule`
-- **Expires:** 2026-10-12 16:04:16 UTC
+- **Owner:** access officer
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Confirm the active appointment with a precise date and time. A verified route is required before asking externally.
+> Record consent for this visit and access method from the authorised person.
 
-<a id="entry-144"></a>
-## 2026-10-10 16:04:16 UTC — 144 · Human review opened: `triage`
+<a id="entry-126"></a>
+## 2026-10-10 16:24:50 UTC — 126 · Clarification opened: `schedule` → tenant
 
 - **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:04:16 UTC
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-> Clarify before routing: Which quote the landlord approved (the £665 checkout clean or the separate maintenance quote) remains unclear, as does whether the hold on booking is formally lifted. A verified route is required before asking externally.
+> Confirm the active appointment with a precise date and time.
 
-<a id="entry-145"></a>
-## 2026-10-10 16:04:16 UTC — 145 · Policy gates → HUMAN REVIEW
+<a id="entry-127"></a>
+## 2026-10-10 16:24:50 UTC — 127 · Clarification opened: `triage` → tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
 
-<a id="entry-146"></a>
-## 2026-10-10 16:04:16 UTC — 146 · Message received: Event 018 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)
+> Clarify before routing: The message does not state whether the earlier hold on the work has been formally lifted, or which quote the landlord approved (the £665 clean or the separate maintenance quote).
+
+<a id="entry-128"></a>
+## 2026-10-10 16:24:50 UTC — 128 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → CLARIFY; `schedule` UNKNOWN → CLARIFY; `triage` UNKNOWN → CLARIFY
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-129"></a>
+## 2026-10-10 16:24:50 UTC — 129 · Policy gates → HUMAN REVIEW
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** HUMAN REVIEW · owner approver
+- **Blockers:** `authority` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → WAIT; `schedule` UNKNOWN → WAIT; `triage` UNKNOWN → WAIT
+- **Next step:** Obtain authority for this work item, provider and action.
+
+<a id="entry-130"></a>
+## 2026-10-10 16:24:59 UTC — 130 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1445 in / 639 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — There is genuine confusion in the thread: the landlord's 'approved quote' message did not say which quote, and it is unclear whether the hold has been lifted. Staff should confirm the approval and hold status internally before this goes out, as the message also references a specific quoted figure and an earlier instruction to hold work.
+- **Send gate:** held for staff — Claude asked for staff review: There is genuine confusion in the thread: the landlord's 'approved quote' message did not say which quote, and it is unclear whether the hold has been lifted. Staff should confirm the approval and hold status internally before this goes out, as the message also references a specific quoted figure and an earlier instruction to hold work. Risk flags: possible_wrong_recipient.
+- **Topics:** access, availability, issue_details
+
+> Hello,
+>
+> Thanks for your patience with the post-tenancy work at the property (checkout clean covering the kitchen, oven, extractor, bathrooms and waste removal).
+>
+> So we have everything recorded correctly, could you let us know:
+>
+> 1. Whether the earlier hold on this work has now been lifted, and which quote was approved (the \u00a3665 clean or the separate maintenance quote)?
+> 2. A date and time that would suit for attending the property?
+> 3. How access should be arranged \u2014 would keys be collected from the office, or is another arrangement preferred?
+>
+> If you could reply with all three in one go, that would be a great help.
+>
+> Many thanks
+
+<a id="entry-131"></a>
+## 2026-10-10 16:24:59 UTC — 131 · Message received: Event 018 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1660,49 +1459,103 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Recorded that a firm date for the sanitation work was being held until the separate maintenance work had been scheduled. No maintenance completion date was recorded.
 
-<a id="entry-147"></a>
-## 2026-10-10 16:04:16 UTC — 147 · Policy gates → HUMAN REVIEW
+<a id="entry-132"></a>
+## 2026-10-10 16:24:59 UTC — 132 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-133"></a>
+## 2026-10-10 16:24:59 UTC — 133 · Jev routed the message
 
-<a id="entry-148"></a>
-## 2026-10-10 16:04:16 UTC — 148 · Workflow receipt
-
-<a id="entry-149"></a>
-## 2026-10-10 16:04:17 UTC — 149 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1718 in / 287 out tokens · 410 ms)
+- **Actor:** Jev (jev-1.13.0 · 1786 in / 287 out tokens · 287 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.73)
-- **Signals:** hazard 0.03 · multiple_issues 0.13 · sensitive 0.02 · states_facts 0.09 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. Route confidence 0.73 is below the Jev-only bar 0.8.
+- **Decision:** claude → no route
+- **Signals:** hazard 0.03 · multiple_issues 0.10 · sensitive 0.02 · states_facts 0.09 · system_instructions 0.03
+- **Why:** Jev route confidence 0.47 is below 0.5.
 
-<a id="entry-150"></a>
-## 2026-10-10 16:04:23 UTC — 150 · Claude read the message
+<a id="entry-134"></a>
+## 2026-10-10 16:25:07 UTC — 134 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1800 in / 404 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1957 in / 586 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Internal note from the maintenance coordinator recording that a firm date for the checkout sanitation work is being held pending scheduling of the separate maintenance work. No maintenance completion date recorded.
-- **Rationale:** Message concerns timing of the visit for a known job, so appointment confirmation remains the active step; no date agreed yet.
+- **Reading:** update · route `clarify` · medium confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Internal note from the maintenance coordinator stating that a firm date for the checkout sanitation work is being held until the separate maintenance work has been scheduled. No completion date for the maintenance work was recorded.
+- **Rationale:** The note confirms the clean is still on hold pending the separate maintenance scheduling; no date, consent or quote clarification is given, so the item cannot be booked yet.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** No date proposed or agreed for the checkout clean; it depends on scheduling of separate maintenance work with no recorded completion date.
-- **Unknown (affects route):** Still unclear which quote the landlord approved and whether the hold on booking is formally lifted.
+- **Unknown (affects route):** It is still unclear whether the earlier hold has been formally lifted and which quote the landlord approved (the £665 clean or the separate maintenance quote).
+- **Unknown (affects route):** No date for the separate maintenance work is recorded, so no date can be set for the checkout clean.
 
-<a id="entry-151"></a>
-## 2026-10-10 16:04:23 UTC — 151 · Policy gates → HUMAN REVIEW
+<a id="entry-135"></a>
+## 2026-10-10 16:25:07 UTC — 135 · Proposed action → `clarify`
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Triage reading (route `clarify`)
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal
+- **Action revision:** 7
 
-<a id="entry-152"></a>
-## 2026-10-10 16:04:23 UTC — 152 · Message received: Event 019 — Call from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-136"></a>
+## 2026-10-10 16:25:07 UTC — 136 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> a firm date for the sanitation work was being held until the separate maintenance work had been scheduled
+
+<a id="entry-137"></a>
+## 2026-10-10 16:25:07 UTC — 137 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-138"></a>
+## 2026-10-10 16:25:07 UTC — 138 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-139"></a>
+## 2026-10-10 16:25:07 UTC — 139 · Question closed
+
+- **Why:** Evidence satisfied the requirement or the action was superseded; old reminders cancelled.
+
+<a id="entry-140"></a>
+## 2026-10-10 16:25:07 UTC — 140 · Clarification opened: `triage` → tenant
+
+- **Actor:** Policy engine
+- **Owner:** case manager
+- **Deadline:** 2026-10-13 16:00:00 UTC
+
+> Clarify before routing: It is still unclear whether the earlier hold has been formally lifted and which quote the landlord approved (the £665 clean or the separate maintenance quote).; No date for the separate maintenance work is recorded, so no date can be set for the checkout clean.
+
+<a id="entry-141"></a>
+## 2026-10-10 16:25:07 UTC — 141 · Policy gates → CLARIFY
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** CLARIFY · owner case manager
+- **Blockers:** `triage` UNKNOWN → CLARIFY
+- **Next step:** Clarify before routing: It is still unclear whether the earlier hold has been formally lifted and which quote the landlord approved (the £665 clean or the separate maintenance quote).; No date for the separate maintenance work is recorded, so no date can be set for the checkout clean.
+
+<a id="entry-142"></a>
+## 2026-10-10 16:25:07 UTC — 142 · Policy gates → WAIT
+
+- **Actor:** Policy engine (rules v2, `domain.evaluate`)
+- **Outcome:** WAIT · owner case manager
+- **Blockers:** `triage` UNKNOWN → WAIT
+- **Next step:** Clarify before routing: It is still unclear whether the earlier hold has been formally lifted and which quote the landlord approved (the £665 clean or the separate maintenance quote).; No date for the separate maintenance work is recorded, so no date can be set for the checkout clean.
+
+<a id="entry-143"></a>
+## 2026-10-10 16:25:12 UTC — 143 · Claude drafted a message to the tenant
+
+- **Actor:** Claude (claude-opus-5 · 1344 in / 356 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The recipient is the landlord/internal parties rather than a tenant, and the thread involves an unresolved hold, quote approval and costs - a staff member should confirm who this goes to and how the hold is described before sending.
+- **Send gate:** held for staff — Claude asked for staff review: The recipient is the landlord/internal parties rather than a tenant, and the thread involves an unresolved hold, quote approval and costs - a staff member should confirm who this goes to and how the hold is described before sending. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
+
+> Hello,
+>
+> Thank you for the update about the approved quote. So we have this right before we take the next step, could you let us know which quote the approval covers - the checkout clean, or the separate maintenance work?
+>
+> Thank you,
+> Northbridge Lettings
+
+<a id="entry-144"></a>
+## 2026-10-10 16:25:12 UTC — 144 · Message received: Event 019 — Call from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1713,49 +1566,33 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Call note records that the contractor would provide possible dates, but the post-tenancy work still depended on the separate maintenance being scheduled first. No visit date was confirmed.
 
-<a id="entry-153"></a>
-## 2026-10-10 16:04:23 UTC — 153 · Policy gates → HUMAN REVIEW
+<a id="entry-145"></a>
+## 2026-10-10 16:25:12 UTC — 145 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-146"></a>
+## 2026-10-10 16:25:13 UTC — 146 · Jev routed the message
 
-<a id="entry-154"></a>
-## 2026-10-10 16:04:24 UTC — 154 · Workflow receipt
-
-<a id="entry-155"></a>
-## 2026-10-10 16:04:24 UTC — 155 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1708 in / 287 out tokens · 302 ms)
+- **Actor:** Jev (jev-1.13.0 · 1761 in / 285 out tokens · 463 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.92)
-- **Signals:** hazard 0.02 · multiple_issues 0.08 · sensitive 0.02 · states_facts 0.06 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.
+- **Decision:** jev_route → `clarify` (confidence 0.96)
+- **Signals:** hazard 0.02 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.07 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-156"></a>
-## 2026-10-10 16:04:30 UTC — 156 · Claude read the message
+<a id="entry-147"></a>
+## 2026-10-10 16:25:18 UTC — 147 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1772 in / 411 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1969 in / 419 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** access or appointment · route `confirm_appointment` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Call note from the property manager to the contractor: contractor to propose possible dates, but the checkout clean remains dependent on the separate maintenance work being scheduled first. No visit date confirmed.
-- **Rationale:** Message is about arranging a visit for a known job; no date agreed, so appointment remains to be confirmed.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Call note records the contractor will propose possible dates, but the checkout clean still depends on the separate maintenance work being scheduled first. No visit date confirmed.
+- **Rationale:** No date or authority confirmed; dependency on separate maintenance unresolved, so clarification is still needed.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** No dates proposed yet; contractor's possible dates are still outstanding.
-- **Unknown (affects route):** Unclear when the separate maintenance work will be scheduled and whether the hold on booking is formally lifted.
+- **Unknown (affects route):** Whether the hold has been lifted and which quote the landlord approved remains unclear.
+- **Unknown:** No dates proposed yet; separate maintenance scheduling date still unknown.
 
-<a id="entry-157"></a>
-## 2026-10-10 16:04:30 UTC — 157 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-158"></a>
-## 2026-10-10 16:04:30 UTC — 158 · Message received: Event 020 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)
+<a id="entry-148"></a>
+## 2026-10-10 16:25:18 UTC — 148 · Message received: Event 020 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1766,54 +1603,33 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Recorded that the post-tenancy work remained dependent on the separate maintenance being completed. The contractor had not provided a confirmed slot.
 
-<a id="entry-159"></a>
-## 2026-10-10 16:04:30 UTC — 159 · Policy gates → HUMAN REVIEW
+<a id="entry-149"></a>
+## 2026-10-10 16:25:18 UTC — 149 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-150"></a>
+## 2026-10-10 16:25:19 UTC — 150 · Jev routed the message
 
-<a id="entry-160"></a>
-## 2026-10-10 16:04:30 UTC — 160 · Workflow receipt
-
-<a id="entry-161"></a>
-## 2026-10-10 16:04:31 UTC — 161 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1727 in / 287 out tokens · 367 ms)
+- **Actor:** Jev (jev-1.13.0 · 1780 in / 285 out tokens · 324 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.98)
-- **Signals:** hazard 0.02 · multiple_issues 0.08 · sensitive 0.02 · states_facts 0.06 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.
+- **Decision:** jev_route → `clarify` (confidence 0.92)
+- **Signals:** hazard 0.02 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.07 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-162"></a>
-## 2026-10-10 16:04:37 UTC — 162 · Claude read the message
+<a id="entry-151"></a>
+## 2026-10-10 16:25:25 UTC — 151 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1808 in / 373 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1940 in / 411 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Internal note records the checkout clean remains dependent on separate maintenance work being completed, and the contractor has not yet provided a confirmed slot.
-- **Rationale:** Internal status update about scheduling an already known job; next step remains confirming an appointment.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Internal note confirming the checkout clean still depends on completion of the separate maintenance work, and that the contractor has not given a confirmed slot.
+- **Rationale:** Note adds no new date or authority; dependency and missing slot keep the item unroutable pending clarification.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** No proposed dates from the contractor; still no confirmed slot for the checkout clean.
-- **Unknown:** Unclear when the separate maintenance will be completed and whether the hold is formally lifted.
+- **Unknown (affects route):** Still unclear whether the hold is lifted and which quote the landlord approved; no date for the separate maintenance work.
+- **Unknown:** Contractor has not supplied a confirmed slot for the clean.
 
-<a id="entry-163"></a>
-## 2026-10-10 16:04:37 UTC — 163 · Review superseded
-
-- **Why:** Relevant evidence or current blockers changed; assess the current review.
-
-<a id="entry-164"></a>
-## 2026-10-10 16:04:37 UTC — 164 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-165"></a>
-## 2026-10-10 16:04:37 UTC — 165 · Message received: Event 021 — Update from Mira Venn (Property Manager, Northbridge Lettings)
+<a id="entry-152"></a>
+## 2026-10-10 16:25:25 UTC — 152 · Message received: Event 021 — Update from Mira Venn (Property Manager, Northbridge Lettings)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1824,49 +1640,33 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 >
 > Recorded the instruction to wait three more working days because the separate major maintenance work must be completed before the sanitation work can be booked. No date is booked, and no update confirming completion of the maintenance work is recorded.
 
-<a id="entry-166"></a>
-## 2026-10-10 16:04:37 UTC — 166 · Policy gates → HUMAN REVIEW
+<a id="entry-153"></a>
+## 2026-10-10 16:25:25 UTC — 153 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-154"></a>
+## 2026-10-10 16:25:26 UTC — 154 · Jev routed the message
 
-<a id="entry-167"></a>
-## 2026-10-10 16:04:37 UTC — 167 · Workflow receipt
-
-<a id="entry-168"></a>
-## 2026-10-10 16:04:38 UTC — 168 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1735 in / 287 out tokens · 354 ms)
+- **Actor:** Jev (jev-1.13.0 · 1788 in / 285 out tokens · 310 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.94)
-- **Signals:** hazard 0.02 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.05 · system_instructions 0.02
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route.
+- **Decision:** jev_route → `clarify` (confidence 0.93)
+- **Signals:** hazard 0.03 · multiple_issues 0.07 · sensitive 0.02 · states_facts 0.06 · system_instructions 0.02
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. Open tenant questions may be answered.
 
-<a id="entry-169"></a>
-## 2026-10-10 16:04:43 UTC — 169 · Claude read the message
+<a id="entry-155"></a>
+## 2026-10-10 16:25:32 UTC — 155 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1806 in / 380 out tokens)
+- **Actor:** Claude (claude-opus-5 · 1990 in / 417 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · high confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Property manager records an internal instruction to wait three more working days, as the separate major maintenance must finish before the checkout clean can be booked. No date is booked and no maintenance completion is confirmed.
-- **Rationale:** Internal update about scheduling an already known job; still awaiting a bookable date.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Property manager records an internal instruction to wait three more working days, as the separate major maintenance must finish before the checkout clean can be booked. No date booked and no confirmation of the maintenance completion.
+- **Rationale:** Message confirms continued hold without resolving the approval or maintenance date, so clarification is still needed.
 - **Extracted:** 0 claims · 2 ambiguities · 1 issue
-- **Unknown:** No date or time proposed for the checkout clean; booking depends on completion of separate maintenance, which is unconfirmed.
-- **Unknown:** No confirmation that the separate major maintenance work is complete.
+- **Unknown (affects route):** Still unclear whether the hold is lifted and which quote the landlord approved; no completion date for the separate maintenance work.
+- **Unknown:** No date or time proposed for the checkout clean.
 
-<a id="entry-170"></a>
-## 2026-10-10 16:04:43 UTC — 170 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-171"></a>
-## 2026-10-10 16:04:43 UTC — 171 · Message received: Attachment move-out-inspection-report.pdf (PDF text extraction)
+<a id="entry-156"></a>
+## 2026-10-10 16:25:32 UTC — 156 · Message received: Attachment move-out-inspection-report.pdf (PDF text extraction)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1887,65 +1687,40 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 > Rear garden requires clearance, including bagged dog waste.
 > Soil in the rear garden has been disturbed by digging.
 
-<a id="entry-172"></a>
-## 2026-10-10 16:04:43 UTC — 172 · Policy gates → HUMAN REVIEW
+<a id="entry-157"></a>
+## 2026-10-10 16:25:32 UTC — 157 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-158"></a>
+## 2026-10-10 16:25:33 UTC — 158 · Jev routed the message
 
-<a id="entry-173"></a>
-## 2026-10-10 16:04:43 UTC — 173 · Workflow receipt
-
-<a id="entry-174"></a>
-## 2026-10-10 16:04:44 UTC — 174 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1796 in / 287 out tokens · 343 ms)
+- **Actor:** Jev (jev-1.13.0 · 1849 in / 285 out tokens · 254 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
 - **Decision:** claude → no route
-- **Signals:** hazard 0.06 · multiple_issues 0.48 · sensitive 0.03 · states_facts 0.04 · system_instructions 0.04
+- **Signals:** hazard 0.06 · multiple_issues 0.52 · sensitive 0.03 · states_facts 0.04 · system_instructions 0.04
 - **Why:** Possibly several issues: splitting cases needs Claude.
 
-<a id="entry-175"></a>
-## 2026-10-10 16:04:57 UTC — 175 · Claude read the message
+<a id="entry-159"></a>
+## 2026-10-10 16:25:43 UTC — 159 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 1838 in / 944 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2020 in / 829 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** An extracted move-out inspection report for 18 Thistlevaunt Lane lists the post-tenancy preparation items: kitchen/oven/extractor degreasing, bathroom and en-suite limescale removal and waste removal, matching the current checkout clean item. It also records rear garden clearance (including bagged dog waste) and disturbed soil, which are not part of the current work item.
-- **Rationale:** Document confirms the scope of the known checkout clean item but adds no date, consent or completion; the case's outstanding step remains arranging the visit. Garden items are a distinct problem needing its own assessment/quote.
+- **Reading:** update · route `clarify` · high confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** A move-out inspection report for 18 Thistlevaunt Lane lists the checkout cleaning preparation items (kitchen, oven, extractor degreasing, bathroom and en-suite limescale, kitchen waste removal) and additionally records that the rear garden needs clearance including bagged dog waste and that the soil has been disturbed by digging. It does not say whether the hold is lifted, which quote was approved, or when the separate maintenance work will complete.
+- **Rationale:** Report confirms the scope of the checkout clean but provides nothing on the hold, approved quote or maintenance completion date, so the current case stays at clarify; the garden items are a separate problem needing a quote.
 - **Extracted:** 0 claims · 3 ambiguities · 2 issues
-- **Unknown (affects route):** Is the rear garden clearance and disturbed soil to be handled as a separate work item, or added to the existing checkout scope with the same contractor?
-- **Unknown:** No remedial action is specified for the disturbed soil in the rear garden; confirm whether reinstatement/levelling is required.
-- **Unknown:** The report gives no date or time; the checkout clean visit remains unbooked and still appears dependent on the separate maintenance work.
+- **Unknown (affects route):** The report does not state whether the earlier hold has been lifted or which quote the landlord approved (the £665 clean or the separate maintenance quote).
+- **Unknown (affects route):** No completion date for the separate maintenance work is given, so the checkout clean still cannot be booked.
+- **Unknown (affects route):** Unclear whether the rear garden clearance and disturbed soil are to be handled as a separate instruction and who bears the cost.
 
-<a id="entry-176"></a>
-## 2026-10-10 16:04:57 UTC — 176 · Separate issue split into a new case
+<a id="entry-160"></a>
+## 2026-10-10 16:25:43 UTC — 160 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
-<a id="entry-177"></a>
-## 2026-10-10 16:04:57 UTC — 177 · Human review opened: `triage`
-
-- **Actor:** Policy engine
-- **Owner:** case manager · rule `require-triage`
-- **Expires:** 2026-10-12 16:04:57 UTC
-
-> Clarify before routing: Is the rear garden clearance and disturbed soil to be handled as a separate work item, or added to the existing checkout scope with the same contractor? A verified route is required before asking externally.
-
-<a id="entry-178"></a>
-## 2026-10-10 16:04:57 UTC — 178 · Policy gates → HUMAN REVIEW
-
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
-
-<a id="entry-179"></a>
-## 2026-10-10 16:04:57 UTC — 179 · Message received: Attachment property-preparation-quotation.pdf (PDF text extraction)
+<a id="entry-161"></a>
+## 2026-10-10 16:25:43 UTC — 161 · Message received: Attachment property-preparation-quotation.pdf (PDF text extraction)
 
 - **Recorded by:** demo-case_manager (case manager)
 - **Reading:** queued for Jev routing / Claude triage
@@ -1969,59 +1744,69 @@ Vacant Property Preparation · 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ · status
 > Description Amount
 > Property preparation service £665.00
 
-<a id="entry-180"></a>
-## 2026-10-10 16:04:57 UTC — 180 · Policy gates → HUMAN REVIEW
+<a id="entry-162"></a>
+## 2026-10-10 16:25:43 UTC — 162 · Workflow receipt
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` UNKNOWN → WAIT
-- **Next step:** Verify the person, property and work item mapping.
+<a id="entry-163"></a>
+## 2026-10-10 16:25:44 UTC — 163 · Jev routed the message
 
-<a id="entry-181"></a>
-## 2026-10-10 16:04:57 UTC — 181 · Workflow receipt
-
-<a id="entry-182"></a>
-## 2026-10-10 16:04:58 UTC — 182 · Jev routed the message
-
-- **Actor:** Jev (jev-1.13.0 · 1882 in / 287 out tokens · 581 ms)
+- **Actor:** Jev (jev-1.13.0 · 1935 in / 285 out tokens · 269 ms)
 - **Tool:** TypeSafe `system_one` · step `route_case_messages`
-- **Decision:** jev_route → `confirm_appointment` (confidence 0.81)
-- **Signals:** hazard 0.03 · multiple_issues 0.18 · sensitive 0.03 · states_facts 0.97 · system_instructions 0.03
-- **Why:** Jev routes; Claude extracts quotes and claims. confirm_appointment is not a Jev-only route. The message may state facts that need exact quotes.
+- **Decision:** jev_route → `clarify` (confidence 0.97)
+- **Signals:** hazard 0.03 · multiple_issues 0.24 · sensitive 0.03 · states_facts 0.97 · system_instructions 0.04
+- **Why:** Jev routes; Claude extracts quotes and claims. clarify is not a Jev-only route. The message may state facts that need exact quotes. Open tenant questions may be answered.
 
-<a id="entry-183"></a>
-## 2026-10-10 16:05:12 UTC — 183 · Claude read the message
+<a id="entry-164"></a>
+## 2026-10-10 16:25:53 UTC — 164 · Claude read the message
 
-- **Actor:** Claude (claude-opus-5 · 2165 in / 1052 out tokens)
+- **Actor:** Claude (claude-opus-5 · 2388 in / 692 out tokens)
 - **Tool:** Anthropic Messages API `ai.triage` (prompt property-triage-2026-10-10.3) · step `triage_case_messages`
-- **Reading:** update · route `confirm_appointment` · medium confidence
-- **Work item:** Checkout clean: kitchen, oven, extractor, bathroom/en-suite limescale, waste removal (checkout_cleaning)
-- **Summary:** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00. Scope includes oven/extractor degreasing, limescale treatment, rubbish removal, carpet shampooing and rear garden tidying; no visit date is given.
-- **Rationale:** Router route retained for the current case item; message is a contractor quotation document adding price information to the known checkout job and does not propose a date.
-- **Extracted:** 1 claim · 3 ambiguities · 2 issues
-- **Unknown:** The quoted £665.00 does not state whether VAT is included; the full comparable commitment including tax needs confirming.
-- **Unknown (affects route):** Quote adds carpet shampooing and garden tidying beyond the recorded checkout scope, and omits the disturbed soil and bagged dog waste noted in the inspection report. Confirm whether the garden work is part of this item or a separate work item.
-- **Unknown:** No proposed visit date or time is given, so the outstanding scheduling request remains unanswered.
-- **Objected to Jev's route:** The message is a quotation rather than scheduling information; it contains no date or time, so confirm_appointment cannot progress. The natural next step is a decision on the £665.00 quote (authority/instruct_work).
+- **Reading:** update · route `clarify` · medium confidence
+- **Work item:** Checkout clean: kitchen, oven, extractor, bathrooms, waste removal (checkout_cleaning)
+- **Summary:** Contractor quotation NBL-015-Q1 from Brindlewick Turnover Services for property preparation at 18 Thistlevaunt Lane, totalling £665.00, covering kitchen/oven/extractor degreasing, limescale, rubbish removal, carpet shampooing and rear garden tidying. It does not address the hold, landlord approval or any date.
+- **Rationale:** Quotation adds the £665 total but does not resolve the hold, approval or scheduling, so clarification is still required as the router decided.
+- **Extracted:** 1 claim · 4 ambiguities · 2 issues
+- **Unknown:** Quotation does not state whether VAT is included in the £665.00.
+- **Unknown (affects route):** No indication whether the landlord has approved this quote or whether the hold pending the separate maintenance work has been lifted.
+- **Unknown:** No proposed date or time for the visit is given.
+- **Unknown (affects route):** Garden clearance (including bagged dog waste) and disturbed soil are only partly covered; unclear if separate instruction/cost applies.
 
-<a id="entry-184"></a>
-## 2026-10-10 16:05:12 UTC — 184 · Claim `total` = 665.0
+<a id="entry-165"></a>
+## 2026-10-10 16:25:53 UTC — 165 · Claim `total` = 665.0
 
 - **Actor:** Claude (extracted)
 - **Status:** unverified assertion — a person or policy must accept it
 
 > Property preparation service £665.00
 
-<a id="entry-185"></a>
-## 2026-10-10 16:05:12 UTC — 185 · Separate issue split into a new case
+<a id="entry-166"></a>
+## 2026-10-10 16:25:53 UTC — 166 · Partial answer → narrower follow-up due
+
+- **Actor:** Claude (reading)
+
+> Property preparation service £665.00
+
+<a id="entry-167"></a>
+## 2026-10-10 16:25:53 UTC — 167 · Separate issue split into a new case
 
 - **Actor:** Claude
 - **Issue:** #2 of the message
 
-<a id="entry-186"></a>
-## 2026-10-10 16:05:12 UTC — 186 · Policy gates → HUMAN REVIEW
+<a id="entry-168"></a>
+## 2026-10-10 16:26:02 UTC — 168 · Claude drafted a message to the tenant
 
-- **Actor:** Policy engine (rules v1, `domain.evaluate`)
-- **Outcome:** HUMAN REVIEW · owner case manager
-- **Blockers:** `identity` UNKNOWN → HUMAN REVIEW; `route` UNKNOWN → HUMAN REVIEW; `access` UNKNOWN → HUMAN REVIEW; `authority` UNKNOWN → HUMAN REVIEW; `schedule` UNKNOWN → HUMAN REVIEW; `triage` CONFLICT → HUMAN REVIEW
-- **Next step:** Verify the person, property and work item mapping.
+- **Actor:** Claude (claude-opus-5 · 1752 in / 560 out tokens)
+- **Tool:** Anthropic Messages API `ai.draft_tenant_message` · step `compose_tenant_messages`
+- **Claude's call:** staff_review — The question is about approving a £665.00 quote and lifting an internal hold — this is a commercial/approval matter for the landlord, not a tenant information request, and the property is vacant, so the recipient and the authority to approve spend need checking before sending.
+- **Send gate:** held for staff — Claude asked for staff review: The question is about approving a £665.00 quote and lifting an internal hold — this is a commercial/approval matter for the landlord, not a tenant information request, and the property is vacant, so the recipient and the authority to approve spend need checking before sending. Risk flags: possible_wrong_recipient.
+- **Topics:** issue_details
+
+> Hello,
+>
+> Thank you for your patience while we sort out the preparation work at 18 Thistlevaunt Lane.
+>
+> So that we can take the next step, could you let us know whether you're happy for us to proceed with the quoted property preparation work of "degrease oven, hob and extractor", limescale treatment, rubbish removal, carpet shampooing and the rear garden tidy at £665.00 — and whether the other maintenance work that this was waiting on has now been completed? It would also help to know whether you'd like the rear garden clearance (including the bagged waste) and the disturbed soil covered as part of this or quoted separately.
+>
+> Just reply to this message and we'll pick it up from there.
+>
+> Many thanks

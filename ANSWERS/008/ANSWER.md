@@ -1,12 +1,12 @@
 # Property Management — case 008: Water ingress affecting two flats
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** Flat 3, 8 Tallowmere Row, Ossin Vale, ZZ1 1ZZ
 - **Decision cutoff:** 2025-06-18T12:55:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 24 of 24
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `29c82303c91189af…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `29c82303c91189af…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -41,16 +41,16 @@ The initial report and 23 further sources, submitted one at a time in availabili
 | 22 | 2025-06-18T12:38:00+00:00 | Event 023 — SMS from Bevin Orlo (Tenant, Flat 2) |
 | 23 | 2025-06-18T12:55:00+00:00 | Event 024 — Update from Arlen Quist (Property Manager, Northbridge Lettings) |
 
-## Final decision — system case `e6cf0e29c7c0`
+## Final decision — system case `ccf40667554f`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Wet ceiling light fitting — electrical assessment Flat 2 (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Wet ceiling light fitting and circuit in Flat 2 - electrical assessment (category other)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `02b88f914b2a` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `e230ca89cefe` as a separate issue.
 
-**Latest reading (model, high confidence, route `urgent_hazard`):** Arlen arranged an urgent electrical attendance with Runa Elt (Vellum Electrical) for the wet ceiling light fitting in Flat 2, offered window 12:30–13:15 subject to tenant access. No assessment has yet taken place.
+**Latest reading (model, medium confidence, route `urgent_hazard`):** Arlen arranged an urgent electrical attendance by Runa Elt (Vellum Electrical) for the wet ceiling light fitting in Flat 2, with a window of 12:30–13:15 subject to tenant access. No assessment has yet taken place; Flat 3 access and leak source remain unresolved.
 
 ### Actions taken
 
@@ -60,44 +60,45 @@ The initial report and 23 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case 02b88f914b2a: Event 014 — Call from Arlen Quist (Property Manager, Northbridge Lettings) |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Split from case e230ca89cefe: Event 014 — Call from Arlen Quist (Property Manager, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 - 1 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
-## Final decision — system case `02b88f914b2a`
+## Final decision — system case `e230ca89cefe`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Reported maintenance (category plumbing)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Suspected leak from Flat 3 bathroom into Flat 2 ceiling (category plumbing)
+- **Next step:** Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `urgent_hazard`):** Arlen Quist summarises the current position: active leak and enlarging ceiling bulge in Flat 2 next to a wet light fitting with electrical safety unestablished, no source or isolation point found, and no authorised access to Flat 3 as the tenant and landlord have not consented.
+**Latest reading (claude-opus-5, medium confidence, route `urgent_hazard`):** Arlen Quist summarises the current position: active dripping and an enlarging ceiling bulge in Flat 2 next to a wet light fitting, electrical safety unestablished, no leak source or isolation point found, and no agreed access to Flat 3. Yara still withholds consent and Niko has not authorised entry.
 
-**Why:** Ongoing uncontrolled leak with enlarging ceiling bulge adjacent to a wet light fitting and no isolation point is a possible immediate hazard requiring a case manager.
+**Why:** Water near a light fitting with an enlarging ceiling bulge and unestablished electrical safety is a possible immediate hazard requiring a case manager; access authority unresolved.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Yara, Thanks for letting us know about the water coming through the ceiling of Flat 2, below your bathroom. We've noted your request to be contacted before anyone comes to Flat 3. So we can work out what's going on, could you tell us whether you've noticed anything unusual in your bathroom rec …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Yara, Thanks again for your help with this. Water is still coming through the ceiling of Flat 2, and at the moment we can't tell where it's coming from. Could you let us know whether you've noticed any water, damp or marks in your bathroom since you last wrote, and whether you're at home today …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Yara, Thanks for speaking with us earlier. We understand you'd rather no one came in while you're away, and that you're back after 17:30. To help us work out where the water is coming from, could you let us know whether you've used the bath, shower, basin or toilet in your bathroom today, and …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Source and extent of the water ingress is unknown; no visible leak in Flat 3. May need inspection of both flats.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: open — Clarify before routing: Access to Flat 3 is still not agreed; contractor states source tracing requires entry to the source flat.; Source of the leak remains unconfirmed; Flat 3 only suspected and supply cannot be isolated from Flat 2.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Event 014 — Call from Arlen Quist (Property Manager, Northbridge Lettings) |
+| `triage` | case manager | `require-triage` | Claude read this as a possible urgent hazard. A case manager must take over now and apply the urgent procedure. | Event 002 — Call from Arlen Quist (Property Manager, Northbridge Lettings) |
 
 ### Missing information and conflicting facts
 
-- **access** (blocks the route): No verified emergency-entry authority; need a decision from the agency director or emergency services on entry to Flat 3.
-- **issue_details**: Source of leak and any isolation point still unidentified; electrical safety of the wet fitting unconfirmed pending Vellum Electrical attendance.
-- 34 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **access** (blocks the route): No agreed route into Flat 3; occupant refuses and no verified emergency-entry authority.
+- **issue_details** (blocks the route): Leak source and isolation point remain unconfirmed after attendance at Flat 2 and the common riser.
+- 30 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 

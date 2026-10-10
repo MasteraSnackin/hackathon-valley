@@ -1,12 +1,12 @@
 # Property Management — case 013: Kitchen glazing maintenance request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-10T10:10:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 25 of 25
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `a3727fd63257ef5c…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `a3727fd63257ef5c…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -42,38 +42,50 @@ The initial report and 24 further sources, submitted one at a time in availabili
 | 23 | 2025-09-10T10:10:00+00:00 | Event 024 — Update from Tamsin Rook (Property Manager, Northbridge Lettings) |
 | 24 | 2025-09-10T10:10:00+00:00 | Attachment glazing-invoice.pdf (PDF text extraction) |
 
-## Final decision — system case `c1a71272813b`
+## Final decision — system case `ae0260793f36`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `confirm_appointment` — Kitchen window: misted sealed unit and water around frame (category windows)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **WAIT**
+- **Proposed next action:** `clarify` — Kitchen window: moisture between panes and water at frame (category windows)
+- **Next step:** Clarify before routing: Invoice wording implies the pane was fitted but no visit report or fitting date is given; confirm whether and when the work was carried out.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, low confidence, route `confirm_appointment`):** Invoice copy from Clearfirth Glazing for supplying and fitting one pane of glass to the kitchen glazing at 8 Brackenmere Walk, dated 10 September 2025. No amount is shown and there is still no visit report or appointment confirmation.
+**Latest reading (claude-opus-5, high confidence, route `clarify`):** Invoice copy from Clearfirth Glazing for supply and fit of one pane of glass to the kitchen glazing at 8 Brackenmere Walk, dated 10 September 2025. No amount is shown and there is no visit report or fitting date.
 
-**Why:** Router chose confirm_appointment; the invoice alone does not evidence completion and no appointment is recorded, so the visit/fitting still needs confirming.
+**Why:** Invoice alone does not evidence completion or attendance date; clarification needed before closing.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `request_quote` → **succeeded** via Demo contractor (simulated adapter) — Kitchen window: moisture between panes and water at frame
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks for letting us know about the misting between the kitchen window panes and the water gathering around the frame. So we can get a clearer picture, could you let us know whether the water at the frame appears mainly after cooking or on cold mornings, or whether it seems to come in …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks for your patience while we look into the misting between the kitchen window panes and the water gathering around the frame. So we have an up-to-date picture, could you let us know how things are at the moment - is the water still appearing around the frame, and have you noticed …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks again for your patience about the kitchen window. So we have a full picture of what's happening, could you let us know whether the problem is limited to the misting between the panes, or whether the water at the frame and any cold or damp are still an issue too? A quick note on …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks for your patience regarding the kitchen window with the misting between the panes and the water at the frame. So we can move things along, could you let us know: 1. Which days and times over the next couple of weeks would suit you for someone to come and take a look? 2. Would yo …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks again for your patience about the kitchen window with the misting between the panes and the water at the frame. So we have an up-to-date picture, could you let us know how the window is at the moment \u2014 in particular, whether water is still gathering at the frame as well as …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks again for your patience with the kitchen window. So we have an up-to-date picture, could you let us know whether water is still gathering around the frame, and whether any damp or mould has appeared around the window or nearby walls since you last wrote? Thanks very much, Northb …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks again for your help with the kitchen window where the panes are misted and water gathers at the frame. So we can get things arranged, could you let us know: 1. Which two or three dates and times over the next couple of weeks would suit you best for a visit? 2. Are you happy for …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks for coming back to us with those dates for the kitchen window where the panes are misted and water gathers at the frame. Just one thing to confirm: are you happy for someone to come into the property to look at the window while you're there, and is there anything they should kno …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Elowen, Thanks for your patience with the kitchen window where the panes are misted and water gathers at the frame. So we have an accurate picture at our end, could you let us know whether anyone has been out to the window, and if so roughly when they attended and what was done? Thanks very mu …”
+- Clarification `triage` to tenant: closed — Clarify before routing: Unclear whether the water at the frame is condensation from a failed sealed unit or ingress from outside; also whether any damp or mould is already visible.
+- Clarification `classification` to tenant: closed — Confirm that the category and work item match the source request.
+- Clarification `triage` to tenant: closed — Clarify before routing: The contractor's price is referenced but no total including VAT, scope of works or validity is stated, so the commitment cannot be compared or instructed.; No inspection findings are recorded, so it is unclear whether the quot …
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `evidence` to tenant: closed — Supply usable evidence required for this work item.
+- Clarification `triage` to tenant: closed — Clarify before routing: Approval is conditional on £180 being the full total; the quote's scope and validity are still unstated, so it is unclear whether it covers the water at the frame and damp concerns as well as the misted glazing.
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: open — Clarify before routing: The invoice wording implies the pane was supplied and fitted, but there is no visit report or confirmation that the work was actually carried out or when.; No appointment was ever confirmed with the tenant, so it is unclear wh …
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `access` | access officer | `require-access` | Record consent for this visit and access method from the authorised person. A verified route is required before asking externally. | no source recorded |
-| `authority` | approver | `require-authority` | Obtain authority for this work item, provider and action. | no source recorded |
-| `schedule` | case manager | `require-schedule` | Confirm the active appointment with a precise date and time. A verified route is required before asking externally. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: The status change implies a visit occurred, but there is no visit report or completion evidence; confirm whether any attendance actually took place. A verified route is required before asking exte … | Event 022 — Note from Tamsin Rook (Property Manager, Northbridge Lettings) |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): The invoice describes fitting glass but there is no visit report or appointment confirmation; confirm whether the work was actually carried out and on what date.
-- **issue_details**: The invoice shows no amount, so the full cost including tax is unknown.
-- 5 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
+- **completion** (blocks the route): Invoice wording implies the pane was fitted but no visit report or fitting date is given; confirm whether and when the work was carried out.
+- **issue_details**: Invoice shows no amount, so the full cost including tax is unknown.
+- 4 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures
 
@@ -81,6 +93,6 @@ The initial report and 24 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

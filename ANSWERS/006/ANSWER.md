@@ -1,12 +1,12 @@
 # Property Management — case 006: Solar generation readings
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 14 Brindlefern Walk, Larkmere, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-18T17:42:00+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 17 of 17
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `7effc3b79ac36a3d…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `7effc3b79ac36a3d…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -34,34 +34,30 @@ The initial report and 16 further sources, submitted one at a time in availabili
 | 15 | 2025-09-18T14:42:00+00:00 | Event 016 — Email from Maya Chen (Property Manager, Northbridge Lettings) |
 | 16 | 2025-09-18T17:42:00+00:00 | Event 017 — Email from Ivo Mercer (Tenant) |
 
-## Final decision — system case `f33754f31e7c`
+## Final decision — system case `0cddfb320d6d`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
+- **Decision (policy outcome):** **NO FURTHER ACTION**
 - **Proposed next action:** `clarify` — Request for solar generation readings (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** in_progress · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Tenant Ivo Mercer replied that the solar generation readings were already supplied around two weeks ago, stating his wife phoned and emailed the office. No figures or image were included in this reply.
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Tenant replied that the solar generation readings were already supplied around two weeks ago, stating his wife phoned and emailed the office. No figures or image were included in this reply.
 
-**Why:** Reply asserts prior supply but provides no readings or evidence; clarification needed before closing, matching router decision.
+**Why:** Reply asserts prior supply but provides no readings; still cannot action without locating or obtaining the data.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Request for solar generation readings
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: Unclear what readings are wanted (period, format) and whether the desk holds or can obtain solar generation data; no maintenance action identified. A verified route is required before asking exter … | Intake report |
+- No open human review.
 
 ### Missing information and conflicting facts
 
-- **issue_details** (blocks the route): Tenant says readings were already sent via phone/email by his wife, but no figures or photo are in this reply; search inbox/call logs or ask for the reading to be resent.
-- **completion** (blocks the route): Confirm whether the earlier submission satisfies the landlord's request so the item can be closed.
+- **issue_details** (blocks the route): Tenant says readings were already sent via phone and email by his wife; search office records for that earlier submission, otherwise request the figures again.
+- **photo**: No reading figures or meter/inverter photo supplied in this reply.
 
 ## Failures
 
@@ -69,6 +65,6 @@ The initial report and 16 further sources, submitted one at a time in availabili
 
 ## Result
 
-No approval was invented and no human response was supplied by the runner. The case is waiting on the person(s) listed in the handover above.
+No approval was invented and no human response was supplied by the runner. See the decision above for the recorded end state.
 
 Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · `checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).

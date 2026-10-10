@@ -1,12 +1,12 @@
 # Property Management — case 025: Kitchen tap maintenance request
 
-*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*
+> **Run assumption:** the `identity` and `route` check(s) were set aside by policy (`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; every other gate (access, authority, schedule, completion, money, triage) still applied.
 
 - **Property (as supplied, unverified):** 18 Thistlewick Row, Fenmere, ZZ1 1ZZ
 - **Decision cutoff:** 2025-09-15T11:11:18+00:00
 - **Runner status:** **settled** · execution `native_local` · sources processed 23 of 23
 - **Models:** Claude `claude-opus-5` (triage effort medium); Jev `jev-1.13.0` routing
-- **Commit:** `26542cfa3d481aa925490db741aa4fbab8f70e3c` · input SHA-256 `7ec08748e429981a…`
+- **Commit:** `281c95a90dc8a3ddd9424b56d5decf0d9c521178` · input SHA-256 `7ec08748e429981a…`
 
 All operational tools in this run are clearly labelled **simulated** adapters: no real tenant, landlord or contractor was contacted, nothing was paid or booked, and a simulated receipt does not prove work happened.
 
@@ -40,42 +40,62 @@ The initial report and 22 further sources, submitted one at a time in availabili
 | 21 | 2025-09-15T11:11:18+00:00 | Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing) |
 | 22 | 2025-09-15T11:11:18+00:00 | Attachment corrected-plumbing-invoice.pdf (PDF text extraction) |
 
-## Final decision — system case `e66c7d372a8b`
+## Final decision — system case `62745fc84f4c`
 
-- **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `clarify` — Separate boiler matter - work done unclear (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Separate boiler matter \u2013 scope unknown (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `3cace1ca9243` as a separate issue.
+- **Case state:** in_progress · policy v2
+- **Split from system case** `03b80531e1ed` as a separate issue.
 
-**Latest reading (model, medium confidence, route `clarify`):** Contractor agrees to amend the invoice postcode and resend it. A separate boiler matter was mentioned; the manager will check with the relevant engineer what work was done.
+**Latest reading (model, medium confidence, route `clarify`):** Call note: contractor agrees to amend the invoice postcode and resend. A separate boiler matter was mentioned; the manager will check with the relevant engineer what work was done, and no boiler work is documented on this tap job.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Separate boiler matter \u2013 scope unknown
 
 ### Escalated to a person (handover)
 
-| Check | Owner | Rule | What the person must resolve | Evidence |
-|---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
+- No open human review.
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `bb642aa7ce68`
+## Final decision — system case `8b6a524fc47a`
+
+- **Decision (policy outcome):** **NO FURTHER ACTION**
+- **Proposed next action:** `clarify` — Loose kitchen drawer with snapped brackets (category other)
+- **Next step:** This action already has a confirmed simulated receipt. Select a new proposal for further work.
+- **Owner:** case manager
+- **Case state:** in_progress · policy v2
+- **Split from system case** `03b80531e1ed` as a separate issue.
+
+**Latest reading (model, high confidence, route `clarify`):** Property manager confirms a visit to the property on 10 September with the contractor, noting timing may vary as the contractor must collect keys from the office.
+
+### Actions taken
+
+- `clarify` → **succeeded** via Demo contractor (simulated adapter) — Loose kitchen drawer with snapped brackets
+
+### Escalated to a person (handover)
+
+- No open human review.
+
+### Missing information and conflicting facts
+
+- None recorded by the latest reading.
+
+## Final decision — system case `71a954267a8e`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `request_quote` — Loose top kitchen drawer with snapped front brackets (category other)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `request_quote` — Top kitchen drawer loose, front brackets snapped (category other)
+- **Next step:** A case manager must define a supported action for this situation.
 - **Owner:** case manager
-- **Case state:** open · policy v1
-- **Split from system case** `3cace1ca9243` as a separate issue.
+- **Case state:** open · policy v2
+- **Split from system case** `03b80531e1ed` as a separate issue.
 
-**Latest reading (model, high confidence, route `request_quote`):** Tenant chases the outstanding plumbing appointment for the leaking kitchen tap, saying no contact has been made despite availability being given. They also report a loose top kitchen drawer with apparently snapped metal front brackets and ask whether it can be repaired during the same visit.
+**Latest reading (model, high confidence, route `request_quote`):** Tenant chases the outstanding plumbing appointment for the leaking tap, saying no contact has been made despite availability already given. She also reports a loose top kitchen drawer with apparently snapped metal front brackets and asks whether it can be repaired at the same visit.
 
 ### Actions taken
 
@@ -85,44 +105,46 @@ The initial report and 22 further sources, submitted one at a time in availabili
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `route` | case manager | `require-route` | Verify the recipient and permitted communication route. | no source recorded |
-| `classification` | case manager | `require-classification` | Confirm that the category and work item match the source request. A verified route is required before asking externally. | no source recorded |
 | `supported` | case manager | `require-supported` | A case manager must define a supported action for this situation. | no source recorded |
 
 ### Missing information and conflicting facts
 
 - None recorded by the latest reading.
 
-## Final decision — system case `3cace1ca9243`
+## Final decision — system case `03b80531e1ed`
 
 - **Decision (policy outcome):** **HUMAN REVIEW**
-- **Proposed next action:** `close_item` — Kitchen mixer tap dripping constantly; cloudy water reported (category plumbing)
-- **Next step:** Verify the person, property and work item mapping.
+- **Proposed next action:** `clarify` — Reported maintenance (category plumbing)
+- **Next step:** The tenant replied, but the reply did not settle this. Review it and record the fact. Clarify before routing: The corrected invoice shows no price or total including VAT; the full comparable commitment is not established.
 - **Owner:** case manager
-- **Case state:** open · policy v1
+- **Case state:** open · policy v2
 
-**Latest reading (claude-opus-5, medium confidence, route `close_item`):** Corrected invoice from Bracken & Vale Plumbing for 18 Thistlewick Row showing supply and install of one new mono kitchen sink tap, with the postcode amended. No total amount is stated in the extracted text and the cloudy water complaint is not addressed.
+**Latest reading (claude-opus-5, medium confidence, route `clarify`):** Corrected invoice from Bracken & Vale Plumbing for supply and install of a new mono kitchen sink tap at 18 Thistlewick Row, with the postcode amended to the recorded property address. No total amount is shown in the extracted text.
 
-**Why:** Corrected invoice for completed tap installation; router decision close_item accepted, though cloudy water remains unverified.
+**Why:** Corrected invoice resolves the postcode query but gives no total or completion evidence, so further clarification is needed before accepting.
 
 ### Actions taken
 
-- **No operational action was executed.** Nothing was booked, instructed, paid or sent. The system recorded readings, claims and policy assessments only.
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Nia, Thanks for your patience regarding the dripping mixer tap and cloudy water. So that we can arrange for someone to come and take a look, could you let us know: 1. Which days and times suit you best over the next week or two? 2. Will you be home to let them in, or is there another way acces …”
+- Drafted message to tenant: **sent** (simulated channel; not sent to a real person) — “Hello Nia, Thanks for letting us know you're home every day next week except Monday - that's really helpful. Just one more thing: when someone comes to look at the dripping mixer tap and cloudy water, are you happy to let them in yourself, or would you prefer access to be arranged another way (for e …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Nia, Thanks for getting back to us, and sorry you've been waiting to hear about the leaking tap. We're following that up. On the top kitchen drawer that's loose with the metal front brackets looking snapped, could you tell us a little more about it - for example, whether the drawer still opens …”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Nia, Thanks again for your help with this. Just one quick thing to check: has a new kitchen mixer tap been fitted at your home recently? If so, it would be helpful to know roughly when the work was done. Just reply to this message and we'll take it from there. Best wishes, Northbridge Lettings”
+- Drafted message to tenant: **awaiting_staff** (simulated channel; not sent to a real person) — “Hello Nia, Thanks again for your help with this. Just a couple of quick questions so we can keep our records straight: 1. Has the kitchen mixer tap been replaced at your home at 18 Thistlewick Row, and is it now working as it should? 2. Has anyone also looked at or carried out any work on your boile …”
+- Clarification `access` to tenant: closed — Record consent for this visit and access method from the authorised person.
+- Clarification `schedule` to tenant: closed — Confirm the active appointment with a precise date and time.
+- Clarification `triage` to tenant: closed — Clarify before routing: Whether the drawer repair should be added to the plumbing visit or handled as a separate job with its own quote.
+- Clarification `triage` to tenant: closed — Clarify before routing: The postcode on the invoice does not match the recorded property postcode; confirm the invoice relates to 18 Thistlewick Row before accepting it.
 
 ### Escalated to a person (handover)
 
 | Check | Owner | Rule | What the person must resolve | Evidence |
 |---|---|---|---|---|
-| `identity` | case manager | `require-identity` | Verify the person, property and work item mapping. | no source recorded |
-| `completion` | reviewer | `require-completion` | Verify completion of this work item with usable evidence. A verified route is required before asking externally. | Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing) |
-| `commitments` | case manager | `require-commitments` | Resolve or explicitly cancel every outstanding commitment for this item. A verified route is required before asking externally. | no source recorded |
-| `triage` | case manager | `require-triage` | Clarify before routing: The invoice covers the tap replacement only; it is still unconfirmed whether the reported cloudy water was investigated or resolved. A verified route is required before asking externally. | Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing) |
+| `triage` | case manager | `require-triage` | The tenant replied, but the reply did not settle this. Review it and record the fact. Clarify before routing: The corrected invoice shows no price or total including VAT; the full comparable commitment is not established … | Attachment corrected-plumbing-invoice.pdf (PDF text extraction) |
 
 ### Missing information and conflicting facts
 
-- **completion** (blocks the route): Invoice covers the tap replacement only; it is still unconfirmed whether the reported cloudy water was investigated or resolved.
-- **issue_details**: No invoice total including VAT appears in the extracted text, so the full commitment is not established.
+- **issue_details** (blocks the route): The corrected invoice shows no price or total including VAT; the full comparable commitment is not established.
+- **completion**: No evidence confirming the tap installation was completed and verified at the property.
 - 7 extracted claim(s) remain **unverified source assertions** (see REASONING.md); none was treated as verified authority.
 
 ## Failures

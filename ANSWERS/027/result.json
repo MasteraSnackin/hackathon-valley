@@ -1,7 +1,11 @@
 {
-  "status": "interrupted",
-  "execution": "see_partial_evidence",
-  "sources_processed": 18,
-  "error": "Batch runner process was stopped when the operator's agent session ended, after 18 of 19 sources had settled. The runner itself recorded no result for this case; this status was written afterwards by the operator to mark the interruption. Partial evidence up to checkpoint-017 is preserved; nothing after that was processed.",
-  "finished_at": "2026-10-10T16:08:41.502472+00:00"
+  "status": "settled",
+  "system_case_id": "a4791baab6094cc9ad2ef39b5c08a8ff",
+  "execution": "native_local",
+  "external_operations": "simulated",
+  "sources_processed": 19,
+  "finished_at": "2026-10-10T16:33:16.686245+00:00",
+  "model_failure_count": 0,
+  "routing_fallback_count": 0,
+  "routing_fallback_errors": []
 }
