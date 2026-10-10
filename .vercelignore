@@ -6,3 +6,9 @@ var/
 .context/
 __pycache__/
 .pytest_cache/
+docs/
+tests/
+web/
+qa/
+.venv/
+*.db

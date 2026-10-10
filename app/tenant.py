@@ -17,6 +17,7 @@ import secrets
 import uuid
 from copy import deepcopy
 from datetime import timedelta
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
@@ -434,17 +435,30 @@ def _start(service, owner, data):
     return _submit(service, owner, cid, data)
 
 
+def same_origin(request, hosted=False) -> bool:
+    """Compare the Origin host with the host this request was addressed to.
+
+    Behind Vercel's proxy the app sees http while the browser used https, so
+    only the host is compared; hosted mode trusts the proxy's forwarded host.
+    """
+    origin = request.headers.get('origin')
+    if not origin:
+        return True
+    host = (hosted and request.headers.get('x-forwarded-host')) or request.headers.get('host', '')
+    return urlsplit(origin).netloc == host
+
+
 def create_tenant_router(wake, mode='demo') -> APIRouter:
     router = APIRouter(prefix='/api/tenant', tags=['tenant'])
+    hosted = mode == 'hosted_demo'
 
     def guard(request):
-        if mode != 'demo':
+        if mode not in {'demo', 'hosted_demo'}:
             raise HTTPException(403, 'Tenant demo identity is disabled; real tenant authentication is not configured')
         host = request.client.host if request.client else ''
-        if host not in {'127.0.0.1', '::1', 'localhost', 'testclient'}:
+        if not hosted and host not in {'127.0.0.1', '::1', 'localhost', 'testclient'}:
             raise HTTPException(403, 'Tenant demonstration sessions are restricted to this computer')
-        origin = request.headers.get('origin')
-        if request.method not in {'GET', 'HEAD', 'OPTIONS'} and origin and origin.rstrip('/') != str(request.base_url).rstrip('/'):
+        if request.method not in {'GET', 'HEAD', 'OPTIONS'} and not same_origin(request, hosted):
             raise HTTPException(403, 'Cross-origin mutations are not permitted')
 
     def identity(request, required=True):
@@ -484,7 +498,7 @@ def create_tenant_router(wake, mode='demo') -> APIRouter:
         with service.db.tx() as c:
             service.db.set_meta(c, 'tenant_session:' + hashlib.sha256(token.encode()).hexdigest(), session)
         response = JSONResponse(session_projection(session))
-        response.set_cookie(COOKIE, token, httponly=True, samesite='strict', secure=False,
+        response.set_cookie(COOKIE, token, httponly=True, samesite='strict', secure=hosted,
                             max_age=28800, path='/api/tenant')
         return response
 

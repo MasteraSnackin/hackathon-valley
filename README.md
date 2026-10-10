@@ -151,7 +151,7 @@ For manual demonstration, set `WORKFLOW_MODE=manual_demo`. Staff use **Reassess 
 
 | Variable | Purpose |
 | --- | --- |
-| `APP_MODE` | Defaults to `demo`; set `production` explicitly for hosted preparation. This disables demo sessions and requires database/staff configuration; `vercel.json` does not set it for you. |
+| `APP_MODE` | Defaults to `demo` (loopback only). `hosted_demo` keeps the labelled demo roles and tenant sessions open to anyone with the link and requires PostgreSQL; the Vercel project `property-desk` uses it. `production` disables demo sessions and requires database/staff configuration; `vercel.json` does not set either for you. |
 | `WORKFLOW_MODE` | Defaults to `native_local`; alternatives are `manual_demo` and prepared-but-unverified `native_cloud`. |
 | `WORKFLOW_TARGET_WORLD` | Set explicitly to `local` or, for hosted configuration, `vercel`. Mode/world mismatches are rejected. |
 | `DATABASE_URL` | Defaults to shared `var/property.db`. Override for isolated development; the deployment path requires PostgreSQL. |
@@ -360,9 +360,9 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 
 - **Local demo:** [http://127.0.0.1:8027](http://127.0.0.1:8027), after starting the application.
 - **Walkthrough:** [Tenant and property-manager journey](docs/PORTAL_UI.md).
-- **Public demo URL:** `TODO: add after a hosted deployment is authorised and verified.`
+- **Public demo URL:** [property-desk-mauve.vercel.app](https://property-desk-mauve.vercel.app) (`APP_MODE=hosted_demo` on Vercel with native Python Workflow and Neon PostgreSQL; anyone with the link can act as any demo role, and all external operations are simulated).
 
-No public deployment is claimed. Screenshots must not expose credentials or reserved evaluation records.
+Hosted demo verified on 10 October 2026: a BUILD 002 import completed native Workflow cycles on Vercel, and a tenant message was read by Claude. Long-running timers and phone intake have not been verified on the hosted deployment. Screenshots must not expose credentials or reserved evaluation records.
 
 The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. They show an earlier version of the original interface, before the React dashboard and current self-identification allowance. Operational actions remain simulated.
 
