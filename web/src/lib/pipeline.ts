@@ -85,6 +85,11 @@ const ACTIVITY_LABELS: Record<string, string> = {
   evidence_received: 'Evidence received', explicit_reassessment: 'Case reassessed', intake: 'Case opened',
   policy_published: 'Policy published', proposal_changed: 'Proposed action changed', review_responded: 'Staff responded to review',
   simulated_action: 'Action attempted (simulated)', simulated_result_reconciled: 'Uncertain result reconciled',
+  routing: 'Message routed', issue_split: 'Issue split into its own case', route_changed: 'Action route changed',
+  triage_retry: 'Message reading retried', question_followup: 'Follow-up question needed',
+  triage_confirmed: 'Message interpretation confirmed', tenant_message: 'Message draft recorded',
+  tenant_message_drafted: 'Message draft recorded', tenant_message_sent: 'Message delivery recorded (simulated)',
+  tenant_message_rejected: 'Message draft rejected',
   workflow_recovery: 'Workflow recovery recorded', workflow_receipt: 'Workflow step recorded', workflow_error: 'Workflow error recorded',
 };
 function activityTone(kind: string): ActivityTone {

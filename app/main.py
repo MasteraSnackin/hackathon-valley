@@ -3,15 +3,16 @@ import os, secrets, hashlib, hmac, json, asyncio
 from pathlib import Path
 from contextlib import asynccontextmanager
 from datetime import timedelta
-from fastapi import FastAPI, Request, Depends, Body, Query
+from fastapi import FastAPI, Request, Depends, Body, Query, BackgroundTasks
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from .localenv import load_local_env
 load_local_env()
 from .domain import *
-from .service import get_service,Forbidden,Conflict
-from . import ai, jev
+from .service import get_service,Forbidden,Conflict,VOICE_BRIDGE
+from . import ai, jev, parties
 from .build_data import list_build,import_case,snapshot
+from .voice import TUNNEL_PATHS,create_voice_router
 
 ROOT=Path(__file__).resolve().parent.parent
 MODE=os.getenv('APP_MODE','demo')
@@ -76,8 +77,14 @@ async def conflict_handler(request,exc):return JSONResponse({'detail':str(exc)},
 @app.exception_handler(ValueError)
 async def value_handler(request,exc):return JSONResponse({'detail':str(exc)},status_code=400)
 
+def tunnelled(request):return bool({'x-forwarded-for','x-forwarded-host','forwarded'}&set(request.headers.keys()))
+
 @app.middleware('http')
 async def security(request,call_next):
+    # Demo sessions trust loopback, and a tunnel (ngrok) arrives from loopback too:
+    # proxied requests may only reach the secret-authenticated phone webhooks.
+    if MODE=='demo' and tunnelled(request) and request.url.path not in TUNNEL_PATHS|{'/api/inbound'}:
+        return JSONResponse({'detail':'Only the phone intake webhooks are reachable through a tunnel'},403)
     # No CORS, cookies SameSite strict, and reject cross-origin state changes.
     if request.method not in {'GET','HEAD','OPTIONS'}:
         origin=request.headers.get('origin')
@@ -105,6 +112,15 @@ def actor(request:Request):
             if identity['role'] not in ROLES:raise Forbidden('Unknown staff role')
             return {'id':identity['id'],'role':identity['role']}
     raise Forbidden('Valid staff authentication required')
+
+def voice_bridge(request:Request):
+    """The voice agent sends Bearer VOICE_BRIDGE_TOKEN; the demo call panel uses a staff session."""
+    expected=os.getenv('VOICE_BRIDGE_TOKEN','')
+    token=request.headers.get('authorization','').removeprefix('Bearer ')
+    if expected and token and hmac.compare_digest(hashlib.sha256(token.encode()).digest(),hashlib.sha256(expected.encode()).digest()):return VOICE_BRIDGE
+    # Through a tunnel only the bridge token counts; a staff session never does.
+    if tunnelled(request):raise Forbidden('Voice bridge token required')
+    return {**VOICE_BRIDGE,'via':actor(request)['id']}
 
 def model_status():
     # Reports whether a credential is configured, never the credential.
@@ -167,6 +183,14 @@ async def reject_message(mid:str,data:dict=Body(...),who=Depends(actor)):
 @app.post('/api/reviews/{rid}/respond')
 async def respond(rid:str,data:ReviewResponse,who=Depends(actor)):
     result=await asyncio.to_thread(get_service().respond,rid,data,who);return await settle(result['case']['id'],result)
+@app.post('/api/inbound')
+async def inbound(data:InboundCall,background:BackgroundTasks,who=Depends(voice_bridge)):
+    # Answer the caller first; the case coordinator reads the message after.
+    result=await asyncio.to_thread(get_service().inbound,data,who)
+    if result['case_id']:background.add_task(wake,result['case_id'])
+    return result
+@app.get('/api/inbound/directory')
+def inbound_directory(who=Depends(actor)):return parties.directory_view()
 @app.get('/api/policies')
 def policies(who=Depends(actor)):return get_service().policies()
 @app.post('/api/policies/draft')
@@ -196,7 +220,14 @@ from .tenant import create_tenant_router
 from .policy_assistant import create_policy_assistant_router
 app.include_router(create_tenant_router(wake, mode=MODE))
 app.include_router(create_policy_assistant_router(actor))
+app.include_router(create_voice_router(wake, actor))
 
 @app.get('/')
 def index():return FileResponse(ROOT/'static/index.html')
+@app.get('/dashboard')
+def dashboard():
+    # React staff dashboard (web/), built into static/dashboard by `npm run build`.
+    page=ROOT/'static/dashboard/index.html'
+    if not page.exists():return JSONResponse({'detail':'Dashboard not built. Run `npm run build` in web/.'},404)
+    return FileResponse(page)
 app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')

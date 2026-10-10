@@ -37,12 +37,21 @@ export interface Case {
   policy_pending: boolean;
   created_at: string;
   interpretation?: unknown;
-  triage?: { state?: string; confirmed?: boolean; [key: string]: unknown };
+  triage?: Triage | null;
   stage?: string;
   rejected_action_revision?: number;
   last_assessed_at?: string;
   completion_state?: string;
   last_verified_action?: string;
+}
+
+/** Latest Claude/Jev reading of the case's newest message (app/service.py apply_triage). */
+export interface Triage {
+  state: 'pending' | 'done' | 'failed' | string;
+  summary?: string;
+  error?: string;
+  confirmed?: boolean;
+  risk_flags?: string[];
 }
 
 /** A single fact assertion extracted from evidence (app/domain.py ClaimInput + service annotations). */
@@ -198,8 +207,120 @@ export interface CaseDetail {
   decision: Decision | null;
   reviews: Review[];
   questions: Question[];
+  tenant_messages: TenantMessage[];
   actions: ActionState[];
   timeline: TimelineEvent[];
+}
+
+/** A Claude-drafted tenant message (app/service.py tenant_messages()). Drafts the
+ * policy gate held back wait for a case manager to send, edit or reject. */
+export interface TenantMessage {
+  id: string;
+  created_at: string;
+  status: 'awaiting_staff' | 'held' | 'draft_failed' | 'sent' | 'rejected';
+  text?: string;
+  sent_text?: string;
+  question_ids: string[];
+  topics: string[];
+  gate?: { auto_send: boolean; reasons: string[] };
+  claude?: { send_decision: string; decision_reason: string; risk_flags: string[] };
+  error_type?: string;
+  action_revision: number;
+  recipient?: { kind: string; [key: string]: unknown };
+}
+
+/** GET /api/session: who is acting and how the workflow runtime is configured. */
+export interface SessionInfo {
+  actor: Actor | null;
+  mode: string;
+  workflow_mode: 'native_local' | 'native_cloud' | 'manual_demo' | string;
+  external_operations: string;
+  model: { provider: string; model: string; credential_configured: boolean };
+}
+
+/** One structured policy rule (app/domain.py Rule). */
+export interface PolicyRule {
+  id: string;
+  conditions: { key: string; status: 'PASS' | 'FAIL' | 'UNKNOWN' | 'CONFLICT' }[];
+  match: 'all' | 'any';
+  actions: string[];
+  response: 'CLARIFY' | 'WAIT' | 'HUMAN REVIEW' | 'STOP ACTION';
+  owner: string;
+  required: boolean;
+  property_ref: string | null;
+  category: string | null;
+}
+
+/** Policy settings (app/domain.py DEFAULT_SETTINGS); only fields the dashboard reads are typed. */
+export interface PolicySettings {
+  review_limit: number;
+  reminder_hours: number;
+  escalation_hours: number;
+  reminder_limit: number;
+  access_immediate_review: boolean;
+  approval_hours: number;
+  tenant_messages: 'claude_decides' | 'staff_approval' | 'off';
+  triage_auto_accept: 'high' | 'medium' | 'never';
+  router: string;
+  [key: string]: unknown;
+}
+
+/** Request body for POST /api/policies/draft (app/domain.py PolicyInput). */
+export interface PolicyInput {
+  base_version: number;
+  settings: PolicySettings;
+  rules: PolicyRule[];
+  reason: string;
+}
+
+export interface ActivePolicy {
+  status: string;
+  id: string;
+  version: number;
+  settings: PolicySettings;
+  rules: PolicyRule[];
+  reason: string;
+  effective_at: string;
+  author: string;
+}
+
+export interface PolicyDraft extends PolicyInput {
+  author: string;
+  id: string;
+  version: number;
+  status: string;
+}
+
+/** GET /api/policies */
+export interface PoliciesResponse {
+  active: ActivePolicy;
+  drafts: PolicyDraft[];
+}
+
+/** POST /api/policies/{id}/preview: before/after outcome of every live case. */
+export interface PolicyPreview {
+  preview_id: string;
+  draft_id: string;
+  active_version: number;
+  affected: {
+    case_id: string;
+    title: string;
+    before: string;
+    after: string;
+    blockers: string[];
+    changed: boolean;
+  }[];
+}
+
+/** Plain-English policy assistant result (app/policy_assistant.py AssistantResult). */
+export interface AssistantResult {
+  status: 'ready' | 'clarification' | 'unsupported';
+  summary: string;
+  questions: string[];
+  warnings: string[];
+  draft: PolicyInput | null;
+  source_review_id: string | null;
+  suggested_text: string | null;
 }
 
 /** One row from GET /api/cases (app/service.py Service.list_cases()): a Case

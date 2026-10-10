@@ -9,7 +9,7 @@ const blocker: Blocker = { key: 'identity', status: 'UNKNOWN', reason: 'Confirm 
 function fixture(): CaseDetail {
   return {
     case: { id: 'fictional-case', title: 'Fictional request', property_ref: 'Example Flat', category: 'plumbing', profile: 'default', revision: 1, action_revision: 1, proposal: { action: 'request_quote', work_item: 'Tap', provider: '', access_method: '', scope: {} }, status: 'open', owner: 'case_manager', next_step: 'Check identity', policy_pending: false, created_at: timestamp },
-    claims: [], evidence: [], reviews: [], questions: [], actions: [], timeline: [],
+    claims: [], evidence: [], reviews: [], questions: [], tenant_messages: [], actions: [], timeline: [],
     decision: { id: 'decision-1', created_at: timestamp, outcome: 'HUMAN REVIEW', checks: [blocker], blockers: [blocker], owner: 'case_manager', next_step: 'Check identity', policy_version: 1, case_revision: 1, action_revision: 1, scope: {}, assessed_at: timestamp },
   };
 }
@@ -74,4 +74,10 @@ test('review selection matches the fact and rule in the current action and polic
   assert.equal(findReviewForBlocker(detail, blocker)?.id, 'current');
   detail.reviews.pop();
   assert.equal(findReviewForBlocker(detail, blocker), undefined);
+});
+
+test('message delivery remains labelled simulated for tenant and other-party records', () => {
+  const [activity] = translateActivity([{ id: 'message', kind: 'tenant_message_sent', case_id: 'fictional-case', created_at: timestamp, payload: { recipient: { kind: 'landlord' } } }]);
+  assert.equal(activity.label, 'Message delivery recorded (simulated)');
+  assert.doesNotMatch(activity.label, /email|landlord.*sent/i);
 });

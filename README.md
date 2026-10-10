@@ -26,10 +26,12 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 
 ### What the prototype does
 
-- Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts. The React dashboard provides a searchable staff queue, current-action progress, evidence review and versioned policy settings. The original interface retains tenant intake and the full specialist review controls.
+- Separate tenant conversations and a staff workspace with evidence, reviews, progress and simulated action receipts. The React dashboard at `/dashboard` provides a searchable staff queue, current-action progress, evidence review, message-draft review and versioned policy settings. The original interface retains tenant intake and the full specialist review controls.
 - Jev routing before Claude: configurable confidence and risk checks select a Jev-only route, Jev routing with Claude extraction, or full Claude triage. Missing Jev credentials or a failed Jev call fall back to Claude. Jev-only handling is restricted to configured quote-request and archive routes; it does not manufacture verified facts or permissions. See [Jev routing](docs/JEV_ROUTING.md).
 - Claude triage as native workflow steps where needed: it names work items, splits separate problems into their own cases and extracts exact-quoted assertions that stay unverified. Jev/Claude route disagreement, hazards and unresolved interpretation can hold actions for human review. If Claude is needed but unavailable, the reading fails and needs staff triage. See [Claude triage](docs/CLAUDE_TRIAGE.md) for the earlier Claude integration and the current routing settings below.
+- Phone intake: an ElevenLabs voice agent on a Twilio number asks for the caller's name, address and problems, reads the summary back and, after a clear yes, sends it in as an unverified report that follows the same Jev/Claude routing and triage path. See [Phone intake](docs/VOICE_PHONE.md).
 - Claude-drafted tenant questions: Claude recommends auto-send or staff review from the case data and policy, and a deterministic gate decides. Staff approve, edit or reject drafts; replies close answered questions. Sending is simulated.
+- Voice intake for every party: `POST /api/inbound` identifies the caller (tenant, landlord, letting agency, contractor or unknown) from a fictional directory, attaches the call to the right case, answers status questions filtered for that caller, and sends questions to the landlord or contractor where they own the answer. Only the right party's word counts for each fact; an approver still verifies any approval. See [Voice intake](docs/VOICE_INTAKE.md).
 - Per-action **PASS / FAIL / UNKNOWN / CONFLICT** checks that retain all relevant blockers and source links.
 - Editable ALL/ANY rules, action/property/category filters, review ownership, thresholds and working-hour follow-ups.
 - Policy draft → impact preview → publication, with explicit reassessment of pending actions and preserved historical versions.
@@ -43,7 +45,7 @@ Property Desk makes those decisions explicit. It gathers a tenant's report, prop
 
 [![C2 container view: browser, Python application, Anthropic API and two separate data stores](docs/diagrams/c4/c2-containers.png)](docs/diagrams/c4/c2-containers.png)
 
-Both interfaces use the same Python application. FastAPI serves the original tenant/staff interface directly; the React staff dashboard runs through Vite during development and proxies API requests to FastAPI. The case service, policy evaluator and native Workflow runtime share the Python process. Jev proposes a route; Claude handles the readings and questions that need it. Explicit policy checks decide whether an action can proceed. Application records and Workflow history use separate stores, both of which are needed for local recovery.
+Both interfaces use the same Python application. FastAPI serves the original tenant/staff interface at `/` and the built React staff dashboard at `/dashboard`; during frontend development the dashboard can also run through Vite, which proxies API requests to FastAPI. The case service, policy evaluator and native Workflow runtime share the Python process. Jev proposes a route; Claude handles the readings and questions that need it. Explicit policy checks decide whether an action can proceed. Application records and Workflow history use separate stores, both of which are needed for local recovery.
 
 ### Choose a diagram
 
@@ -69,7 +71,7 @@ The rendered diagrams describe an earlier reviewed source snapshot and do not ye
 ### Requirements
 
 - Python **3.12**, including `venv` and `pip` for a fresh environment.
-- For the optional React staff dashboard: Node.js **22.12 or later** and npm (the dependencies also accept Node 20 from 20.19). The original FastAPI interface needs no frontend build.
+- Only to change the React staff dashboard: Node.js **22.12 or later** and npm (the dependencies also accept Node 20 from 20.19). Both interfaces are served by FastAPI without a frontend build.
 - A POSIX environment for the native local process lock; existing verification was performed on macOS.
 - This project's source and lockfile. BUILD replay additionally needs the supplied read-only `data/build/` and `handoff/BUILD_MANIFEST.json`.
 - An Anthropic credential (`ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`) for Claude intake, interpretation and question drafting. A TypeSafe API key additionally enables Jev routing; without it the case pipeline falls back to Claude. Without Claude, intake uses a local parser and any case reading that requires Claude needs manual triage. No cloud database or Vercel credentials are needed for the local demonstration.
@@ -116,21 +118,24 @@ Record the printed directory. Stop with Ctrl-C; to resume, reuse the same `prope
 
 Use one process without `--reload`. Local timers require a running process; startup recovery reconstructs pending work after a restart. See [the runtime guide](docs/WORKFLOW_RUNTIME.md). Do not repurpose the shared default `var/property.db` for controlled BUILD checks.
 
-### Start the React staff dashboard
+### Open the React staff dashboard
 
-The `web/` application is a separate staff dashboard with case review and policy editing. Tenant intake remains in the original interface. Its development proxy targets **`http://127.0.0.1:8017`**. Start an isolated Python instance with the command above, changing `--port 8027` to `--port 8017`. In a second terminal, from the repository root:
+FastAPI serves the committed React build at **`/dashboard`** on the same origin as the API. With the server above running, open [the staff dashboard](http://127.0.0.1:8027/dashboard); no Node process is needed. Tenant intake remains at `/`.
+
+To change the frontend, start an isolated Python instance on **port 8017**, the Vite proxy target. In a second terminal, from the repository root:
 
 ```sh
 cd web
 npm ci
-npm run dev -- --host 127.0.0.1 --port 5173
+npm run dev -- --host 127.0.0.1 --port 5173   # hot reload against the backend
+npm run build                                 # rewrites static/dashboard/ for FastAPI
 ```
 
-Open [the React staff dashboard](http://127.0.0.1:5173). The original tenant/staff interface for that same backend is at [http://127.0.0.1:8017](http://127.0.0.1:8017). The Vite proxy rewrites the request origin for local development so the backend's same-origin mutation check can pass. `npm run build` creates frontend assets, but FastAPI and `vercel.json` do not yet serve that build as an integrated deployment.
+Open [the React staff dashboard](http://127.0.0.1:5173). The original tenant/staff interface for that same backend is at [http://127.0.0.1:8017](http://127.0.0.1:8017). The Vite proxy rewrites the request origin for local development so the backend's same-origin mutation check can pass. `npm run build` writes `static/dashboard/`, which FastAPI serves at `/dashboard`. Commit the rebuilt bundle alongside frontend source changes so the served interface stays current. This integration does not establish a hosted Vercel deployment.
 
 Opening the dashboard reads existing cases and creates a case-manager session only when no demo session exists. **Load demo cases** explicitly imports nine authorised BUILD prefixes; it never answers or rejects reviews automatically. Use a disposable isolated store with the supplied BUILD files. Review responses and policy publication are real mutations of that local store, while external operational actions remain simulated.
 
-Search and filter the queue, inspect all blockers and expand the source evidence before recording a response. The form requires a reason and the assigned role; source verification requires an explicitly selected assertion. Authority, finance and custom scoped approvals still use the original staff workspace. Refresh runs every 20 seconds while the page is visible, pauses after repeated failures, and retains the last loaded case. Switching between Cases and Policies preserves unfinished page state.
+Search and filter the queue, inspect all blockers and expand the source evidence before recording a response. The form requires a reason and the assigned role; source verification requires an explicitly selected assertion. Authority, finance and custom scoped approvals still use the original staff workspace. Refresh runs every 20 seconds while the page is visible, pauses after repeated failures, and retains the last loaded case. Switching between Cases and Policies preserves unfinished page state. Held message drafts can be edited and approved, or rejected with an optional redraft; delivery remains simulated. Explicit timer checks use the existing workflow service. Demo-role changes replace the shared staff cookie and also affect the original workspace in the same browser.
 
 The policy panel reads the published version from the backend. Supported plain-English requests become proposed drafts; unclear wording is returned for revision. An explicitly selected **Policy editor** demo role can save a draft, compare its effect on current cases and publish after confirming the preview. Changes invalidate the preview. Published policies do not remove independent permission checks. Affected cases show **Reassess with current policy**; this rechecks the action and reports any remaining blockers. See [the frontend guide](web/README.md) for setup and boundaries.
 
@@ -228,7 +233,7 @@ Tests marked `claude` call the real Anthropic API; those also marked `jev` call 
 
 [Recorded verification](docs/VERIFICATION.md) includes the earlier baseline and later 132-test checks. It and the [runtime evidence](docs/WORKFLOW_RUNTIME.md) describe dated checks. They are historical snapshots, not a claim that subsequent revisions passed the same run. Local SDK and simulated-receipt tests do not establish cloud operation, model accuracy, message delivery or physical repairs.
 
-During the React usability refresh, the frontend build, lint and six semantic tests passed. A further 57 existing offline policy/API tests passed. Browser checks used an isolated manual-demo backend with model credentials disabled: empty startup, explicit BUILD imports, a human information request, unsupported policy wording, role selection, draft preview and explicit local publication were exercised. These checks do not establish native runtime recovery, model quality, production authentication or real message delivery. Run frontend checks as described in [web/README.md](web/README.md).
+During the React usability refresh, the frontend build, lint and six semantic tests passed. A further 57 existing offline policy/API tests passed. Browser checks used an isolated manual-demo backend with model credentials disabled: empty startup, explicit BUILD imports, a human information request, unsupported policy wording, role selection, draft preview and explicit local publication were exercised. These checks do not establish native runtime recovery, model quality, production authentication or real message delivery. Run frontend checks as described in [web/README.md](web/README.md). The later merge with voice intake and FastAPI dashboard serving passed 196 offline backend tests (13 live-provider tests excluded), the frontend build and lint, and seven frontend semantic tests. The exact staged frontend was checked in an isolated directory to exclude another local workstream’s unfinished files. The rebuilt `/dashboard` loaded its case queue and policy settings without browser-console errors against the isolated manual-demo backend.
 
 ## 4. Models, APIs and external services used
 
@@ -242,10 +247,11 @@ Claude intake, interpretation and question drafting need **`ANTHROPIC_API_KEY` o
 | Python Vercel Workflow SDK | Native steps, typed hooks, timers, replay and local recovery using `vercel-workflow==0.11.1` | Local World runs without Vercel credentials; Vercel-hosted World is prepared but unverified |
 | SQLite / SQLAlchemy | Application case state, evidence, decisions, policies and local tenant state | Local storage; PostgreSQL/psycopg is an unverified hosted path, not a provisioned service |
 | FastAPI JSON API | Same-origin browser access to tenant conversations, case decisions and policy operations | Demo sessions locally; production staff bearer configuration is separate from a browser login |
-| Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real email, SMS, phone, contractor system or payment service is connected |
+| Operational adapters | Simulated clarification, contractor contact, bookings, work instructions and receipts | No real outbound email, SMS, contractor system or payment service is connected |
+| ElevenLabs / Twilio intake | Voice-agent configuration, confirmed report webhook and signed post-call transcript endpoint; a separate inbound bridge supports fictional caller roles | Requires configured voice secrets and external agent/number setup. [Recorded phone checks](docs/VOICE_PHONE.md) do not establish a real Twilio call or a working post-call webhook |
 | Lucide icons | Vendored interface icons served locally | No icon CDN or runtime account dependency |
 
-Claude's output is schema-validated. Case-triage quotes must occur verbatim in the source; tenant intake checks normalise whitespace and case. Assertions stay unverified until the named role checks them, apart from the configurable derived category label. Jev proposes routes without creating verified authority. A deterministic gate controls case follow-up messages; intake replies use the separate conversation route. Enabled model paths send relevant text and bounded context to their provider; the tenant fallback parser and the policy parser remain local. No ElevenLabs integration is implemented.
+Claude's output is schema-validated. Case-triage quotes must occur verbatim in the source; tenant intake checks normalise whitespace and case. Assertions stay unverified until the named role checks them, apart from the configurable derived category label. Jev proposes routes without creating verified authority. A deterministic gate controls case follow-up messages; intake replies use the separate conversation route. Enabled model paths send relevant text and bounded context to their provider; the tenant fallback parser and the policy parser remain local. Voice intake adapters and ElevenLabs configuration are implemented; [the phone guide](docs/VOICE_PHONE.md) distinguishes recorded simulator/HTTP checks from unverified real calls and post-call delivery.
 
 ### Libraries and runtime
 
@@ -256,12 +262,12 @@ Claude's output is schema-validated. Case-triage quotes must occur verbatim in t
 | Workflow | Native Python `vercel-workflow==0.11.1`; local event store and embedded queue |
 | Persistence | SQLAlchemy 2.0.43; SQLite locally; unverified PostgreSQL/psycopg deployment path |
 | Original interface | Static HTML, CSS and vanilla JavaScript served by FastAPI; tenant/staff switch, policy editor and vendored Lucide icons |
-| React staff dashboard | React 19, TypeScript 6, Vite 8 and Tailwind CSS 4 in `web/`; separate development server and API proxy |
+| React staff dashboard | React 19, TypeScript 6, Vite 8 and Tailwind CSS 4 in `web/`; built into `static/dashboard/` and served by FastAPI, with a Vite development server and API proxy for changes |
 | Routing and interpretation | Jev via TypeSafe SDK 0.7.4, then Claude via Anthropic SDK 1.13.0 where needed; tenant intake runs during the request, while case routing, triage and question drafting run as native Workflow steps |
 | Testing | pytest 8.4.2, API checks and native Workflow subprocess tests |
 | Deployment preparation | FastAPI configuration in `vercel.json`; Workflow entry point in `pyproject.toml` |
 
-[requirements.lock](requirements.lock) and [uv.lock](uv.lock) record Python dependencies. [web/package-lock.json](web/package-lock.json) locks the separate React frontend. Serving the original interface requires no frontend build; developing or building the React dashboard requires Node.js and npm.
+[requirements.lock](requirements.lock) and [uv.lock](uv.lock) record Python dependencies. [web/package-lock.json](web/package-lock.json) locks the separate React frontend. Serving either interface requires no frontend build; changing and rebuilding the React dashboard requires Node.js and npm.
 
 ### Application API
 
@@ -330,11 +336,10 @@ Evidence fields are `text`, `source_label`, optional timezone-aware `occurred_at
 | Area | Present limit |
 | --- | --- |
 | Real operations | All external operational effects are simulated. No contractor visit, message delivery, payment or physical repair is established by a demo receipt. |
-| Conversation and evidence | The local intake fallback and policy parser support limited wording. Claude reading quality has no labelled accuracy measurement yet; attachment ingestion, image understanding and a voice conversation are not verified or implemented as complete flows. |
+| Conversation and evidence | The local intake fallback and policy parser support limited wording. Claude reading quality has no labelled accuracy measurement yet; attachment ingestion and image understanding remain incomplete. Voice adapters exist, but the documented real-call and post-call webhook checks are still outstanding. |
 | Identity and access | Production tenant login, staff SSO, organisation/property isolation and a real authority directory are unfinished. Tenant routes are disabled outside demo mode. |
-| React dashboard | A local staff interface with explicit demo loading, periodic case refresh, evidence review and a backend policy editor. Tenant intake and specialist approvals remain in the original workspace. Production login and integrated FastAPI/Vercel frontend hosting are unfinished. |
-| Dashboard outcomes | Counts and progress describe the current proposed action. A successful simulated receipt does not establish a completed repair or actual contractor contact. Policy suggestions are editable text, not automatic learning, and do not retain a structured source-review link yet. |
-| Contact labels | The dashboard labels an internal `signal_outbox` wake record as “Email sent to landlord” and uses it to mark “Contacted”. This records neither an outbound email nor verified contact; these display labels need correction. |
+| React dashboard | A local staff interface with explicit demo loading, periodic case refresh, evidence review and a backend policy editor. Tenant intake and specialist approvals remain in the original workspace. FastAPI serves the built dashboard; production login and hosted Vercel verification remain unfinished. |
+| Dashboard outcomes | Counts and progress describe the current proposed action. A successful simulated receipt does not establish a completed repair or actual contractor contact. Review-derived policy suggestions carry the review ID into interpretation and retain provenance in the editable draft reason; there is no separate structured source-review field on the published policy. |
 | Hosted operation | Vercel cloud execution and PostgreSQL behaviour are unverified. Deployment configuration does not provision accounts, secrets, storage, authentication or a production environment. |
 | Durability and scale | Local delivery uses an in-memory queue plus persisted native history and startup recovery. One process owns the Workflow directory; hot reload and multiple workers are unsupported. The prototype serialises transactions and has no production capacity or availability claim. |
 | Evaluation | BUILD replay reports decisions and blockers, not accuracy. Development provenance does not support a claim of a completely blind holdout; see the disclosure below. |
@@ -351,10 +356,10 @@ The earlier policy audit saw the complete corpus before splitting, and a later s
 - Add attachment storage/extraction with document-version availability controls.
 - Extend typed scheduling, accepted-source settings, holiday feeds and cumulative budget/invoice integration.
 - Label routing outcomes to compare Jev-only, Jev-plus-Claude and Claude handling, including missed hazards, unnecessary reviews and provider failures.
-- Integrate frontend hosting and specialist approval forms, retain review provenance in policy suggestions, and decide whether to bring tenant intake into the React client.
+- Complete specialist approval forms, add a structured source-review link to published policies, and decide whether to bring tenant intake into the React client.
 - Add operational metrics, tracing, alerting and service targets.
 - Extend review-derived policy suggestions with duplicate-rule checks and regression examples; retain explicit editor review and publication.
-- Add a voice intake adapter that confirms missing details, preserves the transcript and calls the same case API, with a clear handover to a person.
+- Verify a real phone call and the signed post-call webhook, strengthen production caller identity, and complete a clear handover to a person.
 
 ## Project reference
 

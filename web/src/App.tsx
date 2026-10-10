@@ -1,18 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { createDemoSession, evaluateCase, getCaseDetail, getSession, importBuildCase, listCases, respondToReview } from './lib/api';
-import type { CaseDetail, CaseListItem, Review, ReviewResponseInput } from './lib/types';
-import { computeDetailedPipeline, computeStageRows, readableFactKey, readableRole, severityOf, stagePillOf, toCaseSummaryVM, translateActivity } from './lib/pipeline';
+import { approveMessage, createDemoSession, evaluateCase, getCaseDetail, getSession, importBuildCase, listCases, rejectMessage, respondToReview, runTimers } from './lib/api';
+import type { CaseDetail, CaseListItem, Review, ReviewResponseInput, SessionInfo } from './lib/types';
+import { computeDetailedPipeline, computeStageRows, readableRole, severityOf, stagePillOf, toCaseSummaryVM, translateActivity } from './lib/pipeline';
 import CaseList from './components/CaseList';
 import RightPanel from './components/RightPanel';
 import Pipeline from './components/Pipeline';
 import StageDetailCard from './components/StageDetailCard';
-import PolicyEngine from './components/PolicyEngine';
+import PolicyEngine, { type PolicyRequest } from './components/PolicyEngine';
+import { reviewPolicySuggestion } from './lib/policy-api';
+import MessageDrafts from './components/MessageDrafts';
 import CaseReviewPanel from './components/CaseReviewPanel';
 
 /** Only these chronological BUILD prefixes are imported, after an explicit click. */
 const DEMO_CASES: [string, number][] = [['013', 2], ['016', 2], ['017', 3], ['021', 2], ['023', 4], ['027', 1], ['028', 2], ['034', 3], ['049', 2]];
 const BUTTON = 'rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm font-medium hover:bg-[var(--color-canvas)] disabled:cursor-not-allowed disabled:opacity-50';
-const originalWorkspace = import.meta.env.VITE_ORIGINAL_WORKSPACE_URL || 'http://127.0.0.1:8017/';
+const originalWorkspace = import.meta.env.VITE_ORIGINAL_WORKSPACE_URL || (import.meta.env.DEV ? 'http://127.0.0.1:8017/' : '/');
+const WORKFLOW_LABELS: Record<string, string> = { native_local: 'Native workflow · local', native_cloud: 'Native workflow · Vercel', manual_demo: 'Manual demo mode' };
 let sessionPromise: ReturnType<typeof getSession> | null = null;
 function initialiseSession() {
   if (!sessionPromise) sessionPromise = (async () => {
@@ -43,10 +46,12 @@ function App() {
   const [reassessing, setReassessing] = useState(false);
   const [sessionRole, setSessionRole] = useState('');
   const [mode, setMode] = useState('');
+  const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
+  const [runningTimers, setRunningTimers] = useState(false);
   const [view, setView] = useState<'operations' | 'policies'>('operations');
   const [policyVisited, setPolicyVisited] = useState(false);
-  const [policySuggestion, setPolicySuggestion] = useState<string | null>(null);
-  const [policyDraftText, setPolicyDraftText] = useState<string | undefined>();
+  const [policySuggestion, setPolicySuggestion] = useState<{ text: string; reviewId: string } | null>(null);
+  const [policyRequest, setPolicyRequest] = useState<PolicyRequest | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [pollPaused, setPollPaused] = useState(false);
   const refreshController = useRef<AbortController | null>(null);
@@ -83,7 +88,7 @@ function App() {
     try {
       const [rows, session] = await Promise.all([listCases(controller.signal), getSession(controller.signal)]);
       if (!mounted.current || version !== refreshVersion.current) return;
-      setCases(rows); setSessionRole(session.actor?.role ?? ''); setMode(session.mode); setError(null);
+      setCases(rows); setSessionRole(session.actor?.role ?? ''); setMode(session.mode); setSessionInfo(session); setError(null);
       if (!selected && rows.length) {
         const attention = rows.find((item) => ['HUMAN REVIEW', 'STOP ACTION', 'CLARIFY'].includes(item.outcome));
         selectCase(attention?.id ?? rows[0].id);
@@ -110,7 +115,7 @@ function App() {
     let cancelled = false;
     initialiseSession().then((session) => {
       if (cancelled) return;
-      setSessionRole(session.actor?.role ?? ''); setMode(session.mode); return refresh(true);
+      setSessionRole(session.actor?.role ?? ''); setMode(session.mode); setSessionInfo(session); return refresh(true);
     }).catch((failure) => { if (!cancelled) { setError(messageOf(failure)); setLoading(false); } });
     const interval = window.setInterval(() => { if (document.visibilityState === 'visible') void refresh(); }, 20000);
     return () => { cancelled = true; mounted.current = false; window.clearInterval(interval); refreshVersion.current += 1; refreshController.current?.abort(); };
@@ -160,7 +165,12 @@ function App() {
       const updated = await respondToReview(review.id, response); rememberDetail(updated);
       const remaining = updated.decision?.blockers.length ?? 0;
       setNotice(`Response recorded. ${remaining ? `${remaining} requirement${remaining === 1 ? '' : 's'} still hold the current action.` : 'No blockers are recorded for the current action.'} External operations are simulated.`);
-      setPolicySuggestion(`Consider a policy for ${readableFactKey(review.key).toLowerCase()} during ${detail.case.proposal.action.replace(/_/g, ' ')} requests in ${detail.case.category}. The reviewed scope was property ${detail.case.property_ref}, work item ${detail.case.proposal.work_item}, provider ${detail.case.proposal.provider || 'not established'}, access method ${detail.case.proposal.access_method || 'not established'}. In this case, the response was ${response.decision.replace(/_/g, ' ')} because: ${response.reason}. Define the conditions and exclusions before applying this to other cases; keep other evidence and permission checks.`);
+      // The backend only suggests reusable rules where the completed review supports one.
+      // A suggestion failure must not turn a successful review response into an error.
+      try {
+        const suggestion = await reviewPolicySuggestion(review.id);
+        if (suggestion.suggested_text) setPolicySuggestion({ text: suggestion.suggested_text, reviewId: suggestion.source_review_id ?? review.id });
+      } catch { /* The recorded response remains successful without a policy suggestion. */ }
       success = true;
     } catch (failure) { setActionError(`${messageOf(failure)} Your response is still in the form. Refresh and check the current review before trying again.`); }
     finally { mutation.current = false; setResponding(false); await refresh(true); }
@@ -176,6 +186,23 @@ function App() {
       setNotice(`Reassessed with policy ${updated.decision?.policy_version ?? 'current'}. ${remaining ? `${remaining} requirement${remaining === 1 ? '' : 's'} still hold the action.` : 'No blockers are recorded for this action.'} Reassessment does not grant new permission; external operations are simulated.`);
     } catch (failure) { setActionError(`Could not reassess this action: ${messageOf(failure)} Refresh and check its current state before retrying.`); }
     finally { mutation.current = false; setReassessing(false); await refresh(true); }
+  }
+  async function handleMessageAction(call: () => Promise<CaseDetail>, successMessage: string) {
+    if (mutation.current || sessionRole !== 'case_manager') return;
+    beginMutation(); setResponding(true);
+    try { rememberDetail(await call()); setNotice(successMessage); }
+    catch (failure) { setActionError(`${messageOf(failure)} Your draft is still in the form. Refresh and check its current status before retrying.`); }
+    finally { mutation.current = false; setResponding(false); await refresh(true); }
+  }
+  async function runDueTimers() {
+    const id = selectedRef.current;
+    if (!id || mutation.current || sessionRole !== 'case_manager') return;
+    beginMutation(); setRunningTimers(true);
+    try {
+      rememberDetail(await runTimers(id));
+      setNotice('Due timers processed for this case. Any reminder or external action is simulated; check the activity log for recorded changes.');
+    } catch (failure) { setActionError(`Could not process due timers: ${messageOf(failure)} Refresh and check the activity log before retrying.`); }
+    finally { mutation.current = false; setRunningTimers(false); await refresh(true); }
   }
   async function useCaseManagerRole() {
     if (mutation.current) return;
@@ -195,7 +222,7 @@ function App() {
   };
   const inProgress = summaries.filter((summary) => cases.find((item) => item.id === summary.id)?.outcome !== 'NO FURTHER ACTION' && summary.id !== selectedId);
   const finishedToday = summaries.filter((summary) => cases.find((item) => item.id === summary.id)?.outcome === 'NO FURTHER ACTION');
-  const busy = responding || importing || reassessing;
+  const busy = responding || importing || reassessing || runningTimers;
   const canReassess = ['case_manager', 'policy_editor', 'reviewer', 'approver', 'access_officer'].includes(sessionRole);
 
   return <div className="flex min-h-dvh w-full flex-col bg-[var(--color-canvas)] font-[var(--font-body)] text-[var(--color-ink)] lg:h-dvh lg:overflow-hidden">
@@ -207,22 +234,25 @@ function App() {
         </div>
         <a className="text-sm underline underline-offset-4" href={originalWorkspace} target="_blank" rel="noreferrer">Tenant and staff workspace</a>
       </div>
-      <span className="text-xs text-[var(--color-muted)]">Local demonstration · external actions are simulated</span>
+      <span className="text-xs text-[var(--color-muted)]">{sessionInfo?.mode === 'demo' ? 'Demonstration' : 'Staff workspace'} · external actions are simulated</span>
     </nav>
     <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[var(--color-border)] px-4 py-2 text-xs text-[var(--color-muted)]">
-      <span>Demo role: <strong>{sessionRole ? readableRole(sessionRole) : 'no session'}</strong>{lastUpdated ? ` · Updated ${lastUpdated}` : ''}{pollPaused ? ' · Automatic refresh paused after errors' : ' · Refreshes every 20 seconds while visible'}</span>
+      <span>{mode === 'demo' ? 'Demo role' : 'Session role'}: <strong>{sessionRole ? readableRole(sessionRole) : 'no session'}</strong>{lastUpdated ? ` · Updated ${lastUpdated}` : ''}{pollPaused ? ' · Automatic refresh paused after errors' : ' · Refreshes every 20 seconds while visible'}</span>
       <div className="flex flex-wrap gap-2">
         {mode === 'demo' && sessionRole !== 'case_manager' && <button type="button" className={BUTTON} disabled={busy} onClick={useCaseManagerRole}>Use case manager role</button>}
         <button type="button" className={BUTTON} disabled={busy || refreshing} onClick={() => void refresh(true)}>{refreshing ? 'Refreshing…' : 'Refresh cases'}</button>
         {view === 'operations' && <button type="button" className={BUTTON} disabled={busy || sessionRole !== 'case_manager' || mode !== 'demo'} onClick={loadDemoCases}>{importing ? 'Loading demo cases…' : 'Load demo cases'}</button>}
       </div>
     </div>
+    {sessionInfo && <div className="shrink-0 border-b border-[var(--color-border)] px-4 py-2 text-xs text-[var(--color-muted)]">
+      {WORKFLOW_LABELS[sessionInfo.workflow_mode] ?? sessionInfo.workflow_mode} · Model: {sessionInfo.model.provider} / {sessionInfo.model.model} · {sessionInfo.model.credential_configured ? 'Credentials configured; connection not verified here' : 'Credentials not configured'}
+    </div>}
     {(error || actionError || notice) && <div className="shrink-0 space-y-2 px-4 pt-3">
       {error && <div role="alert" className="rounded border border-[var(--color-attention)] bg-[var(--color-attention-bg)] p-3 text-sm">{error} <button type="button" className="font-semibold underline" disabled={busy} onClick={() => void refresh(true)}>Retry refresh</button></div>}
       {actionError && <div role="alert" className="rounded border border-[var(--color-danger)] bg-[var(--color-danger-bg)] p-3 text-sm">{actionError}</div>}
       {notice && <div role="status" className="flex items-start justify-between gap-2 rounded bg-[var(--color-success-bg)] p-3 text-sm"><span>{notice}</span><button type="button" aria-label="Dismiss notice" className="underline" onClick={() => setNotice(null)}>Dismiss</button></div>}
     </div>}
-    {policyVisited && <main className={view === 'policies' ? 'min-h-0 flex-1 overflow-y-auto' : 'hidden'}><PolicyEngine initialText={policyDraftText} onDraftConsumed={() => setPolicyDraftText(undefined)} sessionRole={sessionRole} onRoleChange={setSessionRole} /></main>}
+    {policyVisited && <main className={view === 'policies' ? 'min-h-0 flex-1 overflow-y-auto' : 'hidden'}><PolicyEngine request={policyRequest} onDraftConsumed={() => setPolicyRequest(null)} sessionRole={sessionRole} onRoleChange={setSessionRole} onPublished={() => void refresh(true)} /></main>}
     <div className={view === 'operations' ? 'contents' : 'hidden'}>
       <div className="grid grid-cols-3 gap-3 border-b border-[var(--color-border)] px-4 py-3 text-xs xl:hidden" aria-label="Case overview">
         <div><strong className="block text-xl">{stats.active}</strong>Active actions</div><div><strong className="block text-xl">{stats.escalations}</strong>Actions stopped</div><div><strong className="block text-xl">{stats.resolvedToday}</strong>Action complete</div>
@@ -234,12 +264,16 @@ function App() {
         <section aria-label="Selected case" className="flex min-h-0 min-w-0 flex-1 flex-col">
           <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[var(--color-border)] px-4 py-3">
             <h1 ref={selectedHeading} tabIndex={-1} className="min-w-0 break-words text-base font-semibold">{selectedSummary?.property_ref ?? 'Your maintenance cases'}</h1>
+            {selectedSummary && <button type="button" className={BUTTON} disabled={busy || sessionRole !== 'case_manager'} onClick={runDueTimers} title="Process due reminders, escalations and review deadlines for this case">{runningTimers ? 'Processing timers…' : 'Run due timers'}</button>}
             {selectedSummary && <span className={`rounded-full px-3 py-1 text-xs ${severityOf(selectedSummary) === 'red' ? 'bg-[var(--color-danger-bg)]' : severityOf(selectedSummary) === 'amber' ? 'bg-[var(--color-attention-bg)]' : 'bg-[var(--color-success-bg)]'}`}>{stagePillOf(selectedSummary)}</span>}
           </div>
           <div className="min-w-0 flex-1 p-4 sm:p-6 lg:overflow-y-auto">
             {detailLoading && <p role="status" className="mb-3 text-sm text-[var(--color-muted)]">Loading the selected case…</p>}
             {detailError && <p role="alert" className="mb-3 rounded bg-[var(--color-danger-bg)] p-3 text-sm">{detailError} <button className="underline" type="button" onClick={() => void refresh(true)}>Retry</button></p>}
             {selectedDetail ? <>
+              <MessageDrafts key={selectedDetail.case.id} messages={selectedDetail.tenant_messages ?? []} actionRevision={selectedDetail.case.action_revision} busy={busy} canManage={sessionRole === 'case_manager'}
+                onSend={(id, text) => void handleMessageAction(() => approveMessage(id, text), 'Message delivery recorded (simulated). No real message was sent.')}
+                onReject={(id, reason, redraft) => void handleMessageAction(() => rejectMessage(id, reason, redraft), redraft ? 'Draft rejected and a redraft requested. Check this case for the next draft; no real message was sent.' : 'Draft rejected. No real message was sent.')} />
               {selectedDetail.case.policy_pending && <div className="mb-4 rounded-[var(--radius-sm)] border border-[var(--color-attention)] bg-[var(--color-attention-bg)] p-4">
                 <h2 className="text-sm font-semibold">A new policy needs to be checked against this action</h2>
                 <p className="mt-1 text-sm">The action stays held until reassessment. This rechecks the evidence under the current published policy; it does not grant permission or resolve conflicting facts. If all checks pass, the workflow can continue with simulated actions.</p>
@@ -254,8 +288,8 @@ function App() {
               {policySuggestion !== null && <section className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-information-bg)] p-4">
                 <h2 className="text-sm font-semibold">Consider a policy for similar cases</h2>
                 <p className="mt-1 text-sm text-[var(--color-muted)]">A single decision does not establish a general rule. Edit this suggestion, then review its conditions and preview before publication.</p>
-                <label className="mt-3 block text-sm font-medium">Policy suggestion<textarea rows={4} value={policySuggestion} onChange={(event) => setPolicySuggestion(event.target.value)} className="mt-1 w-full rounded border border-[var(--color-border)] bg-[var(--color-surface)] p-3 font-normal" /></label>
-                <div className="mt-3 flex flex-wrap gap-2"><button type="button" className={BUTTON} disabled={!policySuggestion.trim()} onClick={() => { setPolicyDraftText(policySuggestion); setPolicySuggestion(null); setPolicyVisited(true); setView('policies'); }}>Review suggestion in Policies</button><button type="button" className={BUTTON} onClick={() => setPolicySuggestion(null)}>Dismiss</button></div>
+                <label className="mt-3 block text-sm font-medium">Policy suggestion<textarea rows={4} value={policySuggestion.text} onChange={(event) => setPolicySuggestion({ ...policySuggestion, text: event.target.value })} className="mt-1 w-full rounded border border-[var(--color-border)] bg-[var(--color-surface)] p-3 font-normal" /></label>
+                <div className="mt-3 flex flex-wrap gap-2"><button type="button" className={BUTTON} disabled={!policySuggestion.text.trim()} onClick={() => { setPolicyRequest({ text: policySuggestion.text, reviewId: policySuggestion.reviewId, nonce: Date.now() }); setPolicySuggestion(null); setPolicyVisited(true); setView('policies'); }}>Review suggestion in Policies</button><button type="button" className={BUTTON} onClick={() => setPolicySuggestion(null)}>Dismiss</button></div>
               </section>}
               <div className="mt-5"><StageDetailCard stageTitle="Current proposed action" rows={computeStageRows(selectedDetail)} activity={translateActivity(selectedDetail.timeline)} /></div>
             </> : !detailLoading && <div className="rounded-[var(--radius-md)] border border-dashed border-[var(--color-border)] p-6"><h2 className="font-semibold">{selectedId ? 'Case details are unavailable' : 'Start with a maintenance request'}</h2><p className="mt-2 text-sm text-[var(--color-muted)]">{selectedId ? 'Refresh to retry. Your case selection is preserved.' : 'Existing cases appear here. Use the tenant workspace to submit a request, or load fictional BUILD prefixes with “Load demo cases”. Loading this page does not import or answer cases.'}</p></div>}
