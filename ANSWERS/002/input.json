@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Gas record and boiler visit",
+  "property_ref": "8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ",
+  "as_of": "2025-10-18T16:35:00+00:00",
+  "report_available_at": "2025-10-01T08:42:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nPlease send me the current gas safety paperwork for the flat. The boiler has also started locking out occasionally; could you check whether that is being looked at?",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Note from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Note\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nTenancy file contains a gas record dated 16 October 2024. No later record is present in the file.",
+      "available_at": "2025-10-01T09:18:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Portal from Iona Pell (Tenant)",
+      "text": "Event 003 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe boiler has stopped during heating twice since the weekend and restarted after I reset it. It is working at the moment. I have not noticed a gas smell.",
+      "available_at": "2025-10-01T11:06:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Nessa Wold (Landlord)\n\nThe tenant has requested the current gas paperwork and reported intermittent boiler lockouts. Please confirm whether a visit has been arranged and what work was authorized.",
+      "available_at": "2025-10-02T10:14:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Nessa Wold (Landlord)",
+      "text": "Event 005 — Email\nFrom: Nessa Wold (Landlord)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI arranged the annual gas visit with Flintmere Gas Services for 9 October. The instruction was to carry out the check; please do not authorize additional repair costs without asking me.",
+      "available_at": "2025-10-03T08:51:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — SMS from Riva Morn (Service Coordinator, Flintmere Gas Services)",
+      "text": "Event 006 — SMS\nFrom: Riva Morn (Service Coordinator, Flintmere Gas Services)\nTo: Iona Pell (Tenant)\n\nFlintmere has the 9 October appointment booked for the annual gas visit. Please confirm an access window.",
+      "available_at": "2025-10-03T13:22:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Portal from Iona Pell (Tenant)",
+      "text": "Event 007 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI can provide access between 09:00 and 11:00 on 9 October. Please ask the engineer to let me know if the visit time changes.",
+      "available_at": "2025-10-04T09:07:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — SMS from Tavin Rell (Gas Engineer, Flintmere Gas Services)",
+      "text": "Event 008 — SMS\nFrom: Tavin Rell (Gas Engineer, Flintmere Gas Services)\nTo: Iona Pell (Tenant)\n\nI am on my way for the booked gas visit and expect to arrive within the agreed access window.",
+      "available_at": "2025-10-09T08:48:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Note from Tavin Rell (Gas Engineer, Flintmere Gas Services)",
+      "text": "Event 009 — Note\nFrom: Tavin Rell (Gas Engineer, Flintmere Gas Services)\nTo: Riva Morn (Service Coordinator, Flintmere Gas Services)\n\nVisit completed. The job app entry records the check as satisfactory. I noted the tenant's intermittent boiler lockout separately; no repair was included in this instruction.",
+      "available_at": "2025-10-09T10:26:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)",
+      "text": "Event 010 — Email\nFrom: Riva Morn (Service Coordinator, Flintmere Gas Services)\nTo: Nessa Wold (Landlord)\n\nThe engineer has closed the visit as satisfactory in the job app. The office paperwork is still being processed.",
+      "available_at": "2025-10-09T14:03:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Document from Riva Morn (Service Coordinator, Flintmere Gas Services)",
+      "text": "Event 011 — Document\nFrom: Riva Morn (Service Coordinator, Flintmere Gas Services)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI have sent the job-app details from the visit. The tenant contact number is omitted from the maintenance-thread copy.",
+      "available_at": "2025-10-10T09:32:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Nessa Wold (Landlord)",
+      "text": "Event 012 — Email\nFrom: Nessa Wold (Landlord)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI found this gas portal record in my account and have attached it. It may be the paperwork the tenant requested.",
+      "available_at": "2025-10-10T10:11:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Document from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Document\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nSaved the landlord's portal screenshot to the case file as gas-portal-record.pdf.",
+      "available_at": "2025-10-10T10:34:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Portal from Iona Pell (Tenant)",
+      "text": "Event 014 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI saw the engineer at the boiler during the visit but did not receive a paper record. Can you confirm whether the attached item is the paperwork for the property?",
+      "available_at": "2025-10-11T08:19:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)",
+      "text": "Event 015 — Email\nFrom: Riva Morn (Service Coordinator, Flintmere Gas Services)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe portal job card is marked complete and satisfactory. The office is still processing the paperwork from the visit.",
+      "available_at": "2025-10-11T15:46:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Nessa Wold (Landlord)",
+      "text": "Event 016 — Email\nFrom: Nessa Wold (Landlord)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI have paid Flintmere for the visit. I would prefer not to commission another visit unless they identify a specific reason it is needed. Do not approve extra charges without my agreement.",
+      "available_at": "2025-10-12T10:02:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Portal from Iona Pell (Tenant)",
+      "text": "Event 017 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe boiler locked out again overnight and restarted after I reset it. It is currently heating. There is no gas smell that I can detect.",
+      "available_at": "2025-10-13T07:56:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Email\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Riva Morn (Service Coordinator, Flintmere Gas Services)\n\nPlease clarify what the portal entry represents, whether the completed check covers the property's gas appliances, and when the paperwork from the visit will be available. Please also confirm how the reported boiler lockout should be handled under the original instruction.",
+      "available_at": "2025-10-13T11:25:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Riva Morn (Service Coordinator, Flintmere Gas Services)",
+      "text": "Event 019 — Email\nFrom: Riva Morn (Service Coordinator, Flintmere Gas Services)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe job card lists the boiler and cooker. Our quality desk has paused issuing the signed paperwork while it reconciles an appliance installation detail against the information already held for the address. The engineer's entry remains satisfactory. A lockout diagnostic would be a separate job.",
+      "available_at": "2025-10-14T09:41:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Nessa Wold (Landlord)\n\nFlintmere says its signed paperwork is paused pending an information check and says a lockout diagnostic would be separate. No diagnostic has been booked. Please confirm what additional work, if any, you authorize.",
+      "available_at": "2025-10-14T14:18:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Email from Tavin Rell (Gas Engineer, Flintmere Gas Services)",
+      "text": "Event 021 — Email\nFrom: Tavin Rell (Gas Engineer, Flintmere Gas Services)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nMy visit entry records the check as satisfactory. I cannot see the office's paperwork queue or resolve the installation-detail query from my job app.",
+      "available_at": "2025-10-15T08:33:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Portal from Iona Pell (Tenant)",
+      "text": "Event 022 — Portal\nFrom: Iona Pell (Tenant)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe boiler locked out once more this morning and came back on after a reset. I can provide access after 21 October if a further visit is arranged. No gas smell noticed.",
+      "available_at": "2025-10-16T12:09:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Nessa Wold (Landlord)",
+      "text": "Event 023 — Email\nFrom: Nessa Wold (Landlord)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nI have not approved a separate diagnostic or further charge. Please let me know what is still outstanding from Flintmere before any additional spend is committed.",
+      "available_at": "2025-10-17T16:27:00+00:00"
+    },
+    {
+      "source_label": "Event 024 — Note from Oren Vale (Property Manager, Northbridge Lettings)",
+      "text": "Event 024 — Note\nFrom: Oren Vale (Property Manager, Northbridge Lettings)\nTo: Oren Vale (Property Manager, Northbridge Lettings)\n\nThe tenancy file still contains the landlord's portal screenshot, but no signed paperwork from Flintmere has arrived. Flintmere has given no date for resolving its information query. The landlord has not authorized a separate diagnostic; the tenant reports another lockout and can offer access after 21 October. The file review is due today.",
+      "available_at": "2025-10-18T16:35:00+00:00"
+    },
+    {
+      "source_label": "Attachment gas-portal-record.pdf (PDF text extraction)",
+      "text": "Attachment: gas-portal-record.pdf\nExtracted text (pypdf; layout not preserved):\n\nsecure record view\nSERVICE PORTAL · RECORD EXPORT Gas safety portal record\nFlintmere Gas Services — Customer Portal\nGas Safety Record\nProperty: 8 Brindlewick Row, Vellum Quay, ZZ1 1ZZ\nJob reference: NBL-48217\nField Entry\nVisit date 09 October 2025\nVisit time 09:05–10:02\nEngineer Tavin Rell\nJob status Complete\nRecorded outcome Satisfactory\nAppliances on job card Boiler; cooker\nRecord created 09 October 2025, 10:08\nCustomer document Processing\n*Portal view captured 10 October 2025, 09:56*",
+      "available_at": "2025-10-18T16:35:00+00:00"
+    }
+  ]
+}

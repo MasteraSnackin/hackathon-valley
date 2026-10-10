@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "title": "Hot-water service report",
+  "property_ref": "17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ",
+  "as_of": "2025-05-16T16:05:00+00:00",
+  "report_available_at": "2025-05-06T08:14:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Iris Vale (Tenant, resident)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nMaintenance request NBL-021: shower and hot water are not working. Tenant says they checked the switch and the boiler has no power. No boiler make or model supplied; small birds are kept at the property.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nAcknowledged the maintenance report and said the landlord would be contacted before next steps were confirmed. Invited the tenant to provide any further relevant details.",
+      "available_at": "2025-05-06T08:31:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nTenant said there was no hot water at the taps as well as in the shower, and that the boiler had no power despite checking the switch. A household member could be at home, but the tenant asked to be contacted about arrangements; the household member does not speak English. Tenant asked if it could be addressed that day before work.",
+      "available_at": "2025-05-06T09:02:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nMaya said the loss of hot water would be treated as urgent and that she would contact the landlord about attendance. She said the tenant would not be charged for the reported fault, while also noting that a call-out might be chargeable if an inspection found only a switch left off. No inspection or diagnosis has taken place.",
+      "available_at": "2025-05-06T09:03:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Tessa Moor (Duty Operations Lead, Northbridge Lettings)\n\nThe file was categorised as Electrical based on the tenant's report of no boiler power. The approval workflow was initiated. No inspection, diagnosis, or contractor attendance is recorded.",
+      "available_at": "2025-05-06T09:17:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nReported the loss of hot water and the tenant's statement that the boiler has no power. Asked Ravi to confirm whether he would arrange attendance himself or wanted Northbridge Lettings to arrange a contractor.",
+      "available_at": "2025-05-06T09:24:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Tessa Moor (Duty Operations Lead, Northbridge Lettings)\n\nThe file was moved to a landlord-managed repair route, and the approval follow-up was stopped. No contractor appointment was booked by Northbridge Lettings.",
+      "available_at": "2025-05-06T09:34:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nAdvised that the landlord would arrange the work directly and that the tenant or household might be contacted about access. Asked the tenant to report if nobody made contact or attended.",
+      "available_at": "2025-05-06T09:35:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nConfirmed the landlord-managed route and asked Ravi to advise when the work was expected to be completed. Said Northbridge Lettings could arrange a contractor instead if he preferred.",
+      "available_at": "2025-05-06T09:36:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nRavi said he would ask one of his own contractors to attend that day. He also asked for a building contact to message the tenant about arrangements. No contractor name or appointment time was given.",
+      "available_at": "2025-05-06T09:40:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nAsked whether the landlord-arranged work had been completed. Asked the tenant to say if nothing had been done or nobody had made contact.",
+      "available_at": "2025-05-11T10:00:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Iris Vale (Tenant, resident)",
+      "text": "Event 012 — Email\nFrom: Iris Vale (Tenant, resident)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nTenant replied: “Nothing done about it thanks.” No restoration of hot water or boiler power was reported.",
+      "available_at": "2025-05-11T10:03:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nReported that the tenant said there was still no hot water and no repair had taken place. Requested an update on the contractor's timing and said Northbridge Lettings could arrange a contractor if the landlord wanted to change course.",
+      "available_at": "2025-05-11T10:30:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nMaya left a voicemail following up on the tenant's report of no hot water and no work completed, and asked Ravi to respond. No conversation or response was recorded.",
+      "available_at": "2025-05-11T10:35:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nRavi said he believed his plumber would attend that evening. He said Northbridge Lettings could send its own contractor the following day if the plumber did not attend. No agency contractor was booked during the call.",
+      "available_at": "2025-05-12T16:20:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nAsked whether the plumber had attended as expected and what the outcome was. The email noted the continuing report of no hot water and asked Ravi to say if Northbridge Lettings should arrange a contractor.",
+      "available_at": "2025-05-13T09:00:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nTenant said there was still no hot water and nobody had come to fix it. Tenant separately reported that the letterbox was not working and asked whether it needed to be reported separately. Maya said she would follow up; no further details or assessment of the letterbox issue were recorded.",
+      "available_at": "2025-05-13T09:05:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Sethi (Landlord, property owner)\n\nRavi said his plumber had attended the previous day and fixed the issue, based on a text from the plumber. No work description, report, invoice, or details of boiler or electrical checks were provided. Ravi asked to be told if the problem persisted.",
+      "available_at": "2025-05-15T08:37:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nMaya called to ask whether hot water had returned and left a voicemail. She said the landlord believed the issue had been resolved. No tenant confirmation was obtained during the call.",
+      "available_at": "2025-05-15T08:38:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Vale (Tenant, resident)\n\nAsked the tenant to confirm whether the hot-water issue had been resolved. No reply is recorded.",
+      "available_at": "2025-05-15T08:45:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Tessa Moor (Duty Operations Lead, Northbridge Lettings)\n\nThe maintenance request remains open. The landlord's update and the tenant's earlier report about the letterbox are on file.",
+      "available_at": "2025-05-16T16:05:00+00:00"
+    }
+  ]
+}

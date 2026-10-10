@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "title": "Kitchen cabinet maintenance request",
+  "property_ref": "42 Brackenveil Row, Oakhollow, ZZ1 1ZZ",
+  "as_of": "2025-09-24T14:36:47+00:00",
+  "report_available_at": "2025-09-04T12:08:49+00:00",
+  "report": "Event 001 — Portal\nFrom: Elowen Marr (Tenant)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nReported peeling kitchen-cabinet laminate, sharp edges that had caused multiple cuts, and several doors that would not close properly. Noted that two dogs would need to be secured before a visit.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Elowen Marr (Tenant)\n\nAcknowledged the report and said the landlord would be contacted about the work. Noted that any visit would need to be coordinated in advance around the dogs.",
+      "available_at": "2025-09-04T12:31:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nSent the tenant's description, flagging the reported cuts, doors that do not close properly, and the need to arrange access around two dogs. Asked whether the landlord was happy for Northbridge Lettings to arrange the work.",
+      "available_at": "2025-09-04T14:57:45+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Soren Pike (Landlord)",
+      "text": "Event 004 — Email\nFrom: Soren Pike (Landlord)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nAsked Northbridge Lettings to obtain a quote for replacing the laminate. The message did not specify approval to carry out work.",
+      "available_at": "2025-09-06T09:07:13+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nConfirmed that a handyman or suitable contractor would be asked to provide a quotation, and that the price would be returned for approval before work proceeded.",
+      "available_at": "2025-09-07T16:30:02+00:00"
+    },
+    {
+      "source_label": "Event 006 — Update from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Update\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nRecorded landlord approval for the original laminate-repair scope. This recorded approval was limited to that scope; it did not approve a full kitchen replacement or replacement of cupboards and doors.",
+      "available_at": "2025-09-09T16:49:18+00:00"
+    },
+    {
+      "source_label": "Event 007 — Update from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Update\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Kellan Rook (Contractor, Alderline Joinery)\n\nAssigned the contractor and moved the matter into scheduling for an on-site quotation or repair visit under the original laminate-repair scope. The tenant was to provide availability so a slot could be arranged, with access around the dogs.",
+      "available_at": "2025-09-09T16:50:18+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Elowen Marr (Tenant)\n\nAsked for suitable time windows for the contractor's visit and invited the tenant to include any access information relevant to securing the dogs.",
+      "available_at": "2025-09-09T16:50:37+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nAdvised that a visit was being arranged with the tenant and contractor. No appointment had yet been confirmed.",
+      "available_at": "2025-09-09T16:50:43+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Elowen Marr (Tenant)",
+      "text": "Event 010 — Email\nFrom: Elowen Marr (Tenant)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nOffered 16, 17, or 18 September, any time between 11:00 and 14:00. No appointment was confirmed.",
+      "available_at": "2025-09-09T17:13:16+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Kellan Rook (Contractor, Alderline Joinery)\n\nForwarded the tenant's offered windows and asked the contractor to select a slot or suggest an alternative. Reiterated the reported cabinet damage and that the dogs needed to be secured before access.",
+      "available_at": "2025-09-09T17:14:02+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Kellan Rook (Contractor, Alderline Joinery)",
+      "text": "Event 012 — Email\nFrom: Kellan Rook (Contractor, Alderline Joinery)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nSaid the contractor had previously quoted for a full new kitchen because of the issue. Did not provide the earlier quote or choose one of the tenant's offered visit slots.",
+      "available_at": "2025-09-10T09:00:17+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nRelayed the contractor's view that the doors were not in a fit state to repair and that a new kitchen might be the practical option. Asked whether the landlord wanted an updated quote. This raised expanded options but did not represent approval for replacement work.",
+      "available_at": "2025-09-10T11:13:55+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Kellan Rook (Contractor, Alderline Joinery)",
+      "text": "Event 014 — Call\nFrom: Kellan Rook (Contractor, Alderline Joinery)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nSaid laminate was peeling from multiple panels and that replacing it properly would require stripping the kitchen, making it more than a straightforward repair. Considered a new kitchen the practical option and said earlier prices could have changed. No current written estimate or site visit was recorded.",
+      "available_at": "2025-09-10T11:14:46+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Soren Pike (Landlord)",
+      "text": "Event 015 — Call\nFrom: Soren Pike (Landlord)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nVoicemail said the landlord was away until 14 September and asked that enquiries be directed to the landlord's office in the meantime.",
+      "available_at": "2025-09-10T11:14:59+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Soren Pike (Landlord)",
+      "text": "Event 016 — Email\nFrom: Soren Pike (Landlord)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nAgreed to obtain up-to-date estimates for two alternatives: a full new kitchen and replacement cupboards and doors only. Said the appliances, worktops, and flooring were in good condition. This requested estimates; it did not approve either replacement option.",
+      "available_at": "2025-09-10T15:24:27+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nConfirmed the two requested estimates: a full kitchen, and cupboards and doors only while retaining the existing appliances, worktops, and flooring. Said Northbridge Lettings would report back when both were received.",
+      "available_at": "2025-09-11T09:46:38+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Kellan Rook (Contractor, Alderline Joinery)\n\nAsked the contractor for an updated full-kitchen quote in response to the landlord's request. The request for estimates did not authorize replacement work.",
+      "available_at": "2025-09-11T15:38:25+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Kellan Rook (Contractor, Alderline Joinery)",
+      "text": "Event 019 — Email\nFrom: Kellan Rook (Contractor, Alderline Joinery)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nAcknowledged the request and said the updated quote would be sent. No visit time was confirmed.",
+      "available_at": "2025-09-11T16:07:24+00:00"
+    },
+    {
+      "source_label": "Event 020 — Note from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Note\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nRecorded a silent wait while the contractor checked with suppliers for updated pricing. The tenant's offered windows remained on file, but no visit slot or estimates had been received.",
+      "available_at": "2025-09-14T07:16:51+00:00"
+    },
+    {
+      "source_label": "Event 021 — Note from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Note\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nThe silent wait expired without a new contractor response. No visit slot or updated estimates had arrived. The first tenant-offered date had passed, and no appointment or dog-access arrangement had been confirmed.",
+      "available_at": "2025-09-17T08:01:16+00:00"
+    },
+    {
+      "source_label": "Event 022 — Call from Kellan Rook (Contractor, Alderline Joinery)",
+      "text": "Event 022 — Call\nFrom: Kellan Rook (Contractor, Alderline Joinery)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nWhile discussing the delayed kitchen quote, the contractor cited a 15% commission as a concern and questioned whether the old or revised commission basis applied, whether a cap applied to a larger job, and how VAT affected the amount. The contractor said these uncertainties could change the quoted amount. The applicable basis, any cap, VAT treatment for the resulting total, and the total payable were not settled in this discussion.",
+      "available_at": "2025-09-23T13:50:19+00:00"
+    },
+    {
+      "source_label": "Event 023 — Call from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 023 — Call\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Kellan Rook (Contractor, Alderline Joinery)\n\nTold the contractor to use the previous commission arrangement and classify the job as before. The conversation did not establish the applicable commission calculation, any cap, or the resulting total. The contractor said the quote would be sent that evening.",
+      "available_at": "2025-09-23T13:51:03+00:00"
+    },
+    {
+      "source_label": "Event 024 — Email from Kellan Rook (Contractor, Alderline Joinery)",
+      "text": "Event 024 — Email\nFrom: Kellan Rook (Contractor, Alderline Joinery)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nSent full-kitchen figures: supply £4,850 plus VAT; removal of the old kitchen and fitting of the new one, including tiled splashback, £3,800 plus VAT; waste removal £230 plus VAT. Electrical work was estimated at £380 plus VAT and would need checking if the quote were acceptable. The proposed kitchen includes an oven, hob, and chimney extractor; it excludes a microwave, washer, and dryer. No cupboards-and-doors-only estimate was included.",
+      "available_at": "2025-09-24T14:35:00+00:00"
+    },
+    {
+      "source_label": "Event 025 — Email from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 025 — Email\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Soren Pike (Landlord)\n\nForwarded the full-kitchen figures and noted that the electrical item was an estimate requiring confirmation. The requested cupboards-and-doors-only estimate had not arrived. The listed figures were plus VAT, while the commission basis, any cap, and resulting payable total remained unconfirmed. No approval for replacement work or access appointment is recorded.",
+      "available_at": "2025-09-24T14:36:03+00:00"
+    },
+    {
+      "source_label": "Event 026 — Note from Nia Calder (Property Manager, Northbridge Lettings)",
+      "text": "Event 026 — Note\nFrom: Nia Calder (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Property Manager, Northbridge Lettings)\n\nRecorded that a response from the landlord about the quote was awaited. The original laminate-repair approval and the later requests for expanded replacement estimates remain distinct; there is no recorded approval for a full kitchen or cupboards-and-doors replacement.",
+      "available_at": "2025-09-24T14:36:22+00:00"
+    }
+  ]
+}

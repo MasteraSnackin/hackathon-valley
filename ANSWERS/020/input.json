@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Kitchen socket maintenance request",
+  "property_ref": "8 Brindlewick Row, Oakhollow, ZZ1 1ZZ",
+  "as_of": "2025-04-12T16:42:00+00:00",
+  "report_available_at": "2025-04-12T08:14:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported a hot, slightly burning smell near the kitchen counter socket. Nora says the socket face felt warm after a kettle had been plugged in; she has unplugged the kettle. No smoke or visible flame reported. Asked for an inspection.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 002 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nMaintenance request NBL-020-01 created and assigned for review. Tenant contact preference on file is portal messaging.",
+      "available_at": "2025-04-12T08:22:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Portal from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Portal\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Nora Bell (Tenant)\n\nAsked whether there is smoke, sparking, a continuing smell, or anyone currently at the property, and whether the relevant circuit can be identified without touching the socket.",
+      "available_at": "2025-04-12T08:37:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Portal from Nora Bell (Tenant)",
+      "text": "Event 004 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nNo smoke or sparks seen. Smell remains faint. Nora is at home with her 10-year-old son. She does not know which breaker serves the kitchen and has not opened the consumer unit.",
+      "available_at": "2025-04-12T08:51:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elliot Vane (Landlord)\n\nForwarded the report and tenant's update. Asked for authority and preferred attendance arrangements, noting the reported warmth and continuing smell.",
+      "available_at": "2025-04-12T09:03:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Elliot Vane (Landlord)",
+      "text": "Event 006 — Email\nFrom: Elliot Vane (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAsked Northbridge to keep costs controlled and said he could send his regular general handyman, Rowan Pike, to look at it. Did not specify an electrical qualification or authorize a particular repair.",
+      "available_at": "2025-04-12T09:18:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Portal from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Portal\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Nora Bell (Tenant)\n\nAsked whether the smell has changed and requested that no appliance be reconnected to the affected socket while attendance is being arranged.",
+      "available_at": "2025-04-12T09:26:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Portal from Nora Bell (Tenant)",
+      "text": "Event 008 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSmell is still faint. Nora confirms the kettle remains unplugged. She cannot confirm whether the socket is on the same circuit as the refrigerator; the refrigerator is running.",
+      "available_at": "2025-04-12T09:41:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nFile note: through this time, no emergency-response guidance, referral, or decision has been communicated to the tenant in the case messages. No contact with emergency services or other emergency response is recorded.",
+      "available_at": "2025-04-12T09:52:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Elliot Vane (Landlord)",
+      "text": "Event 010 — Email\nFrom: Elliot Vane (Landlord)\nTo: Rowan Pike (Handyman, Pike Property Care)\n\nAsked Rowan to attend today, inspect the kitchen socket area, and report what he finds before undertaking work. Elliot described Rowan as his regular handyman.",
+      "available_at": "2025-04-12T10:02:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Rowan Pike (Handyman, Pike Property Care)",
+      "text": "Event 011 — Email\nFrom: Rowan Pike (Handyman, Pike Property Care)\nTo: Elliot Vane (Landlord)\n\nConfirmed he could attend between 13:00 and 15:00. Said his work is general property maintenance and he does not carry out fixed-wiring repairs.",
+      "available_at": "2025-04-12T10:16:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Portal from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Portal\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Nora Bell (Tenant)\n\nProposed Rowan's attendance window, described him as the landlord's handyman, and asked for consent to share the reported symptoms and access details with him.",
+      "available_at": "2025-04-12T10:29:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Portal from Nora Bell (Tenant)",
+      "text": "Event 013 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAgreed to the visit and sharing those details. Nora will be present until 12:30, then leave to collect her son. She says her adult sister, Tessa, may be at the flat later but has not confirmed.",
+      "available_at": "2025-04-12T10:46:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Handyman, Pike Property Care)\n\nSent the tenant-approved symptom summary and access window. Asked Rowan to report his observations before doing any work. The message does not include the tenant's unrelated account details.",
+      "available_at": "2025-04-12T11:03:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Rowan Pike (Handyman, Pike Property Care)",
+      "text": "Event 015 — Call\nFrom: Rowan Pike (Handyman, Pike Property Care)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid he has a non-contact voltage pen and basic hand tools, but no electrical test equipment. He intends only a visual look and will not remove the socket face or alter wiring. Asked whether he should still attend.",
+      "available_at": "2025-04-12T11:37:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Elliot Vane (Landlord)",
+      "text": "Event 016 — Email\nFrom: Elliot Vane (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReiterated that Rowan should attend and report. Elliot has not given separate approval for an electrician's call-out or for electrical repairs.",
+      "available_at": "2025-04-12T11:52:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Portal from Nora Bell (Tenant)",
+      "text": "Event 017 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nLeaving shortly for school collection. The smell is not stronger, but the socket area still feels warm when she holds her hand near it; she has not touched the face again. No confirmation yet that Tessa will be present.",
+      "available_at": "2025-04-12T12:08:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nFile note: tenant initially reported warmth by touch and has since described warmth near the socket without touching it. No photo, temperature reading, electrical test, or confirmation of circuit isolation is available.",
+      "available_at": "2025-04-12T12:19:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — SMS from Rowan Pike (Handyman, Pike Property Care)",
+      "text": "Event 019 — SMS\nFrom: Rowan Pike (Handyman, Pike Property Care)\nTo: Elliot Vane (Landlord)\n\nAt the property. Nora has left; no one has answered the door. Rowan has not entered and asks whether to wait, use landlord-held access, or leave.",
+      "available_at": "2025-04-12T13:06:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elliot Vane (Landlord)\n\nAsked whether Rowan has authorization to use landlord-held keys in the tenant's absence and whether an electrician can be commissioned if the reported condition persists. No response reached; voicemail left.",
+      "available_at": "2025-04-12T13:14:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — SMS from Elliot Vane (Landlord)",
+      "text": "Event 021 — SMS\nFrom: Elliot Vane (Landlord)\nTo: Rowan Pike (Handyman, Pike Property Care)\n\nTexted, 'Please have a look if you can get in; keep it to the socket and let me know.' The text does not say whether Rowan may use a key, and Rowan has not confirmed receiving or acting on it.",
+      "available_at": "2025-04-12T13:27:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Portal from Nora Bell (Tenant)",
+      "text": "Event 022 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays Tessa cannot attend after all. Nora is still away and expects to return around 16:30. She reports no smoke or alarm but cannot say whether the smell has changed since leaving.",
+      "available_at": "2025-04-12T14:11:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Rowan Pike (Handyman, Pike Property Care)",
+      "text": "Event 023 — Email\nFrom: Rowan Pike (Handyman, Pike Property Care)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed he did not enter because nobody answered and he had no clear access authorization. No inspection or isolation has taken place. He remains available until 15:00.",
+      "available_at": "2025-04-12T14:24:00+00:00"
+    },
+    {
+      "source_label": "Event 024 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 024 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elliot Vane (Landlord)\n\nSummarized that the handyman has not inspected, cannot perform fixed-wiring repairs, and lacks clear permission to enter while the tenant is away. Asked for an immediate decision on authority, attendance, and electrical assessment; no reply yet.",
+      "available_at": "2025-04-12T15:02:00+00:00"
+    },
+    {
+      "source_label": "Event 025 — Portal from Nora Bell (Tenant)",
+      "text": "Event 025 — Portal\nFrom: Nora Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nNora says she is back at the property. The faint smell is still noticeable near the counter, and she has not used the socket. She has not switched off any breaker; the refrigerator remains powered. She says she has received no emergency-response guidance. No one has inspected the socket, and the landlord's response to the authority request is still outstanding.",
+      "available_at": "2025-04-12T16:42:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Kitchen glazing maintenance request",
+  "property_ref": "8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ",
+  "as_of": "2025-09-10T10:10:00+00:00",
+  "report_available_at": "2025-07-31T08:11:00+00:00",
+  "report": "Event 001 — Email\nFrom: Elowen Marr (Tenant)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nReported moisture between the kitchen glazing panes, water gathering around the frame, a cold kitchen and concern about damp, especially in winter. Confirmed the sash opens, closes and locks; pets are at the property.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Elowen Marr (Tenant)\n\nAcknowledged the report and said Northbridge Lettings would seek the landlord's approval before arranging work.",
+      "available_at": "2025-07-31T08:30:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Orren Vale (Landlord)\n\nRequested approval to arrange work on the kitchen glazing. Passed on the tenant's report of misting between panes, water around the frame, cold conditions and damp concern. Noted that the sash still opens and locks and that pets are present.",
+      "available_at": "2025-07-31T09:09:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Orren Vale (Landlord)\n\nSent a reminder asking whether Northbridge Lettings should arrange the work or whether the landlord preferred to use their own contractor.",
+      "available_at": "2025-08-03T09:11:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Note from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Note\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nRecorded authorization to obtain a glazing contractor's price. No site assessment or diagnosis of the wider damp or cold concern is recorded.",
+      "available_at": "2025-08-04T11:48:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nRequested a price for the reported misted kitchen glazing and shared the tenant's description. Asked the contractor to advise if an inspection was needed before pricing.",
+      "available_at": "2025-08-04T12:23:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nFollowed up for the requested price or advice on whether a visit would be needed.",
+      "available_at": "2025-08-05T12:04:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Orren Vale (Landlord)\n\nAdvised that a contractor's price had been received and sent for consideration. The record contains no detailed inspection findings.",
+      "available_at": "2025-08-06T09:29:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Orren Vale (Landlord)\n\nAfter unsuccessful attempts to reach the landlord by phone, stated the contractor's price as £150 plus VAT, £180 in total, and asked how the landlord wished to proceed.",
+      "available_at": "2025-08-11T10:34:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Orren Vale (Landlord)",
+      "text": "Event 010 — Email\nFrom: Orren Vale (Landlord)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nSaid he had been away and was catching up on email. Wrote that he was happy to use the contractor if £180 was the total value of the quote.",
+      "available_at": "2025-08-11T11:05:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Orren Vale (Landlord)\n\nSent a quote approval request describing the work as supplying and fitting glass to the kitchen glazing because it was misted. Stated the price as £150 plus VAT and asked the landlord to confirm before work was arranged.",
+      "available_at": "2025-08-11T11:17:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Note from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Note\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nRecorded the quote as approved and moved to arranging attendance. The record also contains the landlord's earlier conditional reply referring to £180 as the total.",
+      "available_at": "2025-08-11T11:19:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Elowen Marr (Tenant)\n\nAsked for two or three availability options for the contractor's visit and invited the tenant to share access information, including arrangements relevant to pets.",
+      "available_at": "2025-08-11T11:20:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Elowen Marr (Tenant)",
+      "text": "Event 014 — Email\nFrom: Elowen Marr (Tenant)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nSaid she was away for two weeks and wanted to be present for the visit. Offered any time on 24, 25 or 26 August. Did not provide a further update on the damp or cold concern.",
+      "available_at": "2025-08-11T11:49:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nForwarded the tenant's available dates and asked the contractor to select a slot or propose an alternative. Reiterated that the tenant wanted to be present.",
+      "available_at": "2025-08-11T11:50:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Call from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Call\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nThe contractor said she was attending a funeral and had asked not to be contacted that day. Tamsin apologised and ended the call. No attendance time was agreed.",
+      "available_at": "2025-08-14T12:54:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nFollowed up asking the contractor to arrange the approved work and select from the tenant's proposed dates. No appointment was confirmed.",
+      "available_at": "2025-08-19T13:12:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Sella Vane (Contractor, Clearfirth Glazing)",
+      "text": "Event 018 — Email\nFrom: Sella Vane (Contractor, Clearfirth Glazing)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nSaid the glass had been ordered and she was waiting for it to arrive. Did not provide a delivery estimate or attendance time.",
+      "available_at": "2025-08-24T15:33:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Elowen Marr (Tenant)\n\nAdvised that the glass had been ordered and Northbridge Lettings would be in touch when it arrived to arrange a date.",
+      "available_at": "2025-08-24T15:54:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nAsked when the glass was expected to arrive and when fitting might be possible so the tenant could be updated.",
+      "available_at": "2025-08-27T16:30:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Call from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Call\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Sella Vane (Contractor, Clearfirth Glazing)\n\nThe contractor said the ordered glass had still not arrived and that she could not estimate delivery because of supplier delays. She said she would provide an update when it arrived. No appointment was arranged.",
+      "available_at": "2025-09-02T10:18:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Note from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 022 — Note\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nMoved the case to awaiting post-visit documents without sending messages. The record available at that time contains no appointment confirmation or visit report.",
+      "available_at": "2025-09-09T09:53:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Document from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 023 — Document\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nUploaded an invoice stating: “Supply and fit 1 pane of glass to the kitchen glazing.” The invoice copy in the case does not show an amount.",
+      "available_at": "2025-09-10T09:55:00+00:00"
+    },
+    {
+      "source_label": "Event 024 — Update from Tamsin Rook (Property Manager, Northbridge Lettings)",
+      "text": "Event 024 — Update\nFrom: Tamsin Rook (Property Manager, Northbridge Lettings)\nTo: Tamsin Rook (Property Manager, Northbridge Lettings)\n\nThe invoice was added to the maintenance record.",
+      "available_at": "2025-09-10T10:10:00+00:00"
+    },
+    {
+      "source_label": "Attachment glazing-invoice.pdf (PDF text extraction)",
+      "text": "Attachment: glazing-invoice.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Clearfirth Glazing — Glazing Invoice Copy\nClearfirth Glazing\nInvoice reference: NBL-013-INV-09\nInvoice date: 10 September 2025\nProperty: 8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ\nDescription\nSupply and fit 1 pane of glass to the kitchen glazing.\nAmount: —",
+      "available_at": "2025-09-10T10:10:00+00:00"
+    }
+  ]
+}

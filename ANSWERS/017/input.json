@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "title": "Flat entrance door maintenance request",
+  "property_ref": "14 Lantern Mews, Brindlewick, ZZ1 1ZZ",
+  "as_of": "2025-02-12T16:10:00+00:00",
+  "report_available_at": "2025-02-03T08:20:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Iona Vale (Tenant, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported flaking paint on the flat-side face of the entrance door and said it catches near the top when closing. Door still closes if pulled firmly. No injury or immediate access issue reported.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iona Vale (Tenant, 14 Lantern Mews)\n\nAcknowledged the report and asked whether the door latches without being held, whether there is visible damage to the edge or frame, and whether the concern is limited to the flat-side paint.",
+      "available_at": "2025-02-03T09:05:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Portal from Iona Vale (Tenant, 14 Lantern Mews)",
+      "text": "Event 003 — Portal\nFrom: Iona Vale (Tenant, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed the latch engages after a firm pull. Paint is flaking on the flat-side face; the top edge has a rub mark. Asked that any visit be arranged after 10:00 because of a scheduled home-care visit for a family member.",
+      "available_at": "2025-02-03T10:12:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Dast (Building Manager, Brindlewick Court)\n\nRequested the latest available entrance-door inspection record and any building-specific requirements for work to flat entrance doors.",
+      "available_at": "2025-02-03T11:40:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Ravi Dast (Building Manager, Brindlewick Court)",
+      "text": "Event 005 — Email\nFrom: Ravi Dast (Building Manager, Brindlewick Court)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid the building file lists the flat entrance doors as fire-resisting doors but did not have a current door-by-door inspection sheet to hand. Asked that no drilling or alterations be arranged without checking with building management.",
+      "available_at": "2025-02-04T08:35:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elian Moss (Landlord, 14 Lantern Mews)\n\nSummarized the reported paint deterioration and catching door. Asked for authority to arrange an inspection and explained that the building manager had requested consultation before alterations.",
+      "available_at": "2025-02-04T09:50:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Elian Moss (Landlord, 14 Lantern Mews)",
+      "text": "Event 007 — Email\nFrom: Elian Moss (Landlord, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAuthorized an inspection and requested a price before any chargeable work. Asked whether the issue could be limited to decorating. No spending limit or authority for replacement was specified.",
+      "available_at": "2025-02-04T13:15:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — SMS from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — SMS\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iona Vale (Tenant, 14 Lantern Mews)\n\nOffered an inspection visit on 7 February between 10:30 and 12:00. Asked whether the tenant could provide access during that window.",
+      "available_at": "2025-02-05T10:30:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — SMS from Iona Vale (Tenant, 14 Lantern Mews)",
+      "text": "Event 009 — SMS\nFrom: Iona Vale (Tenant, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed access after 10:30 and asked the visitor not to photograph personal items inside the flat.",
+      "available_at": "2025-02-05T11:02:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Note from Tomas Ebb (Contractor, Pale Finch Decorating)",
+      "text": "Event 010 — Note\nFrom: Tomas Ebb (Contractor, Pale Finch Decorating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAttended to inspect the door surface and operation. Recorded flaking coating on the flat-side face and a rub mark at the upper edge. The leaf contacted the frame at the top during closing; it latched when pulled shut. Did not remove hardware, measure clearances, inspect concealed construction, or test fire performance.",
+      "available_at": "2025-02-07T10:42:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Tomas Ebb (Contractor, Pale Finch Decorating)",
+      "text": "Event 011 — Email\nFrom: Tomas Ebb (Contractor, Pale Finch Decorating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSent a quotation for preparation, sanding, spot filling, and repainting the flat-side face and visible top edge. Said the visit was visual only and did not include door adjustment, hardware work, or a fire-door inspection.",
+      "available_at": "2025-02-07T11:18:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Dast (Building Manager, Brindlewick Court)\n\nAsked whether the building has a current door schedule, inspection findings for this flat, or a preferred process for investigating the top-edge contact. Sent the contractor's stated visual observations.",
+      "available_at": "2025-02-07T14:05:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Ravi Dast (Building Manager, Brindlewick Court)",
+      "text": "Event 013 — Email\nFrom: Ravi Dast (Building Manager, Brindlewick Court)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported that a common-area check last month noted the flat entrance door as closing slowly, but the checker did not record a gap measurement or inspect the door set. No individual report or certification record was available in the building office. Asked to be consulted before any changes to the door or its hardware.",
+      "available_at": "2025-02-10T09:10:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elian Moss (Landlord, 14 Lantern Mews)\n\nUpdated the landlord on the contractor's visual-only visit and the building manager's note that the door had previously been recorded as closing slowly. Explained that the quotation excludes adjustment and hardware work. Requested confirmation of the landlord's preferred next step and whether additional inspection costs may be considered.",
+      "available_at": "2025-02-10T10:25:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Portal from Iona Vale (Tenant, 14 Lantern Mews)",
+      "text": "Event 015 — Portal\nFrom: Iona Vale (Tenant, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid the door has latched on each use since the visit but still needs a firm pull. Asked whether painting would affect the door and requested advance notice before any further access.",
+      "available_at": "2025-02-10T15:40:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Tomas Ebb (Contractor, Pale Finch Decorating)",
+      "text": "Event 016 — Email\nFrom: Tomas Ebb (Contractor, Pale Finch Decorating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed the quotation price remains available through 28 February. Said Pale Finch Decorating's work would be limited to the listed surface preparation and repainting, and that no fire-door survey, certification, adjustment, or hardware replacement is included.",
+      "available_at": "2025-02-11T08:55:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Elian Moss (Landlord, 14 Lantern Mews)",
+      "text": "Event 017 — Email\nFrom: Elian Moss (Landlord, 14 Lantern Mews)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReplied that the quotation appears affordable and asked whether it can be approved from the repair budget. Asked for the proposed scope and any building response to be confirmed before work is booked.",
+      "available_at": "2025-02-11T12:20:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ravi Dast (Building Manager, Brindlewick Court)\n\nForwarded the quotation scope and asked whether surface preparation and painting of the flat-side face and top edge require building approval or any specified materials or procedure. Requested any inspection or door-record information relevant to the observed contact and slow closing.",
+      "available_at": "2025-02-12T09:30:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elian Moss (Landlord, 14 Lantern Mews)\n\nQuotation, tenant access preference, contractor's visual-only observations, and building manager's limited check information are on file. Building manager's response to the scope query is pending. No work has been booked.",
+      "available_at": "2025-02-12T16:10:00+00:00"
+    },
+    {
+      "source_label": "Attachment fire-door-quotation.pdf (PDF text extraction)",
+      "text": "Attachment: fire-door-quotation.pdf\nExtracted text (pypdf; layout not preserved):\n\nCONTRACTOR QUOTATION Quotation: Flat Entrance Door Surface\nPreparation and Painting\nPale Finch Decorating\nQuotation reference: NBL-017-Q1\nDate: 7 February 2025\nValid until: 28 February 2025\nSite: 14 Lantern Mews, Brindlewick, ZZ1 1ZZ\nPrepared for: Northbridge Lettings\nProposed work\nProtect the immediate work area on the flat side of the entrance door.\nLightly sand loose coating on the flat-side face and visible top edge.\nSpot-fill minor surface marks and apply one undercoat and two finish coats of water-\nbased interior paint to those areas.\nRemove work-area protection and leave the area tidy.\nQuotation total: £186.00, including materials and labour.\nAssumptions and exclusions\nPrice assumes access during one visit and a sound, dry surface beneath the loose coating.\nAny additional substrate damage or preparation will be priced separately before proceeding.\nThis quotation covers surface preparation and decorative painting only. It excludes\nadjustment of the door, frame or hinges; removal or replacement of hardware; alterations to\nthe door, frame, seals or threshold; and investigation of the door's construction or closing\nperformance.\nNo door-set inspection, fire-performance test, certification, compliance assessment, or fire-\nsafety opinion is included. No statement is made about the door's rating or suitability for any\nfire-safety purpose.\nWork is subject to access being arranged by the client. No work has been scheduled.",
+      "available_at": "2025-02-12T16:10:00+00:00"
+    }
+  ]
+}

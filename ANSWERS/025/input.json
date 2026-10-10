@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "title": "Kitchen tap maintenance request",
+  "property_ref": "18 Thistlewick Row, Fenmere, ZZ1 1ZZ",
+  "as_of": "2025-09-15T11:11:18+00:00",
+  "report_available_at": "2025-08-04T18:10:50+00:00",
+  "report": "Event 001 — Portal\nFrom: Nia Calder (Tenant)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nReports a constantly dripping kitchen mixer tap and cloudy-looking water when filling a glass. Says limescale may be involved and asks whether a replacement tap could be considered. No urgency or access constraints are reported.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Orin Bell (Landlord)\n\nRequests approval to arrange plumbing work for the dripping tap and passes on the tenant's cloudy-water concern. Notes that limescale is the tenant's suspicion, not a confirmed cause.",
+      "available_at": "2025-08-05T07:33:17+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Orin Bell (Landlord)",
+      "text": "Event 003 — Email\nFrom: Orin Bell (Landlord)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nApproves proceeding with the maintenance works. Says they are abroad until the following Wednesday and email is the best way to contact them.",
+      "available_at": "2025-08-05T08:52:24+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nRequests a quote or advice on whether a site visit is needed for the dripping mixer tap and cloudy-water report. No water sample or test result is available.",
+      "available_at": "2025-08-05T09:30:38+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nFollows up for a quote or confirmation that an inspection is needed. No response to the initial enquiry is recorded.",
+      "available_at": "2025-08-06T09:30:26+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Tenant)\n\nExplains that the contractor needs to attend to assess the plumbing work and asks for availability.",
+      "available_at": "2025-08-07T09:54:37+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Nia Calder (Tenant)",
+      "text": "Event 007 — Email\nFrom: Nia Calder (Tenant)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nOffers 11, 13 and 14 August, all day, for an appointment.",
+      "available_at": "2025-08-07T12:01:14+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nForwards the tenant's offered dates and asks the contractor to select a slot or propose an alternative.",
+      "available_at": "2025-08-07T13:05:43+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Nia Calder (Tenant)\n\nAsks for further availability because the contractor has not selected a date.",
+      "available_at": "2025-08-12T12:41:48+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Nia Calder (Tenant)",
+      "text": "Event 010 — Email\nFrom: Nia Calder (Tenant)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nSays they are home every day the following week except Monday.",
+      "available_at": "2025-08-12T18:55:02+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nForwards the tenant's updated availability and requests a visit slot.",
+      "available_at": "2025-08-12T18:56:42+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Nia Calder (Tenant)",
+      "text": "Event 012 — Email\nFrom: Nia Calder (Tenant)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nSays they are still waiting for contact about the leaking tap despite providing availability. Separately reports the top kitchen drawer is loose and its metal front brackets appear snapped; asks if it can be repaired when someone attends.",
+      "available_at": "2025-09-05T19:40:02+00:00"
+    },
+    {
+      "source_label": "Event 013 — Call from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Call\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nThe contractor says other jobs prevent a firm date, but expects to review the schedule later that day and book the visit during the week. There is some confusion about the property address, which the manager repeats. No specific appointment is agreed.",
+      "available_at": "2025-09-07T09:50:37+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)",
+      "text": "Event 014 — Email\nFrom: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nOffers the following afternoon and asks whether the tenant will be available.",
+      "available_at": "2025-09-09T08:02:07+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Nia Calder (Tenant)",
+      "text": "Event 015 — Email\nFrom: Nia Calder (Tenant)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nSays they will be at work from 11:00 the next day and authorizes the plumber to attend using the agency's spare key. The message does not address the drawer or provide new information about the cloudy water.",
+      "available_at": "2025-09-09T16:39:08+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nConfirms a visit for 10 September, with timing potentially varying because the contractor needs to collect keys from the office.",
+      "available_at": "2025-09-09T17:09:49+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)",
+      "text": "Event 017 — Email\nFrom: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nSays confirmation after 18:00 the previous evening is too late for scheduling and that they will try to accommodate the visit. Requests earlier confirmation for future bookings.",
+      "available_at": "2025-09-10T06:06:05+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nApologizes for the late notice. Says the contractor may move the visit if unable to attend and can collect keys from the agency office. Requests an update on the date chosen.",
+      "available_at": "2025-09-10T10:51:20+00:00"
+    },
+    {
+      "source_label": "Event 019 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)",
+      "text": "Event 019 — Document\nFrom: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nAn invoice describes a new mono kitchen sink tap supplied and installed. The invoice postcode differs from the property's recorded postcode, so it is queried.",
+      "available_at": "2025-09-15T10:03:43+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nRequests a corrected invoice showing the property's recorded postcode and asks the contractor to check whether any other invoice details need correction.",
+      "available_at": "2025-09-15T11:03:41+00:00"
+    },
+    {
+      "source_label": "Event 021 — Call from Tessa Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Call\nFrom: Tessa Wren (Property Manager, Northbridge Lettings)\nTo: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\n\nThe contractor agrees to amend the postcode and resend the invoice. The conversation briefly turns to a separate boiler matter; the manager says they will check with the relevant engineer what work was done. No boiler work is documented as part of this tap job.",
+      "available_at": "2025-09-15T11:05:47+00:00"
+    },
+    {
+      "source_label": "Event 022 — Document from Ivo Fenlock (Contractor, Bracken & Vale Plumbing)",
+      "text": "Event 022 — Document\nFrom: Ivo Fenlock (Contractor, Bracken & Vale Plumbing)\nTo: Tessa Wren (Property Manager, Northbridge Lettings)\n\nThe corrected invoice shows the property's recorded postcode and describes a new mono kitchen sink tap supplied and installed. The invoice is awaiting operator review.",
+      "available_at": "2025-09-15T11:11:18+00:00"
+    },
+    {
+      "source_label": "Attachment corrected-plumbing-invoice.pdf (PDF text extraction)",
+      "text": "Attachment: corrected-plumbing-invoice.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Bracken & Vale Plumbing — Corrected Invoice\nBracken & Vale Plumbing\nInvoice reference: NBL-025-INV-15\nCorrected: 15 September 2025\nProperty: 18 Thistlewick Row, Fenmere, ZZ1 1ZZ\nWork invoiced\nSupply and install one new mono kitchen sink tap.\nCorrection note: Property postcode amended.",
+      "available_at": "2025-09-15T11:11:18+00:00"
+    }
+  ]
+}

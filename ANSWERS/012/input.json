@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Lock Maintenance Request",
+  "property_ref": "Unit 2, 18 Brindlewick Mews, Orellin ZZ1 1ZZ",
+  "as_of": "2025-09-25T12:06:33+00:00",
+  "report_available_at": "2025-09-04T08:08:44+00:00",
+  "report": "Event 001 — Portal\nFrom: Perrin Dall (Tenant, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nReports that the bathroom window will not open, the bedroom window opens but will not secure, and keys are missing.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Sella Marr (Landlord, Northbridge Lettings)\n\nSummarises the reported lock problems and requests permission to arrange work using a Northbridge Lettings service provider. No cost estimate or spending limit is included.",
+      "available_at": "2025-09-04T09:14:23+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Sella Marr (Landlord, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Sella Marr (Landlord, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nAuthorises Northbridge Lettings to proceed with its own service provider for the lock work. No spending limit or detailed scope is stated.",
+      "available_at": "2025-09-04T10:22:19+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nRequests clarification, asking whether the issue might concern locks on opening sashes rather than internal room doors.",
+      "available_at": "2025-09-04T14:29:18+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nRequests availability for a provider visit to inspect the reported lock problems.",
+      "available_at": "2025-09-09T15:32:14+00:00"
+    },
+    {
+      "source_label": "Event 006 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Call\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nPerrin clarifies that the issue is with opening-sash locks: the bedroom sash opens but will not lock; the bathroom sash is stuck and its locking buttons stick; and the kitchen sash works but has no key. Perrin wants working locks and keys, and mentions mould appearing in the bathroom. Perrin says tradespeople can access the property, but does not specify a key handover arrangement.",
+      "available_at": "2025-09-09T15:35:28+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nFollows up for availability so a provider visit can be arranged.",
+      "available_at": "2025-09-10T15:32:09+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Perrin Dall (Tenant, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Perrin Dall (Tenant, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nSays the provider may attend at any time and asks that management keys be used because Perrin will likely be at work.",
+      "available_at": "2025-09-11T09:10:18+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Tarin Vale (Contractor, Hearthline Access)\n\nPasses on the reported lock issues and Perrin’s broad availability and request for management-key access. Asks Tarin to propose a specific visit time.",
+      "available_at": "2025-09-11T09:11:04+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Tarin Vale (Contractor, Hearthline Access)",
+      "text": "Event 010 — Call\nFrom: Tarin Vale (Contractor, Hearthline Access)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nLeaves a voicemail asking Perrin to call back to arrange a visit. No appointment is agreed in the message.",
+      "available_at": "2025-09-11T09:58:33+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Tarin Vale (Contractor, Hearthline Access)\n\nConfirms Perrin has broad scheduling flexibility and asks Tarin to provide a date and time for collecting management keys and attending.",
+      "available_at": "2025-09-11T12:00:35+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Tarin Vale (Contractor, Hearthline Access)\n\nAdvises Tarin that the job has been reassigned and asks Tarin not to attend.",
+      "available_at": "2025-09-11T15:05:35+00:00"
+    },
+    {
+      "source_label": "Event 013 — Update from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Update\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nRecords that the service provider was changed.",
+      "available_at": "2025-09-11T15:05:39+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Perrin Dall (Tenant, Northbridge Lettings)\n\nRequests availability again for the new provider’s visit and notes that management keys may be used if Perrin is out.",
+      "available_at": "2025-09-11T15:05:50+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Sella Marr (Landlord, Northbridge Lettings)\n\nAdvises Sella that the provider has changed and arrangements for a visit are underway.",
+      "available_at": "2025-09-11T15:05:54+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Tarin Vale (Contractor, Hearthline Access)",
+      "text": "Event 016 — Email\nFrom: Tarin Vale (Contractor, Hearthline Access)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nSays Tarin spoke with Perrin and that Perrin was happy with a date and time they discussed. Tarin asks why the job was removed, but gives no date, time, or written appointment confirmation.",
+      "available_at": "2025-09-11T15:28:21+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Perrin Dall (Tenant, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Perrin Dall (Tenant, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nOffers Thursday 18 September between 08:30 and 10:30 as a possible visit time. No confirmed appointment is recorded.",
+      "available_at": "2025-09-11T15:37:29+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nPasses on Perrin’s Thursday 08:30–10:30 availability and asks Edrin to confirm a visit time.",
+      "available_at": "2025-09-11T15:38:12+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Perrin Dall (Tenant, Northbridge Lettings)",
+      "text": "Event 019 — Email\nFrom: Perrin Dall (Tenant, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nAsks whether management keys can be supplied because Perrin will be at work.",
+      "available_at": "2025-09-14T04:57:12+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nForwards Perrin’s request about management keys and asks Edrin to confirm a visit time.",
+      "available_at": "2025-09-14T04:58:07+00:00"
+    },
+    {
+      "source_label": "Event 021 — Email from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Email\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nFollows up because no firm visit time is recorded, reiterating Perrin’s availability and request for key access.",
+      "available_at": "2025-09-15T08:01:36+00:00"
+    },
+    {
+      "source_label": "Event 022 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 022 — Call\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nEdrin says they have tried the property three times but have not found Perrin in. Edrin says they have not collected management keys and cannot give a definite date for doing so. No dates or times for the attempts are provided. Perrin’s messages say they are likely to be at work and request management-key access.",
+      "available_at": "2025-09-17T09:45:57+00:00"
+    },
+    {
+      "source_label": "Event 023 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 023 — Call\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nAsked about availability, Edrin says the work was completed on Friday, 19 September, and that invoices are produced on Fridays. Ilyra says no invoice is visible. Edrin says they will check and send it on Friday, 26 September. No visit details, work description, or completion record are provided during the call.",
+      "available_at": "2025-09-22T10:07:54+00:00"
+    },
+    {
+      "source_label": "Event 024 — Note from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 024 — Note\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Ilyra Venn (Property Manager, Northbridge Lettings)\n\nRecords Edrin’s verbal statement that the work was completed and that an invoice is expected on Friday. The file still contains no confirmed appointment, attendance record, or invoice.",
+      "available_at": "2025-09-24T09:42:09+00:00"
+    },
+    {
+      "source_label": "Event 025 — Call from Ilyra Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 025 — Call\nFrom: Ilyra Venn (Property Manager, Northbridge Lettings)\nTo: Edrin Moss (Contractor, Keypath Repairs)\n\nIlyra follows up about the invoice. Edrin says the work is complete and promises to send the invoice later today. At the time of the call, no invoice, confirmed appointment, visit notes, or other attendance evidence is recorded.",
+      "available_at": "2025-09-25T12:06:33+00:00"
+    }
+  ]
+}

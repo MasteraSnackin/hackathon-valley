@@ -1,0 +1,7 @@
+{
+  "status": "interrupted",
+  "execution": "see_partial_evidence",
+  "sources_processed": 11,
+  "error": "Batch runner process was stopped when the operator's agent session ended, after 11 of 20 sources had settled. The runner itself recorded no result for this case; this status was written afterwards by the operator to mark the interruption. Partial evidence up to checkpoint-010 is preserved; nothing after that was processed.",
+  "finished_at": "2026-10-10T16:08:41.611071+00:00"
+}

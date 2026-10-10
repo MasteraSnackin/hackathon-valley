@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "Solar generation readings",
+  "property_ref": "14 Brindlefern Walk, Larkmere, ZZ1 1ZZ",
+  "as_of": "2025-09-18T17:42:00+00:00",
+  "report_available_at": "2025-09-03T09:10:00+00:00",
+  "report": "Event 001 — Call\nFrom: Edwin Vale (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nEdwin requested the property's current solar generation readings. He did not describe a fault, give a deadline, or request a contractor visit.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nLogged as a maintenance request based on the landlord's call. No meter type, access arrangement, urgency, or supporting photo was recorded.",
+      "available_at": "2025-09-03T09:26:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 003 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nWorkflow prompt says landlord approval is needed before arranging work. Request notes only ask for readings; no repair or visit is specified.",
+      "available_at": "2025-09-03T09:31:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Northbridge Lettings workflow (System)",
+      "text": "Event 004 — Email\nFrom: Northbridge Lettings workflow (System)\nTo: Ivo Mercer (Tenant)\n\nAutomated message advised that landlord approval was being sought before works could be arranged, and invited the tenant to provide further information.",
+      "available_at": "2025-09-03T09:44:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nMaya recorded that Edwin had already requested the readings and selected the approved-by-landlord status. No separate approval message or repair scope was attached.",
+      "available_at": "2025-09-03T11:18:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Mercer (Tenant)\n\nMaya said Edwin wanted the current solar reading and asked Ivo to check the generation meter or inverter display and reply with the kWh figure; a screen photo was offered as an alternative.",
+      "available_at": "2025-09-03T11:36:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nMaya noted that this appeared to be an information request rather than maintenance and moved it to manual handling. No contractor was selected.",
+      "available_at": "2025-09-03T13:05:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nSet a three-business-day follow-up for a tenant response.",
+      "available_at": "2025-09-03T13:20:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 009 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nThe follow-up period expired. No tenant reply was visible in this request's correspondence.",
+      "available_at": "2025-09-08T10:15:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Mercer (Tenant)\n\nMaya followed up, repeating the request for the current generation reading or a photo of the meter/inverter display.",
+      "available_at": "2025-09-09T09:40:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nRecorded that the team was waiting a further three business days for the tenant's response.",
+      "available_at": "2025-09-09T09:52:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 012 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nThe follow-up period expired; no reply was visible against this request.",
+      "available_at": "2025-09-14T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Mercer (Tenant)\n\nMaya again asked for the current reading or a meter/inverter photo, explaining that Edwin had requested it.",
+      "available_at": "2025-09-14T10:35:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — SMS from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — SMS\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Mercer (Tenant)\n\nShort message said an email had been sent about the landlord's request for the solar readings.",
+      "available_at": "2025-09-14T10:38:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 015 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nFollow-up elapsed with no reply visible in the request. The diary note named the tenant as the expected respondent.",
+      "available_at": "2025-09-17T10:40:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Mercer (Tenant)\n\nMaya sent another follow-up requesting the current generation reading or a photo; a text message also referred the tenant to the email.",
+      "available_at": "2025-09-18T14:42:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Ivo Mercer (Tenant)",
+      "text": "Event 017 — Email\nFrom: Ivo Mercer (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nIvo replied that the readings had already been supplied about two weeks earlier, and said his wife had phoned the office and emailed them. He did not include the figures or an image in this reply.",
+      "available_at": "2025-09-18T17:42:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "settled",
+  "system_case_id": "8f694f83c9f04e6b85b0f4220f1838a6",
+  "execution": "native_local",
+  "external_operations": "simulated",
+  "sources_processed": 25,
+  "finished_at": "2026-10-10T16:04:09.146478+00:00",
+  "model_failure_count": 0,
+  "routing_fallback_count": 0,
+  "routing_fallback_errors": []
+}

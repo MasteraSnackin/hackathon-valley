@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "title": "Washer-dryer maintenance and replacement update",
+  "property_ref": "8 Brackenmere Walk, Vellumford, ZZ1 1ZZ",
+  "as_of": "2025-09-25T09:08:19+00:00",
+  "report_available_at": "2025-08-20T16:32:01+00:00",
+  "report": "Event 001 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nAcknowledged the report and said the landlord's approval would be sought before arranging work.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nAsked the tenant to provide the appliance brand, model, E-number and serial number shown on its identification label.",
+      "available_at": "2025-08-24T14:28:47+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Ari Dalen (Tenant)",
+      "text": "Event 003 — Email\nFrom: Ari Dalen (Tenant)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nReplied without the requested appliance identification details.",
+      "available_at": "2025-08-24T15:59:13+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Nessa Orin (Landlord)",
+      "text": "Event 004 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid they would contact their insurer to sort out the appliance.",
+      "available_at": "2025-08-24T18:23:15+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Nessa Orin (Landlord)",
+      "text": "Event 005 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nAsked whether the tenant could still use the machine despite the error, saying this information was requested while arranging an engineer.",
+      "available_at": "2025-08-25T06:59:14+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nAsked whether the machine remained usable or was completely out of service.",
+      "available_at": "2025-08-25T09:06:03+00:00"
+    },
+    {
+      "source_label": "Event 007 — Call from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Call\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nThe tenant confirmed the machine was unusable and the error appeared when they tried to operate it. They asked for a prompt resolution and said the household had laundry waiting.",
+      "available_at": "2025-08-26T11:43:44+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Nessa Orin (Landlord)",
+      "text": "Event 008 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid they would inform the engineer and asked about a preferred attendance time.",
+      "available_at": "2025-08-26T12:01:16+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Orin (Landlord)\n\nSaid the tenant worked from home and could accommodate a visit on any day, asking for a specific day and morning or afternoon window once available.",
+      "available_at": "2025-08-26T12:18:07+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Nessa Orin (Landlord)",
+      "text": "Event 010 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nReported that the insurer had approved a repair and asked Northbridge Lettings to contact the insurer or repair provider to arrange it. The landlord said they were abroad and unable to make the arrangements themselves.",
+      "available_at": "2025-08-27T10:33:31+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nTold the tenant that the landlord had authorized a repair through the manufacturer's service arrangement and instructed the tenant to contact the manufacturer's service desk directly to book a convenient engineer visit. The message said the appliance identification details, including its model and serial information, might be required and should be available when calling.",
+      "available_at": "2025-08-27T11:23:40+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nSaid Northbridge Lettings was preparing to schedule an inspection and requested possible appointment windows and the appliance identification details.",
+      "available_at": "2025-09-02T09:37:05+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Ari Dalen (Tenant)",
+      "text": "Event 013 — Email\nFrom: Ari Dalen (Tenant)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid someone was generally home but requested at least three hours' notice. The tenant expressed frustration with the delay and described doing laundry by hand. The requested appliance identification details were not included.",
+      "available_at": "2025-09-03T09:01:26+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Orin (Landlord)\n\nReported that the repair provider could not find the relevant account or order under the landlord's name and asked for the purchase name, email, or order reference.",
+      "available_at": "2025-09-03T14:28:03+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Nessa Orin (Landlord)",
+      "text": "Event 015 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid the repair provider would not book without the appliance's E-number and serial number, and asked Northbridge Lettings to obtain those details from the tenant.",
+      "available_at": "2025-09-04T08:12:19+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Nessa Orin (Landlord)",
+      "text": "Event 016 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid the appliance identification details requested in the previous email had not arrived.",
+      "available_at": "2025-09-04T13:41:17+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Orin (Landlord)\n\nSupplied the appliance identification details in the body of the email. No booking confirmation was included.",
+      "available_at": "2025-09-04T15:23:23+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Nessa Orin (Landlord)",
+      "text": "Event 018 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nReported that an engineer had been booked for 9 September between 12:00 and 17:00. The landlord said the engineer would call before arrival and that they would pass on notice. No booking confirmation was included.",
+      "available_at": "2025-09-05T10:35:11+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nPassed on the reported 9 September appointment window and asked that someone be available for access.",
+      "available_at": "2025-09-07T09:33:09+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Ari Dalen (Tenant)",
+      "text": "Event 020 — Email\nFrom: Ari Dalen (Tenant)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nAcknowledged the appointment details with a brief thank-you.",
+      "available_at": "2025-09-07T09:42:24+00:00"
+    },
+    {
+      "source_label": "Event 021 — Email from Nessa Orin (Landlord)",
+      "text": "Event 021 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid the engineer had called and would be at the property within about 20 minutes to fix the machine. This is an expected visit, not confirmation of an inspection or repair outcome.",
+      "available_at": "2025-09-09T12:29:19+00:00"
+    },
+    {
+      "source_label": "Event 022 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 022 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nAsked whether the engineer had attended and whether the appliance was working.",
+      "available_at": "2025-09-10T12:49:22+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Nessa Orin (Landlord)",
+      "text": "Event 023 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid a replacement washing machine was needed and asked whether a unit described as 825 cm high would fit; the previous machine was described as 820 cm.",
+      "available_at": "2025-09-14T08:10:17+00:00"
+    },
+    {
+      "source_label": "Event 024 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 024 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nAsked the tenant to measure the available space in millimetres and note any other fitting constraints, referring to the proposed unit height as 825 mm.",
+      "available_at": "2025-09-14T11:28:38+00:00"
+    },
+    {
+      "source_label": "Event 025 — Email from Ari Dalen (Tenant)",
+      "text": "Event 025 — Email\nFrom: Ari Dalen (Tenant)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nEstimated the available height at about 835 mm and said an 825 mm unit should fit. The tenant described the existing appliance as integrated and fixed to the cabinet door; the rear connections could not be checked without moving it.",
+      "available_at": "2025-09-16T07:52:20+00:00"
+    },
+    {
+      "source_label": "Event 026 — Email from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 026 — Email\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Orin (Landlord)\n\nPassed on the tenant's approximate 835 mm measurement and the integrated-unit constraint, noting that rear connections had not been inspected. Asked how the landlord wished to proceed with ordering and installation.",
+      "available_at": "2025-09-16T09:09:49+00:00"
+    },
+    {
+      "source_label": "Event 027 — Email from Nessa Orin (Landlord)",
+      "text": "Event 027 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid a new washing machine had been ordered, with delivery timing to follow. The landlord said installers would fit it and take the old unit away for disposal.",
+      "available_at": "2025-09-19T08:42:18+00:00"
+    },
+    {
+      "source_label": "Event 028 — Note from Nessa Orin (Landlord)",
+      "text": "Event 028 — Note\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nRequested a quote for removal and replacement of the washing machine.",
+      "available_at": "2025-09-21T11:46:56+00:00"
+    },
+    {
+      "source_label": "Event 029 — Email from Nessa Orin (Landlord)",
+      "text": "Event 029 — Email\nFrom: Nessa Orin (Landlord)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nSaid they had sorted it and arranged delivery, setup, and disposal of the old machine. They complained that the response had taken too long. No delivery or installation date was provided.",
+      "available_at": "2025-09-21T14:29:33+00:00"
+    },
+    {
+      "source_label": "Event 030 — Call from Mara Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 030 — Call\nFrom: Mara Venn (Property Manager, Northbridge Lettings)\nTo: Ari Dalen (Tenant)\n\nWhen asked about delivery, the tenant said no replacement had arrived and there was no packaging at the property.",
+      "available_at": "2025-09-24T15:57:39+00:00"
+    },
+    {
+      "source_label": "Event 031 — Email from Ari Dalen (Tenant)",
+      "text": "Event 031 — Email\nFrom: Ari Dalen (Tenant)\nTo: Mara Venn (Property Manager, Northbridge Lettings)\n\nReplied to a maintenance follow-up: “Yes, the job is completed.” In the same message, said they had received another email about a planned washing-machine change and asked whether it was still happening.",
+      "available_at": "2025-09-25T09:08:19+00:00"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Heating maintenance at 7 Larkspur Fold",
+  "property_ref": "7 Larkspur Fold, Orvane Heath, ZZ1 1ZZ",
+  "as_of": "2025-02-12T16:35:00+00:00",
+  "report_available_at": "2025-02-03T08:14:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Tessa Vane (Tenant)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nReported that radiator heating had cut out twice since the previous evening while hot water remained available. A child lives at the property. Asked for an inspection.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Update from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Update\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Tessa Vane (Tenant)\n\nAcknowledged the report and asked about leaks, unusual smells, boiler warnings and access times. No entry arrangement was yet confirmed.",
+      "available_at": "2025-02-03T08:41:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Portal from Tessa Vane (Tenant)",
+      "text": "Event 003 — Portal\nFrom: Tessa Vane (Tenant)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nConfirmed no visible leak, unusual smell or current warning light. The boiler had shown a brief symbol the previous night, but she did not identify it. She can provide access after 14:00 on weekdays.",
+      "available_at": "2025-02-03T09:12:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Soren Dallow (Landlord)\n\nRequested approval for a diagnostic visit. Noted that the agency's routine repair limit is £180 including VAT and that work above that limit needs landlord approval.",
+      "available_at": "2025-02-03T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Soren Dallow (Landlord)",
+      "text": "Event 005 — Email\nFrom: Soren Dallow (Landlord)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nAuthorized diagnosis up to £180 including VAT only. Asked to be consulted before any remedial work or additional expenditure is authorized.",
+      "available_at": "2025-02-03T12:22:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Petra Quill (Contractor, Copper Finch Mechanical)\n\nRequested diagnosis of intermittent radiator heating, a written report and an itemized estimate before work beyond diagnosis. Confirmed access after 14:00 and the diagnostic-only authorization ceiling of £180 including VAT.",
+      "available_at": "2025-02-04T09:18:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 007 — Email\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nConfirmed attendance for 5 February after 14:00. Quoted £138 including VAT for attendance, diagnosis and testing; parts and remedial work were excluded.",
+      "available_at": "2025-02-04T10:03:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Update from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 008 — Update\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nReported attending and finding an intermittent fault at the heating valve actuator. Said the heating operated during the visit and that no leak or immediate gas-safety concern was observed. No remedial work was reported in this update.",
+      "available_at": "2025-02-05T14:32:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 009 — Email\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nSent an estimate for £372 including VAT for actuator supply and replacement, attendance and heating-system testing. Requested written authorization before proceeding. The estimate did not say whether the £138 diagnostic charge would be credited.",
+      "available_at": "2025-02-05T14:54:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Soren Dallow (Landlord)\n\nForwarded the estimate and asked whether the proposed work was authorized. Noted that it exceeded the routine limit and that the contractor had been told to obtain written authorization before remedial work.",
+      "available_at": "2025-02-05T15:21:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — SMS from Tessa Vane (Tenant)",
+      "text": "Event 011 — SMS\nFrom: Tessa Vane (Tenant)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nReported that the radiators were cold again. She was using one portable heater in the sitting room and said it was plugged directly into a wall socket. No new smell, leak or warning was reported.",
+      "available_at": "2025-02-06T07:56:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Soren Dallow (Landlord)",
+      "text": "Event 012 — Email\nFrom: Soren Dallow (Landlord)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nHad not decided on the estimate. Asked whether the actuator could be repaired and whether the price included all parts, labour and testing. Did not authorize remedial work or further expenditure.",
+      "available_at": "2025-02-06T10:38:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Portal from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Portal\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Tessa Vane (Tenant)\n\nAsked whether heating or safety symptoms had changed, whether the equipment-label details were available, and whether the contractor could be given access if a return visit were arranged.",
+      "available_at": "2025-02-06T13:17:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Portal from Tessa Vane (Tenant)",
+      "text": "Event 014 — Portal\nFrom: Tessa Vane (Tenant)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nSaid the radiators were still inconsistent and repeated that hot water was available. Supplied the boiler-label details in the message. She had not agreed a return appointment.",
+      "available_at": "2025-02-06T14:06:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Petra Quill (Contractor, Copper Finch Mechanical)\n\nAsked for a repair alternative, confirmation of parts availability, a breakdown of the estimate and clarification of whether diagnosis would be credited. Repeated that no further work was authorized.",
+      "available_at": "2025-02-07T09:24:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 016 — Email\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nReplied that parts availability and estimate details still needed checking. Did not confirm a repair option, a credit, a return visit or completion of actuator work.",
+      "available_at": "2025-02-07T13:47:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 017 — Email\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nSent two invoice records dated 10 February and said they had been prepared from the job paperwork. The message did not say whether one replaced the other, whether both amounts were payable, or whether either had been paid. Invoice B describes actuator work as completed and gives a service date of 5 February, but Petra did not attach a signed completion record or explain how that claim relates to the estimate sent later on 5 February and the 7 February parts check.",
+      "available_at": "2025-02-10T09:52:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Document from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 018 — Document\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nThe received invoice records list £138 for attendance, diagnosis, actuator inspection and an operational test, and £372 for actuator supply/replacement, attendance, diagnosis and heating-system testing. Both records identify 5 February as the service date. The second record's wider description includes activities also listed on the first; neither record states whether the other is credited, cancelled or superseded.",
+      "available_at": "2025-02-10T10:26:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Note from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Note\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nCompared the received records with the file: the landlord's written authority covers diagnosis only; the £372 estimate requesting authorization was sent after the stated service date; and the 7 February exchange still had parts and estimate details outstanding. The file contains no written authorization for actuator replacement and no return-visit or completion entry.",
+      "available_at": "2025-02-10T11:11:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Portal from Tessa Vane (Tenant)",
+      "text": "Event 020 — Portal\nFrom: Tessa Vane (Tenant)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nSaid she recalled the 5 February visit but did not know whether the actuator had been replaced. She had not seen a contractor at the property since that visit. Heating was currently working intermittently, with one radiator cooler than the others.",
+      "available_at": "2025-02-10T15:08:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Petra Quill (Contractor, Copper Finch Mechanical)\n\nAsked what work was actually completed and on what date, whether both invoice records remained current, whether either superseded the other, and how the overlapping charges were treated. Requested the job notes, any parts record and any authorization or attendance evidence for actuator work.",
+      "available_at": "2025-02-11T09:16:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Email from Petra Quill (Contractor, Copper Finch Mechanical)",
+      "text": "Event 022 — Email\nFrom: Petra Quill (Contractor, Copper Finch Mechanical)\nTo: Ivo Merrick (Property Manager, Northbridge Lettings)\n\nReplied that she was checking the records and could not yet confirm whether the invoice entries represented separate chargeable work or whether one record replaced the other. She supplied no further completion evidence, revised invoice or parts confirmation.",
+      "available_at": "2025-02-12T11:42:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Ivo Merrick (Property Manager, Northbridge Lettings)",
+      "text": "Event 023 — Email\nFrom: Ivo Merrick (Property Manager, Northbridge Lettings)\nTo: Soren Dallow (Landlord)\n\nThe two invoice records remain on file; there is no recorded payment, confirmed supersession or authorization for actuator work. The tenant reports intermittent heating and has not confirmed replacement. Please advise how you wish to proceed on the unresolved records and whether any further work or expenditure is authorized.",
+      "available_at": "2025-02-12T16:35:00+00:00"
+    },
+    {
+      "source_label": "Attachment invoice-NBL-CFM-250210-A.pdf (PDF text extraction)",
+      "text": "Attachment: invoice-NBL-CFM-250210-A.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Copper Finch Mechanical — Invoice NBL-CFM-\n250210-A\nCopper Finch Mechanical\nInvoice reference: NBL-CFM-250210-A\nInvoice date: 10 February 2025\nCustomer: Northbridge Lettings\nService address: 7 Larkspur Fold, Orvane Heath, ZZ1 1ZZ\nService date: 5 February 2025\nWork invoiced\nAttendance, fault diagnosis, heating valve actuator inspection and operational test.\nTotal including VAT: £138.00\nPayment terms: 14 days",
+      "available_at": "2025-02-12T16:35:00+00:00"
+    },
+    {
+      "source_label": "Attachment invoice-NBL-CFM-250210-B.pdf (PDF text extraction)",
+      "text": "Attachment: invoice-NBL-CFM-250210-B.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Copper Finch Mechanical — Invoice NBL-CFM-\n250210-B\nCopper Finch Mechanical\nInvoice reference: NBL-CFM-250210-B\nInvoice date: 10 February 2025\nCustomer: Northbridge Lettings\nService address: 7 Larkspur Fold, Orvane Heath, ZZ1 1ZZ\nService date: 5 February 2025\nWork invoiced\nHeating valve actuator supply and replacement, attendance, fault diagnosis and heating-\nsystem testing.\nTotal including VAT: £372.00\nPayment terms: 14 days",
+      "available_at": "2025-02-12T16:35:00+00:00"
+    }
+  ]
+}

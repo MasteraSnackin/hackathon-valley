@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "Kitchen maintenance report",
+  "property_ref": "14 Mosswold Crescent, Brindlewick, ZZ1 1ZZ",
+  "as_of": "2025-09-11T14:30:00+00:00",
+  "report_available_at": "2025-08-14T11:05:29+00:00",
+  "report": "Event 001 — Portal\nFrom: Elise Rowan (Tenant)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nReports rats outside near the kitchen and says they have entered the kitchen, including beneath the sink, after the household returned from four days away. Says the landlord previously arranged baiting, which reduced activity for a time. The pest controller reportedly mentioned openings outside near the drains and said a report would follow. Tenant asks for prompt attention and says they are not comfortable living with rats indoors. A small dog lives at the property; the tenant reports no access restrictions.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nAcknowledges the report and says the landlord will be contacted about approval before works are arranged. Invites the tenant to provide any further relevant details.",
+      "available_at": "2025-08-14T11:20:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Gareth Vale (Landlord)\n\nRequests confirmation on how to proceed with the reported rat activity and possible openings by the kitchen drain. Relays the tenant's account of previous baiting and the pest controller's reported offer to provide a written report. Asks whether the landlord approves Northbridge Lettings arranging works or would prefer to use his own contractor.",
+      "available_at": "2025-08-17T12:36:24+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Gareth Vale (Landlord)",
+      "text": "Event 004 — Email\nFrom: Gareth Vale (Landlord)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nAsks for an urgent call back and provides 07700 900184. Does not give written approval or specify whether he will arrange the work himself.",
+      "available_at": "2025-08-17T15:25:13+00:00"
+    },
+    {
+      "source_label": "Event 005 — Call from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Call\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Gareth Vale (Landlord)\n\nLeaves a voicemail asking the landlord to call back about the tenant's report and confirm whether he wants to use his own pest contractor or have Northbridge Lettings arrange an inspection.",
+      "available_at": "2025-08-18T10:05:55+00:00"
+    },
+    {
+      "source_label": "Event 006 — Call from Gareth Vale (Landlord)",
+      "text": "Event 006 — Call\nFrom: Gareth Vale (Landlord)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nDiscusses an earlier property record that he recalls from December 2024: traps had been placed inside and outside, a kitchen kickboard was replaced during investigation, and the record reportedly said filling the external openings might not be feasible. He is unsure why. He also recalls a separate pest contractor having been used previously. No current written pest report, diagnosis, cost, or confirmed entry route is provided during the call.",
+      "available_at": "2025-08-18T10:49:07+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Gareth Vale (Landlord)\n\nRecords that the landlord will arrange the works directly and asks him to provide an expected completion date and confirm when they are complete. No contractor, scope, or target date is included in the email.",
+      "available_at": "2025-08-18T11:26:02+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nAdvises that the landlord will arrange the works directly and that he or a contractor he appoints may contact the tenant about access and timing.",
+      "available_at": "2025-08-18T11:26:05+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nRequests an update on whether the landlord-arranged works have been completed.",
+      "available_at": "2025-09-01T11:26:07+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Elise Rowan (Tenant)",
+      "text": "Event 010 — Email\nFrom: Elise Rowan (Tenant)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nSays pest-control visits are ongoing, with a final visit expected the following Monday. Says the landlord wants openings beneath the kitchen sink blocked, but this has not been done yet.",
+      "available_at": "2025-09-01T12:02:31+00:00"
+    },
+    {
+      "source_label": "Event 011 — Note from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Note\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Priya Noll (Maintenance Coordinator, Northbridge Lettings)\n\nRecords the tenant's update. The tenant describes pest treatment as ongoing and the under-sink openings as still unsealed. No completion evidence or pest-control report is on file.",
+      "available_at": "2025-09-01T12:02:39+00:00"
+    },
+    {
+      "source_label": "Event 012 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 012 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nAutomated escalation generated because no confirmation of completion has been recorded for the landlord-arranged pest treatment or proofing. The latest tenant update says visits were ongoing and openings remained unsealed.",
+      "available_at": "2025-09-07T11:25:50+00:00"
+    },
+    {
+      "source_label": "Event 013 — Note from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Note\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nRecords a decision to allow one additional business day for an update from the landlord. No new contractor or appointment details are entered.",
+      "available_at": "2025-09-07T14:11:16+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Call\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nTenant says pest control attended that morning and removed its equipment, which they understood to be the final visit. They believe separate contractors are due the next day to open or work on the wall area. This differs from the earlier description of openings beneath the sink; the call does not establish the intended scope or that any opening has been sealed.",
+      "available_at": "2025-09-07T14:14:47+00:00"
+    },
+    {
+      "source_label": "Event 015 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 015 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nAutomated waiting-period expiry recorded without a new landlord update or evidence that the proofing work is complete.",
+      "available_at": "2025-09-08T14:11:04+00:00"
+    },
+    {
+      "source_label": "Event 016 — Note from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Note\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nRecords a further three-business-day wait for confirmation from the landlord. The case remains under landlord-arranged works; no Northbridge Lettings contractor is recorded as instructed.",
+      "available_at": "2025-09-08T14:26:26+00:00"
+    },
+    {
+      "source_label": "Event 017 — Call from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Call\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nTenant says nobody has attended that morning to fill the openings, despite their understanding that contractors were expected. They are at work and say phone contact is more convenient than email. They offer to provide an update if an appointment is rearranged.",
+      "available_at": "2025-09-08T14:29:57+00:00"
+    },
+    {
+      "source_label": "Event 018 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 018 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Tara Wren (Property Manager, Northbridge Lettings)\n\nAutomated waiting-period expiry recorded. No confirmation has arrived that the separate proofing work was completed. The latest tenant report says the expected contractor did not attend.",
+      "available_at": "2025-09-11T14:26:29+00:00"
+    },
+    {
+      "source_label": "Event 019 — Note from Tara Wren (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Note\nFrom: Tara Wren (Property Manager, Northbridge Lettings)\nTo: Priya Noll (Maintenance Coordinator, Northbridge Lettings)\n\nThe tenant's latest update about the expected proofing visit has been recorded.",
+      "available_at": "2025-09-11T14:30:00+00:00"
+    }
+  ]
+}

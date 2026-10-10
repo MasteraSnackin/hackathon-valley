@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "Move-out maintenance at 18 Brindle Row",
+  "property_ref": "18 Brindle Row, Larkspur Vale, ZZ1 1ZZ",
+  "as_of": "2025-09-11T07:00:00+00:00",
+  "report_available_at": "2025-09-04T13:25:54+00:00",
+  "report": "Event 001 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nMove-out remedial request logged from inspection notes. No photographs or other supporting documents were provided with the request.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Tomas Venn (Former Tenant)\n\nAdvised that works were being arranged at 18 Brindle Row and that we would contact him to agree access while he was still at the property.",
+      "available_at": "2025-09-04T13:26:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Tomas Venn (Former Tenant)",
+      "text": "Event 003 — Email\nFrom: Tomas Venn (Former Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid he had vacated on 27 August and returned the keys that day. He could not provide access and asked that records be updated and arrangements made with the appropriate person.",
+      "available_at": "2025-09-04T13:51:20+00:00"
+    },
+    {
+      "source_label": "Event 004 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nClassified the request as handyman work and sent the landlord an approval request. The request described the six listed items and said the agency could arrange a provider; no cost estimate was included.",
+      "available_at": "2025-09-04T15:16:19+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Ivo Marlow (Landlord)",
+      "text": "Event 005 — Email\nFrom: Ivo Marlow (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReplied, “Yes, I am happy for you to proceed with the remedial works.” No price limit, item-by-item instructions, or other conditions were stated.",
+      "available_at": "2025-09-07T09:44:04+00:00"
+    },
+    {
+      "source_label": "Event 006 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nLandlord approval recorded. Provider selection remained necessary before quotation or scheduling.",
+      "available_at": "2025-09-07T09:44:16+00:00"
+    },
+    {
+      "source_label": "Event 007 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSelected Alder & Finch Repairs to provide a quotation and asked the provider for availability and key-access requirements for an inspection. The note records that no work was to begin until the quote had been reviewed and written authority issued. The tenant had already said he returned the keys; the agency held a set.",
+      "available_at": "2025-09-07T10:51:49+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Alder & Finch Repairs)\n\nSent the six-item description and requested a quotation only. The email expressly said not to carry out any work until Northbridge Lettings reviewed the price and issued written authority. It asked for two or three possible inspection windows and confirmation of access requirements, and said arrangements would be confirmed with the tenant despite his earlier notice that he had left.",
+      "available_at": "2025-09-07T10:53:09+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ivo Marlow (Landlord)\n\nAdvised that scheduling was underway and that a convenient time was being agreed with the tenant and provider.",
+      "available_at": "2025-09-07T10:53:16+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Alder & Finch Repairs)\n\nChased for availability and access details. The reminder included a tenant contact number, although the tenant had already said he had vacated and was not arranging access.",
+      "available_at": "2025-09-08T10:51:52+00:00"
+    },
+    {
+      "source_label": "Event 011 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nNo provider reply or appointment slot was on file. The case was escalated for a decision on whether to chase, confirm key access, or change provider.",
+      "available_at": "2025-09-10T10:51:40+00:00"
+    },
+    {
+      "source_label": "Event 012 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nRecorded an instruction to wait for the provider's response rather than send another reminder. The note referred to awaiting an invoice, although no invoice had yet been received.",
+      "available_at": "2025-09-10T11:57:57+00:00"
+    },
+    {
+      "source_label": "Event 013 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Alder & Finch Repairs)\n\nMaya called about a quotation. Rowan said he had not realised a quote was needed and thought the instruction was to carry out the work; he said he had completed it the previous day. Maya asked him to send an invoice, and Rowan agreed to send it with paperwork that evening. The call did not establish when or how access had been arranged, who had authorised work to start, or the agreed scope and price.",
+      "available_at": "2025-09-10T12:00:48+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Rowan Pike (Contractor, Alder & Finch Repairs)",
+      "text": "Event 014 — Email\nFrom: Rowan Pike (Contractor, Alder & Finch Repairs)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nForwarded an invoice from Alder & Finch Repairs for the property, without accompanying explanatory message.",
+      "available_at": "2025-09-11T06:57:15+00:00"
+    },
+    {
+      "source_label": "Event 015 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nInvoice recorded at £174. The case had no appointment details, visit narrative, or separate completion evidence.",
+      "available_at": "2025-09-11T06:57:30+00:00"
+    },
+    {
+      "source_label": "Event 016 — Document from Rowan Pike (Contractor, Alder & Finch Repairs)",
+      "text": "Event 016 — Document\nFrom: Rowan Pike (Contractor, Alder & Finch Repairs)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nInvoice description lists replacing the broken lounge floorboard and reinstating carpet; removing the front lounge blind and supplying and installing a new Venetian blind; refixing the cupboard handle with new fixings; adjusting the kitchen blind mechanism; retightening the toilet seat; and reattaching the front-gate hinge with new fixings. No quotation, itemised prices, prior approval of variations, or payment terms are described in the accompanying message.",
+      "available_at": "2025-09-11T06:58:16+00:00"
+    },
+    {
+      "source_label": "Attachment remedial-works-invoice.pdf (PDF text extraction)",
+      "text": "Attachment: remedial-works-invoice.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Alder & Finch Repairs — Remedial Works\nInvoice\nAlder & Finch Repairs\nInvoice reference: NBL-019-INV-11\nInvoice date: 11 September 2025\nProperty: 18 Brindle Row, Larkspur Vale, ZZ1 1ZZ\nWork invoiced\nReplaced the broken lounge floorboard and reinstated carpet.\nRemoved the front lounge blind and supplied and installed a new Venetian blind.\nRefixed the cupboard handle with new fixings.\nAdjusted the kitchen blind mechanism.\nRetightened the toilet seat.\nReattached the front-gate hinge with new fixings.\nDescription Amount\nRemedial works £174.00",
+      "available_at": "2025-09-11T07:00:00+00:00"
+    }
+  ]
+}

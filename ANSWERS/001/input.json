@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "title": "Bathroom leak and wall repair",
+  "property_ref": "4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ",
+  "as_of": "2025-09-23T16:12:00+00:00",
+  "report_available_at": "2025-09-04T08:10:00+00:00",
+  "report": "Event 001 — Email\nFrom: Nessa Quill (Tenant)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nThe pipe behind the shower is leaking again. It was tightened during an earlier visit, but the leak has returned. Water is also coming through the grout behind the wall covering, and the damaged area looks worse than before.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Call from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Call\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Tenant)\n\nMira called to clarify whether the leak was ongoing and whether the tenant had observed water outside the bathroom. Nessa said the leak was continuing and she could not tell how far the moisture extended behind the wall.",
+      "available_at": "2025-09-04T08:31:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Orin Vale (Landlord)\n\nMira reported the recurring shower-pipe leak and damp grout/wall covering, noting the earlier tightening had not lasted and visible deterioration had increased. She asked whether the landlord would authorize an inspection and quotation.",
+      "available_at": "2025-09-04T09:05:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Orin Vale (Landlord)",
+      "text": "Event 004 — Email\nFrom: Orin Vale (Landlord)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nOrin asked to see a quotation before confirming whether to proceed with repair work.",
+      "available_at": "2025-09-05T17:20:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Orin Vale (Landlord)",
+      "text": "Event 005 — Email\nFrom: Orin Vale (Landlord)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nOrin authorized arranging a plumbing inspection and obtaining a quote. His message did not authorize the quoted repair work.",
+      "available_at": "2025-09-07T09:15:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\n\nMira sent the reported leak details and requested a price and proposed scope, asking Ewan to advise if an inspection was needed before quoting.",
+      "available_at": "2025-09-07T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Ewan Rook (Contractor, Hearthline Plumbing & Bath)",
+      "text": "Event 007 — Email\nFrom: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nEwan said he could attend to inspect the bathroom but could not price the work from the description alone.",
+      "available_at": "2025-09-07T11:10:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Tenant)\n\nMira asked Nessa to provide available visit times so the contractor could inspect the leak.",
+      "available_at": "2025-09-07T11:35:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — SMS from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — SMS\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Tenant)\n\nMira followed up on the visit request and asked Nessa to reply with availability.",
+      "available_at": "2025-09-08T11:30:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Call\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Tenant)\n\nMira's call did not connect to a live conversation. She left a voicemail asking Nessa to get in touch about access for the inspection.",
+      "available_at": "2025-09-10T12:20:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Call from Nessa Quill (Tenant)",
+      "text": "Event 011 — Call\nFrom: Nessa Quill (Tenant)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nNessa said she was away that week and authorized the contractor to enter using the office keys. She asked for the visit to happen as soon as possible, saying the leak had been going on for around a week and a half. She did not provide a specific time window.",
+      "available_at": "2025-09-15T15:10:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\n\nMira relayed that Nessa had authorized office-key access while away and asked Ewan to propose an inspection time. Mira included the tenant's contact number, 07700 900184, for visit coordination.",
+      "available_at": "2025-09-15T15:35:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Ewan Rook (Contractor, Hearthline Plumbing & Bath)",
+      "text": "Event 013 — Email\nFrom: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nEwan offered Thursday late morning for the inspection.",
+      "available_at": "2025-09-16T07:40:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Tenant)\n\nMira advised Nessa that Hearthline Plumbing & Bath had proposed Thursday late morning and that access would be by office keys, as authorized.",
+      "available_at": "2025-09-16T08:05:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Note from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Note\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Orin Vale (Landlord)\n\nThe proposed inspection window has passed. No visit report, invoice, or repair authorization is recorded in the correspondence at this point.",
+      "available_at": "2025-09-18T12:00:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Document from Ewan Rook (Contractor, Hearthline Plumbing & Bath)",
+      "text": "Event 016 — Document\nFrom: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nQuotation received after the bathroom inspection. Scope: remove the existing shower screen, taps, and shower valve; install a wall-and-riser cladding system with chrome trims; fit new bath taps and a new shower valve; refit the existing screen. The quotation states subtotal £2,370.00, VAT £474.00, total £2,844.00. It contains no separate materials or labour line items.",
+      "available_at": "2025-09-18T14:25:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Orin Vale (Landlord)\n\nMira sent the proposed scope and £2,844.00 quotation for approval. She described it as bathroom plumbing and cladding work following the inspection.",
+      "available_at": "2025-09-18T14:45:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Orin Vale (Landlord)",
+      "text": "Event 018 — Email\nFrom: Orin Vale (Landlord)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nOrin asked for an itemized breakdown before confirming whether he would proceed.",
+      "available_at": "2025-09-18T15:00:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Orin Vale (Landlord)\n\nMira resent the proposed scope: remove the existing screen, taps, and valve; install cladding to the walls and riser with chrome trims; fit new bath taps and a new valve; refit the existing screen. She said the contractor had not provided separate line-item prices and repeated the £2,844.00 total.",
+      "available_at": "2025-09-18T15:12:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\n\nMira asked Ewan for an itemized breakdown, including materials and labour if available, and asked him to confirm whether the total remained £2,844.00.",
+      "available_at": "2025-09-18T15:30:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Email from Ewan Rook (Contractor, Hearthline Plumbing & Bath)",
+      "text": "Event 021 — Email\nFrom: Ewan Rook (Contractor, Hearthline Plumbing & Bath)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nEwan replied: materials £1,270; labour £1,170 for two people, half a day each; VAT at 20%; Northbridge commission at 10%. He said a 50% deposit would be required if the landlord wished to proceed. The message did not state a revised subtotal or total, clarify how the commission is applied, or specify the deposit calculation basis.",
+      "available_at": "2025-09-18T15:39:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Email from Mira Sallow (Property Manager, Northbridge Lettings)",
+      "text": "Event 022 — Email\nFrom: Mira Sallow (Property Manager, Northbridge Lettings)\nTo: Orin Vale (Landlord)\n\nAfter trying unsuccessfully to reach Orin by phone, Mira sent a brief follow-up asking whether they could go ahead with the quote for the property. The message did not identify an amount or attach the contractor's latest breakdown.",
+      "available_at": "2025-09-23T16:08:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Orin Vale (Landlord)",
+      "text": "Event 023 — Email\nFrom: Orin Vale (Landlord)\nTo: Mira Sallow (Property Manager, Northbridge Lettings)\n\nOrin replied: “Which quote do you mean? There are a couple.” He asked for clarification before confirming whether to proceed.",
+      "available_at": "2025-09-23T16:12:00+00:00"
+    },
+    {
+      "source_label": "Attachment bathroom-works-quotation.pdf (PDF text extraction)",
+      "text": "Attachment: bathroom-works-quotation.pdf\nExtracted text (pypdf; layout not preserved):\n\nCONTRACTOR QUOTATION Hearthline Plumbing & Bath — Bathroom\nWorks Quotation\nHearthline Plumbing & Bath\nQuotation reference: NBL-001-Q1\nDate: 18 September 2025\nProperty: 8 Wrenfold Mews, Brindlewick, ZZ1 1ZZ\nProposed scope\nRemove the existing shower screen, bath taps and shower valve.\nInstall a wall-and-riser cladding system with chrome trims.\nFit new bath taps and a new shower valve.\nRefit the existing shower screen.\nDescription Amount\nBathroom plumbing and cladding works £2,370.00\nVAT (20%) £474.00\nTotal £2,844.00",
+      "available_at": "2025-09-23T16:12:00+00:00"
+    }
+  ]
+}

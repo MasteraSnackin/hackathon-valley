@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "Television, bedroom light and door handle",
+  "property_ref": "8 Vellum Court, Brindlewick, ZZ1 1ZZ",
+  "as_of": "2025-09-17T09:04:05+00:00",
+  "report_available_at": "2025-09-04T13:05:32+00:00",
+  "report": "Event 001 — Portal\nFrom: Ada Pell (Tenant, Brindlewick)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nReported that a Samsung TV in the upstairs bedroom had an internal electrical fault and, in the tenant's description, shorted out and repeatedly tripped a fuse when plugged in. The tenant said the TV had seen little overall use and was unplugged to avoid further damage. Also reported that the downstairs bedroom light flickered and made a popping noise when switched on. Asked that access be scheduled in advance because a dog was at the property.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Mina Voss (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Mina Voss (Property Manager, Northbridge Lettings)\nTo: Corin Wex (Landlord, Brindlewick)\n\nRequested approval to arrange works for the TV fault, classifying the request as appliance repairs. The description included the tenant-reported shorting and repeated fuse trips, that the TV was unplugged, and the low reported use. This approval request did not include the downstairs light.",
+      "available_at": "2025-09-04T14:55:42+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Corin Wex (Landlord, Brindlewick)",
+      "text": "Event 003 — Email\nFrom: Corin Wex (Landlord, Brindlewick)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nReplied, “Please sort it. I don't remember leaving a TV.” The reply followed the TV-focused request. It did not mention the downstairs light or expressly address ownership, replacement, or disposal of the television.",
+      "available_at": "2025-09-05T11:37:04+00:00"
+    },
+    {
+      "source_label": "Event 004 — Note from Mina Voss (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Note\nFrom: Mina Voss (Property Manager, Northbridge Lettings)\nTo: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\n\nRecorded the landlord's instruction to proceed in response to the TV request, along with the landlord's uncertainty about whether the TV had been left at the property. No spending limit or specific disposal instruction was recorded.",
+      "available_at": "2025-09-05T11:45:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Update from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 005 — Update\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nUpdated the maintenance record to include the downstairs bedroom light's flickering and popping symptoms. The tenant had included those symptoms in the initial report, but the landlord's approval request had concerned only the TV.",
+      "available_at": "2025-09-05T15:57:03+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nRequested availability for an electrical contractor to attend regarding the recorded TV and light issues. Asked the tenant to provide times in advance so access could be coordinated around the dog.",
+      "available_at": "2025-09-07T16:29:16+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Corin Wex (Landlord, Brindlewick)",
+      "text": "Event 007 — Email\nFrom: Corin Wex (Landlord, Brindlewick)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nAn automatic reply said the landlord was away. It contained no further repair instructions.",
+      "available_at": "2025-09-07T16:30:08+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nFollowed up for appointment availability for the electrical visit and invited the tenant to share relevant access details.",
+      "available_at": "2025-09-08T16:29:26+00:00"
+    },
+    {
+      "source_label": "Event 009 — SMS from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 009 — SMS\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nSent a brief reminder to check the email and provide availability for the maintenance visit.",
+      "available_at": "2025-09-08T16:29:34+00:00"
+    },
+    {
+      "source_label": "Event 010 — Note from Mina Voss (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Note\nFrom: Mina Voss (Property Manager, Northbridge Lettings)\nTo: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\n\nNo tenant availability had been received following the email and SMS. The electrical visit remained unscheduled.",
+      "available_at": "2025-09-10T16:29:12+00:00"
+    },
+    {
+      "source_label": "Event 011 — Update from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 011 — Update\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nRecorded a change of electrical contractor. The previous contractor was stood down and scheduling was restarted with Bracken Spark Services.",
+      "available_at": "2025-09-11T10:30:08+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nRequested appointment slots again for the combined electrical visit and noted that access needed to be arranged in advance.",
+      "available_at": "2025-09-11T10:30:51+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 013 — Email\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nFollowed up for availability for the electrical visit.",
+      "available_at": "2025-09-14T10:30:29+00:00"
+    },
+    {
+      "source_label": "Event 014 — SMS from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 014 — SMS\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nSent a brief reminder to reply with possible appointment times.",
+      "available_at": "2025-09-14T10:30:40+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Jory Senn (Cover Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Call\nFrom: Jory Senn (Cover Property Manager, Northbridge Lettings)\nTo: Ada Pell (Tenant, Brindlewick)\n\nTenant said their partner had made the original report and they would send availability. The tenant said they had tried replacing fuses and believed the TV's main board was fried; this was the tenant's view, not a technician's diagnosis. They said the TV might as well be discarded if repair was not straightforward and were open to removal. The tenant said they were using a lamp instead of the downstairs light and could manage without it for now. They also raised a separate issue: the rear-door handle had come off. Jory could not find a record of that issue and asked the tenant to submit it separately; the tenant agreed.",
+      "available_at": "2025-09-16T12:04:25+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Ada Pell (Tenant, Brindlewick)",
+      "text": "Event 016 — Email\nFrom: Ada Pell (Tenant, Brindlewick)\nTo: Mina Voss (Property Manager, Northbridge Lettings)\n\nProvided availability for an electrical visit: 23 September after 15:00, 24 September after 15:00, 25 September after 12:30, 29 September after 15:00, 30 September after 15:00, or 2 October after 12:30. Said the dog would be taken out during the visit and asked the contractor to call on arrival rather than knock.",
+      "available_at": "2025-09-16T13:41:07+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\nTo: Rian Sol (Electrician, Bracken Spark Services)\n\nSent the electrician the reported TV fault and downstairs light symptoms together, with the tenant's available dates and request to call on arrival rather than knock because of the dog. Asked the electrician to propose a suitable visit slot. This was a combined electrical visit request; no separate appliance assessment or repair assignment, or decision about TV disposal, was recorded.",
+      "available_at": "2025-09-16T13:42:26+00:00"
+    },
+    {
+      "source_label": "Event 018 — Note from Mina Voss (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Note\nFrom: Mina Voss (Property Manager, Northbridge Lettings)\nTo: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\n\nNoted that the rear-door handle had been raised during the call only. No separate report had been received, and no handyman had been assigned.",
+      "available_at": "2025-09-16T16:10:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Rian Sol (Electrician, Bracken Spark Services)",
+      "text": "Event 019 — Email\nFrom: Rian Sol (Electrician, Bracken Spark Services)\nTo: Oren Pike (Maintenance Coordinator, Northbridge Lettings)\n\nProposed attending on 29 September after 15:00. No exact arrival time was offered, and no appointment confirmation had been sent.",
+      "available_at": "2025-09-17T09:04:05+00:00"
+    }
+  ]
+}

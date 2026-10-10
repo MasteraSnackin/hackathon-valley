@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "title": "Bedroom Window Maintenance Request",
+  "property_ref": "24 Bramblewick Lane, Alderfen, ZZ1 1ZZ",
+  "as_of": "2025-09-10T18:20:00+00:00",
+  "report_available_at": "2025-08-12T09:10:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Elena Voss (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReports that a bedroom window will not close or seal fully; handle seems to work and hinges may be at fault. Says the window is standard and there are no special access arrangements.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nSent the tenant's description and asked whether Northbridge Lettings may arrange an inspection and repair.",
+      "available_at": "2025-08-12T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nSent a concise follow-up asking whether the repair should be arranged by the agency or by the landlord.",
+      "available_at": "2025-08-13T10:15:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Dorian Pike (Landlord)",
+      "text": "Event 004 — Email\nFrom: Dorian Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays he is waiting to obtain the insurance excess and asks the agency to call him to discuss when work can proceed.",
+      "available_at": "2025-08-13T13:40:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nNo connected conversation recorded.",
+      "available_at": "2025-08-14T09:20:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Dorian Pike (Landlord)",
+      "text": "Event 006 — Email\nFrom: Dorian Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAsks the agency to contact the tenant and find a time for him to visit and inspect the window. Says he has tried calling the agency twice.",
+      "available_at": "2025-08-17T11:00:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elena Voss (Tenant)\n\nAsks when the landlord can visit to inspect the window.",
+      "available_at": "2025-08-17T11:25:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Elena Voss (Tenant)",
+      "text": "Event 008 — Email\nFrom: Elena Voss (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays someone will be home each day through 26 August and asks whether several calls from an unfamiliar number were from the agency. No number is included in the message.",
+      "available_at": "2025-08-17T14:10:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nRelays the tenant's availability through 26 August and asks whether it suits his proposed visit.",
+      "available_at": "2025-08-18T09:00:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Dorian Pike (Landlord)",
+      "text": "Event 010 — Email\nFrom: Dorian Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirms that the tenant's availability works for him.",
+      "available_at": "2025-08-19T09:15:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Dorian Pike (Landlord)",
+      "text": "Event 011 — Email\nFrom: Dorian Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nForwards an email from a contractor containing an electrical installation condition report.",
+      "available_at": "2025-08-19T10:30:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elena Voss (Tenant)\n\nUpdates the tenant that the landlord expects to attend during the available period.",
+      "available_at": "2025-08-20T08:40:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Elena Voss (Tenant)",
+      "text": "Event 013 — Email\nFrom: Elena Voss (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays nobody has yet inspected the window. The tenant missed two unfamiliar calls while at work and will not call back without a voicemail or message because of scam concerns. Requests that the landlord message first or that the agency coordinate contact. Adds that rain and falling temperatures make the window being partly open a concern.",
+      "available_at": "2025-08-27T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nThe landlord says he wants to inspect the window himself before sending a contractor and thinks it may only need lubrication. He offers to attend the following morning between 10:00 and 12:00.",
+      "available_at": "2025-08-28T13:00:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elena Voss (Tenant)\n\nTenant agrees to be home the following morning between 10:00 and 12:00 for the landlord's proposed inspection.",
+      "available_at": "2025-08-28T13:20:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Landlord)\n\nConfirms the tenant is available the following morning between 10:00 and 12:00. The landlord agrees to attend.",
+      "available_at": "2025-08-28T13:35:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elena Voss (Tenant)\n\nAsks whether the landlord-arranged window work is complete and invites the tenant to report if nobody has attended.",
+      "available_at": "2025-09-01T15:10:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Elena Voss (Tenant)",
+      "text": "Event 018 — Email\nFrom: Elena Voss (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays a contractor told them parts need to be ordered and that the contractor would contact them the following week.",
+      "available_at": "2025-09-02T09:25:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Dorian Pike (Landlord)",
+      "text": "Event 019 — Email\nFrom: Dorian Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nForwards an email with an attached Landlord Gas Safety Record. The forwarding email contains no additional message.",
+      "available_at": "2025-09-10T09:05:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Email from Elena Voss (Tenant)",
+      "text": "Event 020 — Email\nFrom: Elena Voss (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays, “All jobs was done.” The tenant explains they did not notify the agency because Richard, the contractor, said he would send a report.",
+      "available_at": "2025-09-10T18:20:00+00:00"
+    },
+    {
+      "source_label": "Attachment forwarded-document.pdf (PDF text extraction)",
+      "text": "Attachment: forwarded-document.pdf\nExtracted text (pypdf; layout not preserved):\n\nGAS SAFETY RECORD Forwarded Landlord Gas Safety Record\nLandlord Gas Safety Record\nRecord reference: NBL-009-GSR-25\nProperty: 8 Thistledown Mews, Vellumby, ZZ1 1ZZ\nInspection date: 8 September 2025\nEngineer: Rellan Voss\nAppliances recorded: Boiler; hob\nRecorded outcome: Satisfactory",
+      "available_at": "2025-09-10T18:20:00+00:00"
+    }
+  ]
+}

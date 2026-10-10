@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "title": "Vacant Property Preparation",
+  "property_ref": "18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ",
+  "as_of": "2025-09-25T08:34:11+00:00",
+  "report_available_at": "2025-09-03T18:04:18+00:00",
+  "report": "Event 001 — Note\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)\n\nLogged work requested after the move-out inspection: kitchen, oven and extractor degreasing; bathroom and en-suite limescale removal; removal of waste left in the kitchen; and rear garden clearance, including bagged dog waste. Inspection notes also mention soil disturbed by digging. The property is vacant.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nRequested a price and earliest availability for the post-tenancy sanitation, waste removal and garden clearance. Advised that the property is vacant and keys can be collected from the Northbridge Lettings office.",
+      "available_at": "2025-09-04T17:20:08+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nSent an inspection report to assist with pricing.",
+      "available_at": "2025-09-04T17:27:48+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)",
+      "text": "Event 004 — Email\nFrom: Elian Wren (Contractor, Brindlewick Turnover Services)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nSaid the report appeared to describe the property as it had been about ten years earlier. Asked whether to collect keys and inspect before preparing a price.",
+      "available_at": "2025-09-07T09:59:05+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nApologised for sending the wrong report and supplied the current inspection information. Said an office key set should be available if an inspection was needed.",
+      "available_at": "2025-09-07T11:33:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)",
+      "text": "Event 006 — Email\nFrom: Elian Wren (Contractor, Brindlewick Turnover Services)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nSent a £665 quote covering oven, hob and extractor degreasing; carpet shampooing in bedroom one, stairs and landings; rubbish removal; kitchen grease and bathroom limescale work; general sanitation elsewhere; and garden weeding, grass cutting and tidying. The quoted scope does not expressly mention making good the disturbed soil noted in the inspection.",
+      "available_at": "2025-09-08T13:25:03+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Landlord, Property Owner)\n\nAsked whether the £665 quote could proceed. The approval request described the work generally as post-tenancy work according to the inspection instructions, without listing the quoted carpet and garden tasks.",
+      "available_at": "2025-09-08T13:26:14+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Nessa Quill (Landlord, Property Owner)",
+      "text": "Event 008 — Email\nFrom: Nessa Quill (Landlord, Property Owner)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nReplied: “Happy to approve if they are recovered from the bond as there is no way it was in that state when they moved in.”",
+      "available_at": "2025-09-08T15:45:30+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nTold the contractor the quote was approved and asked for the earliest visit date, noting the property was vacant and keys could be collected from the office. The message did not mention the landlord’s bond-recovery condition.",
+      "available_at": "2025-09-08T15:46:20+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Nessa Quill (Landlord, Property Owner)",
+      "text": "Event 010 — Email\nFrom: Nessa Quill (Landlord, Property Owner)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nReiterated that approval depended on recovering the cost from the former tenants’ bond.",
+      "available_at": "2025-09-08T16:43:12+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Nessa Quill (Landlord, Property Owner)\n\nReported that post-tenancy costs and tenant-attributed damage together exceed the £650 deposit held, and that a claim for the full deposit amount was being prepared through the deposit process. Said final itemised figures for the claim were still awaited, although the £665 quote was already on file. Asked whether the work could proceed meanwhile.",
+      "available_at": "2025-09-10T10:27:45+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nAsked the contractor not to book the work until further notice while the deposit dispute was being handled.",
+      "available_at": "2025-09-10T10:54:32+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)",
+      "text": "Event 013 — Email\nFrom: Elian Wren (Contractor, Brindlewick Turnover Services)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nSaid the next availability would be the following week and agreed to wait for further instructions.",
+      "available_at": "2025-09-10T11:07:05+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Elian Wren (Contractor, Brindlewick Turnover Services)",
+      "text": "Event 014 — Email\nFrom: Elian Wren (Contractor, Brindlewick Turnover Services)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nAsked whether the instruction to hold the work was still in force and whether the property could be attended yet.",
+      "available_at": "2025-09-15T17:08:05+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nConfirmed the work should remain on hold because separate major maintenance was outstanding. A prospective tenant wanted to move in on 28 September; at that point, landlord approval of the separate maintenance quote had not been received.",
+      "available_at": "2025-09-16T07:31:55+00:00"
+    },
+    {
+      "source_label": "Event 016 — Update from Nessa Quill (Landlord, Property Owner)",
+      "text": "Event 016 — Update\nFrom: Nessa Quill (Landlord, Property Owner)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nSent the brief update “approved quote” without identifying which quote it referred to.",
+      "available_at": "2025-09-17T15:38:24+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nAsked the contractor to propose a date and time for the post-tenancy work, noting that the property was vacant and keys were held at the office. No visit was booked or confirmed.",
+      "available_at": "2025-09-17T16:19:33+00:00"
+    },
+    {
+      "source_label": "Event 018 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 018 — Note\nFrom: Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nRecorded that a firm date for the sanitation work was being held until the separate maintenance work had been scheduled. No maintenance completion date was recorded.",
+      "available_at": "2025-09-18T16:27:18+00:00"
+    },
+    {
+      "source_label": "Event 019 — Call from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Call\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Elian Wren (Contractor, Brindlewick Turnover Services)\n\nCall note records that the contractor would provide possible dates, but the post-tenancy work still depended on the separate maintenance being scheduled first. No visit date was confirmed.",
+      "available_at": "2025-09-21T17:41:01+00:00"
+    },
+    {
+      "source_label": "Event 020 — Note from Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)",
+      "text": "Event 020 — Note\nFrom: Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)\nTo: Mira Venn (Property Manager, Northbridge Lettings)\n\nRecorded that the post-tenancy work remained dependent on the separate maintenance being completed. The contractor had not provided a confirmed slot.",
+      "available_at": "2025-09-22T08:27:47+00:00"
+    },
+    {
+      "source_label": "Event 021 — Update from Mira Venn (Property Manager, Northbridge Lettings)",
+      "text": "Event 021 — Update\nFrom: Mira Venn (Property Manager, Northbridge Lettings)\nTo: Tovan Rusk (Maintenance Coordinator, Northbridge Lettings)\n\nRecorded the instruction to wait three more working days because the separate major maintenance work must be completed before the sanitation work can be booked. No date is booked, and no update confirming completion of the maintenance work is recorded.",
+      "available_at": "2025-09-25T08:34:11+00:00"
+    },
+    {
+      "source_label": "Attachment move-out-inspection-report.pdf (PDF text extraction)",
+      "text": "Attachment: move-out-inspection-report.pdf\nExtracted text (pypdf; layout not preserved):\n\nINSPECTION REPORT Move-Out Inspection Report — Property\nPreparation Items\nMove-Out Inspection Report\nReference: NBL-015-INSPECTION\nProperty: 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ\nProperty status: Vacant\nRecorded preparation items\nKitchen, oven and extractor require degreasing.\nBathroom and en-suite require limescale removal.\nWaste remains in the kitchen and requires removal.\nRear garden requires clearance, including bagged dog waste.\nSoil in the rear garden has been disturbed by digging.",
+      "available_at": "2025-09-25T08:34:11+00:00"
+    },
+    {
+      "source_label": "Attachment property-preparation-quotation.pdf (PDF text extraction)",
+      "text": "Attachment: property-preparation-quotation.pdf\nExtracted text (pypdf; layout not preserved):\n\nCONTRACTOR QUOTATION Brindlewick Turnover Services — Property\nPreparation Quotation\nBrindlewick Turnover Services\nQuotation reference: NBL-015-Q1\nDate: 8 September 2025\nProperty: 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ\nIncluded work\nDegrease oven, hob and extractor.\nShampoo carpets in Bedroom 1, stairs and landings.\nRemove rubbish.\nTreat kitchen grease and bathroom limescale.\nGeneral sanitation to remaining areas.\nWeed, cut grass and tidy the rear garden.\nDescription Amount\nProperty preparation service £665.00",
+      "available_at": "2025-09-25T08:34:11+00:00"
+    }
+  ]
+}

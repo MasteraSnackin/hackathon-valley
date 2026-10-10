@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "Move-out maintenance at 46 Fernwick Lane",
+  "property_ref": "46 Fernwick Lane, Aldermead, ZZ1 1ZZ",
+  "as_of": "2025-09-15T16:25:18+00:00",
+  "report_available_at": "2025-09-03T18:03:18+00:00",
+  "report": "Event 001 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nMove-out list records damage to the staircase newel posts and a bedroom door frame; screw damage to an upstairs uPVC window frame; wall holes, plugs, nail holes and sticker residue; kitchen flooring damage and chipped living-room laminate with a missing threshold; missing downstairs toilet-roll holder, bedroom curtain pole and curtains, and some bulbs; a non-working top-floor smoke detector; a kitchen radiator pulled away from the wall; a warped kitchen worktop with reported water ingress; a boiler casing apparently held with tape and needing inspection; two reported non-working extractor fans; rusting radiators, including the en-suite radiator; ceiling or water-damage defects in the kitchen, lounge, Bedroom 3, bathroom and en-suite; altered decoration; and stained, faded carpets for which replacement was requested as a quote.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 002 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nWorkflow note says landlord approval is normally already in place for move-out works and the property is marked vacant. It directs the operator to check whether approval remains outstanding.",
+      "available_at": "2025-09-03T18:10:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nThe full move-out list was retained as the job description. The property is vacant; keys are held at the agency office.",
+      "available_at": "2025-09-04T17:10:01+00:00"
+    },
+    {
+      "source_label": "Event 004 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 004 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nA handyman provider was selected and asked to quote remotely. The job email said the move-out works had been agreed with the landlord, and requested the provider's price, proposed work and earliest availability. It also offered access for an inspection if needed.",
+      "available_at": "2025-09-04T17:20:38+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Owen Vale (Landlord)\n\nAdvised that a provider had been asked to quote for the move-out works. No specific price or contractor scope was included in this update.",
+      "available_at": "2025-09-04T17:21:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Iris Bell (Contractor, Alderwick Property Works)",
+      "text": "Event 006 — Email\nFrom: Iris Bell (Contractor, Alderwick Property Works)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nAsked for the property's check-out report before preparing the quotation.",
+      "available_at": "2025-09-07T09:35:20+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nSent a check-out report in response to the request.",
+      "available_at": "2025-09-07T11:27:12+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nFollowed up to say the report sent earlier was an old report from a different period and not useful for this job; asked the contractor to disregard it and sent the intended current report separately.",
+      "available_at": "2025-09-07T11:34:16+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nAsked whether the corrected report gave enough information to quote or whether an inspection was needed. Requested the quote and earliest availability while re-letting preparations were underway.",
+      "available_at": "2025-09-08T11:58:33+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nCall transcript records automated menu prompts only; no substantive conversation or agreement was captured.",
+      "available_at": "2025-09-10T08:34:20+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nChased for the quotation and asked whether an inspection was required. Repeated that keys could be collected from the office.",
+      "available_at": "2025-09-11T11:33:24+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Contractor, Alderwick Property Works)\n\nFollowed up again for the quotation or confirmation that an inspection was needed.",
+      "available_at": "2025-09-14T13:32:28+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Iris Bell (Contractor, Alderwick Property Works)",
+      "text": "Event 013 — Email\nFrom: Iris Bell (Contractor, Alderwick Property Works)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSent a quotation for the property and invited questions. The listed tasks are: repair damaged newel post; address screw damage to a door frame; fill holes in uPVC window frames; make good wall damage; fit a new door threshold; fit a toilet-roll holder; renew smoke detector; rehang kitchen radiator; renew an extractor fan; renew en-suite radiator; renew an extractor fan; stain-block water-damaged ceilings; and reinstate decoration. The quotation text then gives a single “Labour & Materials” heading, without task-by-task prices or stated exclusions. Iris said she could not provide an attendance date at this stage and would only check scheduling after approval.",
+      "available_at": "2025-09-15T13:52:12+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Owen Vale (Landlord)\n\nForwarded the quote with a stated total of £3,865.68 and asked whether the landlord was happy to proceed at that cost.",
+      "available_at": "2025-09-15T13:53:34+00:00"
+    },
+    {
+      "source_label": "Event 015 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nQuote received; the stated total is £3,865.68 and is above the approval threshold. The workflow records that landlord approval is required before proceeding.",
+      "available_at": "2025-09-15T13:54:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nWaiting for the landlord to respond to the request to approve or reject the specific quotation.",
+      "available_at": "2025-09-15T16:23:44+00:00"
+    },
+    {
+      "source_label": "Event 017 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Owen Vale (Landlord)\n\nCall transcript contains an automated recording notice and a brief unclear utterance. No substantive discussion, approval or rejection was captured.",
+      "available_at": "2025-09-15T16:25:18+00:00"
+    },
+    {
+      "source_label": "Attachment checkout-report.pdf (PDF text extraction)",
+      "text": "Attachment: checkout-report.pdf\nExtracted text (pypdf; layout not preserved):\n\nCHECKOUT REPORT Checkout Report — Move-Out Defects\nCheckout Report\nReference: NBL-027-CHECKOUT\nProperty: 46 Fernwick Lane, Aldermead, ZZ1 1ZZ\nRecorded items\nDamage to staircase newel posts and a bedroom door frame.\nScrew damage to an upstairs uPVC window frame.\nWall holes, plugs, nail holes and sticker residue.\nKitchen flooring damage; chipped living-room laminate and missing threshold.\nMissing toilet-roll holder, bedroom curtain pole, curtains and some bulbs.\nNon-working top-floor smoke detector.\nKitchen radiator pulled away from the wall.\nWarped kitchen worktop with reported water ingress.\nBoiler casing apparently held with tape and requiring inspection.\nTwo reported non-working extractor fans.\nRusting radiators, including the en-suite radiator.\nCeiling or water-damage defects in the kitchen, lounge, Bedroom 3, bathroom and en-\nsuite.\nAltered decoration.\nStained and faded carpets; replacement quotation requested.",
+      "available_at": "2025-09-15T16:25:18+00:00"
+    },
+    {
+      "source_label": "Attachment move-out-works-quotation.pdf (PDF text extraction)",
+      "text": "Attachment: move-out-works-quotation.pdf\nExtracted text (pypdf; layout not preserved):\n\nCONTRACTOR QUOTATION Alderwick Property Works — Move-Out Works\nQuotation\nAlderwick Property Works\nQuotation reference: NBL-027-Q1\nDate: 15 September 2025\nProperty: 46 Fernwick Lane, Aldermead, ZZ1 1ZZ\nLabour & Materials\nRepair damaged newel post.\nAddress screw damage to a door frame.\nFill holes in uPVC window frames.\nMake good wall damage.\nFit a new door threshold and toilet-roll holder.\nRenew smoke detector.\nRehang kitchen radiator.\nRenew an extractor fan.\nRenew an extractor fan.\nRenew en-suite radiator.\nStain-block water-damaged ceilings.\nReinstate decoration.\nDescription Amount\nLabour & Materials £3,865.68",
+      "available_at": "2025-09-15T16:25:18+00:00"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "Smoke alarm maintenance request",
+  "property_ref": "26 Tallowmere Close, Fenbarrow, ZZ1 1ZZ",
+  "as_of": "2025-09-22T08:48:00+00:00",
+  "report_available_at": "2025-08-07T09:58:12+00:00",
+  "report": "Event 001 — Portal\nFrom: Elise Rowan (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported that the smoke alarm had come away from the ceiling and needed attention. No photographs or other attachments were supplied.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nAcknowledged request NBL-016 and said the agency would check the repair arrangements with the landlord before confirming next steps.",
+      "available_at": "2025-08-07T10:21:14+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ronan Vale (Landlord)\n\nSaid an inspection had noted that the alarm had been put up recently and had come down. The agency had no record of arranging that installation. Asked whether the landlord had arranged it and whether the installer could return to secure it.",
+      "available_at": "2025-08-07T11:24:38+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Ronan Vale (Landlord)",
+      "text": "Event 004 — Email\nFrom: Ronan Vale (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReplied briefly that they would use their own electrician to have a look. No electrician's name, work scope, or visit date was provided.",
+      "available_at": "2025-08-07T16:14:57+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Ronan Vale (Landlord)\n\nAcknowledged that the landlord would arrange the work and asked for an expected completion date and confirmation once it was finished.",
+      "available_at": "2025-08-07T16:55:25+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nAdvised that the landlord intended to arrange an electrician and that visit timing should be agreed with the tenant. Asked the tenant to contact the agency if there were safety concerns.",
+      "available_at": "2025-08-07T16:55:33+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Ronan Vale (Landlord)",
+      "text": "Event 007 — Email\nFrom: Ronan Vale (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid the electrician would contact the tenant and complete the work by the following weekend at the latest. No contractor details or confirmed appointment were included.",
+      "available_at": "2025-08-12T05:55:15+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nAsked whether the alarm had been reattached and whether anyone had contacted the tenant. The agency still had no completion confirmation.",
+      "available_at": "2025-08-24T08:01:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nTenant said the landlord had not yet fixed the alarm and that work was expected on Sunday, 31 August. The call did not establish who had confirmed that date or whether a timed appointment was arranged.",
+      "available_at": "2025-08-27T09:25:40+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nTenant said a fitter, not the landlord, had attended, removed the bracket, and could not refit the alarm because the box had no bracket in it. The alarm remained unmounted. Tenant thought the fitter might return the following day, but no appointment was confirmed.",
+      "available_at": "2025-09-02T15:50:40+00:00"
+    },
+    {
+      "source_label": "Event 011 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Elise Rowan (Tenant)\n\nTenant said they were in hospital and did not wish to speak. No maintenance details were discussed during the call.",
+      "available_at": "2025-09-07T16:50:26+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Elise Rowan (Tenant)",
+      "text": "Event 012 — Email\nFrom: Elise Rowan (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed that the alarm work was not finished. Tenant said the fitter had been due on Sunday, but they had been admitted to hospital on Friday. They expected to arrange it when home and said they would email once it was done; for now they needed to recover.",
+      "available_at": "2025-09-07T16:57:08+00:00"
+    },
+    {
+      "source_label": "Event 013 — Email from Elise Rowan (Tenant)",
+      "text": "Event 013 — Email\nFrom: Elise Rowan (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid the fitter had still not completed the alarm and that they had just been discharged from hospital. Tenant said they would arrange it and report when complete, and asked the agency to leave them alone for the moment because repeated calls and emails while they were ill had been upsetting.",
+      "available_at": "2025-09-11T13:12:26+00:00"
+    },
+    {
+      "source_label": "Event 014 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Maintenance Operations Lead, Northbridge Lettings)\n\nRecorded a pause in tenant contact in response to the tenant's request while they recovered. There was no evidence on file that the alarm had been mounted or tested.",
+      "available_at": "2025-09-11T17:40:27+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Elise Rowan (Tenant)",
+      "text": "Event 015 — Call\nFrom: Elise Rowan (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported an unannounced person knocking at the property on Saturday morning and saying they were there to check something. Tenant did not let the person in because they could not verify who they were and thought it might be a scam. Tenant was unsure whether the visitor was connected to the alarm work.",
+      "available_at": "2025-09-20T10:15:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Maintenance Operations Lead, Northbridge Lettings)\n\nRecorded the tenant's account that they had previously raised the unexpected knock with another agency contact, who said it had been passed to a building-management contact. The visitor's identity, organization, purpose, and authority have not been verified in this case.",
+      "available_at": "2025-09-20T11:02:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Dorian Pike (Maintenance Operations Lead, Northbridge Lettings)\n\nNBL-016 is pending review.",
+      "available_at": "2025-09-22T08:48:00+00:00"
+    }
+  ]
+}

@@ -194,7 +194,7 @@ def write_answers(case_id, case_dir, provenance, config, result, track=None):
                + ('The case is waiting on the person(s) listed in the handover above.' if any(latest_reviews(d) for d in details)
                   else 'See the decision above for the recorded end state.'), '',
                'Trace: `REASONING.md` (why) · `AUDIT.md` (every step, actor and tool) · `evidence.json` / `records.jsonl` (raw records) · '
-               '`checkpoint-NNN.json` (state after each source) · `worker.log`.', '']
+               '`checkpoint-NNN.json` (state after each source; kept in the local run directory, not published).', '']
 
     reasoning = [f"# Reasoning — {track} case {case_id}", '',
                  'Exported from the system\'s recorded policy assessments, claims and concise model rationales. '

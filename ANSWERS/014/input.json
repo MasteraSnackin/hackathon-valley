@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "Heating service request at 7 Mallowmere Walk",
+  "property_ref": "7 Mallowmere Walk, Larkfen, ZZ1 1ZZ",
+  "as_of": "2025-01-14T17:08:00+00:00",
+  "report_available_at": "2025-01-14T08:12:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Leah Venn (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported that the radiators are cold and the heating controller is unresponsive. Hot water is still available. Asked for a repair appointment and said she was at home this morning.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Update from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Update\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Leah Venn (Tenant)\n\nAcknowledged the report and asked about the boiler display, any smell of gas or visible leak, and suitable access arrangements.",
+      "available_at": "2025-01-14T08:26:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — SMS from Leah Venn (Tenant)",
+      "text": "Event 003 — SMS\nFrom: Leah Venn (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid there was no gas smell or visible leak and the boiler display was blank. She has a mobility impairment and cannot use the stairs quickly. Asked that an attendee call from outside rather than arrive unannounced.",
+      "available_at": "2025-01-14T08:39:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Leah Venn (Tenant)\n\nLeah said her adult niece, Erin Vale, sometimes stays overnight but is not authorised to approve work or provide access in her absence. Leah asked that medical details not be shared with contractors; she agreed the agency could say she needs extra time to answer the door.",
+      "available_at": "2025-01-14T09:03:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Daniel Hart (Heating Contractor, Brackenridge Heat Services)\n\nSent the reported symptoms and asked for the earliest diagnostic appointment, including whether a same-day visit was available. Noted that access must be arranged directly with Leah.",
+      "available_at": "2025-01-14T09:24:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Daniel Hart (Heating Contractor, Brackenridge Heat Services)",
+      "text": "Event 006 — Email\nFrom: Daniel Hart (Heating Contractor, Brackenridge Heat Services)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nOffered the next standard appointment on 17 January, 10:00–14:00. The diagnostic call-out is a fixed £168 including VAT; replacement parts or remedial work are not included and would be quoted separately.",
+      "available_at": "2025-01-14T09:41:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReviewed the property authority record: the £250 limit is per urgent repair incident, inclusive of diagnostic call-out, labour and parts, and Maya may authorise qualifying urgent-repair expenditure up to that total without further landlord consent. Temporary heaters, transport and accommodation are not covered by this repair authority.",
+      "available_at": "2025-01-14T10:02:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — SMS from Leah Venn (Tenant)",
+      "text": "Event 008 — SMS\nFrom: Leah Venn (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported a living-room temperature of 12°C at 10:10. She has one small plug-in heater whose casing becomes unusually hot and has stopped using it. She may be able to stay with her niece tonight if transport can be arranged, but has not confirmed whether the home is accessible.",
+      "available_at": "2025-01-14T10:18:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 009 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Owen Pike (Landlord)\n\nReported the heating failure, the tenant's temperature reading and the 17 January appointment offer. Asked about a faster diagnostic visit and possible interim arrangements.",
+      "available_at": "2025-01-14T10:37:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Owen Pike (Landlord)",
+      "text": "Event 010 — Email\nFrom: Owen Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid to obtain a quote before committing to non-emergency expenditure. He was travelling and might not respond promptly. He did not address the diagnostic appointment or temporary arrangements in this message.",
+      "available_at": "2025-01-14T11:06:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 011 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Daniel Hart (Heating Contractor, Brackenridge Heat Services)\n\nAsked about an earlier slot, a cancellation list and phone triage, and whether the contractor could offer safe temporary-heating advice without a visit.",
+      "available_at": "2025-01-14T11:22:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Daniel Hart (Heating Contractor, Brackenridge Heat Services)",
+      "text": "Event 012 — Email\nFrom: Daniel Hart (Heating Contractor, Brackenridge Heat Services)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed no same-day engineer was available. A cancellation slot might arise on 15 January but could not be reserved without a booking. Brackenridge Heat Services could not assess the property or advise on a substitute heater remotely, and advised that the heater Leah described should not be used.",
+      "available_at": "2025-01-14T11:48:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — SMS from Leah Venn (Tenant)",
+      "text": "Event 013 — SMS\nFrom: Leah Venn (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed she would not use the suspect heater. She can admit a contractor on 15 January if given at least 30 minutes' notice and a direct call. She cannot guarantee access on 17 January because of a hospital appointment. No key is held by the agency.",
+      "available_at": "2025-01-14T12:14:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Owen Pike (Landlord)",
+      "text": "Event 014 — Email\nFrom: Owen Pike (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nClarified that his request for a quote before committing expenditure concerned non-emergency spending and did not withdraw the standing £250 urgent-repair authority. If the incident is treated as an urgent repair, Maya may authorise the £168 diagnostic call-out without further consent; any later work must remain within the incident limit or be referred for consent.",
+      "available_at": "2025-01-14T12:47:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Call from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Call\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Leah Venn (Tenant)\n\nDiscussed possible interim arrangements. Leah said she has no suitable spare heater and is concerned about carrying one because of her mobility impairment. She asked whether delivery of a heater or transport to her niece's home could be arranged. She still needed to check whether the niece's entrance was step-free.",
+      "available_at": "2025-01-14T13:16:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 016 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Priya Noll (Duty Manager, Northbridge Lettings)\n\nEscalated the cold-weather report, access requirements, late standard appointment and available £250 urgent-repair authority. Asked what cover or separate spending authority applied to temporary heating, transport or accommodation.",
+      "available_at": "2025-01-14T14:03:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Update from Priya Noll (Duty Manager, Northbridge Lettings)",
+      "text": "Event 017 — Update\nFrom: Priya Noll (Duty Manager, Northbridge Lettings)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirmed the office could contact the landlord again and check approved suppliers for heater delivery. The duty file records no separate spending limit for temporary equipment, transport or accommodation.",
+      "available_at": "2025-01-14T15:11:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Portal from Leah Venn (Tenant)",
+      "text": "Event 018 — Portal\nFrom: Leah Venn (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReported the living-room temperature as 10°C at 16:25. Her niece's spare room might be available tonight, but Leah had not confirmed whether the entrance was step-free. Asked for an update before the office closed. No appointment or interim arrangement had been confirmed.",
+      "available_at": "2025-01-14T16:42:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Call from Daniel Hart (Heating Contractor, Brackenridge Heat Services)",
+      "text": "Event 019 — Call\nFrom: Daniel Hart (Heating Contractor, Brackenridge Heat Services)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSaid a cancellation appointment for 15 January, 09:00–11:00, had become available and could be held only if booked by 17:30. It would be the same £168 diagnostic call-out; no repair work or parts were included. Leah's direct confirmation of access, including the required call and notice, would still be needed. The slot has not been booked.",
+      "available_at": "2025-01-14T17:08:00+00:00"
+    }
+  ]
+}

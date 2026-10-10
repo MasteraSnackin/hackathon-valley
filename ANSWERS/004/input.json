@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "title": "Front entrance lock report",
+  "property_ref": "18 Larkspur Quay, Morrowfen, ZZ1 1ZZ",
+  "as_of": "2025-09-16T08:33:00+00:00",
+  "report_available_at": "2025-08-27T10:05:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Nessa Vale (Tenant)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nReports that the front-door lock is loose and intermittent, and the door sometimes catches instead of closing cleanly. Says it can be manually locked at present. A spare key cut recently does not work.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 002 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Nessa Vale (Tenant)\n\nAcknowledges the report and says Northbridge Lettings is seeking the landlord's approval to arrange work. Asks the tenant to send any further details relevant to the repair.",
+      "available_at": "2025-08-27T10:24:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nRequests approval to arrange a locksmith visit for the reported loose, intermittently working front-door lock.",
+      "available_at": "2025-08-27T10:31:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 004 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nFollows up on the outstanding request for approval and asks whether Northbridge Lettings may arrange the lock work or whether the landlord intends to arrange it.",
+      "available_at": "2025-08-28T10:20:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Call from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Call\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nThe landlord says he is away and asks for communication by email. He says the front-door work should already have been done. During the call he also agrees that the tenant may carry out skirting-board paint touch-ups at her own expense.",
+      "available_at": "2025-09-01T09:15:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Note from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 006 — Note\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings maintenance record (Note)\n\nRecords the landlord's approval to proceed with the lock repair or replacement and his separate agreement to the tenant's proposed paint touch-ups at her own expense.",
+      "available_at": "2025-09-01T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Nessa Vale (Tenant)\n\nSays Northbridge Lettings' selected locksmith, Peregrine Keyworks, needs to attend and asks the tenant for appointment options.",
+      "available_at": "2025-09-01T11:20:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 008 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nConfirms that the agency has started arranging a visit with its selected locksmith and is seeking the tenant's availability.",
+      "available_at": "2025-09-01T11:35:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — Email from Nessa Vale (Tenant)",
+      "text": "Event 009 — Email\nFrom: Nessa Vale (Tenant)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nOffers three access windows: 4 September, 11:00–13:00; 8 September, 10:00–12:00; and 9 September, 10:00–12:00. Requests confirmation of the chosen time.",
+      "available_at": "2025-09-01T12:10:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 010 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Elian Marr (Contractor, Peregrine Keyworks)\n\nPasses on the tenant's three available windows and asks the locksmith to commit to one or propose an alternative. The agency's selected provider is being scheduled; no visit is yet confirmed.",
+      "available_at": "2025-09-01T12:24:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Tomas Elde (Landlord)",
+      "text": "Event 011 — Email\nFrom: Tomas Elde (Landlord)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nComplains that communication about a contractor he had asked the agency to contact had failed. He says the contractor was expected on the preceding Friday or Saturday, then turned up at about 11:00 on Saturday when nobody was at the property. This was before the agency requested the tenant's appointment windows. The landlord says not to instruct another contractor and asks Northbridge Lettings to wait for his contractor. He also confirms the tenant may do the paint touch-ups at her own expense.",
+      "available_at": "2025-09-01T14:30:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Note from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Note\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings maintenance record (Note)\n\nRecords the landlord's instruction to use his contractor rather than proceed with the agency's selected provider. The agency had already asked Peregrine Keyworks to choose a slot, but no attendance by that provider had been confirmed.",
+      "available_at": "2025-09-02T08:40:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — Call from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 013 — Call\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Nessa Vale (Tenant)\n\nChecks availability for the landlord's contractor. The tenant says she is available that day, on 4 September, and on 8 and 9 September, and can be flexible on those days.",
+      "available_at": "2025-09-02T09:10:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Call from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 014 — Call\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nAttempts to reach the landlord to discuss coordination with his contractor; no substantive conversation is recorded.",
+      "available_at": "2025-09-02T09:25:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Tomas Elde (Landlord)\n\nApologises for the failed coordination around the earlier Saturday visit and provides the tenant's current availability: that day, 4 September, and 8 and 9 September. Asks how the landlord's contractor proposes to arrange a visit.",
+      "available_at": "2025-09-02T09:40:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Tomas Elde (Landlord)",
+      "text": "Event 016 — Email\nFrom: Tomas Elde (Landlord)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nSays his contractor, Dorian Wren, is away until 9 September. Asks the agency to communicate directly with Dorian, and says Dorian has told him he called and left a message asking for a return call.",
+      "available_at": "2025-09-02T10:05:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Elian Marr (Contractor, Peregrine Keyworks)\n\nNotifies Peregrine Keyworks that the landlord has instructed Northbridge Lettings to wait for his own contractor and stand down the agency's selected provider. No agency-provider visit is to be treated as confirmed.",
+      "available_at": "2025-09-02T10:25:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Note from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 018 — Note\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings maintenance record (Note)\n\nNo visit date from Dorian Wren is recorded. The agency's selected locksmith has been stood down under the landlord's instruction; the repair is now awaiting coordination with the landlord's contractor.",
+      "available_at": "2025-09-03T10:00:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Note from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 019 — Note\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings maintenance record (Note)\n\nThe landlord's contractor was reported to be away until 9 September. No confirmed appointment time or inspection outcome is recorded.",
+      "available_at": "2025-09-08T15:00:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Call from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Call\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Nessa Vale (Tenant)\n\nThe tenant reports a later visit by Dorian Wren, separate from the earlier Saturday visit reported by the landlord. She says Dorian initially disputed that the lock was faulty. After a key he tried also failed, he said a new lock was needed. He left to obtain a lock and said he would return the following week, but did not give a date or time. The tenant says the lock is now worse than before; no replacement is confirmed.",
+      "available_at": "2025-09-09T17:15:00+00:00"
+    },
+    {
+      "source_label": "Event 021 — Call from Nessa Vale (Tenant)",
+      "text": "Event 021 — Call\nFrom: Nessa Vale (Tenant)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nRaises other unresolved concerns during the call: a broken bedroom blind that lets in light, glazing in a door that the landlord had previously said would be addressed, and hot water that she says is too hot. She asks who is handling these matters. The agency representative cannot confirm their status or ownership during the call.",
+      "available_at": "2025-09-09T17:30:00+00:00"
+    },
+    {
+      "source_label": "Event 022 — Email from Mira Sol (Property Manager, Northbridge Lettings)",
+      "text": "Event 022 — Email\nFrom: Mira Sol (Property Manager, Northbridge Lettings)\nTo: Nessa Vale (Tenant)\n\nAsks whether Dorian Wren has returned to replace the lock and whether the issue has been resolved.",
+      "available_at": "2025-09-15T09:15:00+00:00"
+    },
+    {
+      "source_label": "Event 023 — Email from Nessa Vale (Tenant)",
+      "text": "Event 023 — Email\nFrom: Nessa Vale (Tenant)\nTo: Mira Sol (Property Manager, Northbridge Lettings)\n\nSays the contractor is meant to come that day sometime after 10:00 but has not given a narrower time. The tenant says she will update the agency. At this point there is no confirmation that he has attended or that the lock has been repaired or replaced.",
+      "available_at": "2025-09-16T08:33:00+00:00"
+    }
+  ]
+}

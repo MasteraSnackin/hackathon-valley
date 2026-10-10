@@ -1,0 +1,294 @@
+{
+  "track": "Property Management",
+  "cases": {
+    "001": {
+      "events": 23,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "844f933c6ea34f537a1a946e5bcc6c60bcc2e03bde44f40c67cfcf5815451c1f",
+        "history.md": "536e79a1097181fe0e483e9a98b656c49b5d8dd6508a5db7cad3851780854aab",
+        "attachments/bathroom-works-quotation.pdf": "ead9d12a916d0de1856b00c02639c81ed9a50ef76fe7991fa3c0fec873802ee3"
+      }
+    },
+    "002": {
+      "events": 24,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "47d97e5d3f2d785b55812d62c58dfafeaee9618c7c2a1cae0b0fa3465b717f1f",
+        "history.md": "3d6d883fb863b390be2beb02558f470c785129adf30db5d00ecfbb63938cc64e",
+        "attachments/gas-portal-record.pdf": "6df6032076658043712cce7c1932e0b80862bdc002322f1bc1eda9738a076603"
+      }
+    },
+    "003": {
+      "events": 23,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "e6184acdca005c6549540cb1c11773ea889098afc75bcce8a2a3b8d328c026f6",
+        "history.md": "4b95583a58d77fc8dc86974497ab97ac7a241656449d8290dd381a0ad00f51b1",
+        "attachments/tap-works-invoice.pdf": "220c4aa309c3b3c02548f29cf0e68cace4c58d50344db930a0966444ba275890"
+      }
+    },
+    "004": {
+      "events": 23,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "4c9b0b9ff652946dcf7edf746a5b5dbe5f0577b23ccca4bb1f1b0c1aa8dce9e6",
+        "history.md": "f0d574347174f09e7a98bff0b53736b947b6c2c3f0efe0a829b85cd9af2b1cb6"
+      }
+    },
+    "005": {
+      "events": 20,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "f9c84264fef1a88e92e2988dc495f01e705114dacd7bb490082cfec39b4dd9ff",
+        "history.md": "cb022f4e731f59bedd10e3207972ddeabe519ebddf4156b8e92608f4d5f74603",
+        "attachments/invoice-NBL-005-INV-71.pdf": "e3c3e14b21f81df233a2e5efe3550543060f67fa153952742239d1a22a80f998"
+      }
+    },
+    "006": {
+      "events": 17,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "198654f34c424a797ef9fed688c438fd17788798d7a69d382cffa0b2df7d4b4a",
+        "history.md": "97d050be2f392ac056e70a6c08fdfd00be3b5c6cb9db5a9e914521f88e8a8c3f"
+      }
+    },
+    "007": {
+      "events": 19,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "72a477eb1a2a693ca732c69dacb10c5c91921a1c25565965bfff9ba73a03fb69",
+        "history.md": "7cde7159c860a5329a3ad173b32dfcc568c3d0ee8b8881446d4422eb8af4128f"
+      }
+    },
+    "008": {
+      "events": 24,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "5493fc59a8b5effff59ad5335063805a7ab50441e36121b6fe9f3df669aa8764",
+        "history.md": "659433cf007859a606a6b7c031ea06084c8b36212f0a4e98a8994770542f83e7"
+      }
+    },
+    "009": {
+      "events": 20,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "444412af84fa93201f974fc6d3152d7733f60426d9a2a52d3c7edd4c4491402f",
+        "history.md": "597fed3eae4528da474b42a56d43d052fb5d199e3dd4218643fc5d89d7221755",
+        "attachments/forwarded-document.pdf": "ad02bd445d6d5800b12887c1cd453f40c0fe439c9933283ad0d15ba956f0083a"
+      }
+    },
+    "010": {
+      "events": 26,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "1cb8ca34caf4f236ede5c26ab28c4db27d959a1a475941cabbc0d8e16222bc4b",
+        "history.md": "5e7faa7ea5bbac839a19ddab2eea22565fffca4cf637389214625af00406214d"
+      }
+    },
+    "011": {
+      "events": 24,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "73692296e6ef1db8e10a893d94b6912e12240ce97cfc415d6a9d38326e5ac55a",
+        "history.md": "ee51a1b907548a981d5d390bc2588691cd07165ad60ac8ab6826d1b6e8d4132a"
+      }
+    },
+    "012": {
+      "events": 25,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "d5477211b05d184b76978efddb4b1d875ba2a2b362c40f23797b3ba17b41c584",
+        "history.md": "5b1243877d9849340cb5b15871ba4b7b6b8e38961b2484ff45b60c65e0a9c973"
+      }
+    },
+    "013": {
+      "events": 24,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "354548beb3b0e5beb10297bc2e01664c0dcc2a70ef79253a7ee123ea0e8edf16",
+        "history.md": "31fb95eb21781798c0a8f486462739801effa5f5e4c9044163b4a5200099c7ef",
+        "attachments/glazing-invoice.pdf": "a4382ed65e3f517101f0faa3d67c361a3133ed23289adf7df6604b3b15431348"
+      }
+    },
+    "014": {
+      "events": 19,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "be35284ced5c1616e7b89044bfcf7e30ec9c4e3b0de79e8886e93f2f0c68efd1",
+        "history.md": "77cdb1616ab29cf293b4442a4806731a18c85fd9a73e7ac1c7f4a360fa80ec20"
+      }
+    },
+    "015": {
+      "events": 21,
+      "attachments_pdf_text": 2,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "101c1f20c43900e94bdeaf48872792f6c87c32c8d814d05dd108a77be61578e9",
+        "history.md": "aac46638a7453b6f2316e43f39814fcdeaea7e8b56edc521ac3b5405c7a91524",
+        "attachments/move-out-inspection-report.pdf": "08a0674c0ccdd49d6b23348f62476132c34368f4298e6fbbf3c89103f1ead282",
+        "attachments/property-preparation-quotation.pdf": "001c56f26bed1109ac5b78c450f6ba38b76bf376a22cc0797ef3e675f7be74b0"
+      }
+    },
+    "016": {
+      "events": 17,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "8153a88fabc189db8b29e12eb25d64f6c97d39c78407799bc42fec330197edb9",
+        "history.md": "d9bea3d945225f950617aa0d6d5595587effc20ce4448007710275898b2fcce2"
+      }
+    },
+    "017": {
+      "events": 19,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "555777160c9178461f85b7b4db1b80ddb13ce6f3170aea7e934328525fa099fb",
+        "history.md": "3cab9e3c36e6025ccea64c89612904e88bbaa62d81a71d499dc956a040ccd965",
+        "attachments/fire-door-quotation.pdf": "14872b21608680524fccd59419d8c6a41db0e9a8180384ad6f3469e721f46f11"
+      }
+    },
+    "018": {
+      "events": 19,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "b457ff29d472bfbd906d116b3ab0c265b0d5c68385f00236fb1b42ef661f8466",
+        "history.md": "677c9360209ab68b9120e4bf21937c566920e014a7c9bc71076e4cc9ddcade02"
+      }
+    },
+    "019": {
+      "events": 16,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "7d9dcaa4a090a9c846b33bc875c76aae6f64b09dadc6deab1d00fff099cab999",
+        "history.md": "7c36d73ffd5cf724b7db499d30b2809fd5586af6dff7dbf85d5640a972f06fd9",
+        "attachments/remedial-works-invoice.pdf": "2e51f90d258f4a13d227115b6f0cd2a993874f778a9b947dd2eb9ec8e15362a9"
+      }
+    },
+    "020": {
+      "events": 25,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "cea7bf3dc1afa31dbee02d2ccefaf4c900784e09c14b449f1220ca0a5ec70882",
+        "history.md": "820d1c4ce3cda57fed6f3310129d2934631597905286a34d8198b3f31eed4d32"
+      }
+    },
+    "021": {
+      "events": 21,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "db5bcfe1c376d27194038f3499aace7a87a3d375a66f6c3e0642ce4136b28a48",
+        "history.md": "43a2461249d06618a432e2945a3976ea9cbf078f8f2a3894ca16a55cc93f0118"
+      }
+    },
+    "022": {
+      "events": 31,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "dfcdecac9344072b65fca0617a0e3ba855e196f36f16d74bcc99e2a77a717713",
+        "history.md": "1ea78aae67bbf0464ef79f3cc2234978862206e62674f4b11c096df434b3ddfd"
+      }
+    },
+    "023": {
+      "events": 23,
+      "attachments_pdf_text": 2,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "9e555d617ff37d402278ac261106882e2164f181dbc0eb707bf1b126c121b066",
+        "history.md": "c12ce7addf387cbca72b0a015460281a6d13895b3edbb18907c28ce0796dcc2b",
+        "attachments/invoice-NBL-CFM-250210-A.pdf": "6c1ba21e22f37da400f9c2d6270249347128bbe5ff606a20af2bd9977570bce7",
+        "attachments/invoice-NBL-CFM-250210-B.pdf": "91f84f37d6c64c961352ecfb2f7f6f2b9e5fb88293e072f0782db5117c377237"
+      }
+    },
+    "024": {
+      "events": 21,
+      "attachments_pdf_text": 2,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "4cb469deeb827f4d3fbfafd920823665f668a553149eb9b639aa7a36ddd81c12",
+        "history.md": "6de2c2648c111cf40fecc1c28022c2a85e2a86bfc5431fadb3f16d9ade09290f",
+        "attachments/checkout-report.pdf": "64f64699dad7ebd692df242fd6ffdabf8f32450218c17047da22d7f0def7b58d",
+        "attachments/property-service-quotation.pdf": "412c425f35355d13fe8458ab4c2f80efa06806c737d09eec1a49e2901ac6f253"
+      }
+    },
+    "025": {
+      "events": 22,
+      "attachments_pdf_text": 1,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "0e23527a1f745d77722e3262d76b92cca56b3eadd184882a778a489760afc2f1",
+        "history.md": "7e4d866fc791587233a8aea992f23228b995dac7c5168cc739bc06526855ddf1",
+        "attachments/corrected-plumbing-invoice.pdf": "119597caa26becac9762275ab8462adbb2e7e59cfc53ffdc4e088763eba1333c"
+      }
+    },
+    "026": {
+      "events": 20,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "73945d6d243e6c839569e47349a38760c52d0f7b2f950d7288a46f0862cc94ab",
+        "history.md": "bb88c8188a477ed06c9acb56e75b0ddbc6103df637b237202578717d69c216e6"
+      }
+    },
+    "027": {
+      "events": 17,
+      "attachments_pdf_text": 2,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "6ec65d185edef6ba184d1b00c59098b148f5ab5cc57f8262736b75e921b54fdf",
+        "history.md": "af928a92a68793ebffcfbbdd577666229ebc4aaeb7c6bd8b4c78340a1fa3616b",
+        "attachments/checkout-report.pdf": "0e374c03cf6b0791a91984ad4f07fdebffce9cace8353d66d3cedbe46889e31b",
+        "attachments/move-out-works-quotation.pdf": "c408d8e0693db6be73d204d0a419119e782ef944d25e46643554f9e4f8222511"
+      }
+    },
+    "028": {
+      "events": 25,
+      "attachments_pdf_text": 2,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "cb5b5701dc89823bf2e74a0f6d1e0cf9d4feea766958b8fc9c12c6f5e57a57c9",
+        "history.md": "fd8b0c4a611e0a652df620458977c74010cfce783516c2b1d2b6e4dd3d8f923e",
+        "attachments/checkout-report.pdf": "9e18b582c67b80594d71075269844580ffc1fe785781211b51108a4ef6a1c7cb",
+        "attachments/provider-quotation.pdf": "1feb840ffce0111d9e4db1880cea12233f6614a7e97b1d959b04ff0443093085"
+      }
+    },
+    "029": {
+      "events": 20,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "7aad37283ae7d09571b6accce87198c3749e45d739711f5f492d15798b09e7e8",
+        "history.md": "ac3729246af8c7913e3b20e6e660d7a656964d95d4f30132911f60c91712dadf"
+      }
+    },
+    "030": {
+      "events": 15,
+      "attachments_pdf_text": 0,
+      "attachments_unread": [],
+      "source_sha256": {
+        "index.md": "3dfafb42686b5db5ef3b397a905ab4c281ab3995208c27bb16023877208dcbe0",
+        "history.md": "e556da3e9bcafecec023724bea68e86d279e008d9872a8d25b4714d109804609"
+      }
+    }
+  }
+}

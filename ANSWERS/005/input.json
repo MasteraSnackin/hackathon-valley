@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "title": "Heating repair invoice and payment details",
+  "property_ref": "18 Brindlewick Row, Vellmere, ZZ1 1ZZ",
+  "as_of": "2025-05-13T16:40:00+00:00",
+  "report_available_at": "2025-05-06T08:12:00+00:00",
+  "report": "Event 001 — Portal\nFrom: Iris Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReports that the heating stopped overnight. The display on the hall thermostat is blank. Hot water is still available from the immersion switch.",
+  "evidence": [
+    {
+      "source_label": "Event 002 — Update from Northbridge Lettings workflow (System)",
+      "text": "Event 002 — Update\nFrom: Northbridge Lettings workflow (System)\nTo: Iris Bell (Tenant)\n\nMaintenance request NBL-005-184 opened and assigned for review.",
+      "available_at": "2025-05-06T08:34:00+00:00"
+    },
+    {
+      "source_label": "Event 003 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 003 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Iris Bell (Tenant)\n\nAsks whether the thermostat display shows anything and whether any warning lights, leaks, or unusual smells are present.",
+      "available_at": "2025-05-06T09:05:00+00:00"
+    },
+    {
+      "source_label": "Event 004 — Portal from Iris Bell (Tenant)",
+      "text": "Event 004 — Portal\nFrom: Iris Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays the thermostat display is blank. There is no visible leak or unusual smell, and the household can use the immersion for hot water.",
+      "available_at": "2025-05-06T09:27:00+00:00"
+    },
+    {
+      "source_label": "Event 005 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 005 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Hearthline Heating)\n\nRequests an inspection and diagnostic report for the heating fault. Asks Rowan to contact the tenant to arrange access and to obtain approval before undertaking work beyond diagnosis.",
+      "available_at": "2025-05-06T10:16:00+00:00"
+    },
+    {
+      "source_label": "Event 006 — Email from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 006 — Email\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nConfirms availability the following morning. Says the inspection charge is £95 plus VAT and that any repair would be quoted separately.",
+      "available_at": "2025-05-06T11:02:00+00:00"
+    },
+    {
+      "source_label": "Event 007 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 007 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Jonas Reed (Landlord)\n\nRequests approval for the £95 plus VAT diagnostic visit only. Notes that no repair estimate has yet been provided.",
+      "available_at": "2025-05-06T11:18:00+00:00"
+    },
+    {
+      "source_label": "Event 008 — Email from Jonas Reed (Landlord)",
+      "text": "Event 008 — Email\nFrom: Jonas Reed (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nApproves the diagnostic visit up to £95 plus VAT. Says to contact him before authorising repair work.",
+      "available_at": "2025-05-06T13:41:00+00:00"
+    },
+    {
+      "source_label": "Event 009 — SMS from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 009 — SMS\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Iris Bell (Tenant)\n\nOffers an appointment window of 09:00–11:00 on 7 May. Iris replies that the front door buzzer is unreliable and asks Rowan to call on arrival.",
+      "available_at": "2025-05-06T14:10:00+00:00"
+    },
+    {
+      "source_label": "Event 010 — Call from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 010 — Call\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Iris Bell (Tenant)\n\nCalls from outside the property after the buzzer does not respond. Iris confirms access by phone.",
+      "available_at": "2025-05-07T09:38:00+00:00"
+    },
+    {
+      "source_label": "Event 011 — Email from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 011 — Email\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReports that he attended, found a failed control board, and restored heating temporarily by resetting the unit. Says a replacement board may be needed and estimates £460 plus VAT for parts and labour. No written job sheet is attached.",
+      "available_at": "2025-05-07T11:22:00+00:00"
+    },
+    {
+      "source_label": "Event 012 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 012 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Hearthline Heating)\n\nAsks whether the £460 estimate includes the diagnostic charge, requests a written breakdown and job sheet, and asks whether the temporary reset is safe to use pending a decision.",
+      "available_at": "2025-05-07T12:06:00+00:00"
+    },
+    {
+      "source_label": "Event 013 — SMS from Iris Bell (Tenant)",
+      "text": "Event 013 — SMS\nFrom: Iris Bell (Tenant)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays the heating is currently running after the visit but asks whether it is expected to remain operational. Reports no new symptoms.",
+      "available_at": "2025-05-07T13:19:00+00:00"
+    },
+    {
+      "source_label": "Event 014 — Email from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 014 — Email\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nReplies that the estimate is separate from the diagnostic charge. Says the reset is not a permanent repair and the fault could recur; recommends replacement of the control board. Does not provide the requested job sheet.",
+      "available_at": "2025-05-08T08:47:00+00:00"
+    },
+    {
+      "source_label": "Event 015 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 015 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Jonas Reed (Landlord)\n\nForwards the £460 plus VAT estimate and asks whether to proceed. Notes the contractor has not supplied a job sheet or confirmed the reset's expected duration.",
+      "available_at": "2025-05-08T10:03:00+00:00"
+    },
+    {
+      "source_label": "Event 016 — Email from Jonas Reed (Landlord)",
+      "text": "Event 016 — Email\nFrom: Jonas Reed (Landlord)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays he is travelling and asks for a clearer breakdown and written attendance record before deciding on the repair. Does not approve the quoted repair.",
+      "available_at": "2025-05-08T15:26:00+00:00"
+    },
+    {
+      "source_label": "Event 017 — Email from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 017 — Email\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Rowan Pike (Contractor, Hearthline Heating)\n\nRequests the itemised estimate and attendance record again. Asks Rowan not to order parts or carry out the quoted replacement unless separately authorised.",
+      "available_at": "2025-05-09T09:14:00+00:00"
+    },
+    {
+      "source_label": "Event 018 — Email from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 018 — Email\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSends invoice NBL-005-INV-71 for £114 including VAT, described as diagnostic attendance on 7 May. Says the heating fault did not recur during his visit. The invoice lists remittance details 00-00-00 / 00000000 and a payment due date of 19 May.",
+      "available_at": "2025-05-12T14:32:00+00:00"
+    },
+    {
+      "source_label": "Event 019 — Email from Rowan Pike (Contractor, Hearthline Heating)",
+      "text": "Event 019 — Email\nFrom: Rowan Pike (Contractor, Hearthline Heating)\nTo: Maya Chen (Property Manager, Northbridge Lettings)\n\nSays Hearthline Heating has changed bank accounts and asks that the invoice be paid using 11-11-11 / 11111111 instead of the details on the invoice. Says the invoice remains the same and offers to send a revised copy. No independent contact or verification information is included.",
+      "available_at": "2025-05-13T15:51:00+00:00"
+    },
+    {
+      "source_label": "Event 020 — Note from Maya Chen (Property Manager, Northbridge Lettings)",
+      "text": "Event 020 — Note\nFrom: Maya Chen (Property Manager, Northbridge Lettings)\nTo: Northbridge Lettings workflow (System)\n\nRecords that invoice NBL-005-INV-71 is awaiting review. The file contains the original remittance details; Rowan's later email requests different details. The diagnostic visit was approved, but the written job sheet remains outstanding and the quoted repair was not approved. No payment instruction has been entered.",
+      "available_at": "2025-05-13T16:40:00+00:00"
+    },
+    {
+      "source_label": "Attachment invoice-NBL-005-INV-71.pdf (PDF text extraction)",
+      "text": "Attachment: invoice-NBL-005-INV-71.pdf\nExtracted text (pypdf; layout not preserved):\n\nBILLING DOCUMENT Hearthline Heating — Invoice NBL-005-INV-71\nHearthline Heating\nInvoice: NBL-005-INV-71\nInvoice date: 12 May 2025\nPayment due: 19 May 2025\nBill to: Northbridge Lettings\nProperty: 18 Brindlewick Row, Vellmere, ZZ1 1ZZ\nDescription Amount\nDiagnostic attendance and inspection, 7 May 2025 £95.00\nVAT £19.00\nTotal due £114.00\nRemittance details\nSort code: 00-00-00\nAccount number: 00000000\nPlease quote invoice number with payment.",
+      "available_at": "2025-05-13T16:40:00+00:00"
+    }
+  ]
+}
