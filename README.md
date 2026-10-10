@@ -312,11 +312,13 @@ No public deployment is claimed. Screenshots must not expose credentials or rese
 
 The screenshots below were captured on 10 October 2026 from a fresh, isolated local instance using fictional details. Operational actions remain simulated.
 
-#### Animated screenshot walkthrough
+#### Animated product and architecture walkthrough
 
-![Animated walkthrough of the tenant request, staff review and policy settings](docs/screenshots/property-desk-walkthrough.gif)
+![Property Desk animated walkthrough: tenant request, property management, policy settings and architecture](docs/screenshots/property-desk-combined.gif)
 
-A 15-second loop using the saved application screenshots, with animated zooms and highlights. This is a screenshot walkthrough rather than a recording of live interactions; operational actions remain simulated.
+A 61-second loop covering tenant intake, staff review and policy settings, followed by the architecture. It combines an edited sequence of actual local app screens with an architecture animation. Operational actions are simulated; an action receipt does not confirm a completed repair.
+
+Property Desk is still being built. This walkthrough is a prototype snapshot, and the interface, workflows and features are subject to frequent changes.
 
 #### Tenant request
 
@@ -351,9 +353,15 @@ A plain-English instruction produces a proposed change to route missing access p
 
 `TODO: choose the project licence and add a root LICENSE file before public reuse.` Third-party assets retain their own terms; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
 
+### Maintainers and team
+
+- [@MasteraSnackin](https://github.com/MasteraSnackin)
+- [@vincentwap](https://github.com/vincentwap)
+- [@oleh-vell](https://github.com/oleh-vell)
+- [@Mehedi-dev-2404](https://github.com/Mehedi-dev-2404)
+
 ### Contact and support
 
-- **Maintainer:** `TODO: add maintainer or team name.`
 - **Support channel:** [GitHub issues](https://github.com/MasteraSnackin/hackathon-valley/issues), for users with repository access.
 - **Repository:** [MasteraSnackin/hackathon-valley](https://github.com/MasteraSnackin/hackathon-valley) (private).
 
