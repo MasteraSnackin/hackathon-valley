@@ -68,8 +68,13 @@ DEFAULT_SETTINGS = {'access_immediate_review':False,'reminder_hours':8,'escalati
  'tenant_self_identification':['clarify','request_quote'],
  # Questions to landlords, letting agencies and contractors on directory
  # properties (see app/parties.py). Sending is simulated, as for tenants.
- 'party_messages':'claude_decides','party_auto_send_topics':['approval','quote']}
+ 'party_messages':'claude_decides','party_auto_send_topics':['approval','quote'],
+ # Checks an operator explicitly assumes are satisfied (e.g. an evaluation that
+ # sets aside who-is-this verification). Only an UNKNOWN check is assumed; a
+ # contradicting or failing source still blocks. Off by default.
+ 'assumed_checks':[]}
 SELF_IDENTIFICATION_ACTIONS={'clarify','request_quote'}
+ASSUMABLE_CHECKS={'identity','route'}
 ROUTERS={'claude','jev_shadow','jev'}
 
 class StrictModel(BaseModel):
@@ -209,6 +214,7 @@ class PolicyInput(StrictModel):
         if s['router_jev_only_confidence']<s['router_min_confidence']: raise ValueError('The Jev-only bar cannot be below the routing bar')
         # Routes that need a person or Claude's quotes can never skip Claude.
         if not isinstance(s['router_jev_only_routes'],list) or set(s['router_jev_only_routes'])-{'archive','request_quote'}: raise ValueError('Jev-only routes are limited to archive and request_quote')
+        if not isinstance(s['assumed_checks'],list) or set(s['assumed_checks'])-ASSUMABLE_CHECKS: raise ValueError('Only identity and route checks can be assumed')
         if not isinstance(s['required_per_action'],dict): raise ValueError('Action requirements must map actions to required facts')
         for a,keys in s['required_per_action'].items():
             if a not in REQUIRED or not isinstance(keys,list) or set(keys)-FACTS: raise ValueError('Unsupported action requirement')
@@ -317,6 +323,9 @@ def evaluate(case,claims,approvals,policy,uncertain=False,at=None):
             if checkmap[key]['status']=='UNKNOWN':
                 checkmap[key]={'key':key,'status':'PASS','source_ids':[sid['source_id']],'claim_ids':[],
                     'reason':f"Tenant self-identified in their portal session as {sid['name']} at {sid['address']}; policy v{policy['version']} accepts this for {action.replace('_',' ')}."+(' Replies use the same in-app thread.' if key=='route' else '')}
+    for key in s.get('assumed_checks',[]):
+        if checkmap[key]['status']=='UNKNOWN':
+            checkmap[key]={**checkmap[key],'status':'PASS','reason':f"Assumed satisfied by policy v{policy['version']} setting assumed_checks; not verified."}
     for key in ['authority','finance']:
         # A grant cannot override a refusal or material contradiction.
         if any(a['key']==key for a in valid_approvals) and checkmap.get(key,{}).get('status') not in {'FAIL','CONFLICT'}:

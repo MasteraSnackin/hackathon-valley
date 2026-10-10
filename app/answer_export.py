@@ -153,11 +153,17 @@ def write_answers(case_id, case_dir, provenance, config, result, track=None):
     if not isinstance(data, dict):
         data = {}
     evidence = load(case_dir / 'evidence.json', {'cases': []})
-    label = 'OFFICIAL RUN' if config.mode == 'official' else 'PREPARATION ONLY — not official Reality Test results'
     details = evidence.get('cases', [])
+    assumed = (evidence.get('policy') or {}).get('settings', {}).get('assumed_checks') or []
 
-    answer = [f"# {track} — case {case_id}: {data.get('title', 'untitled')}", '',
-              f"*{label}. System-generated; not edited by hand.*", '',
+    answer = [f"# {track} — case {case_id}: {data.get('title', 'untitled')}", '']
+    if config.mode != 'official':
+        answer += ['*PREPARATION ONLY — not official Reality Test results. System-generated; not edited by hand.*', '']
+    if assumed:
+        answer += [f"> **Run assumption:** the {' and '.join(f'`{k}`' for k in assumed)} check(s) were set aside by policy "
+                   f"(`assumed_checks`): treated as satisfied unless a source contradicted them. Nothing was verified; "
+                   'every other gate (access, authority, schedule, completion, money, triage) still applied.', '']
+    answer += [
               f"- **Property (as supplied, unverified):** {data.get('property_ref', 'unknown')}",
               f"- **Decision cutoff:** {data.get('as_of', 'unknown')}",
               f"- **Runner status:** **{result.get('status')}** · execution `{result.get('execution', 'unknown')}` · "
