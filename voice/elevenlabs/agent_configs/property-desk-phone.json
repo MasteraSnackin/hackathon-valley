@@ -4,7 +4,7 @@
   "conversation_config": {
     "agent": {
       "language": "en",
-      "first_message": "Hello, you've reached the Property Desk maintenance line. I'm an automated assistant, and this call is transcribed so our team can review your report. If anyone is in danger right now, please hang up and call 999. How can I help?",
+      "first_message": "Hi, Property Desk maintenance, automated line. This call is transcribed. What's the problem?",
       "prompt": {
         "llm": "claude-sonnet-5",
         "temperature": 0.2,
