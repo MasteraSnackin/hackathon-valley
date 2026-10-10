@@ -1,0 +1,7 @@
+{
+  "artifact_sha256": "d036e1c0e6f6a6a08e00667b8ab604bd412bead91c5bc61f99ef3a6b99bd37c3",
+  "status": "not_run",
+  "reason": "The in-app browser security policy rejected the local file URL. No alternate browser or hosting workaround was attempted.",
+  "automated_browser_evidence": "See property-workflow.visual-check.json; unchanged",
+  "visual_review": "Parent inspected final 1440x900 light and 2048x1320 dark screenshots; readable labels and routes."
+}

@@ -1,0 +1,41 @@
+{
+  "diagram_type": "architecture",
+  "output": "/Users/darkcomet/.codex/.chatgpt-projects/g-p-6ac970305f2481919eebbb5c44f3b350/property-workflow/docs/diagrams/property-workflow.html",
+  "specification": "/Users/darkcomet/.codex/.chatgpt-projects/g-p-6ac970305f2481919eebbb5c44f3b350/property-workflow/docs/diagrams/property-workflow.architecture.json",
+  "specification_sha256": "1e03882be7b9f790de8381afab41b30ebe1e53b500a4c2b4aefcbd0d6fa0c682",
+  "artifact_sha256": "d036e1c0e6f6a6a08e00667b8ab604bd412bead91c5bc61f99ef3a6b99bd37c3",
+  "artifact_bytes": 815991,
+  "validation": "9/9 showcase, 0 errors, 0 warnings",
+  "browser_evidence": "passed",
+  "visual_review": "passed",
+  "correction_rounds": 1,
+  "visual_review_scope": {
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "inspected_screenshots": [
+      "1440x900",
+      "2048x1320"
+    ],
+    "observations": [
+      "No clipping or overlapping node and relationship labels in the inspected images.",
+      "Diagram and three explanatory cards fit; the larger composition uses the page without a conspicuous empty lower band."
+    ],
+    "interaction_tests": "Not performed by this authoring agent; root may inspect the frozen HTML."
+  },
+  "automated_viewports": [
+    "1440x900",
+    "1600x1000",
+    "1920x1080",
+    "2048x1320"
+  ],
+  "source_scope": "Inspected local source on 10 October 2026; no Git revision verification or frozen implementation claim.",
+  "sidecars": {
+    "delivery": "property-workflow.delivery.json",
+    "validation": "property-workflow.validation.json",
+    "browser_evidence": "property-workflow.visual-check.json",
+    "contact_sheet": "property-workflow.visual-check.html",
+    "source_notes": "source-notes.md"
+  }
+}

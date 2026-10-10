@@ -16,4 +16,10 @@ This conservative exclusion limits replay coverage. The app accepts pasted evide
 
 Replay uses the local literal demonstration interpreter and a clean isolated database. It never calls a live model, sends an external communication or executes an adapter. Generated source assertions stay distinct from verified facts. The replay report shows outcomes and blockers; it does not treat eventual historical closure as an acceptable-outcome label or an accuracy score.
 
-All 50 original cases informed an earlier generic audit before this split. The other partition is reserved from this implementation onward, rather than previously unseen. Neither this implementation nor its replay command reads or runs the reserved cases. A later evaluator should freeze code/policy/labels and test that partition separately.
+All 50 original cases informed an earlier generic audit before this split. The other partition is reserved from this implementation onward, rather than previously unseen. The source loader and replay command address only the BUILD partition. A later evaluator should freeze code/policy/labels and test the reserved partition separately.
+
+## Shared runtime exposure during UI verification
+
+The existing default `var/property.db` had records labelled as reserved evaluation data, introduced outside this implementation subtask. The dashboard automatically selected one of those records during the first browser check and displayed its stored history. The verification server was stopped immediately after that was recognised. No source folder from the reserved partition was opened, and no implementation or test decision was based on that displayed history. The existing database was preserved without cleanup.
+
+Subsequent browser verification used a fresh separate application database and native workflow directory containing fictional demonstration material only. Automated tests use isolated temporary storage, and CLI replay uses its own temporary BUILD-only database. The shared default database and the accidentally displayed case cannot be described as an untouched evaluation environment. This exposure must remain disclosed in any later evaluation report.
