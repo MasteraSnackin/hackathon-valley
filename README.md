@@ -52,11 +52,12 @@ You can either use Demo link: [property-desk-mauve.vercel.app](https://property-
 
 
 # Models, APIs and external services used
-Anthropic models for reasoning 
-Jev model for routing
-Vercel Workflows for durable execution and hosting
-Twilio for phone number 
-ElevenLabs for Voice agents
+
+- Anthropic models for reasoning
+- Jev model for routing
+- Vercel Workflows for durable execution and hosting
+- Twilio for phone number
+- ElevenLabs for Voice agents
 
 
 # Key assumptions
