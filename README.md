@@ -50,8 +50,6 @@ Both browser views share the case service and policy checks. Incoming evidence a
 
 [![Property Desk architecture map showing browser views, case service, policy checks, native Workflow, storage and simulated actions](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)](docs/diagrams/property-workflow.visual-check.2048x1320.light.png)
 
-[Download the interactive architecture map](docs/diagrams/property-workflow.html) using GitHub’s **Download raw file** button, then open the HTML file locally to explore components and three guided views. GitHub displays the static preview above; it does not run the interactive HTML inside the README.
-
 The map’s [editable JSON](docs/diagrams/property-workflow.architecture.json), [delivery receipt](docs/diagrams/property-workflow.delivery.json) and [source notes](docs/diagrams/source-notes.md) are kept alongside it. It describes reviewed local code; it does not represent a verified cloud deployment.
 
 The companion [decision flow](docs/diagrams/decision-flow.html) shows how a held action returns to a fresh assessment. The [standalone system overview](docs/diagrams/system-overview.html) is the editable HTML source of the embedded figure. Both diagrams describe the implemented local system; optional live interpretation and hosted deployment are explicitly distinguished.
@@ -165,6 +163,14 @@ Rules combine supported fact states with ALL/ANY conditions, action/property/cat
 ```
 
 Replay verifies the source manifest, uses temporary isolated storage, sends each selected prefix to Claude for triage and executes no adapters; drafted tenant questions stay in the simulated thread. It reports blockers, not an accuracy score. Index pages, later events and all binary attachments are excluded; see [BUILD replay boundaries](docs/BUILD_REPLAY_BOUNDARY.md), including retrospective material in BUILD 008.
+
+### Reality Test preparation
+
+The separate [Reality Test runner](docs/REALITY_TEST.md) accepts a versioned input manifest, runs cases in isolated native local Workflow processes and exports the required `ANSWERS/<case-id>/ANSWER.md` and `REASONING.md` with execution evidence. It retains failures and unresolved human handovers; it does not supply approvals or replace the agent's answers.
+
+Follow the guide to validate configuration, record the frozen commit and run the organisers' newly released cases. The organiser input format has not yet been supplied, so conversion into the documented input schema may be needed. Fictional development examples verify the runner, not performance on unseen cases. Official Reality Test results have not been generated.
+
+The [submission checklist](submission.md) collects the video path, social links, team accounts, freeze deadlines and remaining hand-in requirements.
 
 ### Checks
 
@@ -349,9 +355,9 @@ A plain-English instruction produces a proposed change to route missing access p
 
 ### Licence
 
-**Project licence: not specified.** No project-wide `LICENSE` file is present; this README does not grant or choose one on the maintainer's behalf.
+Property Desk's original source code and documentation are licensed under the [Apache License 2.0](LICENSE). Copyright 2026 Property Desk contributors.
 
-`TODO: choose the project licence and add a root LICENSE file before public reuse.` Third-party assets retain their own terms; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
+Third-party libraries, datasets, models, APIs and assets retain their own licences and terms. The project licence does not relicense those materials; vendored icons include [their Lucide licence](static/vendor/LUCIDE-LICENSE).
 
 ### Maintainers and team
 

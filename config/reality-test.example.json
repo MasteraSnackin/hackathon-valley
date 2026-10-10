@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "mode": "preparation",
+  "expected_commit": null,
+  "model": "claude-opus-5",
+  "triage_effort": "medium",
+  "draft_effort": "low",
+  "model_timeout_seconds": 30,
+  "case_timeout_seconds": 150,
+  "batch_timeout_seconds": 1500,
+  "workers": 4,
+  "poll_seconds": 0.25,
+  "require_model_credentials": true,
+  "policy_settings": {},
+  "policy_rules": []
+}
