@@ -2,9 +2,9 @@
 
 Resolve property cases with AI, Durable Execution by Vercel Workflows and 11labs
 
-**[Watch the 54-second working-product demo](docs/demo/property-desk-demo.mp4)** — the MP4 is stored in this repository.
+**[Watch the 60-second working product demo](https://youtu.be/sGq3t-AoA6A)** — watch on YouTube.
 
-[![Property Desk working-product demo: a maintenance request with independent human review checks](docs/demo/poster.jpg)](docs/demo/property-desk-demo.mp4)
+[![Property Desk working-product demo: a maintenance request with independent human review checks](docs/demo/poster.jpg)](https://youtu.be/sGq3t-AoA6A)
 
 Demo link: [property-desk-mauve.vercel.app](https://property-desk-mauve.vercel.app) 
 
