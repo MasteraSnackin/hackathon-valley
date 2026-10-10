@@ -67,6 +67,10 @@ In local mode, FastAPI, the case service and the embedded Workflow queue share o
 
 ### Diagram guide
 
+**[Open the live interactive architecture gallery](https://masterasnackin.github.io/hackathon-valley/)** · **[Open the interactive C2 system map](https://masterasnackin.github.io/hackathon-valley/c4/c2-containers.html)**
+
+These public GitHub Pages views run directly in the browser. They are static architecture documentation, separate from the maintenance application.
+
 The [diagram guide](docs/diagrams/README.md) provides ten focused views with static previews, editable sources and interactive HTML where available. Those diagrams are pinned to [2732af6](https://github.com/MasteraSnackin/hackathon-valley/tree/2732af60a920d0f9a88be18a36e078aa22fbfa6d), before the Jev router and React dashboard were added. They remain useful for the core service, policy and storage design, but omit the newer paths covered by the flow above. The four structural views follow the C4 levels: system context, containers, components and code. The code view focuses on the action decision path rather than every function in the repository.
 
 | View | What it explains |
@@ -483,6 +487,6 @@ These changes remain to be implemented:
 
 The [diagram guide](docs/diagrams/README.md) describes the earlier source snapshot, each view's scope and the checks performed. Archify generates the four C4 maps, two sequences and two flow diagrams from editable typed JSON. Diagram Design provides the data-storage and local-deployment figures as self-contained HTML with SVG exports. Humanizer was used for the explanatory prose and labels. Those artefacts have not been regenerated for Jev, the React client, portfolio and insight modules or the Reality Test runner; the inline high-level flow and current prose document the additional paths.
 
-Static previews work in GitHub Markdown. Interactive HTML must be downloaded and opened locally or served by a documentation host. The JSON, HTML, Mermaid sources and validation receipts stay beside each diagram so later changes can be reviewed and regenerated.
+Static previews work in GitHub Markdown. The [interactive gallery](https://masterasnackin.github.io/hackathon-valley/) is hosted on GitHub Pages; the HTML files can also be downloaded and opened locally. The JSON, HTML, Mermaid sources and validation receipts stay beside each diagram so later changes can be reviewed and regenerated.
 
 The diagrams document code and configuration. They do not establish cloud deployment, model accuracy, real message delivery or physical repair. Earlier figures remain in the repository as prototype snapshots; the guide links the reviewed set.

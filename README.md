@@ -48,9 +48,11 @@ flowchart TD
 
 ## Interactive architecture diagrams
 
-Explore the system through the [architecture gallery](docs/diagrams/index.html) or go straight to the [interactive system map (C2)](docs/diagrams/c4/c2-containers.html). The gallery includes C1–C4 views, request and human-review sequences, policy flows, storage and deployment diagrams.
+**[Open the live architecture gallery](https://masterasnackin.github.io/hackathon-valley/)** · **[Open the interactive system map (C2)](https://masterasnackin.github.io/hackathon-valley/c4/c2-containers.html)**
 
-GitHub displays these HTML files as source. To use the interactive views, run this from the repository root:
+These public GitHub Pages links run the diagrams in your browser; no download or local server is needed. The gallery includes C1–C4 views, request and human-review sequences, policy flows, storage and deployment diagrams.
+
+The [gallery HTML](docs/diagrams/index.html) and [C2 HTML](docs/diagrams/c4/c2-containers.html) remain available as editable source. To run a local copy, use this command from the repository root:
 
 ```sh
 python3 -m http.server 63575 --bind 127.0.0.1 --directory docs/diagrams

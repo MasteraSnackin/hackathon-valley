@@ -8,7 +8,7 @@ This snapshot predates Jev routing, the separate React operations dashboard and 
 
 The four structural levels follow the [C4 model](https://c4model.com/diagrams): context, containers, components and code. The [code view](https://c4model.com/diagrams/code) is deliberately limited to the policy decision component. It is not an exhaustive class diagram.
 
-The [local gallery](index.html) provides one page for opening all ten diagrams. GitHub displays the static images below. Click a preview to inspect its full size. Download an interactive HTML file and open it locally to use Archify's search, focus and guided views. JSON is the source of truth for Archify maps; HTML is the source for the two Diagram Design figures. Mermaid files are alternative editable representations, not the source of the delivered Archify HTML.
+The **[live architecture gallery](https://masterasnackin.github.io/hackathon-valley/)** opens all ten diagrams in your browser. Go straight to the **[interactive C2 system map](https://masterasnackin.github.io/hackathon-valley/c4/c2-containers.html)** to use search, focus and guided views. GitHub Pages serves these static files; it does not run the maintenance application. GitHub displays the static images below, and the [gallery HTML](index.html) remains available to download or serve locally. JSON is the source of truth for Archify maps; HTML is the source for the two Diagram Design figures. Mermaid files are alternative editable representations, not the source of the delivered Archify HTML.
 
 | View | Read it when you need to understand |
 | --- | --- |
