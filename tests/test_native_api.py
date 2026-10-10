@@ -164,13 +164,24 @@ def test_native_interrupted_step_redelivery_keeps_one_provider_receipt(tmp_path)
 @pytest.mark.claude
 def test_native_claude_triage_step_routes_a_new_report(tmp_path):
     """Real HTTP intake, real native workflow, real Claude call in the triage step."""
-    output = Path(os.getenv("PROPERTY_NATIVE_API_CHECK_DIR", str(tmp_path))).resolve() / "claude-triage"
+    _run_native_model_phase(tmp_path, "claude")
+
+
+@pytest.mark.jev
+@pytest.mark.claude
+def test_native_jev_route_step_routes_a_new_report(tmp_path):
+    """Real HTTP intake, real native workflow, real Jev call in the routing step."""
+    _run_native_model_phase(tmp_path, "jev")
+
+
+def _run_native_model_phase(tmp_path, phase):
+    output = Path(os.getenv("PROPERTY_NATIVE_API_CHECK_DIR", str(tmp_path))).resolve() / f"{phase}-triage"
     output.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ)
     env.update({
         "APP_MODE": "demo", "WORKFLOW_MODE": "native_local", "WORKFLOW_TARGET_WORLD": "local",
         "DATABASE_URL": f"sqlite:///{output / 'case.db'}", "WORKFLOW_LOCAL_DATA_DIR": str(output / "world"),
-        "PROPERTY_NATIVE_API_PHASE": "claude",
+        "PROPERTY_NATIVE_API_PHASE": phase,
     })
     env.pop("VERCEL_QUEUE_BASE_URL", None)
     process = subprocess.run(
@@ -180,9 +191,10 @@ def test_native_claude_triage_step_routes_a_new_report(tmp_path):
     assert process.returncode == 0, process.stdout + process.stderr
     result = json.loads(next(line for line in process.stdout.splitlines() if line.startswith('{"native_api"')))
     steps = [json.loads(p.read_text()) for p in (output / "world" / "steps").glob(f'{result["run_id"]}-*.json')]
-    triage_steps = [st for st in steps if st["stepName"].endswith("//triage_case_messages")]
-    assert triage_steps and all(st["status"] == "completed" for st in triage_steps)
-    print(json.dumps({"native_api": "passed", "scenario": "claude_triage", **result}))
+    step = "//route_case_messages" if phase == "jev" else "//triage_case_messages"
+    model_steps = [st for st in steps if st["stepName"].endswith(step)]
+    assert model_steps and all(st["status"] == "completed" for st in model_steps)
+    print(json.dumps({"native_api": "passed", "scenario": f"{phase}_triage", **result}))
 
 
 def _exercise_claude_phase():
@@ -207,6 +219,13 @@ def _exercise_claude_phase():
         assert triage["state"] == "done", triage
         reading = next(r["payload"] for r in detail["timeline"] if r["kind"] == "interpretation")
         assert reading["status"] == "ok" and reading["request_id"] and reading["model"]
+        routings = [r["payload"] for r in detail["timeline"] if r["kind"] == "routing"]
+        if os.environ["PROPERTY_NATIVE_API_PHASE"] == "jev":
+            assert _request(client, "GET", "/api/health")["router"]["credential_configured"] is True
+            assert len(routings) == 1 and routings[0]["model"] == "jev-1.13.0" and routings[0]["request_id"]
+            assert triage["router"]["mode"] == routings[0]["mode"]
+        else:
+            assert all(r["mode"] == "claude" and r["error_type"] == "missing_credentials" for r in routings)
         assert detail["case"]["category"] == "plumbing"
         assert detail["case"]["proposal"]["action"] == ROUTES[triage["route"]]["action"]
         receipts = _receipts(detail)
@@ -218,7 +237,8 @@ def _exercise_claude_phase():
         run_id = [r["payload"] for r in detail["timeline"] if r["kind"] == "workflow_receipt"][-1]["run_id"]
         output = {"case_id": case_id, "run_id": run_id, "route": triage["route"], "confidence": triage["confidence"],
                   "outcome": detail["decision"]["outcome"], "provider_receipt_count": len(_receipts(detail)),
-                  "model": reading["model"], "usage": reading["usage"]}
+                  "model": reading["model"], "usage": reading["usage"],
+                  "router_mode": triage.get("router", {}).get("mode")}
     print(json.dumps({"native_api": "phase", **output}))
 
 
@@ -435,7 +455,7 @@ def _exercise_phase():
 
 
 if __name__ == "__main__":
-    if os.environ["PROPERTY_NATIVE_API_PHASE"] == "claude":
+    if os.environ["PROPERTY_NATIVE_API_PHASE"] in {"claude", "jev"}:
         _exercise_claude_phase()
     elif os.environ["PROPERTY_NATIVE_API_PHASE"].startswith("dispatch"):
         _exercise_dispatch_phase()

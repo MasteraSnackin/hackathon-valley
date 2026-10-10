@@ -24,8 +24,15 @@ case and wake its coordinator.
 The tenant session has a separate cookie and conversation ownership checks. Its
 API returns only the tenant's messages, supplied details and a plain-language
 progress projection. It does not return internal reviews, policy controls, staff
-evidence or the shared case list. Supplying an address is not identity verification
-and supplying a statement is not permission to act.
+evidence or the shared case list. Supplying a statement is not permission to act.
+
+The name and address the tenant confirmed in their summary are stored on the case
+as self-identification (never as a verified claim). Policy setting
+`tenant_self_identification` (default `clarify`, `request_quote`) lets them satisfy
+the identity and route checks for those information-gathering actions only; replies
+go back to the same in-app thread. Visits, keys, instructing work, closing and
+archiving still need the case manager. If the tenant later corrects their name or
+address, self-identification stops counting and the case manager verifies.
 
 Claude only proposes the summary. A name, address or problem is kept only if it
 occurs in the tenant's own messages, and the summary card appears only when all

@@ -14,7 +14,7 @@ from .domain import CATEGORIES, ROUTES, TENANT_TOPICS, FACTS, MESSAGES
 def model_id():
     return os.getenv('CLAUDE_MODEL', 'claude-opus-5')
 
-PROMPT_VERSION = 'property-triage-2026-10-10'
+PROMPT_VERSION = 'property-triage-2026-10-10.2'
 # The scalar "default" form routes a policy decline to Anthropic's recommended
 # fallback model by refusal category, inside the same request.
 FALLBACK_BETA = 'server-side-fallback-2026-07-01'
@@ -69,6 +69,7 @@ class Triage(Schema):
     risk_flags: list[RiskFlag]
     confidence: Literal['high', 'medium', 'low'] = Field(description='Confidence in the category and route of the first issue.')
     rationale: str = Field(description='Brief reason for the route, for audit.')
+    route_objection: str = Field(description='Empty unless <router_decision> is present and its route is clearly wrong for the current case issue; then say why, for staff.')
 
 class TenantQuestion(Schema):
     question_id: str = Field(description='The id of the open question this covers.')
@@ -171,7 +172,8 @@ Rules:
 - Ambiguities: list what you would need to ask before acting. Set affects_route only when the answer could change the route or work item.
 - For a reply in an existing case, put the issue matching the current work item first with relation current_case, and judge each open question as answered, partial or unanswered.
 - A separate, unrelated problem in the same message is a new_issue.
-- Risk flags describe the sender's situation or tone, not the defect itself, except "safety"."""
+- Risk flags describe the sender's situation or tone, not the defect itself, except "safety".
+- When <router_decision> is present, a separate router has already chosen the route for the current case issue. Use that route for the issue with relation current_case unless it is clearly wrong; then use the route you judge correct and explain in route_objection. Your other duties (quotes, claims, ambiguities, answers, new issues) are unchanged."""
 
 DRAFT_SYSTEM = """You write messages to tenants for a UK residential property maintenance desk, and decide whether each message can be sent automatically or needs a staff member to check it first.
 
@@ -227,12 +229,17 @@ def _parse(system, user, schema, effort):
                       'cache_creation_input_tokens': usage.cache_creation_input_tokens or 0}}
     return response.parsed_output, meta
 
-def triage(text, context):
+def triage(text, context, router=None):
+    """Full triage, or extraction under a route Jev already chose (router={'route', 'reasons'})."""
     routes, facts = _catalogue()
     system = TRIAGE_SYSTEM.format(routes=routes, categories=', '.join(sorted(CATEGORIES)), facts=facts)
     user = ('<case_context>\n' + json.dumps(context, indent=1, sort_keys=True) + '\n</case_context>\n'
             '<new_message>\n' + text + '\n</new_message>')
-    result, meta = _parse(system, user, Triage, os.getenv('CLAUDE_TRIAGE_EFFORT', 'medium'))
+    effort = os.getenv('CLAUDE_TRIAGE_EFFORT', 'medium')
+    if router:
+        user += '\n<router_decision>\n' + json.dumps(router, sort_keys=True) + '\n</router_decision>'
+        effort = os.getenv('CLAUDE_EXTRACT_EFFORT', 'low')
+    result, meta = _parse(system, user, Triage, effort)
     return result.model_dump(), meta
 
 def draft_tenant_message(context):

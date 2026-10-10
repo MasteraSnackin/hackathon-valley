@@ -218,7 +218,9 @@ def _submit_case(service, owner, cid, conversation):
         property_ref='Unverified address: ' + summary['address'],
         report=report[:30000],  # Claude chooses the route on the staff side
         work_item='Tenant-reported maintenance',
-        idempotency_key='tenant-conversation:' + cid), actor)
+        idempotency_key='tenant-conversation:' + cid), actor,
+        # The name and address the tenant confirmed; policy decides what they unlock.
+        self_identification={'name': summary['name'], 'address': summary['address'], 'conversation_id': cid})
     return result['case']['id']
 
 
@@ -317,6 +319,8 @@ def _deliver(service, owner, cid, operation):
             text=operation['message']['text'],
             source_label='Tenant conversation: unverified statement',
             idempotency_key='tenant:' + operation['message']['id']), actor)
+        if operation['corrected']:
+            service.identity_corrected(case_id, operation['fields'], actor)
         reply = ('Thanks, I’ve passed on your corrected details for your property manager to check.'
                  if operation['corrected'] else
                  'Thanks, I’ve added your update to the report for your property manager.')
