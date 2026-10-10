@@ -10,6 +10,7 @@
 import type { CaseDetail, CaseListItem, Claim, TimelineEvent } from './types';
 import type {
   ActivityItem,
+  ActivityTone,
   CaseSummaryVM,
   PipelineNode,
   Severity,
@@ -367,6 +368,15 @@ function titleCaseKind(kind: string): string {
     .join(' ');
 }
 
+/** Semantic colour for an activity dot, keyed by event kind family. */
+function activityTone(kind: string): ActivityTone {
+  const k = kind.toLowerCase();
+  if (/(reject|overdue|error|escalat)/.test(k)) return 'r';
+  if (/(decision|approv|complet|reconcil|published|resolved)/.test(k)) return 'g';
+  if (/(review|question|human|reminder|clarif|proposal)/.test(k)) return 'a';
+  return 'b';
+}
+
 /** Translate raw timeline event kinds into the human-readable activity log,
  * newest first, capped to the last 5. */
 export function translateActivity(timeline: TimelineEvent[]): ActivityItem[] {
@@ -377,5 +387,6 @@ export function translateActivity(timeline: TimelineEvent[]): ActivityItem[] {
       id: event.id,
       label: ACTIVITY_LABELS[event.kind] ?? titleCaseKind(event.kind),
       time: formatTime(event.created_at) ?? '',
+      tone: activityTone(event.kind),
     }));
 }

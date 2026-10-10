@@ -120,7 +120,13 @@ function App() {
         const finalList = await ensureBootstrapped();
         if (cancelled) return;
         setCases(finalList);
-        setSelectedId(finalList[0]?.id ?? null);
+        // Open on a case that genuinely needs a human decision, so the
+        // "Action required" hero is the first thing on screen — fall back to
+        // the first case if none are pending review.
+        const firstPending = finalList.find(
+          (c) => c.outcome === 'HUMAN REVIEW' || c.outcome === 'CLARIFY',
+        );
+        setSelectedId(firstPending?.id ?? finalList[0]?.id ?? null);
       } catch (err) {
         if (!cancelled) setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -218,14 +224,7 @@ function App() {
   const stats = {
     active: cases.filter((c) => c.outcome !== 'NO FURTHER ACTION').length,
     escalations: cases.filter((c) => c.outcome === 'STOP ACTION').length,
-    // "Autonomous" = cases progressing without a human escalation (i.e. not
-    // stopped). Honest and derived from real outcomes, not a vanity number.
-    autonomousPct:
-      cases.length === 0
-        ? 0
-        : Math.round(
-            (100 * cases.filter((c) => c.outcome !== 'STOP ACTION').length) / cases.length,
-          ),
+    resolvedToday: cases.filter((c) => c.outcome === 'NO FURTHER ACTION').length,
   };
 
   const selectedSeverity = selectedSummary ? severityOf(selectedSummary) : 'amber';
@@ -234,16 +233,48 @@ function App() {
   const { actions, disabledNote } = selectedDetail
     ? computeActions(selectedDetail)
     : { actions: [], disabledNote: undefined };
+  // Approve is promoted to the hero callout; the detail-card row keeps only
+  // the secondary responses (Request more info / Defer / Reject).
+  const detailActions = actions.filter((a) => a.key !== 'approve');
   const activity = selectedDetail ? translateActivity(selectedDetail.timeline) : [];
   const currentStageLabel =
     pipelineNodes.find((n) => n.state === 'current')?.label ??
     (selectedSummary ? stagePillOf(selectedSummary) : '');
 
+  // A case "needs a decision" when its current assessment is held for a human
+  // (anything other than ready-to-act or already resolved). This drives the
+  // amber hero callout.
+  const topBlocker = selectedDetail?.decision?.blockers[0];
+  const needsDecision = Boolean(
+    topBlocker &&
+      (topBlocker.response === 'HUMAN REVIEW' || topBlocker.response === 'CLARIFY'),
+  );
+  const canApprove = topBlocker?.key === 'authority' || topBlocker?.key === 'finance';
+
   return (
     <div className="flex h-screen w-screen flex-col overflow-hidden bg-[var(--color-canvas)] font-[var(--font-body)] text-[var(--color-ink)]">
-      <div className="flex h-6 shrink-0 items-center justify-center border-b border-[var(--color-border)] bg-[var(--color-sidebar)] text-[10px] tracking-wide text-[var(--color-muted)]">
-        LOCAL DEMONSTRATION — NO REAL ACTIONS TAKEN
-      </div>
+      <nav className="flex h-12 shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5">
+        <div className="flex items-center gap-2.5">
+          <span
+            className="h-2 w-2 rounded-full bg-[var(--color-primary)]"
+            style={{ boxShadow: '0 0 6px rgba(33,88,72,.5)', animation: 'dot-pulse 2.2s ease-out infinite' }}
+          />
+          <span className="text-[15px] font-semibold tracking-[-0.2px] text-[var(--color-ink)]">
+            Property Desk
+          </span>
+          <span className="text-[13px] text-[var(--color-muted)]">· Maintenance operations</span>
+        </div>
+        <span
+          className="rounded-full border px-3 py-1 text-[11px] font-medium"
+          style={{
+            background: 'rgba(33,88,72,.08)',
+            color: '#215848',
+            borderColor: 'rgba(33,88,72,.2)',
+          }}
+        >
+          Local demonstration — no real actions taken
+        </span>
+      </nav>
 
       <div className="flex min-h-0 flex-1">
         <div className="w-[260px] shrink-0 border-r border-[var(--color-border)] bg-[var(--color-sidebar)]">
@@ -272,6 +303,40 @@ function App() {
           <div className="flex-1 overflow-y-auto px-6 py-6">
             {selectedDetail ? (
               <>
+                {needsDecision && selectedSummary && (
+                  <div
+                    className="mb-5 rounded-[var(--radius-md)] px-5 py-4"
+                    style={{
+                      borderLeft: '4px solid #865719',
+                      background: '#FBF1DF',
+                    }}
+                  >
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-attention)]">
+                      ⚠ Action required
+                    </p>
+                    <p className="mt-1.5 text-[14px] font-semibold text-[var(--color-ink)]">
+                      {selectedSummary.property_ref}
+                    </p>
+                    <p className="mt-0.5 text-[13px] text-[var(--color-ink)]/80">
+                      {selectedDetail.decision?.next_step}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => handleAction('approve')}
+                      disabled={responding}
+                      className="mt-3 rounded-[var(--radius-sm)] bg-[var(--color-primary)] px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)] disabled:opacity-60"
+                    >
+                      {canApprove ? 'Approve & assign contractor' : 'Approve this action'}
+                    </button>
+                    {!canApprove && (
+                      <p className="mt-2 text-[11px] text-[var(--color-attention)]">
+                        This review needs the underlying source verified rather than a general
+                        approval — use the responses below.
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 <div className="mb-8 flex justify-center">
                   <Pipeline nodes={pipelineNodes} />
                 </div>
@@ -283,7 +348,7 @@ function App() {
                 <StageDetailCard
                   stageTitle={currentStageLabel}
                   rows={stageRows}
-                  actions={actions}
+                  actions={detailActions}
                   onAction={handleAction}
                   disabledNote={disabledNote}
                   activity={activity}

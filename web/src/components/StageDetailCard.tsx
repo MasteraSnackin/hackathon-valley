@@ -1,4 +1,11 @@
-import type { StageDetailRow, StageAction, ActionKey, ActivityItem } from './dashboard-types'
+import type { StageDetailRow, StageAction, ActionKey, ActivityItem, ActivityTone } from './dashboard-types'
+
+const TONE_COLOR: Record<ActivityTone, string> = {
+  b: '#355C85',
+  g: '#215848',
+  a: '#865719',
+  r: '#A33B36',
+}
 
 interface StageDetailCardProps {
   stageTitle: string
@@ -68,7 +75,13 @@ export default function StageDetailCard({
                 key={item.id}
                 className="flex items-baseline justify-between gap-3 text-xs text-[var(--color-muted)]"
               >
-                <span className="truncate">{item.label}</span>
+                <span className="flex min-w-0 items-baseline gap-2">
+                  <span
+                    className="mt-[1px] h-1.5 w-1.5 shrink-0 translate-y-[2px] rounded-full"
+                    style={{ background: TONE_COLOR[item.tone] }}
+                  />
+                  <span className="truncate">{item.label}</span>
+                </span>
                 <span className="shrink-0">{item.time}</span>
               </li>
             ))}

@@ -59,10 +59,11 @@ export function CaseList({ cases, selectedId, onSelect }: CaseListProps) {
                   key={c.id}
                   type="button"
                   onClick={() => onSelect(c.id)}
+                  style={isSelected ? { background: 'rgba(33,88,72,.08)' } : undefined}
                   className={`flex min-h-[72px] w-full cursor-pointer flex-col justify-center gap-1 rounded-sm border-l-4 px-3 py-2 text-left transition-colors ${
                     isSelected
-                      ? 'border-l-[var(--color-primary)] bg-[var(--color-surface)]'
-                      : `${severityBorderClass(c.severity)} bg-transparent`
+                      ? 'border-l-[var(--color-primary)]'
+                      : `${severityBorderClass(c.severity)} bg-transparent hover:bg-[var(--color-canvas)]`
                   }`}
                 >
                   <span className="truncate text-[13px] font-bold text-[var(--color-ink)]">

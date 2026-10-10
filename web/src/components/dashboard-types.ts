@@ -34,8 +34,11 @@ export interface StageAction {
   primary?: boolean // true = filled blue button, false/undefined = outlined secondary
 }
 
+export type ActivityTone = 'b' | 'g' | 'a' | 'r' // blue / green / amber / red dot
+
 export interface ActivityItem {
   id: string
   label: string // already translated to human language by the caller, e.g. "Tenant message received" — just render it, don't interpret raw event kinds yourself
   time: string // short formatted time
+  tone: ActivityTone
 }
