@@ -5,14 +5,15 @@ from sqlalchemy import update
 from app.domain import *
 from app.service import Service,Conflict,Forbidden
 from app.store import Store,records
-from app.ai import Interpretation,validate_sources
+from app.ai import checked_triage
 from app.build_data import snapshot,verify_sources,ALLOWED
 
 @pytest.fixture
 def service(tmp_path):return Service(Store('sqlite:///'+str(tmp_path/'test.db')))
 def actor(role='case_manager'):return {'id':'test-'+role,'role':role}
 def make(service,action='instruct_work'):
-    return service.intake(Intake(title='BUILD-derived dishwasher repair',property_ref='DEMO-FLAT-1',report='The integrated dishwasher starts then stops.',category='appliance',work_item='Dishwasher repair',action=action),actor())
+    # Manual staff triage: deterministic policy mechanics, no model call.
+    return service.intake(Intake(title='BUILD-derived dishwasher repair',property_ref='DEMO-FLAT-1',report='The integrated dishwasher starts then stops.',category='appliance',work_item='Dishwasher repair',action=action,triage='staff'),actor())
 def source(service,cid,key,value,text=None):
     text=text or f'Source states {key}: {value} for this action.'
     return service.evidence(cid,EvidenceInput(text=text,source_label='BUILD-derived test source',claims=[ClaimInput(key=key,value=value,source_quote=text)]),actor())
@@ -83,8 +84,14 @@ def test_superseded_question_and_reminder_cancelled(service):
     assert next(x for x in d['questions'] if x['id']==q['id'])['status']=='closed'
     assert not [e for e in d['timeline'] if e['kind']=='reminder' and e['payload']['question_id']==q['id']]
 
-def test_unanswered_request_is_bounded_and_never_permission(service):
+def test_unanswered_request_is_bounded_and_never_permission(service,no_claude):
     d=make(service);cid=d['case']['id'];q=next(q for q in d['questions'] if q['key']=='access')
+    # Without Claude the draft fails visibly; staff write and send the question.
+    assert q['reminder_at'] is None
+    service.compose_tenant_messages(cid);m=service.detail(cid)['tenant_messages'][0]
+    assert m['status']=='draft_failed'
+    d=service.approve_message(m['id'],actor(),'Could you confirm you are happy for the engineer to enter?')
+    q=next(x for x in d['questions'] if x['id']==q['id']);assert q['sent_at'] and q['reminder_at']
     service.tick(cid,dt(q['reminder_at'])+timedelta(seconds=1));service.tick(cid,dt(q['deadline'])+timedelta(seconds=1));service.tick(cid,dt(q['deadline'])+timedelta(days=7));d=service.detail(cid)
     q=next(x for x in d['questions'] if x['id']==q['id']);assert q['reminders']==1;assert q['escalated']
     assert next(b for b in d['decision']['blockers'] if b['key']=='access')['status']=='UNKNOWN'
@@ -111,7 +118,7 @@ def test_incoming_idempotency_and_immutable_audit(service):
         with service.db.tx() as c:c.execute(update(records).values(payload='{}'))
 
 def test_unsupported_case_has_visible_handover(service):
-    d=service.intake(Intake(title='Unrecognised issue',property_ref='DEMO-FLAT-1',report='A novel concern with an unidentified object.',category='other'),actor())
+    d=service.intake(Intake(title='Unrecognised issue',property_ref='DEMO-FLAT-1',report='A novel concern with an unidentified object.',category='other',action='instruct_work',triage='staff'),actor())
     assert any(b['key']=='supported' for b in d['decision']['blockers']);assert d['decision']['outcome']!='ACT'
 
 def test_build_hashes_and_prefix_no_future():
@@ -121,17 +128,26 @@ def test_build_hashes_and_prefix_no_future():
     with pytest.raises(ValueError):snapshot('../not-allowed')
 
 def test_structured_model_output_needs_real_quotes():
-    r=Interpretation(category='plumbing',summary='Leak',source_quote='Invented quotation')
-    with pytest.raises(ValueError):validate_sources(r,'The tap drips.')
+    issue={'category':'plumbing','route':'request_quote','work_item':'Tap','relation':'current_case'}
+    result={'intent':'new_request','summary':'Leak','confidence':'high','rationale':'r','risk_flags':[],'ambiguities':[],
+        'issues':[{**issue,'source_quote':'Invented quotation'},{**issue,'source_quote':'The tap drips.'}],
+        'claims':[{'key':'access','value':True,'amount':None,'source_quote':'I grant access','issue_index':1},{'key':'total','value':True,'amount':None,'source_quote':'The tap drips.','issue_index':1}],
+        'answers':[{'question_id':'q1','status':'answered','source_quote':'Invented'}]}
+    checked=checked_triage(result,'The tap drips.')
+    assert [i['source_quote'] for i in checked['issues']]==['The tap drips.']
+    assert checked['claims']==[] and checked['answers']==[]
+    assert len(checked['rejected'])==4
 
-def test_continuing_reply_is_interpreted_but_not_granted(service):
-    d=make(service);cid=d['case']['id']
-    d=service.evidence(cid,EvidenceInput(text='I give permission for this visit while I am at home.',source_label='Fictional tenant reply'),actor())
-    claim=next(c for c in reversed(d['claims']) if c['key']=='access')
-    assert claim['source_quote']=='I give permission for this visit while I am at home'
-    assert not claim['verified']
-    assert any(b['key']=='access' for b in d['decision']['blockers'])
-    assert any(e['kind']=='interpretation' and e['payload']['source_id']==claim['source_id'] for e in d['timeline'])
+def test_free_text_reply_waits_for_reading_and_never_acts(service,no_claude):
+    d=make(service,'request_quote');cid=d['case']['id'];assert d['decision']['outcome']=='ACT'
+    d=service.evidence(cid,EvidenceInput(text='Please do not come round any more.',source_label='Fictional tenant reply'),actor())
+    # An unread message holds every action until it is read.
+    assert d['decision']['outcome']=='WAIT' and d['decision']['blockers'][0]['key']=='triage'
+    with pytest.raises(Conflict):service.execute(cid,actor())
+    service.triage_messages(cid);d=service.detail(cid)
+    assert d['case']['triage']['state']=='failed' and d['decision']['outcome']=='HUMAN REVIEW'
+    assert next(r for r in d['reviews'] if r['key']=='triage' and r['status']=='open')['owner']=='case_manager'
+    assert not any(c.get('origin')=='claude' for c in d['claims'])
 
 def test_duplicate_key_with_altered_claims_rejected(service):
     d=make(service);cid=d['case']['id'];text='Permission is addressed in this message.'

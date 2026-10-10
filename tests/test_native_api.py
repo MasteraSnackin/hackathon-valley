@@ -1,8 +1,10 @@
 """Black-box FastAPI + native Python Workflow + actual application storage test.
 
 Two interpreter processes run the app's real lifespan. There are no service,
-step, clock or SDK doubles. Only BUILD 002 event 001 enters intake. Model calls
-are disabled, and all application operations use the simulated adapters.
+step, clock or SDK doubles. Only BUILD 002 event 001 enters intake. The
+mechanics scenarios use manual staff triage or no model credential; the
+``claude`` scenario calls the real Claude API inside the native triage step.
+All application operations use the simulated adapters.
 """
 
 from datetime import UTC, datetime
@@ -14,6 +16,8 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,14 +31,15 @@ def test_native_api_intake_evidence_and_restart(tmp_path):
     env = dict(os.environ)
     env.update({
         "APP_MODE": "demo",
-        "AI_MODE": "literal_demo",
         "WORKFLOW_MODE": "native_local",
         "WORKFLOW_TARGET_WORLD": "local",
         "DATABASE_URL": f"sqlite:///{output / 'native-api-check.db'}",
         "WORKFLOW_LOCAL_DATA_DIR": str(output / "native-api-world"),
     })
-    # Never inherit live model or external queue routing into this local check.
-    env.pop("OPENAI_API_KEY", None)
+    # Never inherit model credentials or external queue routing into this check:
+    # Claude triage fails visibly and the case is handed to a person.
+    env.pop("ANTHROPIC_API_KEY", None)
+    env["PROPERTY_LOCAL_ENV"] = "off"
     env.pop("VERCEL_QUEUE_BASE_URL", None)
     results = []
     for phase in ("intake", "restart"):
@@ -61,11 +66,12 @@ def test_native_evidence_review_dispatch_exactly_once(tmp_path):
     output.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ)
     env.update({
-        "APP_MODE": "demo", "AI_MODE": "literal_demo", "WORKFLOW_MODE": "native_local", "WORKFLOW_TARGET_WORLD": "local",
+        "APP_MODE": "demo", "WORKFLOW_MODE": "native_local", "WORKFLOW_TARGET_WORLD": "local",
         "DATABASE_URL": f"sqlite:///{output / 'native-api-dispatch.db'}",
         "WORKFLOW_LOCAL_DATA_DIR": str(output / "native-api-dispatch-world"),
     })
-    env.pop("OPENAI_API_KEY", None)
+    env.pop("ANTHROPIC_API_KEY", None)
+    env["PROPERTY_LOCAL_ENV"] = "off"
     env.pop("VERCEL_QUEUE_BASE_URL", None)
     results = []
     for phase in ("dispatch", "dispatch_restart"):
@@ -96,11 +102,12 @@ def test_native_interrupted_step_redelivery_keeps_one_provider_receipt(tmp_path)
     output.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ)
     env.update({
-        "APP_MODE": "demo", "AI_MODE": "literal_demo", "WORKFLOW_MODE": "native_local",
+        "APP_MODE": "demo", "WORKFLOW_MODE": "native_local",
         "WORKFLOW_TARGET_WORLD": "local", "DATABASE_URL": f"sqlite:///{output / 'case.db'}",
         "WORKFLOW_LOCAL_DATA_DIR": str(output / "world"), "PROPERTY_NATIVE_API_PHASE": "dispatch_interrupt",
     })
-    env.pop("OPENAI_API_KEY", None)
+    env.pop("ANTHROPIC_API_KEY", None)
+    env["PROPERTY_LOCAL_ENV"] = "off"
     env.pop("VERCEL_QUEUE_BASE_URL", None)
     command = [sys.executable, "-c", "import runpy; runpy.run_path('tests/test_native_api.py', run_name='__main__')"]
     process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -154,14 +161,75 @@ def test_native_interrupted_step_redelivery_keeps_one_provider_receipt(tmp_path)
         "storage": str(output)}))
 
 
+@pytest.mark.claude
+def test_native_claude_triage_step_routes_a_new_report(tmp_path):
+    """Real HTTP intake, real native workflow, real Claude call in the triage step."""
+    output = Path(os.getenv("PROPERTY_NATIVE_API_CHECK_DIR", str(tmp_path))).resolve() / "claude-triage"
+    output.mkdir(parents=True, exist_ok=True)
+    env = dict(os.environ)
+    env.update({
+        "APP_MODE": "demo", "WORKFLOW_MODE": "native_local", "WORKFLOW_TARGET_WORLD": "local",
+        "DATABASE_URL": f"sqlite:///{output / 'case.db'}", "WORKFLOW_LOCAL_DATA_DIR": str(output / "world"),
+        "PROPERTY_NATIVE_API_PHASE": "claude",
+    })
+    env.pop("VERCEL_QUEUE_BASE_URL", None)
+    process = subprocess.run(
+        [sys.executable, "-c", "import runpy; runpy.run_path('tests/test_native_api.py', run_name='__main__')"],
+        cwd=ROOT, env=env, capture_output=True, text=True, timeout=240,
+    )
+    assert process.returncode == 0, process.stdout + process.stderr
+    result = json.loads(next(line for line in process.stdout.splitlines() if line.startswith('{"native_api"')))
+    steps = [json.loads(p.read_text()) for p in (output / "world" / "steps").glob(f'{result["run_id"]}-*.json')]
+    triage_steps = [st for st in steps if st["stepName"].endswith("//triage_case_messages")]
+    assert triage_steps and all(st["status"] == "completed" for st in triage_steps)
+    print(json.dumps({"native_api": "passed", "scenario": "claude_triage", **result}))
+
+
+def _exercise_claude_phase():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    from app.domain import ROUTES
+
+    with TestClient(app) as client:
+        assert _request(client, "GET", "/api/health")["model"]["credential_configured"] is True
+        _request(client, "POST", "/api/demo-session", json={"role": "case_manager"})
+        created = _request(client, "POST", "/api/cases", json={
+            "title": "Fictional kitchen tap report",
+            "property_ref": "DEMO-FLAT-1",
+            "report": "The kitchen tap has been dripping constantly since yesterday and will not turn off fully.",
+        })
+        case_id = created["case"]["id"]
+        # Stored first, read later: the request never waits for the model.
+        assert created["case"]["triage"]["state"] == "pending" and created["decision"]["outcome"] == "WAIT"
+        detail = _wait_detail(client, case_id, lambda d: d["case"]["triage"]["state"] != "pending"
+                              and any(c["payload"]["revision"] == d["case"]["revision"] for c in _checkpoints(d)), timeout=180)
+        triage = detail["case"]["triage"]
+        assert triage["state"] == "done", triage
+        reading = next(r["payload"] for r in detail["timeline"] if r["kind"] == "interpretation")
+        assert reading["status"] == "ok" and reading["request_id"] and reading["model"]
+        assert detail["case"]["category"] == "plumbing"
+        assert detail["case"]["proposal"]["action"] == ROUTES[triage["route"]]["action"]
+        receipts = _receipts(detail)
+        if detail["decision"]["outcome"] in {"ACT", "NO FURTHER ACTION"}:
+            detail = _wait_detail(client, case_id, lambda d: len(_receipts(d)) == 1, timeout=30)
+            assert detail["actions"][0]["actor"]["id"] == "native-case-coordinator"
+        else:
+            assert not receipts and detail["decision"]["blockers"]
+        run_id = [r["payload"] for r in detail["timeline"] if r["kind"] == "workflow_receipt"][-1]["run_id"]
+        output = {"case_id": case_id, "run_id": run_id, "route": triage["route"], "confidence": triage["confidence"],
+                  "outcome": detail["decision"]["outcome"], "provider_receipt_count": len(_receipts(detail)),
+                  "model": reading["model"], "usage": reading["usage"]}
+    print(json.dumps({"native_api": "phase", **output}))
+
+
 def _request(client, method, path, **kwargs):
     response = client.request(method, path, **kwargs)
     assert response.status_code == 200, (path, response.status_code, response.text)
     return response.json()
 
 
-def _wait_detail(client, case_id, predicate):
-    deadline = time.monotonic() + 15
+def _wait_detail(client, case_id, predicate, timeout=15):
+    deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         detail = _request(client, "GET", f"/api/cases/{case_id}")
         errors = [r for r in detail["timeline"] if r["kind"] == "workflow_error"]
@@ -197,40 +265,49 @@ def _exercise_dispatch_phase():
             # BUILD 002 event 001 contains both sentences. This is a labelled
             # input-only scenario withholding the first sentence until evidence
             # arrives, not an assertion about the historical order of messages.
+            # Manual staff triage at intake; the property is not in the demo
+            # directory, so identity and contact route need verified sources.
             created = _request(client, "POST", "/api/cases", json={
                 "title": "BUILD 002 derived quote request",
-                "property_ref": "DEMO-FLAT-1",
+                "property_ref": "BUILD-002 fictional flat",
                 "report": "Run block lodged by pan connector.",
                 "category": "plumbing",
                 "work_item": "BUILD 002 obstruction investigation",
                 "action": "request_quote",
+                "triage": "staff",
             })
             case_id = created["case"]["id"]
             initial = _wait_detail(client, case_id, lambda d: bool(_checkpoints(d)))
             assert not _receipts(initial)
-            assert any(b["key"] == "classification" for b in initial["decision"]["blockers"])
+            assert {"identity", "route"} <= {b["key"] for b in initial["decision"]["blockers"]}
+            text = "Directory check for BUILD-002 fictional flat: tenant record and in-app contact route confirmed."
             evidence = _request(client, "POST", f"/api/cases/{case_id}/evidence", json={
-                "text": "Toilet need to be removed to clear blockage. Run block lodged by pan connector.",
-                "source_label": "BUILD 002 event 001 — input-only clarification scenario",
-                "claims": [{"key": "classification", "value": True,
-                            "source_quote": "Toilet need to be removed to clear blockage."}],
-                "idempotency_key": "native-api-classification-002",
+                "text": text,
+                "source_label": "BUILD 002 derived — simulated directory check",
+                "claims": [{"key": "identity", "value": True, "source_quote": text},
+                           {"key": "route", "value": True, "source_quote": text}],
+                "idempotency_key": "native-api-directory-002",
             })
             pending = _wait_detail(client, case_id, lambda d: any(c["payload"]["revision"] >= evidence["case"]["revision"] for c in _checkpoints(d)))
-            review = next(r for r in pending["reviews"] if r["key"] == "classification" and r["status"] == "open")
-            review_id = review["id"]
-            claim = next(c for c in pending["claims"] if c["key"] == "classification" and not c["verified"])
             assert not _receipts(pending), "Source assertion must not dispatch before review"
-            response = {"decision": "correct", "key": "classification", "value": True,
-                        "claim_id": claim["id"], "source_id": claim["source_id"],
-                        "reason": "The quoted toilet obstruction supports the plumbing classification for this quote request."}
 
+            def correction(detail, key):
+                review = next(r for r in detail["reviews"] if r["key"] == key and r["status"] == "open")
+                claim = next(c for c in detail["claims"] if c["key"] == key and not c["verified"])
+                return review["id"], {"decision": "correct", "key": key, "value": True,
+                    "claim_id": claim["id"], "source_id": claim["source_id"],
+                    "reason": "The directory check supports this fact for this quote request."}
+
+            review_id, response = correction(pending, "identity")
             # Wrong-role input is rejected by the real HTTP authentication path.
             _request(client, "POST", "/api/demo-session", json={"role": "access_officer"})
             rejected = client.post(f"/api/reviews/{review_id}/respond", json=response)
             assert rejected.status_code == 403, rejected.text
             assert not _receipts(_request(client, "GET", f"/api/cases/{case_id}"))
             _request(client, "POST", "/api/demo-session", json={"role": "case_manager"})
+            partial = _request(client, "POST", f"/api/reviews/{review_id}/respond", json=response)
+            assert not _receipts(partial), "One verified fact must not release the action"
+            review_id, response = correction(partial, "route")
             authorised = _request(client, "POST", f"/api/reviews/{review_id}/respond", json=response)
             review_event = next(e for e in reversed(_events(authorised)) if e["payload"]["event_type"] == "review_responded")
             detail = _wait_detail(client, case_id, lambda d: len(_receipts(d)) == 1 and any(review_event["id"] in c["payload"]["consumed_event_ids"] for c in _checkpoints(d)))
@@ -299,8 +376,11 @@ def _exercise_phase():
             case_id = created["case"]["id"]
             intake = next(e for e in _events(created) if e["payload"]["event_type"] == "intake")
             assert any(r["kind"] == "signal_outbox" and r["payload"]["event_id"] == intake["id"] for r in created["timeline"])
-            assert created["case"]["interpretation"]["mode"] == "literal_demo"
-            initial = _wait_detail(client, case_id, lambda d: any(intake["id"] in c["payload"]["consumed_event_ids"] for c in _checkpoints(d)))
+            assert created["case"]["triage"]["state"] == "pending"
+            initial = _wait_detail(client, case_id, lambda d: any(intake["id"] in c["payload"]["consumed_event_ids"] for c in _checkpoints(d)) and d["case"]["triage"]["state"] == "failed")
+            # No credential in this check: the native triage step records the
+            # failure and hands the message to a person, with no fallback reading.
+            assert any(r["kind"] == "interpretation" and r["payload"]["status"] == "failed" for r in initial["timeline"])
             open_reviews = {r["id"] for r in initial["reviews"] if r["status"] == "open"}
             assert open_reviews, "The intended pending-review scenario was not established"
             assert initial["decision"]["outcome"] != "ACT"
@@ -312,7 +392,8 @@ def _exercise_phase():
             })
             assert submitted["case"]["revision"] > initial["case"]["revision"]
             evidence_event = next(e for e in reversed(_events(submitted)) if e["payload"]["event_type"] == "evidence_received")
-            detail = _wait_detail(client, case_id, lambda d: any(c["payload"]["revision"] >= submitted["case"]["revision"] and evidence_event["id"] in c["payload"]["consumed_event_ids"] for c in _checkpoints(d)))
+            detail = _wait_detail(client, case_id, lambda d: any(c["payload"]["revision"] >= submitted["case"]["revision"] and evidence_event["id"] in c["payload"]["consumed_event_ids"] for c in _checkpoints(d))
+                and len([r for r in d["timeline"] if r["kind"] == "interpretation"]) == 2 and d["case"]["revision"] == _checkpoints(d)[-1]["payload"]["revision"])
             assert open_reviews <= {r["id"] for r in detail["reviews"] if r["status"] == "open"}
             assert detail["decision"]["outcome"] != "ACT"
             assert not detail["actions"], "Receiving an unresolved note must not execute work"
@@ -354,7 +435,9 @@ def _exercise_phase():
 
 
 if __name__ == "__main__":
-    if os.environ["PROPERTY_NATIVE_API_PHASE"].startswith("dispatch"):
+    if os.environ["PROPERTY_NATIVE_API_PHASE"] == "claude":
+        _exercise_claude_phase()
+    elif os.environ["PROPERTY_NATIVE_API_PHASE"].startswith("dispatch"):
         _exercise_dispatch_phase()
     else:
         _exercise_phase()

@@ -14,15 +14,15 @@ def actor(role='case_manager'):
 
 
 @pytest.fixture
-def service(tmp_path, monkeypatch):
-    monkeypatch.setenv('AI_MODE', 'literal_demo')
+def service(tmp_path):
     return Service(Store('sqlite:///' + str(tmp_path / 'independent.db')))
 
 
 def create(service):
     return service.intake(Intake(title='Fictional dishwasher repair',
         property_ref='DEMO-FLAT-1', report='The dishwasher stops mid-cycle.',
-        category='appliance', work_item='Dishwasher motor repair'), actor())
+        category='appliance', work_item='Dishwasher motor repair', action='instruct_work',
+        triage='staff'), actor())
 
 
 def open_review(detail, key):
@@ -120,7 +120,8 @@ def test_financial_rejection_stops_current_proposal(service):
 def test_policy_publication_does_not_reopen_a_completed_action(service):
     detail = service.intake(Intake(title='Fictional completed dishwasher repair',
         property_ref='DEMO-FLAT-1', report='The dishwasher has been repaired.',
-        category='appliance', work_item='Dishwasher motor repair', action='close_item'), actor())
+        category='appliance', work_item='Dishwasher motor repair', action='close_item',
+        triage='staff'), actor())
     cid = detail['case']['id']
     for key in ('completion', 'commitments'):
         detail = verify_latest(service, submit(service, cid, key, True), key)
@@ -143,7 +144,8 @@ def test_policy_publication_does_not_reopen_a_completed_action(service):
 def test_custom_condition_fact_can_be_verified_then_resumed(service, response):
     detail = service.intake(Intake(title='Fictional quote after earlier repair',
         property_ref='DEMO-FLAT-1', report='The dishwasher needs a repair quote.',
-        category='appliance', work_item='Dishwasher repair', action='request_quote'), actor())
+        category='appliance', work_item='Dishwasher repair', action='request_quote',
+        triage='staff'), actor())
     cid = detail['case']['id']
     policy = service.policies()['active']
     draft = service.draft(PolicyInput(base_version=policy['version'], settings=policy['settings'],

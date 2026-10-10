@@ -8,12 +8,15 @@ Use Python 3.12 (pinned in `.python-version`). Dependencies are managed with [uv
 
 ```sh
 uv sync
-APP_MODE=demo WORKFLOW_MODE=native_local WORKFLOW_TARGET_WORLD=local MODEL_MODE=literal_demo uv run uvicorn app.main:app --host 127.0.0.1 --port 8017
+printf 'ANTHROPIC_API_KEY=your-key\n' > .env.local   # git-ignored; loaded at startup
+APP_MODE=demo WORKFLOW_MODE=native_local WORKFLOW_TARGET_WORLD=local uv run uvicorn app.main:app --host 127.0.0.1 --port 8017
 ```
+
+Claude (`CLAUDE_MODEL`, default `claude-opus-5`) reads every message, routes it to a workflow and drafts tenant questions; see `docs/CLAUDE_TRIAGE.md`. Without a credential each message is handed to a case manager for manual triage.
 
 `uv sync` creates `.venv` and installs the runtime dependencies plus the `dev` group (pytest, pypdf). Add a dependency with `uv add <package>` (or `uv add --dev <package>`). `requirements.lock` is kept for pip-only environments; refresh it after changing dependencies with `uv export --no-hashes --no-emit-project -o requirements.lock`. Without uv: `python3.12 -m venv .venv && .venv/bin/python -m pip install -r requirements.lock`.
 
-The existing `.venv` can be used directly; recreating it is unnecessary when dependencies are already installed. Open <http://127.0.0.1:8017>. Use one Uvicorn process without `--reload`. Do not set `VERCEL_QUEUE_BASE_URL` for local mode. The application does not load `.env` automatically; `.env.example` documents optional settings.
+The existing `.venv` can be used directly; recreating it is unnecessary when dependencies are already installed. Open <http://127.0.0.1:8017>. Use one Uvicorn process without `--reload`. Do not set `VERCEL_QUEUE_BASE_URL` for local mode. The application loads only the git-ignored `.env.local` (existing environment variables win); `.env.example` documents optional settings.
 
 The default application database is `var/property.db`. The native SDK stores its separate local workflow history in its configured local data directory; see `docs/WORKFLOW_RUNTIME.md`. Stop with Ctrl-C. Restarting from the same directory preserves cases and reviews and wakes their stored coordinators. The app must be running for local timers to be delivered.
 
@@ -40,19 +43,21 @@ Demonstration role switching is restricted to loopback and is not production aut
 - Bounded simulated clarification requests and reminders, then human/deputy escalation. Silence cannot become consent, completion or approval.
 - Native Workflow steps, one ordered case event consumer, typed hooks, durable timers and startup recovery. Every incoming event commits to the application database before signalling. The coordinator rechecks all current gates before any simulated execution.
 - Stable business action IDs, idempotent evidence/intake keys, a simulated provider receipt ledger and an explicit uncertain-result reconciliation path. These checks demonstrate the design; real provider idempotency and read-back still need adapter-specific implementation.
-- Optional source-checked model interpretation. `MODEL_MODE=literal_demo` makes no network calls even if a model key exists. Explicit `MODEL_MODE=live_model` plus `OPENAI_API_KEY` enables the configured Responses API call; it has not been verified with live credentials. Model assertions never grant permission.
+- Claude triage as native workflow steps: each stored message is read by Claude, which chooses the workflow route, names the work item, splits separate issues into their own cases and extracts exact-quoted assertions (stored unverified). Unreadable, ambiguous, hazardous or disputed readings hold the action for a person. There is no keyword fallback.
+- Claude-drafted tenant questions. Claude recommends auto-send or staff review from the case data and policy; a deterministic gate (policy mode, allowed topics, risk flags, hazards, verified route) decides. Staff approve, edit or reject drafts. Replies are read by Claude and close answered questions; answers remain unverified assertions. Sending is simulated.
 
 The `total` fact means the **full comparable cumulative commitment for this job, including tax**, supplied and verified from evidence. The prototype does not have a real accounting integration to calculate it across invoices. Unknown is not zero. The illustrative default review limit is £100 inclusive; £100.01 requires a separate financial review.
 
 ## Tests and BUILD replay
 
 ```sh
-uv run pytest -q
+uv run pytest -q                 # live Claude tests run when a key is configured
+uv run pytest -q -m "not claude" # offline only
 uv run python -m app.replay --all-first --output var/build-replay-first-events.json
 uv run python -m app.replay --case 013 --events 2
 ```
 
-The replay command validates the fixed BUILD manifest hashes, uses an isolated temporary database and the published demonstration policy, disables live model requests, and records assessments without running any adapter. It is a development replay, not an accuracy score. Human acceptable-outcome labels and a separately run reserved evaluation remain future work. No reserved evaluation material is loaded by these tools.
+The replay command validates the fixed BUILD manifest hashes, uses an isolated temporary database and the published demonstration policy, sends each selected history prefix to Claude for triage, and records assessments and any drafted tenant questions without running any adapter or sending anything. It is a development replay, not an accuracy score. Human acceptable-outcome labels and a separately run reserved evaluation remain future work. No reserved evaluation material is loaded by these tools.
 
 The tests cover authority/access independence, conflicting and missing evidence, partial closure, policy publication during a wait, wrong-role and stale review responses, uncertain action reconciliation, duplicate intake/evidence/action handling, native hook/timer execution and native recovery across processes. See `docs/WORKFLOW_RUNTIME.md` for the specific native runtime proof and its limits.
 
@@ -69,6 +74,9 @@ Interactive local schema: <http://127.0.0.1:8017/docs>.
 | `POST /api/cases/{id}/evidence` | Original text and exact source-linked claims; optional idempotency key |
 | `POST /api/cases/{id}/proposal` | Change scoped action and increment its revision |
 | `POST /api/cases/{id}/evaluate` | Explicit policy reassessment |
+| `POST /api/cases/{id}/tenant-reply` | Simulated tenant reply `{"text": ...}`; Claude reads it in the next coordinator step |
+| `POST /api/cases/{id}/triage/retry` | Retry a failed Claude reading |
+| `POST /api/messages/{id}/approve`, `POST /api/messages/{id}/reject` | Send (optionally edited) or reject a Claude-drafted tenant message; `{"reason":...,"redraft":true}` asks for a new draft |
 | `POST /api/reviews/{id}/respond` | Role-checked `correct`, `approve`, `reject`, `defer` or `more_evidence` |
 | `POST /api/cases/{id}/execute` | Simulated result; `{"outcome":"uncertain"}` demonstrates a lost acknowledgement |
 | `POST /api/cases/{id}/reconcile` | Read the simulated provider receipt before retry |

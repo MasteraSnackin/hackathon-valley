@@ -43,7 +43,8 @@ def import_case(service,case_id,actor,event_count=1):
     report=snap['text']
     found=re.search(r'(?:Address:|property at )([^\n]+)',report,re.I)
     prop=found.group(1).strip()[:200] if found else 'Unverified property — BUILD '+case_id
-    result=service.intake(Intake(title=f'BUILD {case_id} · through event {event_count:03d}',property_ref=prop,report=report,category='other',work_item='Recorded request; scope unverified',action='request_quote'),actor)
+    # Category and route are left to Claude's reading of the prefix only.
+    result=service.intake(Intake(title=f'BUILD {case_id} · through event {event_count:03d}',property_ref=prop,report=report,work_item='Recorded request; scope unverified'),actor)
     cid=result['case']['id']
     with service.db.tx() as c:
         service.db.add(c,'build_snapshot',{'case_id':case_id,'event_count':event_count,'source_url':snap['source_url'],'boundary':snap['boundary'],'attachments':[]},cid)

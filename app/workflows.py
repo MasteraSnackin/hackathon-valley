@@ -2,6 +2,14 @@
 
 The hook transports wake notifications, never authority or the source event itself.
 Intake must commit its event and recovery record before calling these helpers.
+
+Each case coordinator runs three kinds of durable step:
+  run_case_cycle          policy assessment, timers and simulated actions
+  triage_case_messages    Claude reads newly stored messages and routes the case
+  compose_tenant_messages Claude drafts tenant questions and decides, within
+                          policy, whether each is sent or held for staff
+Model output is persisted by the service with idempotent keys, so a retried
+step never applies the same reading or sends the same message twice.
 """
 
 from __future__ import annotations
@@ -40,6 +48,26 @@ class CycleResult(BaseModel):
     terminal: bool = Field(strict=True)
     next_wake_at: AwareDatetime | None
     revision: int = Field(ge=0, strict=True)
+    # Work for the model steps. Absent means none (older service versions).
+    needs_triage: bool = Field(default=False, strict=True)
+    needs_tenant_message: bool = Field(default=False, strict=True)
+
+
+class TriageResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    triaged: int = Field(ge=0, strict=True)
+    spawned_case_ids: list[str]
+    started_case_ids: list[str] = Field(default_factory=list)
+
+
+class ComposeResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    drafted: int = Field(ge=0, strict=True)
+    sent: int = Field(ge=0, strict=True)
+
+
+# Bounds model steps between waits, so a misbehaving reading cannot spin.
+MAX_MODEL_STEPS_PER_WAKE = 8
 
 
 def case_hook_token(case_id: str) -> str:
@@ -63,6 +91,31 @@ async def run_case_cycle(case_id: str) -> dict:
     return CycleResult.model_validate(result).model_dump(mode="json")
 
 
+@wf.step(max_retries=3)
+async def triage_case_messages(case_id: str) -> dict:
+    """Claude reads every committed, unread message of the case.
+
+    A separate issue found in a message becomes its own case; its coordinator
+    is started here, outside the deterministic workflow body.
+    """
+    from app.service import triage_messages
+
+    result = TriageResult.model_validate(await asyncio.to_thread(triage_messages, case_id))
+    for new_case_id in result.spawned_case_ids:
+        # Starting is idempotent (hook claim), so a retried step is safe.
+        await start_case_coordinator(new_case_id)
+        result.started_case_ids.append(new_case_id)
+    return result.model_dump(mode="json")
+
+
+@wf.step(max_retries=3)
+async def compose_tenant_messages(case_id: str) -> dict:
+    """Claude drafts questions for open tenant clarifications; policy gates sending."""
+    from app.service import compose_tenant_messages as compose
+
+    return ComposeResult.model_validate(await asyncio.to_thread(compose, case_id)).model_dump(mode="json")
+
+
 async def _receive_signal(hook: workflow.HookEvent[CaseSignal]) -> CaseSignal:
     return await hook
 
@@ -80,11 +133,23 @@ async def case_coordinator(*, case_id: str) -> dict:
 
         receiver = asyncio.create_task(_receive_signal(hook))
         timer = None
+        model_steps = 0
         try:
             while True:
                 state = CycleResult.model_validate(await run_case_cycle(case_id))
                 if state.terminal:
                     return {"case_id": case_id, "status": "terminal", "revision": state.revision}
+
+                # Unread messages hold every action (policy WAIT), so reading
+                # them comes first; tenant questions follow the fresh cycle.
+                if model_steps < MAX_MODEL_STEPS_PER_WAKE and (state.needs_triage or state.needs_tenant_message):
+                    model_steps += 1
+                    if state.needs_triage:
+                        await triage_case_messages(case_id)
+                    else:
+                        await compose_tenant_messages(case_id)
+                    continue
+                model_steps = 0
 
                 # A signal can arrive while the database step is executing. Its
                 # revision is a hint only; rerun the ordered consumer even when
@@ -254,7 +319,7 @@ async def recover_local_case_steps(case_id: str) -> dict:
         step = await world.steps_get(hook.run_id, step_id)
         if step.status in {"completed", "failed"}:
             continue
-        if step.step_name != run_case_cycle.name:
+        if step.step_name not in {run_case_cycle.name, triage_case_messages.name, compose_tenant_messages.name}:
             raise RuntimeError("Recovery encountered an unrecognised case coordinator step")
         at = datetime.now(UTC)
         retry_at = getattr(step, "retry_after", None)
@@ -271,4 +336,4 @@ async def recover_local_case_steps(case_id: str) -> dict:
             "step_ids": requeued, "sdk_version": "0.11.1"}
 
 
-__all__ = ["wf", "CaseSignal", "case_coordinator", "case_hook_token", "start_case_coordinator", "signal_case_event", "native_runtime_lifespan", "validate_runtime_mode", "recover_local_case_steps"]
+__all__ = ["wf", "CaseSignal", "case_coordinator", "triage_case_messages", "compose_tenant_messages", "case_hook_token", "start_case_coordinator", "signal_case_event", "native_runtime_lifespan", "validate_runtime_mode", "recover_local_case_steps"]

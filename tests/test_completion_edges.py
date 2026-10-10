@@ -10,12 +10,11 @@ from app.build_data import import_case,snapshot
 ACTOR={'id':'fictional-manager','role':'case_manager'}
 
 @pytest.fixture
-def service(tmp_path,monkeypatch):
-    monkeypatch.setenv('MODEL_MODE','literal_demo')
+def service(tmp_path):
     return Service(Store('sqlite:///'+str(tmp_path/'edge.db')))
 
 def intake(service,**extra):
-    return service.intake(Intake(title='Fictional dishwasher issue',property_ref='DEMO-FLAT-1',report='The dishwasher stops.',category='appliance',work_item='Dishwasher',action='request_quote',**extra),ACTOR)
+    return service.intake(Intake(title='Fictional dishwasher issue',property_ref='DEMO-FLAT-1',report='The dishwasher stops.',category='appliance',work_item='Dishwasher',action='request_quote',triage='staff',**extra),ACTOR)
 
 def test_intake_retry_reuses_case_and_changed_payload_is_rejected(service):
     first=intake(service,idempotency_key='incoming-001')
@@ -59,9 +58,22 @@ def test_selected_build_prefix_has_provenance_without_future_or_attachments(serv
     assert provenance['attachments']==[]
     with pytest.raises(ValueError):snapshot('013',True)
 
-def test_literal_mode_never_uses_incidentally_available_model_key(service,monkeypatch):
-    import app.ai as ai
-    monkeypatch.setenv('OPENAI_API_KEY','fictional-test-not-a-credential')
-    def forbidden_network(*args,**kwargs):raise AssertionError('Default must not call model')
-    monkeypatch.setattr(ai.httpx,'post',forbidden_network)
-    assert intake(service)['case']['interpretation']['mode']=='literal_demo'
+def test_missing_credential_hands_triage_to_a_person_and_can_retry(service,no_claude):
+    created=service.intake(Intake(title='Fictional report',property_ref='DEMO-FLAT-1',report='The dishwasher stops.'),ACTOR)
+    cid=created['case']['id']
+    assert created['case']['triage']['state']=='pending' and created['decision']['outcome']=='WAIT'
+    assert service.triage_messages(cid)=={'triaged':1,'spawned_case_ids':[]}
+    detail=service.detail(cid)
+    assert detail['case']['triage']=={**detail['case']['triage'],'state':'failed','error':'missing_credentials'}
+    assert detail['case']['proposal']['action']=='clarify' and detail['case']['category']=='other'
+    failed=next(r['payload'] for r in detail['timeline'] if r['kind']=='interpretation')
+    assert failed['status']=='failed' and 'result' not in failed
+    # No keyword fallback, and the failure is not retried on every wake.
+    assert service.triage_messages(cid)['triaged']==0
+    retried=service.retry_triage(cid,ACTOR)
+    assert retried['case']['triage']['state']=='pending'
+    assert service.triage_messages(cid)['triaged']==1
+    assert service.detail(cid)['case']['triage']['state']=='failed'
+    # Manual triage settles it.
+    detail=service.proposal(cid,ProposalInput(action='request_quote',category='appliance',work_item='Dishwasher'),ACTOR)
+    assert detail['case']['triage']['state']=='staff' and 'triage' not in {b['key'] for b in detail['decision']['blockers']}
