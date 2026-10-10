@@ -4,14 +4,14 @@ A local property maintenance prototype with Python policy evaluation, a staff da
 
 ## Run locally
 
-Use Python 3.12. The native SDK is pinned to `vercel-workflow==0.11.1`; the exact installed dependency set is in `requirements.lock`.
+Use Python 3.12 (pinned in `.python-version`). Dependencies are managed with [uv](https://docs.astral.sh/uv/); `uv.lock` is the exact resolved set. The native SDK is pinned to `vercel-workflow==0.11.1`.
 
 ```sh
-cd /Users/darkcomet/.codex/.chatgpt-projects/g-p-6ac970305f2481919eebbb5c44f3b350/property-workflow
-python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements.lock
-APP_MODE=demo WORKFLOW_MODE=native_local WORKFLOW_TARGET_WORLD=local MODEL_MODE=literal_demo .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8017
+uv sync
+APP_MODE=demo WORKFLOW_MODE=native_local WORKFLOW_TARGET_WORLD=local MODEL_MODE=literal_demo uv run uvicorn app.main:app --host 127.0.0.1 --port 8017
 ```
+
+`uv sync` creates `.venv` and installs the runtime dependencies plus the `dev` group (pytest, pypdf). Add a dependency with `uv add <package>` (or `uv add --dev <package>`). `requirements.lock` is kept for pip-only environments; refresh it after changing dependencies with `uv export --no-hashes --no-emit-project -o requirements.lock`. Without uv: `python3.12 -m venv .venv && .venv/bin/python -m pip install -r requirements.lock`.
 
 The existing `.venv` can be used directly; recreating it is unnecessary when dependencies are already installed. Open <http://127.0.0.1:8017>. Use one Uvicorn process without `--reload`. Do not set `VERCEL_QUEUE_BASE_URL` for local mode. The application does not load `.env` automatically; `.env.example` documents optional settings.
 
@@ -47,9 +47,9 @@ The `total` fact means the **full comparable cumulative commitment for this job,
 ## Tests and BUILD replay
 
 ```sh
-.venv/bin/python -m pytest -q
-.venv/bin/python -m app.replay --all-first --output var/build-replay-first-events.json
-.venv/bin/python -m app.replay --case 013 --events 2
+uv run pytest -q
+uv run python -m app.replay --all-first --output var/build-replay-first-events.json
+uv run python -m app.replay --case 013 --events 2
 ```
 
 The replay command validates the fixed BUILD manifest hashes, uses an isolated temporary database and the published demonstration policy, disables live model requests, and records assessments without running any adapter. It is a development replay, not an accuracy score. Human acceptable-outcome labels and a separately run reserved evaluation remain future work. No reserved evaluation material is loaded by these tools.
