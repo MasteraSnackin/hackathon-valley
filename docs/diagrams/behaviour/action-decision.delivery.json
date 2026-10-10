@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "workflow",
+  "input": "docs/diagrams/behaviour/action-decision.workflow.json",
+  "output": "docs/diagrams/behaviour/action-decision.html",
+  "specification": {
+    "sha256": "1ab86625d0a422801ad5c6f6509d3615655348e4739ca5898820ac2e1317da33",
+    "bytes": 4502
+  },
+  "artifact": {
+    "sha256": "a8b479ce866d7da3ebd1ce4db09adc643ecf89c7a99a90f686ca327e6ee2cabb",
+    "bytes": 811043
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

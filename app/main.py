@@ -12,6 +12,7 @@ from .domain import *
 from .service import get_service,Forbidden,Conflict,VOICE_BRIDGE
 from . import ai, jev, parties
 from .build_data import list_build,import_case,snapshot
+from .voice import TUNNEL_PATHS,create_voice_router
 
 ROOT=Path(__file__).resolve().parent.parent
 MODE=os.getenv('APP_MODE','demo')
@@ -78,6 +79,10 @@ async def value_handler(request,exc):return JSONResponse({'detail':str(exc)},sta
 
 @app.middleware('http')
 async def security(request,call_next):
+    # Demo sessions trust loopback, and a tunnel (ngrok) arrives from loopback too:
+    # proxied requests may only reach the secret-authenticated phone webhooks.
+    if MODE=='demo' and {'x-forwarded-for','x-forwarded-host','forwarded'}&set(request.headers.keys()) and request.url.path not in TUNNEL_PATHS:
+        return JSONResponse({'detail':'Only the phone intake webhooks are reachable through a tunnel'},403)
     # No CORS, cookies SameSite strict, and reject cross-origin state changes.
     if request.method not in {'GET','HEAD','OPTIONS'}:
         origin=request.headers.get('origin')
@@ -211,7 +216,14 @@ from .tenant import create_tenant_router
 from .policy_assistant import create_policy_assistant_router
 app.include_router(create_tenant_router(wake, mode=MODE))
 app.include_router(create_policy_assistant_router(actor))
+app.include_router(create_voice_router(wake, actor))
 
 @app.get('/')
 def index():return FileResponse(ROOT/'static/index.html')
+@app.get('/dashboard')
+def dashboard():
+    # React staff dashboard (web/), built into static/dashboard by `npm run build`.
+    page=ROOT/'static/dashboard/index.html'
+    if not page.exists():return JSONResponse({'detail':'Dashboard not built. Run `npm run build` in web/.'},404)
+    return FileResponse(page)
 app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')

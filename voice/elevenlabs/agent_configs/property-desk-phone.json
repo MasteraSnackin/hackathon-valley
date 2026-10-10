@@ -1,0 +1,34 @@
+{
+  "name": "Property Desk phone intake",
+  "tags": ["property-desk", "hackathon"],
+  "conversation_config": {
+    "agent": {
+      "language": "en",
+      "first_message": "Hello, you've reached the Property Desk maintenance line. I'm an automated assistant, and this call is transcribed so our team can review your report. If anyone is in danger right now, please hang up and call 999. How can I help?",
+      "prompt": {
+        "llm": "claude-sonnet-5",
+        "temperature": 0.2,
+        "prompt": "Filled from voice/agent_prompt.md by voice/sync.py",
+        "tool_ids": [],
+        "built_in_tools": {
+          "end_call": {
+            "type": "system",
+            "name": "end_call",
+            "description": "End the call after the caller has their reference and has nothing else to add, or says goodbye.",
+            "params": {"system_tool_type": "end_call"}
+          }
+        }
+      }
+    },
+    "asr": {"keywords": ["postcode", "flat", "boiler", "stopcock", "radiator", "extractor"]},
+    "tts": {"model_id": "eleven_flash_v2", "voice_id": "Xb7hH8MSUJpSbSDYk0k2"},
+    "turn": {"turn_timeout": 7},
+    "conversation": {"max_duration_seconds": 600}
+  },
+  "platform_settings": {
+    "privacy": {"record_voice": false, "retention_days": 30},
+    "workspace_overrides": {
+      "webhooks": {"post_call_webhook_id": null, "events": ["transcript"]}
+    }
+  }
+}

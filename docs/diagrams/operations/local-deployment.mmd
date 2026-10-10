@@ -1,0 +1,11 @@
+flowchart TB
+    subgraph host["Local machine: one worker, no hot reload"]
+        browser["Tenant and staff browser"]
+        process["Python process: FastAPI, Service, policy and native Workflow queue"]
+        sql[("SQLite application database")]
+        world[("Separate native Workflow directory")]
+        browser -->|HTTP loopback| process
+        process -->|SQLAlchemy transactions| sql
+        process -->|SDK history files| world
+    end
+    process -->|"HTTPS: intake, triage and drafting"| anthropic["External Anthropic API"]

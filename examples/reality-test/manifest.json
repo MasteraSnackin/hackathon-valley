@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "dataset_kind": "development_fixture",
+  "cases": [
+    {"id": "fictional-tap", "input_file": "fictional-tap.json"}
+  ]
+}

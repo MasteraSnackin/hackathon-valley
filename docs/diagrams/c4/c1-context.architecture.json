@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "C1 \u00b7 Property Desk in context",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/MasteraSnackin/hackathon-valley",
+      "revision": "2732af60a920d0f9a88be18a36e078aa22fbfa6d"
+    },
+    "views": [
+      {
+        "id": "tenant-journey",
+        "label": "Tenant journey",
+        "focus": [
+          "tenant",
+          "desk",
+          "claude"
+        ],
+        "note": "The model reads a report; application policy still controls actions."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      60,
+      72
+    ],
+    "cols": 3,
+    "cellW": 220,
+    "cellH": 80,
+    "gapX": 180,
+    "gapY": 130
+  },
+  "components": [
+    {
+      "id": "tenant",
+      "type": "external",
+      "label": "Tenant",
+      "sublabel": "Reports and follow-ups",
+      "row": 0,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/tenant.py",
+          "line": 433
+        }
+      ]
+    },
+    {
+      "id": "staff",
+      "type": "external",
+      "label": "Property team",
+      "sublabel": "Reviews and policy decisions",
+      "row": 2,
+      "col": 0,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 94,
+          "end_line": 108
+        }
+      ]
+    },
+    {
+      "id": "desk",
+      "type": "backend",
+      "label": "Property Desk",
+      "sublabel": "Maintenance case application",
+      "row": 1,
+      "col": 1,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/main.py",
+          "line": 128,
+          "end_line": 180
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "type": "cloud",
+      "label": "Anthropic API",
+      "sublabel": "Claude structured responses",
+      "row": 1,
+      "col": 2,
+      "size": [
+        220,
+        80
+      ],
+      "sources": [
+        {
+          "path": "app/ai.py",
+          "line": 121,
+          "end_line": 262
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "tenant-to-desk",
+      "from": "tenant",
+      "to": "desk",
+      "label": "Report / progress",
+      "variant": "default"
+    },
+    {
+      "id": "staff-to-desk",
+      "from": "staff",
+      "to": "desk",
+      "label": "Review / configure",
+      "variant": "default"
+    },
+    {
+      "id": "desk-to-claude",
+      "from": "desk",
+      "to": "claude",
+      "label": "HTTPS \u00b7 text + context",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Application boundary",
+      "items": [
+        "Native Python Workflow runs within Property Desk.",
+        "Operational actions and in-app delivery are simulated."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "External dependency",
+      "items": [
+        "Claude supports intake, case triage and tenant questions.",
+        "Case triage failures require manual review."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "sequence",
+  "input": "docs/diagrams/behaviour/tenant-message.sequence.json",
+  "output": "docs/diagrams/behaviour/tenant-message.html",
+  "specification": {
+    "sha256": "e20a4c9050be6d553079ad450c2ebb5831a162664d6d70919b2c039e565a91d1",
+    "bytes": 3455
+  },
+  "artifact": {
+    "sha256": "7a4b1d4496ba818015d8ffb346c4bea0b611dddfcb1a60afd2ee761a5a8c1608",
+    "bytes": 809635
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

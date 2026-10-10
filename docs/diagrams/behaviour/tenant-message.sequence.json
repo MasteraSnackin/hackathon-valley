@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Tenant message to a checked next step",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      620
+    ]
+  },
+  "participants": [
+    {
+      "id": "tenant",
+      "label": "Tenant",
+      "type": "external",
+      "sublabel": "demo conversation"
+    },
+    {
+      "id": "api",
+      "label": "Tenant API",
+      "type": "frontend",
+      "sublabel": "owned session"
+    },
+    {
+      "id": "service",
+      "label": "Case service",
+      "type": "backend",
+      "sublabel": "facts and policy"
+    },
+    {
+      "id": "store",
+      "label": "Case store",
+      "type": "database",
+      "sublabel": "SQL transaction"
+    },
+    {
+      "id": "workflow",
+      "label": "Workflow",
+      "type": "messagebus",
+      "sublabel": "native coordinator"
+    },
+    {
+      "id": "claude",
+      "label": "Claude API",
+      "type": "cloud",
+      "sublabel": "triage and questions"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "from": "tenant",
+      "to": "api",
+      "label": "Confirmed report or case update",
+      "y": 160,
+      "variant": "default"
+    },
+    {
+      "id": "m2",
+      "from": "api",
+      "to": "service",
+      "label": "Intake / evidence with retry key",
+      "y": 188,
+      "variant": "default"
+    },
+    {
+      "id": "m3",
+      "from": "service",
+      "to": "store",
+      "label": "Commit source, event and wake intent",
+      "y": 216,
+      "variant": "emphasis"
+    },
+    {
+      "id": "m5",
+      "from": "api",
+      "to": "workflow",
+      "label": "Start or signal after commit",
+      "y": 244,
+      "variant": "dashed"
+    },
+    {
+      "id": "m8",
+      "from": "workflow",
+      "to": "service",
+      "label": "Fresh cycle; triage unread message",
+      "y": 272,
+      "variant": "default"
+    },
+    {
+      "id": "m9",
+      "from": "service",
+      "to": "claude",
+      "label": "Quoted source + bounded context",
+      "y": 300,
+      "variant": "emphasis"
+    },
+    {
+      "id": "m10",
+      "from": "claude",
+      "to": "service",
+      "label": "Route, assertions and ambiguities",
+      "y": 328,
+      "variant": "return"
+    },
+    {
+      "id": "m11",
+      "from": "service",
+      "to": "store",
+      "label": "Commit checked interpretation",
+      "y": 356,
+      "variant": "default"
+    },
+    {
+      "id": "m13",
+      "from": "workflow",
+      "to": "service",
+      "label": "Fresh cycle; compose if due",
+      "y": 384,
+      "variant": "default"
+    },
+    {
+      "id": "m14",
+      "from": "service",
+      "to": "claude",
+      "label": "Request a tenant question draft",
+      "y": 412,
+      "variant": "emphasis"
+    },
+    {
+      "id": "m15",
+      "from": "claude",
+      "to": "service",
+      "label": "Draft + send recommendation",
+      "y": 440,
+      "variant": "return"
+    },
+    {
+      "id": "m16",
+      "from": "service",
+      "to": "store",
+      "label": "Gate draft; store sent or held state",
+      "y": 468,
+      "variant": "security"
+    },
+    {
+      "id": "m17",
+      "from": "workflow",
+      "to": "service",
+      "label": "Fresh cycle: ACT or blockers",
+      "y": 496,
+      "variant": "default"
+    },
+    {
+      "id": "m18",
+      "from": "service",
+      "to": "workflow",
+      "label": "Checkpoint + next wake deadline",
+      "y": 524,
+      "variant": "return"
+    }
+  ]
+}
